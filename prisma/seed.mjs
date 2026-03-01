@@ -1,12 +1,24 @@
-import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
-import * as fs from 'fs';
-import * as path from 'path';
+import { readFileSync, existsSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
-const prisma = new PrismaClient({ adapter } as any);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const equipmentMap: Record<string, string> = {
+// Find the generated Prisma client
+let PrismaClient;
+try {
+  const mod = await import('../src/generated/prisma/client.js');
+  PrismaClient = mod.PrismaClient;
+} catch {
+  const mod = await import('../dist/src/generated/prisma/client.js');
+  PrismaClient = mod.PrismaClient;
+}
+
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
+
+const equipmentMap = {
   Barbell: 'barbell',
   Dumbbell: 'dumbbell',
   Bodyweight: 'bodyweight',
@@ -20,7 +32,7 @@ const equipmentMap: Record<string, string> = {
   Other: 'other',
 };
 
-const muscleGroupMap: Record<string, string> = {
+const muscleGroupMap = {
   Chest: 'chest',
   Lats: 'lats',
   'Lower Back': 'lowerBack',
@@ -44,28 +56,17 @@ const muscleGroupMap: Record<string, string> = {
   Other: 'other',
 };
 
-interface RawExercise {
-  id: string;
-  name: string;
-  equipment: string;
-  primaryMuscles: string[];
-  secondaryMuscles: string[];
-  thumbnailUrl: string;
-  videoUrl: string;
-  exerciseType: string;
-}
-
 async function main() {
   console.log('Seeding exercises...');
 
   const possiblePaths = [
-    path.join(__dirname, 'exercises.json'),
-    path.join(__dirname, '..', '..', 'wolog', 'wolog', 'Resources', 'exercises.json'),
+    join(__dirname, 'exercises.json'),
+    join(__dirname, '..', '..', 'wolog', 'wolog', 'Resources', 'exercises.json'),
   ];
 
-  let exercisesPath: string | null = null;
+  let exercisesPath = null;
   for (const p of possiblePaths) {
-    if (fs.existsSync(p)) {
+    if (existsSync(p)) {
       exercisesPath = p;
       break;
     }
@@ -76,7 +77,7 @@ async function main() {
     process.exit(1);
   }
 
-  const raw: RawExercise[] = JSON.parse(fs.readFileSync(exercisesPath, 'utf-8'));
+  const raw = JSON.parse(readFileSync(exercisesPath, 'utf-8'));
   console.log(`Found ${raw.length} exercises in ${exercisesPath}`);
 
   let created = 0;
@@ -88,7 +89,7 @@ async function main() {
     const exerciseType = ex.exerciseType || 'weightReps';
 
     try {
-      await (prisma.exercise as any).upsert({
+      await prisma.exercise.upsert({
         where: { id: ex.id },
         create: {
           id: ex.id,
@@ -100,18 +101,14 @@ async function main() {
           isCustom: false,
           thumbnailUrl: ex.thumbnailUrl || null,
           videoUrl: ex.videoUrl || null,
-          primaryMuscles: ex.primaryMuscles.map(
-            (m: string) => muscleGroupMap[m] || m.toLowerCase(),
-          ),
-          secondaryMuscles: ex.secondaryMuscles.map(
-            (m: string) => muscleGroupMap[m] || m.toLowerCase(),
-          ),
+          primaryMuscles: ex.primaryMuscles.map(m => muscleGroupMap[m] || m.toLowerCase()),
+          secondaryMuscles: ex.secondaryMuscles.map(m => muscleGroupMap[m] || m.toLowerCase()),
         },
         update: {},
       });
       created++;
     } catch (error) {
-      console.warn(`Skipped exercise "${ex.name}" (${ex.id}):`, (error as Error).message);
+      console.warn(`Skipped exercise "${ex.name}" (${ex.id}):`, error.message);
       skipped++;
     }
   }
@@ -124,6 +121,4 @@ main()
     console.error(e);
     process.exit(1);
   })
-  .finally(async () => {
-    await (prisma as any).$disconnect();
-  });
+  .finally(() => prisma.$disconnect());
