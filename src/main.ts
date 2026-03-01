@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, Logger } from '@nestjs/common';
 import { AppModule } from './app.module.js';
 import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.js';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,7 +18,7 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalFilters(new PrismaExceptionFilter());
+  app.useGlobalFilters(new PrismaExceptionFilter(), new HttpExceptionFilter());
 
   app.enableCors();
   app.enableShutdownHooks();
