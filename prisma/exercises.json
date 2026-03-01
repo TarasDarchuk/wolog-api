@@ -1,0 +1,5949 @@
+[
+  {
+    "id": "cb580d31-0df7-4add-88e9-7e571a9f6d75",
+    "name": "21s Bicep Curl",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAakwEZnRzMRyV0PJYHahguXj7lZiFoSqrtC4b",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaUqisuzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "02ae2083-3f00-4097-8d4b-0d6ea0453033",
+    "name": "Ab Scissors",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAdezO4hVxkAlzuNrLOV4ovyf9xW2qeaC51gMT",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAL2P4AfYaDPCHXqyu1Miw83pZ4QUgl6sW7tFE",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "152384cd-67a9-4bf2-a1c2-9c4c32a7029e",
+    "name": "Ab Wheel",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVSOUtSpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAO6zYbq0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "eff16822-db8d-4566-baf1-82ef1fcf2326",
+    "name": "Aerobics",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "73bd65bb-88eb-410f-b8d7-b17febb17058",
+    "name": "Air Bike",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAV0Q7zKpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "2be24f97-d860-4a69-a45b-aa70e1e3bba3",
+    "name": "Arnold Press (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQBpMQkVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzX9FdX29HdCEVfNo8pTRqwrvbnAyO7XU6I3k",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "872b19bc-b072-4e30-ad63-1a2a28499dbb",
+    "name": "Around The World",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Shoulders",
+      "Lats"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVGJiHR6pbQM81pWSZOCgFjBsxvrna3AL45yq",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGr2zZihYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "17038a50-774f-47a2-a7ca-3586377c88ed",
+    "name": "Assisted Pistol Squats",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnNbWojAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMq3yAzUsI2HR9AO0mzCnYSwFK8glJ1axQVTu",
+    "exerciseType": "assistedBodyweight"
+  },
+  {
+    "id": "4f4286d4-5f1e-4950-aa02-0ca0915cc24d",
+    "name": "Back Extension (Hyperextension)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lower Back"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWpJdNRveRYUB5hJosEfOuAPVpyTDvSMnIwrW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnVLxmzAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "3766896d-8083-4357-887e-8b4d8b762f32",
+    "name": "Back Extension (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lower Back"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIdzQL4D5QkHzl8hnX7vEstAYP4VJ5wGFMxmg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEkpRsTQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "1775976e-5e48-42e0-bc14-57e07c500fbb",
+    "name": "Back Extension (Weighted Hyperextension)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lower Back"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAkduTBIm7S1QmAYJU6Eye9vqgGRMObfdWDnxk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAU3bqsb1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "16758b8e-9f5b-482e-8423-ccc3ab5b6776",
+    "name": "Ball Slams",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOWUgEqR0vd4xz0wmk2Qy3cCrUoXZ95hePjNG",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAR8HdrVuJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d45125ae-de6c-44b2-bdc1-3cec888c685a",
+    "name": "Band Pullaparts",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Upper Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANM7Xj1ncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbt3Zyz6WzHFD79eU5g3GiMtJumfpBQIOqEPV",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f524f899-c261-4ff8-a014-0d4b9fdd0c5a",
+    "name": "Battle Ropes",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA1LeZKtgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAavLumZzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "duration"
+  },
+  {
+    "id": "f9c0f4f7-8a39-48a1-82d0-71d705c2a6af",
+    "name": "Behind the Back Bicep Wrist Curl (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Forearms"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiXMAiuLGYHRqUSzA67Ejbu2d4CsN8JP5BhZI",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAa7ZMDtzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "00de47a5-acc2-4528-b3ae-290cb5997234",
+    "name": "Behind the Back Curl (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXuxHqSTr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaARe6RzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5e2399a6-7daf-48db-a050-d1ebb152578a",
+    "name": "Belt Squat (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJDFresZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5xxRmj7KivToJBdkGEtK0LXFzHcQmfOR45D7",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "23ebb60b-d482-42f4-9241-54e5826fb5e5",
+    "name": "Bench Dip",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Chest"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwEfP3kSixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQiiSWvbVE9DAjXh1qT83eivFcu4U0CW7Sf6P",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "dc94bcb7-c5ac-490a-b2f4-6e4e9e7b9ef5",
+    "name": "Bench Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0DWzarbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzABMQlaQefUktwYsXIpMPVvNCRyoZi6G3Sd8E5",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "171527cf-6dbc-4eeb-80c3-d1236fc03fff",
+    "name": "Bench Press (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzbG1Wi29HdCEVfNo8pTRqwrvbnAyO7XU6I3k",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAT5Dy3Af02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f62b1c36-aa67-4566-bf0a-2a3017ce5ce6",
+    "name": "Bench Press (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApcAqF1iIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzALk1CQOaDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "8102fe1b-6d35-43c1-b44a-fd53439efc83",
+    "name": "Bench Press (Smith Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAo5gQHwMLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVb1P34pbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "314dbfd8-434b-4e8f-8082-b49f21f400e3",
+    "name": "Bench Press - Close Grip (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANquVEwncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA2YB9mhkT79A0eZ4OoHrvQI5g3t6LwRJaYdkl",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "fe23c453-0950-48f6-99e1-67b233f03af0",
+    "name": "Bench Press - Wide Grip (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAECt6eLQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATZsbOCif02R43IWtJEhMX15cxaPYUSDgHnq8",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "db367515-156f-400f-acd4-2a70d470b209",
+    "name": "Bent Over Row (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzABUoBx8efUktwYsXIpMPVvNCRyoZi6G3Sd8E5",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhfJG0YAXlZoYW2rsMtq4nT3PaBx7kCmRfDwO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "6ce7734c-6331-4f11-8db5-065fdf65998c",
+    "name": "Bent Over Row (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVEjNYypbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAw7GUVTSixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "9c1f3a2e-3105-4753-8c76-495263845bd4",
+    "name": "Bent Over Row (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVXRgcPpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQnnR1TVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "05a2c91a-54ef-4e0e-88fc-43c90b4090cb",
+    "name": "Bicep Curl (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOiaSZd0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAE0NVPwQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "10741c40-f8a9-4279-bf05-fc279c32ab95",
+    "name": "Bicep Curl (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAp11y6OiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGToQ085hYjJs7R8FLCSy4EicbfeP0UoVnhZm",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "0066cac1-dbfe-4edb-b382-8d9b2c51c819",
+    "name": "Bicep Curl (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAs2UvuClNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAx6cZ8RBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c2f39a1a-8973-41cf-9e63-f583d767e6a2",
+    "name": "Bicep Curl (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUUAMWY1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9pzYbZUSlTcYeQLr1pizDksgxjw2BUWq0EPF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "18169312-ee17-49af-af57-655bc023adb5",
+    "name": "Bicep Curl (Suspension)",
+    "equipment": "Suspension",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAezN3fbJLVM6riuhFtRGknTHUd39q8X1v20CB",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAphfuN8SiIm4QoZFVfak2U7ORGxWJB9pCjlgz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c6e4b095-edbb-418b-a6f0-744df8223bf5",
+    "name": "Bicycle Crunch",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAoKPE76MLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaTHOsNzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "efdbb95f-e1f1-4fdb-9702-7c272e562d54",
+    "name": "Bicycle Crunch Raised Legs",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVIwPSrpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApBCEYUiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "8df74af1-df26-439d-8974-e7cb199b402f",
+    "name": "Bird Dog",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACBqdlk67MxLg0Za213urFASkmczsjEXYlonQ",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhftHpYSXlZoYW2rsMtq4nT3PaBx7kCmRfDwO",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "c544b6a3-54d2-4609-821e-b280213928ed",
+    "name": "Box Jump",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes",
+      "Calves"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbKKs0VWzHFD79eU5g3GiMtJumfpBQIOqEPV2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaGfi34zMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "04a07ca1-e0a6-47f4-bfe2-672b14bddad5",
+    "name": "Box Squat (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAp7Mb2KiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjcHnjGOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b2c5447d-540e-4173-8505-e3db2262e2d2",
+    "name": "Boxing",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAoHyQPdMLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "ea1f5ba4-503a-4a2a-a240-6a7eae20698d",
+    "name": "Bulgarian Split Squat",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARfQENcuJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAE1hTJTQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "716ec55f-5511-4a60-a5cd-e3711a162575",
+    "name": "Burpee",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASARS8IvN79ctXURDAfsMYpvq038uBhZNjLT6",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAowIKvFMLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "5babc108-71e9-494b-a2c9-8ee63af1a5b3",
+    "name": "Burpee Over the Bar",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHYvNuLEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA2OYlvnkT79A0eZ4OoHrvQI5g3t6LwRJaYdkl",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "70e16e5c-d118-49d7-a336-111019fdb535",
+    "name": "Butterfly (Pec Deck)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOFHLok0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiAysk2GYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "1d509a6d-8fe2-4fb2-a18b-4fa1d36c02ba",
+    "name": "Cable Core Palloff Press",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAkDPktyOm7S1QmAYJU6Eye9vqgGRMObfdWDnx",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAsakAuMlNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "ae062812-a474-4296-b837-512c04931c36",
+    "name": "Cable Crunch",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUobXLT1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnf695vAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d7246fc5-2bcd-4e64-9b6e-274b7bab7cb8",
+    "name": "Cable Fly Crossovers",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADGdJsWwSW8luh1yKizM4Vrp0kwB62o7EsGZj",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATeAcxZf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "6bdb84ef-2fb1-4e8f-889a-a975a1fd90af",
+    "name": "Cable Pull Through",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Lower Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjEijybOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVP08SgpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "bd817700-4e20-4ec4-946d-bc143f87b62e",
+    "name": "Cable Twist (Down to up)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJc7Xf4Z05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnrTeFcAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "aa5ecb35-5a94-4577-acd1-695c6b487994",
+    "name": "Cable Twist (Up to down)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVGJcPaJpbQM81pWSZOCgFjBsxvrna3AL45yq",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAakran44zMRyV0PJYHahguXj7lZiFoSqrtC4b",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "cb90ba3b-5209-4a0b-a233-d17bf4e33ead",
+    "name": "Calf Extension (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAolOVebOMLagWu8qOQCcyxVdDpI5zHP1t7ejA",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApQrMx2iIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "fed7323a-687c-4152-8b87-1d24cc78b888",
+    "name": "Calf Press (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQrUyKqVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApIcsPBiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "71db92d4-a9cd-4f42-8467-3582fb90f885",
+    "name": "Chest Dip",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlcgYf1qSDgdytXe4UrNBop1xaL0InqPRz6Av",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAeh8hChLVM6riuhFtRGknTHUd39q8X1v20CBc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5c272ee2-6d41-4126-91fb-0169c4bf5fc4",
+    "name": "Chest Dip (Assisted)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApsehePiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlJs2LeqSDgdytXe4UrNBop1xaL0InqPRz6Av",
+    "exerciseType": "assistedBodyweight"
+  },
+  {
+    "id": "1a88dcb9-c5fc-4695-b29e-3220e6007d3b",
+    "name": "Chest Dip (Weighted)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOZL9Bj0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGg0d14hYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "334a715f-ba1c-44ad-80d8-702e7110feb3",
+    "name": "Chest Fly (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAdenIUJJxkAlzuNrLOV4ovyf9xW2qeaC51gMT",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiCuO4mGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "7a93fad6-ebee-4037-9242-f1e30b01efc6",
+    "name": "Chest Fly (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAphTFkmziIm4QoZFVfak2U7ORGxWJB9pCjlgz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGWmHpXhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d4f152b9-5065-4f84-90cb-286c00c45ef3",
+    "name": "Chest Fly (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPSntO3HDZ7yi9D5HkYUamTlhVCO28dbuWLBg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQE5aQYVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "47eb7a11-8db3-4e47-96c2-c968399a7a86",
+    "name": "Chest Fly (Suspension)",
+    "equipment": "Suspension",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARdBKdsuJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAp6BtgmiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "60b57a44-723f-42a4-b9e5-d189323f5563",
+    "name": "Chest Press (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJtR0SuZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAsvV2HQlNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "fc2c6ff1-694c-4192-9276-ef97a7b60822",
+    "name": "Chest Press (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZxRUv1o76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApQyy26iIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "21f34d6f-0819-492a-b803-4c95b634c7c8",
+    "name": "Chest Supported Incline Row (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAE6h76qQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWZ4CSsveRYUB5hJosEfOuAPVpyTDvSMnIwrW",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "877eb6eb-40fd-43ae-87bc-e6e91adfbc46",
+    "name": "Chest Supported Reverse Fly (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Upper Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAM1jM8psI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAdlBOtjxkAlzuNrLOV4ovyf9xW2qeaC51gMTP",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "bcf36be8-038f-4aaf-aec4-7b3325408b44",
+    "name": "Chest Supported Y Raise (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Upper Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPnkfRQDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq9JxmnjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "93587c64-ccea-403d-a724-60fdb4138f6d",
+    "name": "Chin Up",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5DLeYkKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQZ4zaDVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "076cfc41-e381-48cf-ac99-9d0e3f288db5",
+    "name": "Chin Up (Assisted)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAu8WAqlyw8XTx3m9SLZPRoMUHErqnjOcA6Iv0",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0VIh6ObLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "exerciseType": "assistedBodyweight"
+  },
+  {
+    "id": "168dccc7-c298-446c-a372-e96a8b03af46",
+    "name": "Chin Up (Weighted)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5hsEjEKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAC1ljNP67MxLg0Za213urFASkmczsjEXYlonQ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d0187652-6283-4c30-8a74-bc19e2c817b2",
+    "name": "Clamshell",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAM1mKKbsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMoZlxCsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "fc437002-f27a-48df-819e-044628af5461",
+    "name": "Clap Push Ups",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA49xnnJPCUoagiFeSh3rXG6s2zwxjfEm8qnWZ",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAd2bhhFxkAlzuNrLOV4ovyf9xW2qeaC51gMTP",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "e554e877-8727-4525-8ddf-723fe8ffc6c8",
+    "name": "Clean",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHZ4OsWEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "cae5d67f-46a2-49ab-8f49-e452598fc53f",
+    "name": "Clean and Jerk",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq0b6alDjwqEr6dCLSvi72a8BDkc5FAbuG1H3",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAk9VXzNm7S1QmAYJU6Eye9vqgGRMObfdWDnxk",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "35db4dd6-c83a-4873-8508-c79ce10c3b3d",
+    "name": "Clean and Press",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATNZJcf02R43IWtJEhMX15cxaPYUSDgHnq8zQ",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAgWEmEjIlZ0uYsjPkm2XH1SFneGV4QKpdr7Wc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "da61e0b4-7558-4a27-bd24-9df1642a0be9",
+    "name": "Clean Pull",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnrcIcxtAMAhsGUjnxFX0Lfq4Py2riewgRuz1",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARER6TmuJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e2d6e2ed-8343-4bab-b760-b6ee87efad1c",
+    "name": "Climbing",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "cc2a6bdd-3e53-46a4-a98a-7c29f915d948",
+    "name": "Concentration Curl",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMqOxNTksI2HR9AO0mzCnYSwFK8glJ1axQVTu",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAG1PHWthYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "6bf03ad3-a274-4cec-ab8a-d3582eec7e69",
+    "name": "Cross Body Hammer Curl",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAykfnOTHXuQtbDrYGs3kIc4ne7iOHx8fM956B",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzABkJmRvefUktwYsXIpMPVvNCRyoZi6G3Sd8E5",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "8a479979-af52-4de6-a020-a51d11e240f8",
+    "name": "Crunch",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQX1IshVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA1B6WIVgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "c80161c5-f102-47ee-93ef-a14b7b24cb24",
+    "name": "Crunch (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADrQEZVwSW8luh1yKizM4Vrp0kwB62o7EsGZj",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACwhrrD67MxLg0Za213urFASkmczsjEXYlonQ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "72a5a342-19ac-4ccb-b3ba-872a9ac51d06",
+    "name": "Crunch (Weighted)",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAahfXSwzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0HZ2I3bLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "5b6779af-fce3-48c8-9638-d2bfe341a4e0",
+    "name": "Curtsy Lunge (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings",
+      "Adductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHVhONvJEzWPUw9KxOEmu3hIqBrbAyf7GtDov",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhfTFMZlXlZoYW2rsMtq4nT3PaBx7kCmRfDwO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b06dc7a6-3137-4d6b-8e8e-71f7612e3b3f",
+    "name": "Cycling",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "7ecfe301-6a8d-424d-ad04-27f984e78be1",
+    "name": "Dead Bug",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWFFc5xJveRYUB5hJosEfOuAPVpyTDvSMnIwr",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9gaVKx9USlTcYeQLr1pizDksgxjw2BUWq0EP",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "fe20c3c9-b06f-4176-ab02-3b60197b95d7",
+    "name": "Dead Hang",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVu9KDlpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "",
+    "exerciseType": "duration"
+  },
+  {
+    "id": "cc1cf781-8a64-474c-9cb4-a748a9a0fbf7",
+    "name": "Deadlift (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Lower Back",
+      "Upper Back",
+      "Lats",
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPlkp3oDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQgAH7DVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "ce4729e4-363b-426e-8f5d-b09409da361d",
+    "name": "Deadlift (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Lower Back",
+      "Upper Back",
+      "Lats",
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAd0alpHxkAlzuNrLOV4ovyf9xW2qeaC51gMTP",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAinhyTUGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "bba54a77-bb3e-48db-bb90-bfdea266844b",
+    "name": "Deadlift (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Lower Back",
+      "Upper Back",
+      "Lats",
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOfcR6Y0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAuOeYcjyw8XTx3m9SLZPRoMUHErqnjOcA6Iv0",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "43b9c4f4-2dc9-4288-86eb-02ab88b2891e",
+    "name": "Deadlift (Smith Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Lower Back",
+      "Upper Back",
+      "Lats",
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA1VlBNgPityzmd4vDWTABSwU5YrOe6MqN7foI",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUc9r3g1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "8576353d-47ac-459e-9285-707293bc1412",
+    "name": "Deadlift (Trap bar)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Lower Back",
+      "Upper Back",
+      "Lats",
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANybrDFncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAm6mDSRPkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "fa7e5627-19d6-49e8-87c8-f61ea1a135c6",
+    "name": "Deadlift High Pull",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9oNPFtUSlTcYeQLr1pizDksgxjw2BUWq0EPF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbjjhqXWzHFD79eU5g3GiMtJumfpBQIOqEPV2",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "1b93491b-ffca-4436-a3d3-10f33b87f19a",
+    "name": "Decline Bench Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAdmCOzYxkAlzuNrLOV4ovyf9xW2qeaC51gMTP",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9gxMRgbUSlTcYeQLr1pizDksgxjw2BUWq0EP",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "98cfd0d5-044d-4b4d-9e6e-43403482b4d0",
+    "name": "Decline Bench Press (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATP7wZwf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUVMz561a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "7aee4389-de6f-4479-842e-ea101285b73c",
+    "name": "Decline Bench Press (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEpVeghDQZbLj9yK3g6F7vpf2TuMwldVrWn85",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAa89ZurzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e6838c56-452c-41e6-95c6-57bbe6076c2b",
+    "name": "Decline Bench Press (Smith Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASxIpGjN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9gkKN3gUSlTcYeQLr1pizDksgxjw2BUWq0EP",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "0adb7b6b-8786-48a9-adf2-42fe59737b34",
+    "name": "Decline Chest Fly (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAx6LDFGBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq07xw7rjwqEr6dCLSvi72a8BDkc5FAbuG1H3",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "acd839f3-78bd-4b72-84d6-e361cbcd636c",
+    "name": "Decline Crunch",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGGYRXDhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMqt4D1RsI2HR9AO0mzCnYSwFK8glJ1axQVTu",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "d81ceddb-7039-44b8-a171-34addcf7f796",
+    "name": "Decline Crunch (Weighted)",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACpT2I867MxLg0Za213urFASkmczsjEXYlonQ",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA6dtUVK9OBVnqaJGUYftp9yeSk5sAiPXWCzb4",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "eb7bfd0e-6b3c-4f55-909b-e0fcd37abf6d",
+    "name": "Decline Push Up",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAj29QLEOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzABXiNHnefUktwYsXIpMPVvNCRyoZi6G3Sd8E5",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "f4477914-8300-4347-a946-13e2666111f6",
+    "name": "Diamond Push Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAphs5s4QiIm4QoZFVfak2U7ORGxWJB9pCjlgz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA1F8SBSgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "7fa49a4a-6f4f-46b5-aa0a-03545c3f8461",
+    "name": "Downward Dog",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVNuCNHpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPMc3nCDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "72e3396b-49a1-4ba9-8bfb-d400038b34eb",
+    "name": "Drag Curl",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbf7mVUWzHFD79eU5g3GiMtJumfpBQIOqEPV2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJniMx9Z05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "fec2b508-49f3-4120-a117-3b2e32c83d31",
+    "name": "Dragon Flag",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAp2U3wdiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVZqrz9pbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "0dce570b-48b2-46d1-9de0-a8f34a0d5247",
+    "name": "Dragonfly",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzALkmFbraDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAT25Srzf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "c117eab2-3dd1-410c-9029-cf86070e07f6",
+    "name": "Dumbbell Row",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEpOjesQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAE2uBSEQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "551c965e-c700-4c89-b731-eb5643848bff",
+    "name": "Dumbbell Snatch",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAgulrOpIlZ0uYsjPkm2XH1SFneGV4QKpdr7Wc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJ8KzCwZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "3799f384-8ac9-49d8-b985-3391c23e1a9b",
+    "name": "Dumbbell Squeeze Press",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXQBpsWTr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAdVWdp1xkAlzuNrLOV4ovyf9xW2qeaC51gMTP",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "77844dda-b299-4cb5-880d-d587c61b1c5e",
+    "name": "Dumbbell Step Up",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaR3HXBzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAs1xeSWlNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "7dfb125d-914d-406f-967e-04a6352e59eb",
+    "name": "Elbow to Knee",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADvXWriwSW8luh1yKizM4Vrp0kwB62o7EsGZj",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVGhoUVlpbQM81pWSZOCgFjBsxvrna3AL45yq",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "c27bff75-aa14-4af0-b213-5dae8d73e853",
+    "name": "Elliptical Trainer",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0tZ51TbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhOlV0gXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "07a9844b-8ba7-4f48-b14c-5912e1eae1af",
+    "name": "External Shoulder Rotation",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4926ee2c-542c-460d-89e5-8fc559b70f7b",
+    "name": "EZ Bar Biceps Curl",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAKhZnlEd7tmzAikHLCueN2GcVYXp0rDfOWTgj",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXi4tr4Tr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "9df863b8-a949-4f22-8070-3f90d61cdde9",
+    "name": "Face Pull",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Biceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAuc1A3Xyw8XTx3m9SLZPRoMUHErqnjOcA6Iv0",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGBQp7FhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "39ee664c-2ce7-43b9-aff0-0a7590e369e3",
+    "name": "Farmers Walk",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATEXhFxf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEalM70QZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightDistance"
+  },
+  {
+    "id": "cbad1640-f646-48a5-95ce-1455a41c73e1",
+    "name": "Feet Up Bench Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEB0pfvQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHki18WEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e6a83813-da8b-4c2e-9efe-744d44f6965a",
+    "name": "Fire Hydrants",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaFJiJYzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5FUhWyKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "2fd2dbb8-08d2-4e79-8bb3-a2fe9bcde0fd",
+    "name": "Floor Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0jAzgwbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzmwomyX29HdCEVfNo8pTRqwrvbnAyO7XU6I3",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "32a24789-4d04-473d-be1c-693107e9400b",
+    "name": "Floor Press (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA6rgQHR9OBVnqaJGUYftp9yeSk5sAiPXWCzb4",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAmwwW6glPkQdE0ySTCtcrPe9RiUsxjBuw2XZf",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "620123f7-4838-40c2-980f-f10f6d5cb0e2",
+    "name": "Floor Triceps Dip",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAakDyZDnzMRyV0PJYHahguXj7lZiFoSqrtC4b",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAsvn8EJlNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "ebe2f694-6ca8-4e5b-86a1-7e9af4bfde78",
+    "name": "Flutter Kicks",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMpXVkAsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADYjqfHwSW8luh1yKizM4Vrp0kwB62o7EsGZj",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "b496b127-ea0a-4e32-9108-2d2f34584b70",
+    "name": "Frog Jumps",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings",
+      "Calves"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOIL1O90vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAuK1Ruyw8XTx3m9SLZPRoMUHErqnjOcA6Iv0z",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "b1252319-468c-4900-8faf-4d4ed2302a07",
+    "name": "Frog Pumps (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAxHWNrzBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAmO9TLFPkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "03ca1971-2342-456c-af67-2b0e1d9e8c1d",
+    "name": "Front Lever Hold",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAitcjvJGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhn74MeXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "c1cb52c3-1325-4538-b4a4-b4823972bd1e",
+    "name": "Front Lever Raise",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHPlhfuEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASZHzG6N79ctXURDAfsMYpvq038uBhZNjLT62",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "11336ac5-d81c-44e0-9641-d74c26025dc5",
+    "name": "Front Raise (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHB1MJyEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJMFrbpTZ05ZXjFRWSdY39albUNDsoi2Qy8C1",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4347b956-9fed-43c0-b24b-c3c6558afcad",
+    "name": "Front Raise (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwnEAsbuSixa7G9gUQTyKsv0jt1NqVBrJFCpz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA54nkl9KivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "96bf5e88-556a-4b7a-ae62-059fc4d39f72",
+    "name": "Front Raise (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIdSbLqD5QkHzl8hnX7vEstAYP4VJ5wGFMxmg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApCckmMiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "cbc64d59-6e02-491c-9fb6-c3d1dae98c86",
+    "name": "Front Raise (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANcGgEvHncosi1nFz5GdkAg49VRrWlMb0uaK8",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq0v8mW2jwqEr6dCLSvi72a8BDkc5FAbuG1H3",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "ad052213-6b40-4a73-b480-78243fed9134",
+    "name": "Front Raise (Suspension)",
+    "equipment": "Suspension",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5xkehPMKivToJBdkGEtK0LXFzHcQmfOR45D7",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASArS7FoN79ctXURDAfsMYpvq038uBhZNjLT6",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "a3a80d32-616a-4eb4-8370-b85abadf1a45",
+    "name": "Front Squat",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA2Pn3r6qkT79A0eZ4OoHrvQI5g3t6LwRJaYdk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWD7rgcveRYUB5hJosEfOuAPVpyTDvSMnIwrW",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "56714752-fb3f-4702-8b41-52670d21cc16",
+    "name": "Full Squat",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAuETR38Pyw8XTx3m9SLZPRoMUHErqnjOcA6Iv",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZpe2Feo76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "eb7a404c-7c19-48c8-bbbd-b1cef17c5924",
+    "name": "Glute Bridge",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnjHDTAMAhsGUjnxFX0Lfq4Py2riewgRuz1HI",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACgGGbj67MxLg0Za213urFASkmczsjEXYlonQ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "a68fdaba-295c-4572-8c34-0111879b6e88",
+    "name": "Glute Ham Raise",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq4CgsmjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHPdPq4EzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "357d6cc6-2eaf-43e1-8676-0a52c8daff12",
+    "name": "Glute Kickback (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPSV1neeDZ7yi9D5HkYUamTlhVCO28dbuWLBg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMeahSnsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "2bff7bd8-4ff7-4b68-a7da-e2ac89b7b1a6",
+    "name": "Glute Kickback on Floor",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9sL2lGUSlTcYeQLr1pizDksgxjw2BUWq0EPF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGTju4d6hYjJs7R8FLCSy4EicbfeP0UoVnhZm",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "be87de98-5ab3-4f49-9870-054d56a1ea4d",
+    "name": "Goblet Squat",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAntfDlJAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMq9FANysI2HR9AO0mzCnYSwFK8glJ1axQVTu",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "dff48263-d6e1-4df0-97ef-ee8f1783d9b0",
+    "name": "Good Morning (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Lower Back",
+      "Upper Back",
+      "Lats"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAU0rInb1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEpZsNreQZbLj9yK3g6F7vpf2TuMwldVrWn85",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d2188575-f6be-4200-ad3b-54442a78826c",
+    "name": "Gorilla Row (Kettlebell)",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXunQE8Tr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANNF2Eyncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "38e78dd5-64bf-4e1f-9246-c8a997085d0b",
+    "name": "Hack Squat",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAezzBPtuLVM6riuhFtRGknTHUd39q8X1v20CB",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANlYAtbncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c5d5343a-d88e-46aa-83d1-d84b83863a70",
+    "name": "Hack Squat (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwupoEASixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAKSySfEd7tmzAikHLCueN2GcVYXp0rDfOWTgj",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e06185b9-39f2-4a08-afa8-5d08adcaad26",
+    "name": "Hammer Curl (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAyywO0fHXuQtbDrYGs3kIc4ne7iOHx8fM956B",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAf6Qok8J9vjcJh378LTxo0CuYRZUztyF2eSqV",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "392f3214-475e-4a27-9043-b76bac413a20",
+    "name": "Hammer Curl (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0H4RU8bLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhFqLzsXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "02c19692-0c99-416a-9769-493f6735beda",
+    "name": "Hammer Curl (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANDSit6ncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiptY2aGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "ed6d2403-dffe-4ddf-a327-710c89b224e9",
+    "name": "Handstand Hold",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhAaArnXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARHsEUhguJ0OCVMUP3jcYwvH7n1BXEyDqkz4p",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "b64e38be-7155-46c1-af06-97710ab0d2fa",
+    "name": "Handstand Push Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARb91K8uJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApNSdbiIm4QoZFVfak2U7ORGxWJB9pCjlgzeL",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "ed452a92-d7db-445f-8002-912c22b4f54b",
+    "name": "Hang Clean",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnQPr1bAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADNik4BxwSW8luh1yKizM4Vrp0kwB62o7EsGZ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b9a62d32-bcb5-4bd8-a366-196271e69af2",
+    "name": "Hang Snatch",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIskm7c5QkHzl8hnX7vEstAYP4VJ5wGFMxmgp",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwniCuseSixa7G9gUQTyKsv0jt1NqVBrJFCpz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "2835addd-0fcd-4627-938a-6deb75ca09fe",
+    "name": "Hanging Knee Raise",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEcflZDQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGTfv5fIhYjJs7R8FLCSy4EicbfeP0UoVnhZm",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "ef8faa26-9c42-4e17-aad6-813099fc57a2",
+    "name": "Hanging Leg Raise",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUIamqOg1a8Jjxn1UTZfg3rLV4KuRFtk5eSyM",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASKhSWbN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "cc5604ca-5f6c-4206-acb6-1e4acc0035d4",
+    "name": "Heel Taps",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAqmXmXPjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAx0PyPIBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "bfbf9d77-617a-4060-abe7-a2e60d5c4151",
+    "name": "High Knee Skips",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApNgOl7iIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATKjeIwf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "f3b9996b-82e6-4417-aca3-007fef37aba3",
+    "name": "High Knees",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXJMsAV2Tr8SGzjHNDA4hgIZmB1Kw2pfO0b5s",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANsxeg7ncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "9877befc-0be6-461c-86f8-8c694467ed62",
+    "name": "HIIT",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "0a537a66-82de-413d-acb6-7bc9edc22964",
+    "name": "Hiking",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "d3067c0e-e590-461d-873d-c9af715c382b",
+    "name": "Hip Abduction (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Abductors"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAdVRM2MxkAlzuNrLOV4ovyf9xW2qeaC51gMTP",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAN5eCWhncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "3fdba583-fd60-4352-9f02-6155c07fcfc0",
+    "name": "Hip Adduction (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Adductors"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOoqDZG0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAeSqduZLVM6riuhFtRGknTHUd39q8X1v20CBc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f8e9ae6f-3901-4d0b-8903-bb6a9040ab9c",
+    "name": "Hip Thrust",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAqnodD5jwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZuq62Ro76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "a9cf4bb2-f28b-4a40-956a-04507e7d4f96",
+    "name": "Hip Thrust (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Adductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJ5WUzSZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJb1oQrZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "bc2f7354-6595-4aed-9d9c-8fd8d3bb407c",
+    "name": "Hip Thrust (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Adductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAdhsIlKxkAlzuNrLOV4ovyf9xW2qeaC51gMTP",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzABYkZmJefUktwYsXIpMPVvNCRyoZi6G3Sd8E5",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d751c68a-3693-4d1b-9eff-b50229b3dc6c",
+    "name": "Hip Thrust (Smith Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Adductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzw149j29HdCEVfNo8pTRqwrvbnAyO7XU6I3k",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATZWl7XSf02R43IWtJEhMX15cxaPYUSDgHnq8",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "50cddfc0-c4aa-4da7-b26d-57ffa98e9ada",
+    "name": "Hollow Rock",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA15KGSpagPityzmd4vDWTABSwU5YrOe6MqN7f",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARtA7QquJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "a3b1c2d4-e5f6-7890-abcd-ef1234567890",
+    "name": "Incline Bench Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAsX3Z3KlNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAETThPjQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d7f7e5d8-792e-48c3-8cdc-8b496a908eac",
+    "name": "Incline Bench Press (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0N1htWbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzAyhlk29HdCEVfNo8pTRqwrvbnAyO7XU6I3k",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5b288ae0-0673-4568-a31a-4e942ded60c4",
+    "name": "Incline Bench Press (Smith Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnkf5RaAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAn9NryWAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "20504fb9-ba62-4cef-bb57-63c7d0227775",
+    "name": "Incline Chest Fly (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAo4yGnJMLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzABmg9PSefUktwYsXIpMPVvNCRyoZi6G3Sd8E5",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "1edb41ff-3363-479a-9016-6d1ed50e3b19",
+    "name": "Incline Chest Press (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAepedYbLVM6riuhFtRGknTHUd39q8X1v20CBc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANi4xHcncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b987524c-f0ca-481b-a65d-7d0f7a7359ee",
+    "name": "Incline Push Ups",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAeThzFpLVM6riuhFtRGknTHUd39q8X1v20CBc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwKH85USixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "9b99e0a5-2f9b-4a63-a9fc-8575dc192b3c",
+    "name": "Inverted Row",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA1TqNysgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQceBq3VE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "1e7e4f99-9b96-4293-af46-8193582301d8",
+    "name": "Iso-Lateral Chest Press (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAl6HefxqSDgdytXe4UrNBop1xaL0InqPRz6Av",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAi2ERDlGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "2adb3397-0cad-49a6-88bc-261ea95a37eb",
+    "name": "Iso-Lateral High Row (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAxgAJKpBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbaYDlxWzHFD79eU5g3GiMtJumfpBQIOqEPV2",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "bd3dc76a-9759-4a57-ba29-f0f0bb3729ce",
+    "name": "Iso-Lateral Low Row",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA1v722pgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGPxxAAhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b5788463-f53f-4f9d-9518-5e845ee9b91f",
+    "name": "Iso-Lateral Row (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASUr1zAN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAxf50FwBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "9adb5cee-fb99-4b2f-a26b-0ec2feb1c5f0",
+    "name": "Jack Knife (Suspension)",
+    "equipment": "Suspension",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXJbBVqhTr8SGzjHNDA4hgIZmB1Kw2pfO0b5s",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApeJquyiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "52c56578-98fb-4eef-9f49-c7b1afe08ac3",
+    "name": "Jackknife Sit Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9ZtAKVUSlTcYeQLr1pizDksgxjw2BUWq0EPF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMq8lMJcsI2HR9AO0mzCnYSwFK8glJ1axQVTu",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "b97b32b7-2ac4-437b-a720-9019be860b62",
+    "name": "JM Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA4J2osSCUoagiFeSh3rXG6s2zwxjfEm8qnWZR",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOQm9g80vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "04212064-75e0-4d58-bf50-128594055100",
+    "name": "Jump Rope",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApBYb2hiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "91958dba-1e0d-410d-9ec8-9b0ea5f7cefa",
+    "name": "Jump Shrug",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZsbG1L0o76Macbqm82xpoWJysZfAIKO5HnXk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiXMqxdJGYHRqUSzA67Ejbu2d4CsN8JP5BhZI",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d8b1a9f4-d2e8-4a01-8ae4-ffc85ef5d330",
+    "name": "Jump Squat",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes",
+      "Calves"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAKACOHSd7tmzAikHLCueN2GcVYXp0rDfOWTgj",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVTDJyGpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "5453c5b8-678c-4a36-87d1-ad5c68886434",
+    "name": "Jumping Jack",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAmx0ySJPkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEdMClyQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "cd28e02e-f37e-47ee-9aba-89425fd67f05",
+    "name": "Jumping Lunge",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes",
+      "Calves"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAL8CxnsaDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHiBJghEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "ab4b6c70-acf2-4718-a141-dba6c3b79173",
+    "name": "Kettlebell Around the World",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Traps",
+      "Chest",
+      "Abdominals"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIPUdsp5QkHzl8hnX7vEstAYP4VJ5wGFMxmgp",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGyesKNhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4b5a3e02-f1c2-4ce6-91bd-f31e762ffd3a",
+    "name": "Kettlebell Clean",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARHhegBnuJ0OCVMUP3jcYwvH7n1BXEyDqkz4p",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAfoqYSacJ9vjcJh378LTxo0CuYRZUztyF2eSq",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "ff868f97-9782-417a-bbb5-3dde6ba2d9f9",
+    "name": "Kettlebell Curl",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0hd5GFbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaVGwRszMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "a4f00508-58da-4747-a39e-fc57787830e9",
+    "name": "Kettlebell Goblet Squat",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVvCREDpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAB7Q53JefUktwYsXIpMPVvNCRyoZi6G3Sd8E5",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "34bd90a9-ec43-4a22-baa0-c49110b10baa",
+    "name": "Kettlebell Halo",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Traps",
+      "Upper Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA15d7C5YgPityzmd4vDWTABSwU5YrOe6MqN7f",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHNuSrbEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "8d02cb05-559d-4f9f-ada0-e516617f439d",
+    "name": "Kettlebell High Pull",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA6OYxYl9OBVnqaJGUYftp9yeSk5sAiPXWCzb4",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADQfXJYwSW8luh1yKizM4Vrp0kwB62o7EsGZj",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d0076bc2-e4ab-4993-b375-6319eed9c2a7",
+    "name": "Kettlebell Shoulder Press",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPSR2FNKDZ7yi9D5HkYUamTlhVCO28dbuWLBg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9d9c81USlTcYeQLr1pizDksgxjw2BUWq0EPF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "575a60c9-d2a1-4e05-bbdd-49a8291dd25d",
+    "name": "Kettlebell Snatch",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5G7RmPKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZlauego76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5ec7f384-8046-4d15-9b16-c7f99d400269",
+    "name": "Kettlebell Swing",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAfjOW4CJ9vjcJh378LTxo0CuYRZUztyF2eSqV",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPufR0rDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "309ab3bd-f862-46e7-ba7a-ad9a138c6504",
+    "name": "Kettlebell Turkish Get Up",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAi2Qd0hGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzALCgP2HaDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4f3d00d5-2e75-4b97-bbca-ec0f2f0232c3",
+    "name": "Kipping Pull Up",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "61ca0b36-59a8-4aea-b988-9a18acf2e41a",
+    "name": "Knee Raise Parallel Bars",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGyooL6hYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAp0xFPTiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "2335bf24-5821-498b-b2bc-f418227a7575",
+    "name": "Kneeling Pulldown (band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9tE5YGUSlTcYeQLr1pizDksgxjw2BUWq0EPF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0Ao7o4bLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c506e2b6-f1e1-4a2b-823c-b87a0091d3d6",
+    "name": "Kneeling Push Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASxB1JuN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnx5tSWAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "bdd8e489-1b20-48ae-91fe-5a07b6d1d5a9",
+    "name": "L-Sit Hold",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA4YoySvCUoagiFeSh3rXG6s2zwxjfEm8qnWZR",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAix6qeSGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "4b5f9ea0-bcc1-4351-b15d-3779e694af98",
+    "name": "Landmine 180",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Chest",
+      "Upper Back",
+      "Traps",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlOUur3KqSDgdytXe4UrNBop1xaL0InqPRz6A",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAxLLPntBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d99f6380-0877-4651-a440-f979dc2f937d",
+    "name": "Landmine Row",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOxiMWo0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASlZCnxN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "6ee7d77e-541d-44bd-9ef3-9db3b208d0f3",
+    "name": "Landmine Squat and Press",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEyjTiPQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAmadkHDPkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "8872a22a-e29f-4d11-9825-d664e28ec194",
+    "name": "Lat Pulldown (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA51IdNnKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIa3EXU5QkHzl8hnX7vEstAYP4VJ5wGFMxmgp",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "0b3f671b-d8b2-40d9-a99b-467265a1e261",
+    "name": "Lat Pulldown (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHxB7eLEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUjaWH91a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "92156b8d-ac8d-4ca2-871f-af61e0b7c0d0",
+    "name": "Lat Pulldown (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAG0fNu2hYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQbLi7qVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "8ad8efce-1b5d-4cbe-84a8-ccbf933bf3f7",
+    "name": "Lat Pulldown - Close Grip (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAH8vb7ZEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnaVTVZAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "3fd634c8-b888-4a60-b51f-c1deeeeb2753",
+    "name": "Lateral Band Walks",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Abductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApETSn5iIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAgK5VYuAIlZ0uYsjPkm2XH1SFneGV4QKpdr7W",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b0533024-e67e-4d43-816b-54aabd281373",
+    "name": "Lateral Box Jump",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes",
+      "Calves"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVvF1XXpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5Ut5GuKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "04b71242-b1a4-497f-a535-9ef18bb4ba1b",
+    "name": "Lateral Leg Raises",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Abductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAl38oGgqSDgdytXe4UrNBop1xaL0InqPRz6Av",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0VAhEXbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "025a9f0d-9764-4783-8a0e-49b2771ce28b",
+    "name": "Lateral Lunge",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes",
+      "Abductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAa0vUxMzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATGwFKzf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "2b7e5987-6be7-4975-95a4-23027aa2dddb",
+    "name": "Lateral Raise (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHs4m17EzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiQB9QqGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "3f5eb922-85f5-4d26-8d5a-3c0d765deae1",
+    "name": "Lateral Raise (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhfT9iYlXlZoYW2rsMtq4nT3PaBx7kCmRfDwO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIFc8nx5QkHzl8hnX7vEstAYP4VJ5wGFMxmgp",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "9daacb76-1ab1-4a79-903f-63a3f049e106",
+    "name": "Lateral Raise (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA6LdHpb9OBVnqaJGUYftp9yeSk5sAiPXWCzb4",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUPvufM1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5dca078f-2e83-4575-8662-e9d6e047b9a8",
+    "name": "Lateral Raise (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAM5f44esI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlZQCiGqSDgdytXe4UrNBop1xaL0InqPRz6Av",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4aff5891-86be-4f8d-afc0-1dc098a3c620",
+    "name": "Lateral Squat",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes",
+      "Abductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASEMkqVN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAxLAPfDnBTJhSCx6g73aPmrj9ypMLI0enU4NF",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "609c4d80-0710-446e-b872-decf87e541c3",
+    "name": "Leg Extension (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA4Qc3fNCUoagiFeSh3rXG6s2zwxjfEm8qnWZR",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEkNaCCQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "8df933cf-66c8-4d67-abeb-c7202b019b1c",
+    "name": "Leg Press (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzmYbyQy29HdCEVfNo8pTRqwrvbnAyO7XU6I3",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAakPrJnczMRyV0PJYHahguXj7lZiFoSqrtC4b",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4cba7cdb-696a-4dce-aad6-d51cd3871803",
+    "name": "Leg Press Horizontal (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEGWvdpQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0pD8AIbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "91325802-06f1-4919-8f99-4591a7a3ee7b",
+    "name": "Leg Raise Parallel Bars",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAspf2MelNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAh98f1xXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "cea5df4f-0a8c-4373-8f4e-2b5c5828d4d3",
+    "name": "Low Cable Fly Crossovers",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhSNMZHXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA4pqZXtCUoagiFeSh3rXG6s2zwxjfEm8qnWZR",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f07a6a0c-86af-4883-8498-6ebb039d4234",
+    "name": "Low Row (Suspension)",
+    "equipment": "Suspension",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMih1IJsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEwUEIAQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "7ab9069c-035b-40ad-bcc1-76779ba67515",
+    "name": "Lunge",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiHxSPzGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAqrgyUqjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "7b0cc07f-ac1a-4aef-a30c-2c819701488e",
+    "name": "Lunge (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWTSLnCveRYUB5hJosEfOuAPVpyTDvSMnIwrW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzALMGQP5aDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5da8275f-36b2-4032-89e8-5ade3c53fcf5",
+    "name": "Lunge (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIPOZlj5QkHzl8hnX7vEstAYP4VJ5wGFMxmgp",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAezn5QXlLVM6riuhFtRGknTHUd39q8X1v20CB",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b3719713-10a3-4539-a523-da18eec483d6",
+    "name": "Lying Knee Raise",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAakowpkzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA2PPB2ShkT79A0eZ4OoHrvQI5g3t6LwRJaYdk",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "9b4fb72c-c444-4464-a876-f0a923cd2791",
+    "name": "Lying Leg Curl (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Calves"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwg1UXgSixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAsUedBqlNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f3b999b7-7723-4e59-9651-9b9b078b8b77",
+    "name": "Lying Leg Raise",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAH7yYSIEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGikwlchYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "d8ef094a-1617-452d-887b-d3d5ce25b097",
+    "name": "Lying Neck Curls",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Neck"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5xklkxEKivToJBdkGEtK0LXFzHcQmfOR45D7",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAmOaQF3PkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "a621cd1f-61d7-4ba7-acf8-a1ee3851782a",
+    "name": "Lying Neck Curls (Weighted)",
+    "equipment": "Plate",
+    "primaryMuscles": [
+      "Neck"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5Volr8KivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAohSKUUMLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "530e1a17-f89e-4cd6-907e-d0d168e48e68",
+    "name": "Lying Neck Extension",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Neck"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEFYqe1QZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA19Zx2kgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "d129c468-fd3d-4295-b905-d7d63a538cb8",
+    "name": "Lying Neck Extension (Weighted)",
+    "equipment": "Plate",
+    "primaryMuscles": [
+      "Neck"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVGJu92BpbQM81pWSZOCgFjBsxvrna3AL45yq",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA26lfGwkT79A0eZ4OoHrvQI5g3t6LwRJaYdkl",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d16a35f8-48ae-407e-a1ee-cf8e526acbcb",
+    "name": "Meadows Rows (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHnYeqhEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA6vmCFB9OBVnqaJGUYftp9yeSk5sAiPXWCzb4",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "2862390e-bf01-4360-80fe-cceef243a7b2",
+    "name": "Mountain Climber",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAmUiWzgPkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApWoPUQiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "8e9b8957-5ff4-4267-8a41-228b26d97910",
+    "name": "Muscle Up",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAkE89OYm7S1QmAYJU6Eye9vqgGRMObfdWDnxk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPPuMBuDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "e6ec3b26-0101-44a1-ad62-fdc63207e1e4",
+    "name": "Negative Pull Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbybvYAWzHFD79eU5g3GiMtJumfpBQIOqEPV2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACevkT567MxLg0Za213urFASkmczsjEXYlonQ",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "e44ff5c8-6c88-423e-8bd0-a6756ba5edd1",
+    "name": "Nordic Hamstrings Curls",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWorfKmveRYUB5hJosEfOuAPVpyTDvSMnIwrW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzABhfk6gefUktwYsXIpMPVvNCRyoZi6G3Sd8E5",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "5e77e3b5-74f4-4888-8511-32f83f7114c2",
+    "name": "Oblique Crunch",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAgKNVp3RIlZ0uYsjPkm2XH1SFneGV4QKpdr7W",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQMKMGjVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "0b17e509-23f1-438b-9c30-9ed41ef59f93",
+    "name": "One Arm Push Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAn1axV9AMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAE4MtuAQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "b934bb60-633a-45f5-902e-de5cd84888d3",
+    "name": "Overhead Curl (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAh0gzvcXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJOp75PZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "56c98837-3332-4de2-a9c3-f33681028ce3",
+    "name": "Overhead Dumbbell Lunge",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes",
+      "Shoulders",
+      "Triceps",
+      "Upper Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAmw6tpHPkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwkedxrSixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "bae0f8f3-aa1b-47f9-ac3c-12a20978b5f7",
+    "name": "Overhead Plate Raise",
+    "equipment": "Plate",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANoqc8kncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXqKrFvTr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "9b4b5655-b54e-4567-ac0d-b87c1ffb681a",
+    "name": "Overhead Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Abdominals"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANcc7B79ncosi1nFz5GdkAg49VRrWlMb0uaK8",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARkiZAouJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "9fcd4204-5adb-461a-b4e9-bd5dca0488ac",
+    "name": "Overhead Press (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIdkjwVC5QkHzl8hnX7vEstAYP4VJ5wGFMxmg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0B8OagbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4efc4c40-4ee9-48d0-9f77-69f5998124f1",
+    "name": "Overhead Press (Smith Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUI2l0UZ1a8Jjxn1UTZfg3rLV4KuRFtk5eSyM",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq08dK8hjwqEr6dCLSvi72a8BDkc5FAbuG1H3",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "edb2b519-f0e4-4845-8717-e503b85e937f",
+    "name": "Overhead Squat",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGUzKpjhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAha1E6bXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "52a267bf-9295-487e-b9fa-3416691a73d1",
+    "name": "Overhead Triceps Extension (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHVhieOkEzWPUw9KxOEmu3hIqBrbAyf7GtDov",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnx7aQiAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "28759f69-3416-42cb-871c-da2e6117ce29",
+    "name": "Partial Glute Bridge (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Adductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAS08IprN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACZwG0v67MxLg0Za213urFASkmczsjEXYlonQ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "7bfacd4e-b627-4559-8cff-de1ed076b8a6",
+    "name": "Pause Squat (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA2URLMikT79A0eZ4OoHrvQI5g3t6LwRJaYdkl",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARwWVr5uJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "73c5a5b5-73ca-4b80-ad40-b533c1b67bc7",
+    "name": "Pendlay Row (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATBG4M8f02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhFdcaVXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "9b2e18ae-ed32-4c3f-b201-fdb716fefecc",
+    "name": "Pendulum Squat (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHA6VP6EzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATFza4nf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "21ce3717-11f8-4630-ac29-78eb13c8b154",
+    "name": "Pike Pushup",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Chest"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAD9GHqKwSW8luh1yKizM4Vrp0kwB62o7EsGZj",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASVJDn9N79ctXURDAfsMYpvq038uBhZNjLT62",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "8c804ba5-53cb-4821-bc20-30cc96f8c995",
+    "name": "Pilates",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "3ed0c493-32fc-4625-aa42-8219a34bfb1e",
+    "name": "Pinwheel Curl (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAi3ShlTGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATLFqTwf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "38c47911-35f5-4262-8822-9fa2955a9df7",
+    "name": "Pistol Squat",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAgEmbwdIlZ0uYsjPkm2XH1SFneGV4QKpdr7Wc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQPMUwqVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "0f76a168-529a-4373-b3bc-bc273ad7545a",
+    "name": "Plank",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaHTWiYzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAKfly9Jd7tmzAikHLCueN2GcVYXp0rDfOWTgj",
+    "exerciseType": "duration"
+  },
+  {
+    "id": "fd8c5ca7-5109-49a0-946c-7f5deaa314da",
+    "name": "Plank Pushup",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps",
+      "Abdominals"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzALAnDUeaDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAeKdy5VLVM6riuhFtRGknTHUd39q8X1v20CBc",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "0b7f523c-ae39-448b-afa9-93f8a5761be6",
+    "name": "Plate Curl",
+    "equipment": "Plate",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAquNpiyjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHpBiRKEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e9d12654-6152-4a05-af81-689c80af1190",
+    "name": "Plate Front Raise",
+    "equipment": "Plate",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIVkEcO5QkHzl8hnX7vEstAYP4VJ5wGFMxmgp",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAujF0lHyw8XTx3m9SLZPRoMUHErqnjOcA6Iv0",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4117b9cf-7c59-4392-a3b6-c3b92e4fed5a",
+    "name": "Plate Press",
+    "equipment": "Plate",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA20sQKdkT79A0eZ4OoHrvQI5g3t6LwRJaYdkl",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOXmJmA0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b3960b72-16a1-4b81-bdf9-e761610878c5",
+    "name": "Plate Squeeze (Svend Press)",
+    "equipment": "Plate",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAj3SFn4OY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJKDVcYZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "7a299895-002e-4a22-be48-4b62e5e2b52f",
+    "name": "Power Clean",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEL1wu1QZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAmoHhDXPkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "08d20b63-3ea1-4c36-946d-b76c8234ec15",
+    "name": "Power Snatch",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOumtU50vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAel6a16LVM6riuhFtRGknTHUd39q8X1v20CBc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "190f691f-0743-4a30-9c51-fd82a609308a",
+    "name": "Preacher Curl (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWcoDKzveRYUB5hJosEfOuAPVpyTDvSMnIwrW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlObA3umqSDgdytXe4UrNBop1xaL0InqPRz6A",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "0d4709d9-be91-4141-9154-75155d473d4a",
+    "name": "Preacher Curl (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwieIppSixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASTAf56N79ctXURDAfsMYpvq038uBhZNjLT62",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "76394135-5d73-47d6-96ed-05bd5433aa36",
+    "name": "Preacher Curl (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJwvGjdZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnFUNRJAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "8629c77e-1e8f-4171-a16d-03895a0bae3e",
+    "name": "Press Under",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "bcdc2d48-e8cb-4283-8d65-b13c57f74b35",
+    "name": "Pull Up",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbC2cX7WzHFD79eU5g3GiMtJumfpBQIOqEPV2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGcoK7YhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "7bcd3b29-98a6-43b3-99b7-fa9ba3ab1c36",
+    "name": "Pull Up (Assisted)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJR1OilZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAfLH0YqJ9vjcJh378LTxo0CuYRZUztyF2eSqV",
+    "exerciseType": "assistedBodyweight"
+  },
+  {
+    "id": "c7740e0b-2ee5-424a-977a-9156c55d8209",
+    "name": "Pull Up (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhKwQLAXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAgKLjiMTIlZ0uYsjPkm2XH1SFneGV4QKpdr7W",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c37c0cc3-65ae-4ef1-b94d-59ba1eaf34bc",
+    "name": "Pull Up (Weighted)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAkuqcYpm7S1QmAYJU6Eye9vqgGRMObfdWDnxk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADNrVdNXwSW8luh1yKizM4Vrp0kwB62o7EsGZ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5d5ba6c3-0cf0-4c0c-a94b-d589e287354c",
+    "name": "Pullover (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Upper Back",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAU5A2cc1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9Kof3yUSlTcYeQLr1pizDksgxjw2BUWq0EPF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "93ce9984-d81d-4e9a-9be3-7b331aeda601",
+    "name": "Pullover (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Chest",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEY2vZJQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAX5kO4oTr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "412e2251-368c-4630-8d3f-141d99579ffe",
+    "name": "Push Press",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Quadriceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWF4Tp0gveRYUB5hJosEfOuAPVpyTDvSMnIwr",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwnErJOQSixa7G9gUQTyKsv0jt1NqVBrJFCpz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "55b18342-1260-4ed7-b9e3-1f3ae642ac99",
+    "name": "Push Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXvgR1bTr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAfdyefZJ9vjcJh378LTxo0CuYRZUztyF2eSqV",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "00057b47-493b-4fad-9c8f-f7240e19e9b6",
+    "name": "Push Up (Weighted)",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPqVN1wDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHVocxpIEzWPUw9KxOEmu3hIqBrbAyf7GtDov",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "52721c73-4226-4a2b-8687-8b11197d4ca2",
+    "name": "Push Up - Close Grip",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA4sW6opCUoagiFeSh3rXG6s2zwxjfEm8qnWZR",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAqc5LYEjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "575b0600-588d-4f05-83c2-d383bdc90846",
+    "name": "Rack Pull",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings",
+      "Lower Back",
+      "Lats",
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPSYSNBiDZ7yi9D5HkYUamTlhVCO28dbuWLBg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAo8T0pbMLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "7581302f-fc7b-4ee6-810d-aa16a5d13683",
+    "name": "Rear Delt Reverse Fly (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Upper Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPSn9BNoDZ7yi9D5HkYUamTlhVCO28dbuWLBg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA1sU325gPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "460c71e3-9b10-4208-9b0c-27b1c76ec42f",
+    "name": "Rear Delt Reverse Fly (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Upper Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUICqs01a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIdzvSxJ5QkHzl8hnX7vEstAYP4VJ5wGFMxmg",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "48ef74a4-e1a1-4804-bd19-a5b7840cdfaf",
+    "name": "Rear Delt Reverse Fly (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Upper Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVGZBsvXpbQM81pWSZOCgFjBsxvrna3AL45yq",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAL9kE09aDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e912d9e9-c952-4524-9302-bbea78a42f62",
+    "name": "Rear Kick (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAph0UaBuiIm4QoZFVfak2U7ORGxWJB9pCjlgz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAG9FjzuhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f1392d02-9d09-4fe1-b4dd-5c6ad24e17a2",
+    "name": "Renegade Row (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAxGzmnQBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQi0X4uWVE9DAjXh1qT83eivFcu4U0CW7Sf6P",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "ee345c8b-4ca3-4776-82f9-de38b584ac77",
+    "name": "Reverse Crunch",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZ4wuZyo76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASAG6GG2N79ctXURDAfsMYpvq038uBhZNjLT6",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "462dbccf-c96b-465b-99ce-2f8a5b7a06d2",
+    "name": "Reverse Curl (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHWbzh9EzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATM1hssf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5d19b214-81b5-404b-8a35-a708edc9318c",
+    "name": "Reverse Curl (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA59WVnqKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA6IGU1n9OBVnqaJGUYftp9yeSk5sAiPXWCzb4",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "af450666-a0bf-48e9-9273-77f5759cd11b",
+    "name": "Reverse Curl (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWQEpkjveRYUB5hJosEfOuAPVpyTDvSMnIwrW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAe9EyTiLVM6riuhFtRGknTHUd39q8X1v20CBc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "89502c75-adf2-4203-85ee-82b9d01415a4",
+    "name": "Reverse Fly Single Arm (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Upper Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAudC4Unyw8XTx3m9SLZPRoMUHErqnjOcA6Iv0",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAw8QUYySixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "0e281748-8ac4-4ab0-a20c-c3a8597519e1",
+    "name": "Reverse Grip Concentration Curl",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAl5H4sSqSDgdytXe4UrNBop1xaL0InqPRz6Av",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA2Vi95skT79A0eZ4OoHrvQI5g3t6LwRJaYdkl",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "61812f6a-9bf5-43cd-b7cb-14d9a5a0db38",
+    "name": "Reverse Grip Lat Pulldown (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlZdjNBqSDgdytXe4UrNBop1xaL0InqPRz6Av",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPApArgDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "68263dde-8502-4e41-bc9b-38eb305aaf9b",
+    "name": "Reverse Hyperextension",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Lower Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAyhNnilHXuQtbDrYGs3kIc4ne7iOHx8fM956B",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiXbT1kfGYHRqUSzA67Ejbu2d4CsN8JP5BhZI",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b8fa0b6a-149a-4f01-8ea5-70f3db16f143",
+    "name": "Reverse Lunge",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA6sefjc9OBVnqaJGUYftp9yeSk5sAiPXWCzb4",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAi9ov6RGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "d661dd2b-7e96-4278-8a14-8f3258986671",
+    "name": "Reverse Lunge (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhnGFTyXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAKKiGF0d7tmzAikHLCueN2GcVYXp0rDfOWTgj",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "88a1e963-2838-4a81-8258-a935b9d7909d",
+    "name": "Reverse Lunge (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA61BKc3w9OBVnqaJGUYftp9yeSk5sAiPXWCzb",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAakDVLRIzMRyV0PJYHahguXj7lZiFoSqrtC4b",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e3014267-6a98-4259-85cc-328106f3c910",
+    "name": "Reverse Plank",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAX0xNlqTr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApWZI76iIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "2db90c80-bcf1-4aa3-94df-b4d57deb72c1",
+    "name": "Ring Dips",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjrzFAnOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATZ0QSAEf02R43IWtJEhMX15cxaPYUSDgHnq8",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "fa0b0576-3c24-4ecf-9244-4175ee8b3124",
+    "name": "Ring Pull Up",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzABkFsl8efUktwYsXIpMPVvNCRyoZi6G3Sd8E5",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAolFRH8AMLagWu8qOQCcyxVdDpI5zHP1t7ejA",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e8cec867-5748-4d94-954c-16be00de9837",
+    "name": "Ring Push Up",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARfRqD9uJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAd0v8G9xkAlzuNrLOV4ovyf9xW2qeaC51gMTP",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "723ceb5d-8b5d-47ca-9d56-dbf0b8b95191",
+    "name": "Romanian Deadlift (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Lower Back",
+      "Upper Back",
+      "Lats"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZkhFDfo76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAqw90OkjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d20d73de-d8fc-45df-97d6-1e10945052ee",
+    "name": "Romanian Deadlift (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Lower Back",
+      "Upper Back",
+      "Lats"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0pAxGBbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAunFE3Ayw8XTx3m9SLZPRoMUHErqnjOcA6Iv0",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "0e07173f-018f-4cfc-bca1-09c0420113b1",
+    "name": "Rope Cable Curl",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzmwLhqg29HdCEVfNo8pTRqwrvbnAyO7XU6I3",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATSdOq1f02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "02a13af3-b5aa-4b56-98f0-4e384e64b97a",
+    "name": "Rope Straight Arm Pulldown",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA6gphxv9OBVnqaJGUYftp9yeSk5sAiPXWCzb4",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANtiwUgncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f2679ffe-83e3-4cdd-a05d-f64be69fde4f",
+    "name": "Rowing Machine",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA99tzJ7USlTcYeQLr1pizDksgxjw2BUWq0EPF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApMvEGBiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "ce90fa0f-f6f8-45bb-9e71-97cc936471d8",
+    "name": "Running",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlOCnfcDqSDgdytXe4UrNBop1xaL0InqPRz6A",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAC4wdi067MxLg0Za213urFASkmczsjEXYlonQ",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "7cbac506-de85-4dfd-9b22-508a1ee2826a",
+    "name": "Russian Twist (Bodyweight)",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACZb4Py67MxLg0Za213urFASkmczsjEXYlonQ",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhcVErpXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "d594e789-4527-4fae-a0f2-6467cfc21e9e",
+    "name": "Russian Twist (Weighted)",
+    "equipment": "Plate",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJMss8JxZ05ZXjFRWSdY39albUNDsoi2Qy8C1",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAxXApVVBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "2ab89252-b8b4-47d2-ac9d-845442d6e713",
+    "name": "Scapular Pull Ups",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjCUBNwOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAg22lyhIlZ0uYsjPkm2XH1SFneGV4QKpdr7Wc",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "ca1927ff-7d04-4dae-9ac3-38cd9f30c54b",
+    "name": "Seated Cable Row - Bar Grip",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASyxVOsN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApPGt5OiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b56444ec-84be-48d9-a512-a5bda5b4ef53",
+    "name": "Seated Cable Row - Bar Wide Grip",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Traps",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASGr5eMN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGIbn9VhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "344b3c52-a985-408a-acbc-0b793be0d8a8",
+    "name": "Seated Cable Row - V Grip (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAM82fqUsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzPR0G729HdCEVfNo8pTRqwrvbnAyO7XU6I3k",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "a6d2eaad-c792-4e78-9280-31f033fb22f5",
+    "name": "Seated Calf Raise",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQIK5C4VE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADDUpDMwSW8luh1yKizM4Vrp0kwB62o7EsGZj",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "157740e9-48f9-40c5-bee1-0c7ae12f9c72",
+    "name": "Seated Chest Flys (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGAlTFqhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlOj0KemqSDgdytXe4UrNBop1xaL0InqPRz6A",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c8cb65ab-bd03-4b68-8f05-e932ce0e54c8",
+    "name": "Seated Dip Machine",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOWvfzCo0vd4xz0wmk2Qy3cCrUoXZ95hePjNG",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAdeNMTbtxkAlzuNrLOV4ovyf9xW2qeaC51gMT",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4aca5314-dfb3-4007-8298-5284a1197ec9",
+    "name": "Seated Incline Curl (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXAHY9sTr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaNlOwyzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "85ffd8c4-46c6-4bf0-8322-b94267c3f06d",
+    "name": "Seated Lateral Raise (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPSNlaW3DZ7yi9D5HkYUamTlhVCO28dbuWLBg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAENNqvxQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b843691e-e27e-45d2-ba93-943b2c805189",
+    "name": "Seated Leg Curl (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Calves"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASJglLTN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAqAFTtSjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "91d2a4d8-7bc1-4c10-80b2-a20ff00147df",
+    "name": "Seated Overhead Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAezPAg8FLVM6riuhFtRGknTHUd39q8X1v20CB",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIghUpP5QkHzl8hnX7vEstAYP4VJ5wGFMxmgp",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4e2e3912-8be2-47ab-8a1e-87afacf42564",
+    "name": "Seated Overhead Press (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARWxz26uJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5xR0w3KivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "8e47b0f7-e2be-4e98-b8f3-3322331f7588",
+    "name": "Seated Palms Up Wrist Curl",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Forearms"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzALZPkVNaDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjUxebWOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c962b23f-2ad2-4d44-a969-4de938e3880e",
+    "name": "Seated Row (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAai3KAezMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApC0nOpiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "527b6771-7a28-42c6-8e2d-3ef93db5d568",
+    "name": "Seated Shoulder Press (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAho9SzoXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZzUPKQo76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f39eabfb-be16-4e00-a733-9a27b7f7345b",
+    "name": "Seated Triceps Press",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOEfBRi0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAM9Td4IsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c5c779a1-581f-46a8-819a-895b02efae54",
+    "name": "Seated Wrist Extension (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Forearms"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAdcj48fxkAlzuNrLOV4ovyf9xW2qeaC51gMTP",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA13eX2NgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "74306b29-eda7-4025-b28e-0619dc7b31c0",
+    "name": "Shoulder Press (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhfssl71XlZoYW2rsMtq4nT3PaBx7kCmRfDwO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACNgFuP67MxLg0Za213urFASkmczsjEXYlonQ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "dff1b2e3-c8c4-44d7-86a7-d5831f198ae0",
+    "name": "Shoulder Press (Machine Plates)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEpqMfH3QZbLj9yK3g6F7vpf2TuMwldVrWn85",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAg2EexdIlZ0uYsjPkm2XH1SFneGV4QKpdr7Wc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "37897352-bc48-4751-b243-56becadf3595",
+    "name": "Shoulder Taps",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASAy7KacN79ctXURDAfsMYpvq038uBhZNjLT6",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5B6WlWKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "4224c820-acff-4bd8-9461-80f9112fcb7b",
+    "name": "Shrug (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Traps"
+    ],
+    "secondaryMuscles": [
+      "Neck"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATvBlaUf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAU3i2oI1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d7b1f994-e871-4854-8369-2f5481a19524",
+    "name": "Shrug (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Traps"
+    ],
+    "secondaryMuscles": [
+      "Neck"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA2PAQCumkT79A0eZ4OoHrvQI5g3t6LwRJaYdk",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzALsbMQnaDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "53b33e6d-fa53-44dd-948b-a837bfae4fdf",
+    "name": "Shrug (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Traps"
+    ],
+    "secondaryMuscles": [
+      "Neck"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAp1L0c9iIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAULP0Fd1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "eae76e4e-3eae-4abd-8525-5c7efa4fedf6",
+    "name": "Shrug (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Traps"
+    ],
+    "secondaryMuscles": [
+      "Neck"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHVGUgy0EzWPUw9KxOEmu3hIqBrbAyf7GtDov",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPSprNv2DZ7yi9D5HkYUamTlhVCO28dbuWLBg",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "222d69f5-7448-45e7-bc51-85fcc05511f5",
+    "name": "Shrug (Smith Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Traps"
+    ],
+    "secondaryMuscles": [
+      "Neck"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAE3u8cgQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPSYJ5SNDZ7yi9D5HkYUamTlhVCO28dbuWLBg",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "afd7f5a5-ea04-4919-90c9-e5b977c1d8a3",
+    "name": "Side Bend",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwnAlrn0Sixa7G9gUQTyKsv0jt1NqVBrJFCpz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPUGvONDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "2ad8f8e3-ac07-4e6b-9e6e-0d4a45491382",
+    "name": "Side Bend (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMRq8zzsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQxMQmnVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d1282dd0-9b75-4480-ac0b-1f33e38acfb5",
+    "name": "Side Plank",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA16xk3PgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApl8pkOiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "duration"
+  },
+  {
+    "id": "6059dc70-de15-432f-8552-0a865b27017e",
+    "name": "Single Arm Cable Crossover",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQ8zzXsVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAP7hugKDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "667db301-3ecf-4946-9255-971afcb22f9f",
+    "name": "Single Arm Cable Row",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq0UM0AWjwqEr6dCLSvi72a8BDkc5FAbuG1H3",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACCsr1c67MxLg0Za213urFASkmczsjEXYlonQ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f83708f1-b8c7-4931-8708-b22944fb61e3",
+    "name": "Single Arm Curl (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEULK71QZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAb82IuBWzHFD79eU5g3GiMtJumfpBQIOqEPV2",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f65cc168-cf1e-4c04-adcc-188249be1a0a",
+    "name": "Single Arm Landmine Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Chest"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9gg5GojUSlTcYeQLr1pizDksgxjw2BUWq0EP",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApsY4YRiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "33f60ce3-c1ce-497b-9b63-aff08a3c2685",
+    "name": "Single Arm Lat Pulldown",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATuTE1Rf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAH5ortUEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "16289fab-83e7-4763-b475-eb23e8c82794",
+    "name": "Single Arm Lateral Raise (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiXstWt0GYHRqUSzA67Ejbu2d4CsN8JP5BhZI",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAqk8nWsjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "49c05a56-4af4-4413-8184-83e5de3c9b1f",
+    "name": "Single Arm Tricep Extension (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUieSh01a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAe1Gt7QLVM6riuhFtRGknTHUd39q8X1v20CBc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "ac8fb749-f2ee-4416-8db4-a50197f21e5e",
+    "name": "Single Arm Triceps Pushdown (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACoZ4t367MxLg0Za213urFASkmczsjEXYlonQ",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA4qKeunCUoagiFeSh3rXG6s2zwxjfEm8qnWZR",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c8f4579d-eea4-4c4e-8d0e-046c1afe39c5",
+    "name": "Single Leg Extensions",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzRnXtL29HdCEVfNo8pTRqwrvbnAyO7XU6I3k",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAphJ2wpliIm4QoZFVfak2U7ORGxWJB9pCjlgz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e9a63fc5-9cce-4187-9d68-8e4443fa9886",
+    "name": "Single Leg Glute Bridge",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANfQpVEncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEHkYhCQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "9dd78f07-f5ce-4ce1-9f64-4becfe4105b2",
+    "name": "Single Leg Hip Thrust",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXcVMSxTr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAiWXnViGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "43f750aa-c951-4ec9-8b1a-80bdf47ca232",
+    "name": "Single Leg Hip Thrust (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjbguItDOY5uvdCixX6PQ1Sj8NWfbwhk97V4J",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0CivFEbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "11c54e2f-d60d-4b84-8e2c-e91146dba1be",
+    "name": "Single Leg Press (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjb0INZZOY5uvdCixX6PQ1Sj8NWfbwhk97V4J",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA2RCq7SkT79A0eZ4OoHrvQI5g3t6LwRJaYdkl",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "f8f8587b-b4ce-4d2f-aada-d244d0758c4a",
+    "name": "Single Leg Romanian Deadlift (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Lower Back",
+      "Upper Back",
+      "Lats"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAh9SrnjXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAp2101wiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b7bbce4a-1292-4d92-b260-ed8c39d3e7b5",
+    "name": "Single Leg Romanian Deadlift (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Lower Back"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5FBTYBKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARHETYDouJ0OCVMUP3jcYwvH7n1BXEyDqkz4p",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "35bcade9-a071-4338-a33a-e53d7bc0faea",
+    "name": "Single Leg Standing Calf Raise",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA1YXwLVgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEpiLEv5QZbLj9yK3g6F7vpf2TuMwldVrWn85",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "f0a747c4-76d0-479d-aea7-550ecfe66b3a",
+    "name": "Single Leg Standing Calf Raise (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHVoyP9uEzWPUw9KxOEmu3hIqBrbAyf7GtDov",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAphsFHBqiIm4QoZFVfak2U7ORGxWJB9pCjlgz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5946ed3b-c733-4b9a-8f32-ad8698fa27c9",
+    "name": "Single Leg Standing Calf Raise (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMHZ8ZpsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVPovSFpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "2135ea7b-ed4a-4219-91b8-31d512a997bc",
+    "name": "Single Leg Standing Calf Raise (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA4e7PhbCUoagiFeSh3rXG6s2zwxjfEm8qnWZR",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhLfn7tXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "774dfc16-591b-429c-aef6-7c3b94f099ef",
+    "name": "Sissy Squat (Weighted)",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAG0QNH6hYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEeW4IFQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "db63251a-aba1-4d58-9ab9-6801ae1199bb",
+    "name": "Sit Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAL2A4whNaDPCHXqyu1Miw83pZ4QUgl6sW7tFE",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwOmPEeSixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "6c57ef17-7b43-4f56-985b-0dc8e553ba42",
+    "name": "Sit Up (Weighted)",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEplCuhYQZbLj9yK3g6F7vpf2TuMwldVrWn85",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjplzIdOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "c56866ab-6417-47f6-bec1-04edba4eab88",
+    "name": "Skating",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "84aa5f5e-fc82-4c9d-a754-11726a0b2c44",
+    "name": "Skiing",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "3ba260e4-cee4-488d-8b9c-c5eb36fd7657",
+    "name": "Skullcrusher (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXbqRJVTr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAsbF6sclNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "a7c9ccd8-ab18-493e-9733-b053082c9169",
+    "name": "Skullcrusher (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9gLqZ9VUSlTcYeQLr1pizDksgxjw2BUWq0EP",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMjDIt8sI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e98757b4-93c3-4ecc-92cc-d531e57900f4",
+    "name": "Slant Board Squat",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "80c2e9ca-c0f9-4fe1-b556-f145931d0f57",
+    "name": "Sled Push",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzARhCAoAuJ0OCVMUP3jcYwvH7n1BXEyDqkz4pK",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAKjm3PFd7tmzAikHLCueN2GcVYXp0rDfOWTgj",
+    "exerciseType": "weightDistance"
+  },
+  {
+    "id": "0b2715b3-bf4a-49ce-961c-20dcfef3a511",
+    "name": "Snatch",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQSB5QDVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA49UjsUgCUoagiFeSh3rXG6s2zwxjfEm8qnWZ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "1806d9b4-b292-4011-b621-fe3d5b3241e6",
+    "name": "Snowboarding",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "5446c255-d575-4c21-ab40-8870a45f0198",
+    "name": "Spider Curl (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXubrl5Tr8SGzjHNDA4hgIZmB1Kw2pfO0b5se",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGTFUubhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "6ba24469-8aed-4161-a73a-a94d4799e03e",
+    "name": "Spider Curl (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGMxFB4hYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApI6UESiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "743fc716-cfc5-460b-80e0-089578a04233",
+    "name": "Spiderman",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA27wKOZkT79A0eZ4OoHrvQI5g3t6LwRJaYdkl",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATdAETJf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "fabf2ed6-bc81-4dbe-abff-81af3e0ff981",
+    "name": "Spinning",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAn8Zo6HAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA4Z06UFCUoagiFeSh3rXG6s2zwxjfEm8qnWZR",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "adcd3efc-d358-4975-9230-e2db9c65cc0c",
+    "name": "Split Jerk",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAgZC68KIlZ0uYsjPkm2XH1SFneGV4QKpdr7Wc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQiMmL4AVE9DAjXh1qT83eivFcu4U0CW7Sf6P",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4aebacf8-0ca9-47f1-8093-f062daf25786",
+    "name": "Split Squat (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq39IpBjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZNnOKzo76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "3b9bf5e4-482d-4537-b2ca-ae46b91b0897",
+    "name": "Sprints",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "dd8236f4-05fc-4525-ac17-3035246ac0ce",
+    "name": "Squat (Band)",
+    "equipment": "Resistance Band",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOQE94I0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzeGqRK29HdCEVfNo8pTRqwrvbnAyO7XU6I3k",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d905636c-2c23-45d6-9118-96b3daaf41cd",
+    "name": "Squat (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANcYuJZMncosi1nFz5GdkAg49VRrWlMb0uaK8",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAb41xcOWzHFD79eU5g3GiMtJumfpBQIOqEPV2",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "3d3ad0c7-0f9a-4a24-90e0-d50cf2b4f334",
+    "name": "Squat (Bodyweight)",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACSzZRf67MxLg0Za213urFASkmczsjEXYlonQ",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAVXExjfpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "7c88332d-e1ca-47d1-9652-caa737cf4614",
+    "name": "Squat (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEUZOd5QZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUXNnve1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "83232f26-101f-451c-8a9a-19359ca8bad9",
+    "name": "Squat (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAuXpOlSyw8XTx3m9SLZPRoMUHErqnjOcA6Iv0",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAxXFDEPBTJhSCx6g73aPmrj9ypMLI0enU4NFH",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "50e82f78-e532-4506-97a8-dd46a42f8cca",
+    "name": "Squat (Smith Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA15zxw03gPityzmd4vDWTABSwU5YrOe6MqN7f",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAN1GHgqncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "be57eb56-9c32-4193-951c-8bf9bf160ec8",
+    "name": "Squat (Suspension)",
+    "equipment": "Suspension",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQq4adTVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAE8qMwyQZbLj9yK3g6F7vpf2TuMwldVrWn85h",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "289a7a4e-bc56-4135-a1ad-a8f29515a558",
+    "name": "Squat Row",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhuErhIXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAkDr67Akm7S1QmAYJU6Eye9vqgGRMObfdWDnx",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d4470952-b01b-4ee2-9d12-31368d4aaa81",
+    "name": "Stair Machine (Floors)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAuN8SD6yw8XTx3m9SLZPRoMUHErqnjOcA6Iv0",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAnrYu2Z7AMAhsGUjnxFX0Lfq4Py2riewgRuz1",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "7cacf3db-5825-4b76-85f4-36170b184885",
+    "name": "Stair Machine (Steps)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAm178qtPkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATqoj3f02R43IWtJEhMX15cxaPYUSDgHnq8zQ",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "6094b682-5274-4380-9b15-d2f7052c428c",
+    "name": "Standing Cable Glute Kickbacks",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAV6ZkzjpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAsWDFfOlNjZ0cDKexX85E46zfUrMukH9GawIh",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "47472a2b-a524-43d9-9e5a-c65c1d60ed94",
+    "name": "Standing Calf Raise",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAohTHLKMLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "videoUrl": "",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "12b15ffa-3978-46f8-82d4-c39734bb4a33",
+    "name": "Standing Calf Raise (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIddnZEP5QkHzl8hnX7vEstAYP4VJ5wGFMxmg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAaN0F9xzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d4a77bae-8901-4cfd-9d29-13ec9eb5fab0",
+    "name": "Standing Calf Raise (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAKBkDtv5d7tmzAikHLCueN2GcVYXp0rDfOWTg",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHgBXAHEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4c7f48c0-f00b-47d8-9345-b9b9e3c173c8",
+    "name": "Standing Calf Raise (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAa9scYwzMRyV0PJYHahguXj7lZiFoSqrtC4b9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASAAjZUiN79ctXURDAfsMYpvq038uBhZNjLT6",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b8385c14-14bd-427b-83b5-c17763cde2dc",
+    "name": "Standing Calf Raise (Smith)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAV4GcbIpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAIdeMqMM5QkHzl8hnX7vEstAYP4VJ5wGFMxmg",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d0d5f1e7-10f1-4e2a-bf26-d3ed42923eed",
+    "name": "Standing Leg Curls",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Calves"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADU7uUswSW8luh1yKizM4Vrp0kwB62o7EsGZj",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADNrmuZNwSW8luh1yKizM4Vrp0kwB62o7EsGZ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5a968109-dd03-486f-973f-190128a70762",
+    "name": "Standing Military Press (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhftyfQ6XlZoYW2rsMtq4nT3PaBx7kCmRfDwO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzMVVYM29HdCEVfNo8pTRqwrvbnAyO7XU6I3k",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "001269a6-42a0-4cf1-8579-61caa76b8e1d",
+    "name": "Step Up",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAW8Tq9gveRYUB5hJosEfOuAPVpyTDvSMnIwrW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAidARYvGYHRqUSzA67Ejbu2d4CsN8JP5BhZIk",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "a9ea86fa-7f84-4cc8-94f5-bd0727c6805c",
+    "name": "Sternum Pull up (Gironda)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwnVNon4Sixa7G9gUQTyKsv0jt1NqVBrJFCpz",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAoj7IdGMLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "05984493-827a-4ace-a4a6-fe1fe8b52bce",
+    "name": "Straight Arm Lat Pulldown (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApkHJdiIm4QoZFVfak2U7ORGxWJB9pCjlgzeL",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0120gwbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "12040803-27bc-4b91-a266-e1e68812109c",
+    "name": "Straight Leg Deadlift",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Lower Back",
+      "Upper Back",
+      "Lats",
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATeDkkvf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWFIlqGXveRYUB5hJosEfOuAPVpyTDvSMnIwr",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "54c53cb5-4997-4177-b28e-c239befbd311",
+    "name": "Stretching",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Other"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "a7012d59-7a2b-4147-9b25-2b2a192004c6",
+    "name": "Sumo Deadlift",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Adductors",
+      "Lower Back",
+      "Upper Back",
+      "Lats",
+      "Traps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWVArY4veRYUB5hJosEfOuAPVpyTDvSMnIwrW",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATYdKSaf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "607a614f-d20b-4a45-9b11-493b16c729a2",
+    "name": "Sumo Squat",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Adductors",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHoymuhEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAV6lMdPpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "b9a3c2cc-4b40-492e-80d9-c30036d5d4ad",
+    "name": "Sumo Squat (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes",
+      "Adductors"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAxLkpjkGBTJhSCx6g73aPmrj9ypMLI0enU4NF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATZ0Ai5bf02R43IWtJEhMX15cxaPYUSDgHnq8",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "681ff709-d8ef-4ecc-9516-da59f3e75840",
+    "name": "Sumo Squat (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Adductors",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAN4Z6o5ncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEphTNa7QZbLj9yK3g6F7vpf2TuMwldVrWn85",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "664463ef-23f9-4949-9105-bc215c9e651a",
+    "name": "Sumo Squat (Kettlebell)",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Adductors",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHVVttZKEzWPUw9KxOEmu3hIqBrbAyf7GtDov",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0FrPVfbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b8f1cac7-7f5a-48ce-a7bf-3113e04c96f8",
+    "name": "Superman",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Lower Back"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATQm8emf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUTNk3w1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "aa576728-cb43-435a-8307-2f425aafb1d6",
+    "name": "Swimming",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "1f0f1f79-f5e9-4747-87e7-0a2b592e8f5c",
+    "name": "T Bar Row",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Upper Back"
+    ],
+    "secondaryMuscles": [
+      "Lats",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZEIg4no76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzApnaO9CiIm4QoZFVfak2U7ORGxWJB9pCjlgze",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "a235a553-571a-4de7-8783-cf19fe01138d",
+    "name": "Thruster (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA2HJndpkT79A0eZ4OoHrvQI5g3t6LwRJaYdkl",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPtlSwoDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "b14c3608-299f-4218-8745-90ecded466f1",
+    "name": "Thruster (Kettlebell)",
+    "equipment": "Kettlebell",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATTD0Ypf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzABazuZ2IefUktwYsXIpMPVvNCRyoZi6G3Sd8E",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4065d7a8-b9f2-4d75-9323-a5af640c725b",
+    "name": "Tibialis Raises",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [
+      "Other"
+    ],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "cf5af2a6-4685-4041-99e3-289421a2ac55",
+    "name": "Toe Touch",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMPYTo0sI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGB901nhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "518b4c04-0da1-4433-83a2-93536611495b",
+    "name": "Toes to Bar",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbt4JdZlWzHFD79eU5g3GiMtJumfpBQIOqEPV",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANSPzi4ncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "4bb4368a-80bc-47b7-a6e7-60b8f2a0228d",
+    "name": "Torso Rotation",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQP4Qk8VE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA14UW3hgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e9bc626c-e817-4825-ab65-f7701df9ff6a",
+    "name": "Treadmill",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5QV4LNKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHYFVrCEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "2d2b5b4a-871d-40fd-8bad-43a8306bab06",
+    "name": "Triceps Dip",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhpDgl7XlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq08KM2PjwqEr6dCLSvi72a8BDkc5FAbuG1H3",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "12fed51b-c106-413f-b358-741e338753ab",
+    "name": "Triceps Dip (Assisted)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAV7hKKJpbQM81pWSZOCgFjBsxvrna3AL45yq2",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAH0rmXGEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "assistedBodyweight"
+  },
+  {
+    "id": "5b462fdb-e56f-4119-add3-045e664d29d3",
+    "name": "Triceps Dip (Weighted)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADfT5IzwSW8luh1yKizM4Vrp0kwB62o7EsGZj",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAMFe4NmsI2HR9AO0mzCnYSwFK8glJ1axQVTue",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "e4bc83cd-a802-4654-9922-affc4807621a",
+    "name": "Triceps Extension (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAgwljfLIlZ0uYsjPkm2XH1SFneGV4QKpdr7Wc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhyeeVFXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "128b83cf-05a9-4630-b7ad-f32b1a3645b1",
+    "name": "Triceps Extension (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUevnvx1a8Jjxn1UTZfg3rLV4KuRFtk5eSyMO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAHHTg0WEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "157c0c99-48e6-4af1-981e-c718c8773fab",
+    "name": "Triceps Extension (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATZJmLovf02R43IWtJEhMX15cxaPYUSDgHnq8",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOLnXaF0vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5813ddf0-9be9-41c1-b869-4347ba3a1f4b",
+    "name": "Triceps Extension (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAh0Ik1pXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQRwyBIVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "707045d4-c910-4939-9d2a-866f81332b3b",
+    "name": "Triceps Extension (Suspension)",
+    "equipment": "Suspension",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzADNQlrOtwSW8luh1yKizM4Vrp0kwB62o7EsGZ",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXJFgzvaTr8SGzjHNDA4hgIZmB1Kw2pfO0b5s",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "950565b2-0e1e-4ceb-86d7-ef51b0aa681c",
+    "name": "Triceps Kickback (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJM3cYbPZ05ZXjFRWSdY39albUNDsoi2Qy8C1",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAwGEFjPSixa7G9gUQTyKsv0jt1NqVBrJFCpzW",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "4c72d950-842d-4505-84f0-3577ed89b629",
+    "name": "Triceps Kickback (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlH1z8rqSDgdytXe4UrNBop1xaL0InqPRz6Av",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAuX2uc6yw8XTx3m9SLZPRoMUHErqnjOcA6Iv0",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "c535beb5-a7d7-4a47-aaf2-b25e585732fd",
+    "name": "Triceps Pressdown",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzANb3Q0Uncosi1nFz5GdkAg49VRrWlMb0uaK8e",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQ5uMv1VE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "36575a41-7a71-4774-96a7-533d181f7e2f",
+    "name": "Triceps Pushdown",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA9gzzixaUSlTcYeQLr1pizDksgxjw2BUWq0EP",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEpZbTjrQZbLj9yK3g6F7vpf2TuMwldVrWn85",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "382af9f0-1afc-4574-9094-dc984c5667d7",
+    "name": "Triceps Rope Pushdown",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0knxRDbLye1AUcCZfMDzPkvgrVnTNl0J9qQO",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjNqqTnOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "9079650c-328f-41a0-8aab-23a26a3228c7",
+    "name": "Upright Row (Barbell)",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Traps",
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhJhH6mXlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAqfwsUQjwqEr6dCLSvi72a8BDkc5FAbuG1H3V",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "d731400e-7199-494c-b238-1aaca4d1d54a",
+    "name": "Upright Row (Cable)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Traps",
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA6fdDKK9OBVnqaJGUYftp9yeSk5sAiPXWCzb4",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAH5UxTAEzWPUw9KxOEmu3hIqBrbAyf7GtDovi",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "7ad7af4f-9d30-41a9-9771-42fdeb10be55",
+    "name": "Upright Row (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Traps",
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAWF5oVenveRYUB5hJosEfOuAPVpyTDvSMnIwr",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAgKLbFkFIlZ0uYsjPkm2XH1SFneGV4QKpdr7W",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "9f2ef51a-8ce2-4e40-b3fa-9e7f9b55c4d8",
+    "name": "V Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Abdominals"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATjK7zSf02R43IWtJEhMX15cxaPYUSDgHnq8z",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEpflwZGQZbLj9yK3g6F7vpf2TuMwldVrWn85",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "c0a63163-fa9f-494b-b532-728785fcf759",
+    "name": "Vertical Traction (Machine)",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzALd1NdBaDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJ8k0SzZ05ZXjFRWSdY39albUNDsoi2Qy8C1H",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "2d436b98-3ae3-4faf-851e-babe8b13547c",
+    "name": "Waiter Curl (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA0v36tiJbLye1AUcCZfMDzPkvgrVnTNl0J9qQ",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAm9oFlZPkQdE0ySTCtcrPe9RiUsxjBuw2XZfl",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "2945c02f-b144-4e0a-af34-8a1760d6a541",
+    "name": "Walking",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Cardio"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "distanceDuration"
+  },
+  {
+    "id": "b5a41921-14b3-4dac-9f7e-adeecf9c4628",
+    "name": "Walking Lunge",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAoPrrdzMLagWu8qOQCcyxVdDpI5zHP1t7ejAF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQZjBnbVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "fda23df7-172b-49eb-a516-995a2da78a8e",
+    "name": "Walking Lunge (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAzxtW3029HdCEVfNo8pTRqwrvbnAyO7XU6I3k",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAEpia7nKQZbLj9yK3g6F7vpf2TuMwldVrWn85",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5822af0c-6bd1-472c-85a9-30e73ff5bcaf",
+    "name": "Wall Ball",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAne65KPAMAhsGUjnxFX0Lfq4Py2riewgRuz1H",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAOxd5a20vd4xz0wmk2Qy3cCrUoXZ95hePjNGY",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "5740890e-f004-47fa-9178-4f74471abea0",
+    "name": "Wall Sit",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAZeegENo76Macbqm82xpoWJysZfAIKO5HnXkF",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAg7ucMMIlZ0uYsjPkm2XH1SFneGV4QKpdr7Wc",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "55e7dd9a-bb58-4d44-9983-2a000ca80183",
+    "name": "Warm Up",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "08625911-1602-4b1d-ac5e-194ce086d798",
+    "name": "Wide Pull Up",
+    "equipment": "Other",
+    "primaryMuscles": [
+      "Lats"
+    ],
+    "secondaryMuscles": [
+      "Upper Back",
+      "Biceps",
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAUILhg0x1a8Jjxn1UTZfg3rLV4KuRFtk5eSyM",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAph0yLxpiIm4QoZFVfak2U7ORGxWJB9pCjlgz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "67b91d17-1085-4c61-84de-7ad877dde48c",
+    "name": "Wide-Elbow Triceps Press (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzALLxKLHaDPCHXqyu1Miw83pZ4QUgl6sW7tFEc",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjCSqRKOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "347ccc2c-8e54-42a4-a72c-1e758ff442ea",
+    "name": "Wrist Roller",
+    "equipment": "Machine",
+    "primaryMuscles": [
+      "Forearms"
+    ],
+    "secondaryMuscles": [
+      "Shoulders"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzASes9HvN79ctXURDAfsMYpvq038uBhZNjLT62",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA49xAT5RCUoagiFeSh3rXG6s2zwxjfEm8qnWZ",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "766946ed-89e2-4966-b4a6-13885875ad54",
+    "name": "Yoga",
+    "equipment": "None",
+    "primaryMuscles": [
+      "Full Body"
+    ],
+    "secondaryMuscles": [],
+    "thumbnailUrl": "",
+    "videoUrl": "",
+    "exerciseType": "repsOnly"
+  },
+  {
+    "id": "747b81a5-df39-4916-b9ea-ebe33cf2d772",
+    "name": "Zercher Squat",
+    "equipment": "Barbell",
+    "primaryMuscles": [
+      "Quadriceps"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Glutes",
+      "Biceps"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5BkwmBKivToJBdkGEtK0LXFzHcQmfOR45D7n",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA18iUOFgPityzmd4vDWTABSwU5YrOe6MqN7fo",
+    "exerciseType": "weightReps"
+  },
+  {
+    "id": "6f18b06b-4c08-41a5-9c48-dc20f89d84f8",
+    "name": "Zottman Curl (Dumbbell)",
+    "equipment": "Dumbbell",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAJM78z4dZ05ZXjFRWSdY39albUNDsoi2Qy8C1",
+    "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAXJfZkmRTr8SGzjHNDA4hgIZmB1Kw2pfO0b5s",
+    "exerciseType": "weightReps"
+  }
+]
