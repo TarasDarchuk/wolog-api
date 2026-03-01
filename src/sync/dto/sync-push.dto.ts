@@ -69,6 +69,10 @@ export class WorkoutExercisePushDto {
   @IsString()
   notes?: string;
 
+  @IsOptional()
+  @IsUUID()
+  supersetId?: string;
+
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => ExerciseSetPushDto)
@@ -168,6 +172,10 @@ export class ExercisePushDto {
   @IsArray()
   @IsString({ each: true })
   secondaryMuscles: string[];
+
+  @IsOptional()
+  @IsBoolean()
+  isCustom?: boolean;
 
   @IsDateString()
   updatedAt: string;
@@ -298,10 +306,11 @@ export class TemplatePushDto {
   @Type(() => TemplateItemPushDto)
   items: TemplateItemPushDto[];
 
+  @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => TemplateSupersetPushDto)
-  supersets: TemplateSupersetPushDto[];
+  supersets?: TemplateSupersetPushDto[];
 }
 
 // ─── Body Measurement DTO ───────────────────────────────────────────────────
