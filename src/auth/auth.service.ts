@@ -19,16 +19,17 @@ import {
 
 @Injectable()
 export class AuthService {
-  private googleClient: OAuth2Client;
+  private googleClient: OAuth2Client | null = null;
 
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
     private configService: ConfigService,
   ) {
-    this.googleClient = new OAuth2Client(
-      this.configService.get('GOOGLE_CLIENT_ID'),
-    );
+    const googleClientId = this.configService.get('GOOGLE_CLIENT_ID');
+    if (googleClientId) {
+      this.googleClient = new OAuth2Client(googleClientId);
+    }
   }
 
   async signInWithApple(dto: AppleAuthDto): Promise<AuthResponseDto> {
@@ -79,6 +80,10 @@ export class AuthService {
   }
 
   async signInWithGoogle(dto: GoogleAuthDto): Promise<AuthResponseDto> {
+    if (!this.googleClient) {
+      throw new UnauthorizedException('Google Sign-In is not configured');
+    }
+
     let googlePayload: { sub: string; email?: string; name?: string };
 
     try {
