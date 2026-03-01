@@ -1,0 +1,301 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums (mirrored from iOS SharedEnums.swift) ────────────────────────────
+
+enum ExerciseType {
+  weightReps
+  repsOnly
+  weightedBodyweight
+  assistedBodyweight
+  duration
+  weightDuration
+  distanceDuration
+  weightDistance
+}
+
+enum MuscleGroup {
+  chest
+  lats
+  lowerBack
+  traps
+  upperBack
+  abductors
+  adductors
+  calves
+  tibialis
+  glutes
+  hamstrings
+  quadriceps
+  shoulders
+  neck
+  biceps
+  triceps
+  forearms
+  abdominals
+  cardio
+  fullBody
+  other
+}
+
+enum Equipment {
+  barbell
+  dumbbell
+  bodyweight
+  cable
+  machine
+  kettlebell
+  plate
+  resistanceBand
+  suspension
+  other
+}
+
+enum SetType {
+  normal
+  warmup
+  dropset
+  failure
+}
+
+enum MeasurementType {
+  weight
+  bodyFat
+  chest
+  waist
+  hips
+  neck
+  shoulders
+  leftBicep
+  rightBicep
+  leftForearm
+  rightForearm
+  leftThigh
+  rightThigh
+  leftCalf
+  rightCalf
+}
+
+// ─── User & Auth ────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String?  @unique
+  appleUserId  String?  @unique
+  googleUserId String?  @unique
+  displayName  String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  refreshTokens    RefreshToken[]
+  workouts         Workout[]
+  exercises        Exercise[]
+  workoutTemplates WorkoutTemplate[]
+  bodyMeasurements BodyMeasurement[]
+}
+
+model RefreshToken {
+  id         String    @id @default(uuid()) @db.Uuid
+  userId     String    @db.Uuid
+  tokenHash  String
+  deviceName String?
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+}
+
+// ─── Workouts (atomic aggregate) ────────────────────────────────────────────
+
+model Workout {
+  id             String    @id @db.Uuid
+  userId         String    @db.Uuid
+  name           String    @default("")
+  startedAt      DateTime  @default(now())
+  completedAt    DateTime?
+  notes          String?
+  activeCalories Int       @default(0)
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercises WorkoutExercise[]
+  supersets WorkoutSuperset[]
+
+  @@index([userId, updatedAt])
+  @@index([userId, deletedAt])
+}
+
+model WorkoutExercise {
+  id         String  @id @db.Uuid
+  workoutId  String  @db.Uuid
+  exerciseId String  @db.Uuid
+  sortOrder  Int     @default(0)
+  notes      String?
+  updatedAt  DateTime @updatedAt
+
+  workout  Workout     @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  exercise Exercise    @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  sets     ExerciseSet[]
+
+  @@index([workoutId])
+}
+
+model ExerciseSet {
+  id                String   @id @db.Uuid
+  workoutExerciseId String   @db.Uuid
+  setNumber         Int      @default(1)
+  weight            Float?
+  reps              Int?
+  duration          Float?
+  distance          Float?
+  isCompleted       Boolean  @default(false)
+  type              SetType  @default(normal)
+  prRecords         Json?
+
+  workoutExercise WorkoutExercise @relation(fields: [workoutExerciseId], references: [id], onDelete: Cascade)
+
+  @@index([workoutExerciseId])
+}
+
+model WorkoutSuperset {
+  id                String @id @db.Uuid
+  workoutId         String @db.Uuid
+  supersetColorIndex Int   @default(0)
+  exerciseIds       String[] @db.Uuid
+
+  workout Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+
+  @@index([workoutId])
+}
+
+// ─── Exercises ──────────────────────────────────────────────────────────────
+
+model Exercise {
+  id               String       @id @db.Uuid
+  userId           String?      @db.Uuid
+  name             String       @default("")
+  muscleGroup      MuscleGroup  @default(chest)
+  equipment        Equipment    @default(barbell)
+  exerciseType     ExerciseType @default(weightReps)
+  isCustom         Boolean      @default(false)
+  restDuration     Float?
+  thumbnailUrl     String?
+  videoUrl         String?
+  primaryMuscles   String[]
+  secondaryMuscles String[]
+  updatedAt        DateTime     @updatedAt
+  deletedAt        DateTime?
+
+  user              User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workoutExercises  WorkoutExercise[]
+  templateExercises TemplateExercise[]
+
+  @@index([userId])
+  @@index([isCustom])
+}
+
+// ─── Templates (atomic aggregate) ──────────────────────────────────────────
+
+model WorkoutTemplate {
+  id        String   @id @db.Uuid
+  userId    String   @db.Uuid
+  name      String   @default("")
+  notes     String   @default("")
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  user  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items TemplateItem[]
+
+  @@index([userId, updatedAt])
+  @@index([userId, deletedAt])
+}
+
+model TemplateItem {
+  id         String  @id @db.Uuid
+  templateId String  @db.Uuid
+  sortOrder  Int     @default(0)
+  supersetId String? @db.Uuid
+
+  template WorkoutTemplate   @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  superset TemplateSuperset? @relation(fields: [supersetId], references: [id], onDelete: SetNull)
+  exercise TemplateExercise?
+
+  @@index([templateId])
+}
+
+model TemplateExercise {
+  id               String  @id @db.Uuid
+  templateItemId   String  @unique @db.Uuid
+  supersetId       String? @db.Uuid
+  exerciseId       String  @db.Uuid
+  sortOrder        Int     @default(0)
+  targetSets       Int     @default(3)
+  targetReps       Int     @default(10)
+  notes            String?
+  restTimerSeconds Int?
+
+  templateItem TemplateItem      @relation(fields: [templateItemId], references: [id], onDelete: Cascade)
+  superset     TemplateSuperset? @relation(fields: [supersetId], references: [id], onDelete: SetNull)
+  exercise     Exercise          @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  sets         TemplateSet[]
+
+  @@index([templateItemId])
+}
+
+model TemplateSet {
+  id                 String @id @db.Uuid
+  templateExerciseId String @db.Uuid
+  setNumber          Int    @default(1)
+  targetWeight       Float?
+  targetReps         Int?
+  targetDuration     Float?
+  targetDistance      Float?
+
+  templateExercise TemplateExercise @relation(fields: [templateExerciseId], references: [id], onDelete: Cascade)
+
+  @@index([templateExerciseId])
+}
+
+model TemplateSuperset {
+  id                 String   @id @db.Uuid
+  templateId         String   @db.Uuid
+  supersetColorIndex Int      @default(0)
+  exerciseIds        String[] @db.Uuid
+
+  items     TemplateItem[]
+  exercises TemplateExercise[]
+
+  @@index([templateId])
+}
+
+// ─── Body Measurements ─────────────────────────────────────────────────────
+
+model BodyMeasurement {
+  id        String          @id @db.Uuid
+  userId    String          @db.Uuid
+  date      DateTime
+  type      MeasurementType @default(weight)
+  value     Float           @default(0)
+  photoUrl  String?
+  updatedAt DateTime        @updatedAt
+  deletedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@index([userId, deletedAt])
+}

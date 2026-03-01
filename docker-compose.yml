@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: wolog
+      POSTGRES_PASSWORD: wolog
+      POSTGRES_DB: wolog
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: postgresql://wolog:wolog@postgres:5432/wolog?schema=public
+      JWT_SECRET: dev-secret-change-in-production
+      JWT_ACCESS_EXPIRY: 15m
+      JWT_REFRESH_EXPIRY_DAYS: 30
+      APPLE_CLIENT_ID: com.taras.wolog
+      GOOGLE_CLIENT_ID: placeholder.apps.googleusercontent.com
+      PORT: 3000
+      NODE_ENV: development
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:

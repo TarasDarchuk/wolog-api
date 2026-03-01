@@ -1,0 +1,28 @@
+# compiled output
+/dist
+/node_modules
+/build
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+# env
+.env
+.env.local
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+.DS_Store
+
+# test
+/coverage
+/.nyc_output
+
+# prisma
+prisma/migrations/**/migration_lock.toml
+src/generated/
