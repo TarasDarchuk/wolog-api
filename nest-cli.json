@@ -5,7 +5,7 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "assets": [
-      { "include": "generated/**/*", "watchAssets": true }
+      { "include": "generated/**/*", "outDir": "dist/src", "watchAssets": true }
     ]
   }
 }
