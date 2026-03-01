@@ -47,6 +47,8 @@ The generated client outputs to `src/generated/prisma/` (custom output path). Be
 
 ## Commands
 
+**Before pushing:** Always run tests first: `npm test`
+
 ```bash
 nvm use 22                     # Required: Node 22 LTS
 npm run start:dev              # Dev server with watch mode
