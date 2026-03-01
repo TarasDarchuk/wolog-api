@@ -128,33 +128,35 @@ export class SyncService {
             },
           });
 
-          // Insert exercises
-          for (const we of workout.exercises) {
-            await tx.workoutExercise.create({
-              data: {
+          // Insert exercises (batch)
+          if (workout.exercises.length) {
+            await tx.workoutExercise.createMany({
+              data: workout.exercises.map((we) => ({
                 id: we.id,
                 workoutId: workout.id,
                 exerciseId: we.exerciseId,
                 sortOrder: we.sortOrder,
                 notes: we.notes || null,
-              },
+              })),
             });
 
-            if (we.sets?.length) {
-              await tx.exerciseSet.createMany({
-                data: we.sets.map((s) => ({
-                  id: s.id,
-                  workoutExerciseId: we.id,
-                  setNumber: s.setNumber,
-                  weight: s.weight ?? null,
-                  reps: s.reps ?? null,
-                  duration: s.duration ?? null,
-                  distance: s.distance ?? null,
-                  isCompleted: s.isCompleted,
-                  type: s.type as any,
-                  prRecords: s.prRecords ?? Prisma.JsonNull,
-                })),
-              });
+            // Insert all sets across all exercises (batch)
+            const allSets = workout.exercises.flatMap((we) =>
+              (we.sets || []).map((s) => ({
+                id: s.id,
+                workoutExerciseId: we.id,
+                setNumber: s.setNumber,
+                weight: s.weight ?? null,
+                reps: s.reps ?? null,
+                duration: s.duration ?? null,
+                distance: s.distance ?? null,
+                isCompleted: s.isCompleted,
+                type: s.type as any,
+                prRecords: s.prRecords ?? Prisma.JsonNull,
+              })),
+            );
+            if (allSets.length) {
+              await tx.exerciseSet.createMany({ data: allSets });
             }
           }
 

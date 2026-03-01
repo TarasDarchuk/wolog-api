@@ -141,13 +141,19 @@ export class AuthService {
   }
 
   async refreshAccessToken(dto: RefreshTokenDto): Promise<AuthResponseDto> {
-    const tokens = await this.prisma.refreshToken.findMany({
-      where: { revokedAt: null, expiresAt: { gt: new Date() } },
+    // Look up by tokenFamily (first 8 chars of the token used as lookup key)
+    const tokenFamily = dto.refreshToken.substring(0, 8);
+    const candidates = await this.prisma.refreshToken.findMany({
+      where: {
+        tokenFamily,
+        revokedAt: null,
+        expiresAt: { gt: new Date() },
+      },
       include: { user: true },
     });
 
-    let matchedToken: (typeof tokens)[0] | null = null;
-    for (const token of tokens) {
+    let matchedToken: (typeof candidates)[0] | null = null;
+    for (const token of candidates) {
       const isMatch = await bcrypt.compare(dto.refreshToken, token.tokenHash);
       if (isMatch) {
         matchedToken = token;
@@ -173,11 +179,12 @@ export class AuthService {
   }
 
   async logout(refreshToken: string): Promise<void> {
-    const tokens = await this.prisma.refreshToken.findMany({
-      where: { revokedAt: null },
+    const tokenFamily = refreshToken.substring(0, 8);
+    const candidates = await this.prisma.refreshToken.findMany({
+      where: { tokenFamily, revokedAt: null },
     });
 
-    for (const token of tokens) {
+    for (const token of candidates) {
       const isMatch = await bcrypt.compare(refreshToken, token.tokenHash);
       if (isMatch) {
         await this.prisma.refreshToken.update({
@@ -226,6 +233,7 @@ export class AuthService {
     );
 
     const rawRefreshToken = uuidv4();
+    const tokenFamily = rawRefreshToken.substring(0, 8);
     const tokenHash = await bcrypt.hash(rawRefreshToken, 10);
     const refreshExpiryDays = this.configService.get<number>(
       'JWT_REFRESH_EXPIRY_DAYS',
@@ -238,6 +246,7 @@ export class AuthService {
       data: {
         userId,
         tokenHash,
+        tokenFamily,
         deviceName: deviceName || null,
         expiresAt,
       },

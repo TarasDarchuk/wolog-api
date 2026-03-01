@@ -101,18 +101,19 @@ model User {
 }
 
 model RefreshToken {
-  id         String    @id @default(uuid()) @db.Uuid
-  userId     String    @db.Uuid
-  tokenHash  String
-  deviceName String?
-  expiresAt  DateTime
-  revokedAt  DateTime?
-  createdAt  DateTime  @default(now())
+  id          String    @id @default(uuid()) @db.Uuid
+  userId      String    @db.Uuid
+  tokenHash   String
+  tokenFamily String
+  deviceName  String?
+  expiresAt   DateTime
+  revokedAt   DateTime?
+  createdAt   DateTime  @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
-  @@index([tokenHash])
+  @@index([tokenFamily])
 }
 
 // ─── Workouts (atomic aggregate) ────────────────────────────────────────────
@@ -217,8 +218,9 @@ model WorkoutTemplate {
   updatedAt DateTime @updatedAt
   deletedAt DateTime?
 
-  user  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items TemplateItem[]
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     TemplateItem[]
+  supersets TemplateSuperset[]
 
   @@index([userId, updatedAt])
   @@index([userId, deletedAt])
@@ -276,6 +278,7 @@ model TemplateSuperset {
   supersetColorIndex Int      @default(0)
   exerciseIds        String[] @db.Uuid
 
+  template  WorkoutTemplate    @relation(fields: [templateId], references: [id], onDelete: Cascade)
   items     TemplateItem[]
   exercises TemplateExercise[]
 

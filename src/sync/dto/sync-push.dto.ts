@@ -6,10 +6,17 @@ import {
   IsBoolean,
   IsDateString,
   IsUUID,
-  IsEnum,
+  IsIn,
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import {
+  ExerciseType,
+  MuscleGroup,
+  Equipment,
+  SetType,
+  MeasurementType,
+} from '../../generated/prisma/client.js';
 
 // ─── Exercise Set DTO ───────────────────────────────────────────────────────
 
@@ -39,7 +46,7 @@ export class ExerciseSetPushDto {
   @IsBoolean()
   isCompleted: boolean;
 
-  @IsString()
+  @IsIn(Object.values(SetType))
   type: string;
 
   @IsOptional()
@@ -133,13 +140,13 @@ export class ExercisePushDto {
   @IsString()
   name: string;
 
-  @IsString()
+  @IsIn(Object.values(MuscleGroup))
   muscleGroup: string;
 
-  @IsString()
+  @IsIn(Object.values(Equipment))
   equipment: string;
 
-  @IsString()
+  @IsIn(Object.values(ExerciseType))
   exerciseType: string;
 
   @IsOptional()
@@ -306,7 +313,7 @@ export class MeasurementPushDto {
   @IsDateString()
   date: string;
 
-  @IsString()
+  @IsIn(Object.values(MeasurementType))
   type: string;
 
   @IsNumber()
