@@ -16,10 +16,10 @@ Added `PrismaExceptionFilter` that catches `PrismaClientKnownRequestError` and m
 
 ---
 
-**3. `SyncService` is a god service** (`arch-single-responsibility`) — DEFERRED
-`src/sync/sync.service.ts` — 676 lines
+**3. ~~`SyncService` is a god service~~** ✅ FIXED
+`src/sync/`
 
-This single service handles push/pull for 4 entity types. Splitting into per-entity services is a large refactor best done as a separate effort.
+Split 676-line god service into 4 entity-specific services (`WorkoutSyncService`, `ExerciseSyncService`, `TemplateSyncService`, `MeasurementSyncService`) orchestrated by a lean 94-line `SyncService`. Shared `PushResult` interface extracted to `interfaces/push-result.interface.ts`.
 
 ---
 
@@ -122,7 +122,7 @@ Created `ListExercisesDto` with `@IsInt()`, `@Min()`, `@Max()`, `@Type(() => Num
 |---|-------|--------|
 | 1 | Refresh token full-table scan | ✅ Fixed |
 | 2 | No exception filter | ✅ Fixed |
-| 3 | SyncService god service | Deferred |
+| 3 | SyncService god service | ✅ Fixed |
 | 4 | No graceful shutdown hooks | ✅ Fixed |
 | 5 | CORS unrestricted | Intentional |
 | 6 | Health returns 200 on failure | ✅ Fixed |
@@ -137,4 +137,4 @@ Created `ListExercisesDto` with `@IsInt()`, `@Min()`, `@Max()`, `@Type(() => Num
 | 15 | Zero test coverage | Deferred |
 | 16 | Query params not DTO-validated | ✅ Fixed |
 
-**10 of 16 items fixed. 1 intentional. 5 deferred for future work.**
+**11 of 16 items fixed. 1 intentional. 4 deferred for future work.**
