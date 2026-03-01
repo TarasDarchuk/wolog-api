@@ -7,6 +7,7 @@ import { HealthModule } from './health/health.module.js';
 import { AuthModule } from './auth/auth.module.js';
 import { UsersModule } from './users/users.module.js';
 import { SyncModule } from './sync/sync.module.js';
+import { ExercisesModule } from './exercises/exercises.module.js';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
 
 @Module({
@@ -18,6 +19,7 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
     AuthModule,
     UsersModule,
     SyncModule,
+    ExercisesModule,
   ],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },
