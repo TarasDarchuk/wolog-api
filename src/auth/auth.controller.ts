@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service.js';
 import {
   AppleAuthDto,
@@ -21,6 +22,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Public()
+  @Throttle([{ ttl: 60000, limit: 10 }])
   @Post('apple')
   @HttpCode(HttpStatus.OK)
   signInWithApple(@Body() dto: AppleAuthDto) {
@@ -28,6 +30,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle([{ ttl: 60000, limit: 10 }])
   @Post('google')
   @HttpCode(HttpStatus.OK)
   signInWithGoogle(@Body() dto: GoogleAuthDto) {
@@ -35,6 +38,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle([{ ttl: 60000, limit: 20 }])
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   refreshToken(@Body() dto: RefreshTokenDto) {

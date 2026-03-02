@@ -1,13 +1,36 @@
-import { IsOptional, IsDateString, IsNumber, Min, Max } from 'class-validator';
+import {
+  IsOptional,
+  IsDateString,
+  IsNumber,
+  Min,
+  Max,
+  ValidateNested,
+} from 'class-validator';
+import { Type } from 'class-transformer';
+
+export class SyncPullSinceDto {
+  @IsOptional()
+  @IsDateString()
+  workouts?: string;
+
+  @IsOptional()
+  @IsDateString()
+  exercises?: string;
+
+  @IsOptional()
+  @IsDateString()
+  templates?: string;
+
+  @IsOptional()
+  @IsDateString()
+  measurements?: string;
+}
 
 export class SyncPullRequestDto {
   @IsOptional()
-  since?: {
-    workouts?: string;
-    exercises?: string;
-    templates?: string;
-    measurements?: string;
-  };
+  @ValidateNested()
+  @Type(() => SyncPullSinceDto)
+  since?: SyncPullSinceDto;
 
   @IsOptional()
   @IsNumber()
