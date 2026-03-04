@@ -56,7 +56,9 @@ export class WorkoutSyncService {
                 : null,
               notes: workout.notes || null,
               activeCalories: workout.activeCalories || 0,
-              heartRateSamples: workout.heartRateSamples ?? Prisma.JsonNull,
+              heartRateSamples: workout.heartRateSamples
+                ? (workout.heartRateSamples as unknown as Prisma.InputJsonValue)
+                : Prisma.JsonNull,
               deletedAt: workout.deletedAt
                 ? new Date(workout.deletedAt)
                 : null,
@@ -69,7 +71,9 @@ export class WorkoutSyncService {
                 : null,
               notes: workout.notes || null,
               activeCalories: workout.activeCalories || 0,
-              heartRateSamples: workout.heartRateSamples ?? Prisma.JsonNull,
+              heartRateSamples: workout.heartRateSamples
+                ? (workout.heartRateSamples as unknown as Prisma.InputJsonValue)
+                : Prisma.JsonNull,
               deletedAt: workout.deletedAt
                 ? new Date(workout.deletedAt)
                 : null,
