@@ -119,15 +119,16 @@ model RefreshToken {
 // ─── Workouts (atomic aggregate) ────────────────────────────────────────────
 
 model Workout {
-  id             String    @id @db.Uuid
-  userId         String    @db.Uuid
-  name           String    @default("")
-  startedAt      DateTime  @default(now())
-  completedAt    DateTime?
-  notes          String?
-  activeCalories Int       @default(0)
-  updatedAt      DateTime  @updatedAt
-  deletedAt      DateTime?
+  id               String    @id @db.Uuid
+  userId           String    @db.Uuid
+  name             String    @default("")
+  startedAt        DateTime  @default(now())
+  completedAt      DateTime?
+  notes            String?
+  activeCalories   Int       @default(0)
+  heartRateSamples Json?
+  updatedAt        DateTime  @updatedAt
+  deletedAt        DateTime?
 
   user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   exercises WorkoutExercise[]
@@ -138,30 +139,30 @@ model Workout {
 }
 
 model WorkoutExercise {
-  id         String  @id @db.Uuid
-  workoutId  String  @db.Uuid
-  exerciseId String  @db.Uuid
-  sortOrder  Int     @default(0)
+  id         String   @id @db.Uuid
+  workoutId  String   @db.Uuid
+  exerciseId String   @db.Uuid
+  sortOrder  Int      @default(0)
   notes      String?
   updatedAt  DateTime @updatedAt
 
-  workout  Workout     @relation(fields: [workoutId], references: [id], onDelete: Cascade)
-  exercise Exercise    @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  workout  Workout       @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  exercise Exercise      @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
   sets     ExerciseSet[]
 
   @@index([workoutId])
 }
 
 model ExerciseSet {
-  id                String   @id @db.Uuid
-  workoutExerciseId String   @db.Uuid
-  setNumber         Int      @default(1)
+  id                String  @id @db.Uuid
+  workoutExerciseId String  @db.Uuid
+  setNumber         Int     @default(1)
   weight            Float?
   reps              Int?
   duration          Float?
   distance          Float?
-  isCompleted       Boolean  @default(false)
-  type              SetType  @default(normal)
+  isCompleted       Boolean @default(false)
+  type              SetType @default(normal)
   prRecords         Json?
 
   workoutExercise WorkoutExercise @relation(fields: [workoutExerciseId], references: [id], onDelete: Cascade)
@@ -170,10 +171,10 @@ model ExerciseSet {
 }
 
 model WorkoutSuperset {
-  id                String @id @db.Uuid
-  workoutId         String @db.Uuid
-  supersetColorIndex Int   @default(0)
-  exerciseIds       String[] @db.Uuid
+  id                 String   @id @db.Uuid
+  workoutId          String   @db.Uuid
+  supersetColorIndex Int      @default(0)
+  exerciseIds        String[] @db.Uuid
 
   workout Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade)
 
@@ -209,13 +210,13 @@ model Exercise {
 // ─── Templates (atomic aggregate) ──────────────────────────────────────────
 
 model WorkoutTemplate {
-  id        String   @id @db.Uuid
-  userId    String   @db.Uuid
-  name      String   @default("")
-  notes     String   @default("")
-  sortOrder Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String    @id @db.Uuid
+  userId    String    @db.Uuid
+  name      String    @default("")
+  notes     String    @default("")
+  sortOrder Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
   user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -265,7 +266,7 @@ model TemplateSet {
   targetWeight       Float?
   targetReps         Int?
   targetDuration     Float?
-  targetDistance      Float?
+  targetDistance     Float?
 
   templateExercise TemplateExercise @relation(fields: [templateExerciseId], references: [id], onDelete: Cascade)
 

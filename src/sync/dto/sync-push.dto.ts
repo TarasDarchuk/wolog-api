@@ -18,6 +18,16 @@ import {
   MeasurementType,
 } from '../../generated/prisma/client.js';
 
+// ─── Heart Rate Sample DTO ──────────────────────────────────────────────────
+
+export class HeartRateSampleDto {
+  @IsDateString()
+  timestamp: string;
+
+  @IsNumber()
+  bpm: number;
+}
+
 // ─── Exercise Set DTO ───────────────────────────────────────────────────────
 
 export class ExerciseSetPushDto {
@@ -116,6 +126,12 @@ export class WorkoutPushDto {
   @IsOptional()
   @IsNumber()
   activeCalories?: number;
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => HeartRateSampleDto)
+  heartRateSamples?: HeartRateSampleDto[];
 
   @IsDateString()
   updatedAt: string;
