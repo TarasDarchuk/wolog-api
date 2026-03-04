@@ -59,9 +59,7 @@ export class WorkoutSyncService {
               heartRateSamples: workout.heartRateSamples
                 ? (workout.heartRateSamples as unknown as Prisma.InputJsonValue)
                 : Prisma.JsonNull,
-              deletedAt: workout.deletedAt
-                ? new Date(workout.deletedAt)
-                : null,
+              deletedAt: workout.deletedAt ? new Date(workout.deletedAt) : null,
             },
             update: {
               name: workout.name,
