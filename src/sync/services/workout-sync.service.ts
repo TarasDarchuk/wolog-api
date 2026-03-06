@@ -49,6 +49,7 @@ export class WorkoutSyncService {
             create: {
               id: workout.id,
               userId,
+              templateId: workout.templateId || null,
               name: workout.name,
               startedAt: new Date(workout.startedAt),
               completedAt: workout.completedAt
@@ -62,6 +63,7 @@ export class WorkoutSyncService {
               deletedAt: workout.deletedAt ? new Date(workout.deletedAt) : null,
             },
             update: {
+              templateId: workout.templateId || null,
               name: workout.name,
               startedAt: new Date(workout.startedAt),
               completedAt: workout.completedAt

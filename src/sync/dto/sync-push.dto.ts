@@ -120,6 +120,10 @@ export class WorkoutPushDto {
   completedAt?: string;
 
   @IsOptional()
+  @IsUUID()
+  templateId?: string;
+
+  @IsOptional()
   @IsString()
   notes?: string;
 

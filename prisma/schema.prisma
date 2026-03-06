@@ -121,6 +121,7 @@ model RefreshToken {
 model Workout {
   id               String    @id @db.Uuid
   userId           String    @db.Uuid
+  templateId       String?   @db.Uuid
   name             String    @default("")
   startedAt        DateTime  @default(now())
   completedAt      DateTime?
