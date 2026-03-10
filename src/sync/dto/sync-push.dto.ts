@@ -289,12 +289,17 @@ export class TemplateItemPushDto {
 
   @IsOptional()
   @IsUUID()
-  supersetId?: string;
+  supersetId?: string | null;
 
   @IsOptional()
   @ValidateNested()
   @Type(() => TemplateExercisePushDto)
-  exercise?: TemplateExercisePushDto;
+  exercise?: TemplateExercisePushDto | null;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => TemplateSupersetPushDto)
+  superset?: TemplateSupersetPushDto | null;
 }
 
 export class TemplatePushDto {
