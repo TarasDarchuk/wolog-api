@@ -294,7 +294,7 @@ export class TemplateItemPushDto {
   @IsOptional()
   @ValidateNested()
   @Type(() => TemplateExercisePushDto)
-  exercise?: TemplateExercisePushDto | null;
+  exercise?: TemplateExercisePushDto;
 
   @IsOptional()
   @ValidateNested()
