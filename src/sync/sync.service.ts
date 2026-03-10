@@ -85,7 +85,7 @@ export class SyncService {
 
   async purge(userId: string) {
     const cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - 30);
+    cutoff.setDate(cutoff.getDate() - 5);
 
     const deletedBefore = { userId, deletedAt: { lt: cutoff } };
 
