@@ -27,6 +27,12 @@ export class SyncController {
     return this.syncService.pull(userId, dto);
   }
 
+  @Post('purge')
+  @HttpCode(HttpStatus.OK)
+  purge(@CurrentUser('id') userId: string) {
+    return this.syncService.purge(userId);
+  }
+
   @Get('status')
   getStatus(@CurrentUser('id') userId: string) {
     return this.syncService.getStatus(userId);

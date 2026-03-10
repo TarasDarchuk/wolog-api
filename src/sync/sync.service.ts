@@ -6,10 +6,12 @@ import { WorkoutSyncService } from './services/workout-sync.service.js';
 import { ExerciseSyncService } from './services/exercise-sync.service.js';
 import { TemplateSyncService } from './services/template-sync.service.js';
 import { MeasurementSyncService } from './services/measurement-sync.service.js';
+import { PrismaService } from '../prisma/prisma.service.js';
 
 @Injectable()
 export class SyncService {
   constructor(
+    private readonly prisma: PrismaService,
     private readonly workoutSync: WorkoutSyncService,
     private readonly exerciseSync: ExerciseSyncService,
     private readonly templateSync: TemplateSyncService,
@@ -78,6 +80,39 @@ export class SyncService {
         templates: templates.hasMore,
         measurements: measurements.hasMore,
       },
+    };
+  }
+
+  async purge(userId: string) {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 30);
+
+    const deletedBefore = { userId, deletedAt: { lt: cutoff } };
+
+    const [workouts, exercises, templates, measurements] =
+      await this.prisma.$transaction(async (tx) => {
+        const { count: workoutCount } = await tx.workout.deleteMany({
+          where: deletedBefore,
+        });
+
+        const { count: exerciseCount } = await tx.exercise.deleteMany({
+          where: deletedBefore,
+        });
+
+        const { count: templateCount } = await tx.workoutTemplate.deleteMany({
+          where: deletedBefore,
+        });
+
+        const { count: measurementCount } =
+          await tx.bodyMeasurement.deleteMany({
+            where: deletedBefore,
+          });
+
+        return [workoutCount, exerciseCount, templateCount, measurementCount];
+      });
+
+    return {
+      purged: { workouts, exercises, templates, measurements },
     };
   }
 

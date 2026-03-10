@@ -1,5 +1,10 @@
 import { SyncService } from './sync.service';
-import { USER_ID, NOW, PAST } from '../__mocks__/prisma.mock';
+import {
+  createMockPrismaService,
+  USER_ID,
+  NOW,
+  PAST,
+} from '../__mocks__/prisma.mock';
 
 function createMockEntitySyncService() {
   return {
@@ -11,18 +16,21 @@ function createMockEntitySyncService() {
 
 describe('SyncService', () => {
   let service: SyncService;
+  let prisma: ReturnType<typeof createMockPrismaService>;
   let workoutSync: ReturnType<typeof createMockEntitySyncService>;
   let exerciseSync: ReturnType<typeof createMockEntitySyncService>;
   let templateSync: ReturnType<typeof createMockEntitySyncService>;
   let measurementSync: ReturnType<typeof createMockEntitySyncService>;
 
   beforeEach(() => {
+    prisma = createMockPrismaService();
     workoutSync = createMockEntitySyncService();
     exerciseSync = createMockEntitySyncService();
     templateSync = createMockEntitySyncService();
     measurementSync = createMockEntitySyncService();
 
     service = new SyncService(
+      prisma as any,
       workoutSync as any,
       exerciseSync as any,
       templateSync as any,
@@ -116,6 +124,30 @@ describe('SyncService', () => {
       expect(result.workouts).toEqual([{ id: 'w1' }]);
       expect(result.cursors.workouts).toBe(NOW);
       expect(result.hasMore.workouts).toBe(true);
+    });
+  });
+
+  // ─── Purge ─────────────────────────────────────────────────────────────
+
+  describe('purge', () => {
+    it('hard-deletes soft-deleted records older than 30 days', async () => {
+      prisma.workout.deleteMany.mockResolvedValue({ count: 3 });
+      prisma.exercise.deleteMany.mockResolvedValue({ count: 1 });
+      prisma.workoutTemplate.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.bodyMeasurement.deleteMany.mockResolvedValue({ count: 2 });
+
+      const result = await service.purge(USER_ID);
+
+      expect(result).toEqual({
+        purged: { workouts: 3, exercises: 1, templates: 0, measurements: 2 },
+      });
+      expect(prisma.$transaction).toHaveBeenCalled();
+      expect(prisma.workout.deleteMany).toHaveBeenCalledWith({
+        where: expect.objectContaining({
+          userId: USER_ID,
+          deletedAt: { lt: expect.any(Date) },
+        }),
+      });
     });
   });
 
