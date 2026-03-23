@@ -208,6 +208,7 @@ export class TemplateSyncService {
           },
           orderBy: { sortOrder: 'asc' },
         },
+        supersets: true,
       },
       orderBy: { updatedAt: 'asc' },
       take: limit + 1,
