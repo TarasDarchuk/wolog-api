@@ -174,6 +174,10 @@ export class ExercisePushDto {
   exerciseType: string;
 
   @IsOptional()
+  @IsBoolean()
+  includesBodyweight?: boolean;
+
+  @IsOptional()
   @IsNumber()
   restDuration?: number;
 

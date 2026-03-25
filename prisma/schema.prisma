@@ -191,8 +191,9 @@ model Exercise {
   muscleGroup      MuscleGroup  @default(chest)
   equipment        Equipment    @default(barbell)
   exerciseType     ExerciseType @default(weightReps)
-  isCustom         Boolean      @default(false)
-  restDuration     Float?
+  isCustom            Boolean      @default(false)
+  includesBodyweight  Boolean      @default(false)
+  restDuration        Float?
   thumbnailUrl     String?
   videoUrl         String?
   primaryMuscles   String[]
