@@ -77,17 +77,44 @@ export class TemplateSyncService {
             },
           });
 
+          // Collect all supersets: from top-level array and from item-level superset fields
+          const supersetMap = new Map<string, { id: string; supersetColorIndex: number; exerciseIds: string[] }>();
+
           if (template.supersets?.length) {
             for (const ss of template.supersets) {
-              await tx.templateSuperset.create({
-                data: {
-                  id: ss.id,
-                  templateId: template.id,
-                  supersetColorIndex: ss.supersetColorIndex,
-                  exerciseIds: ss.exerciseIds,
-                },
+              supersetMap.set(ss.id, {
+                id: ss.id,
+                supersetColorIndex: ss.supersetColorIndex,
+                exerciseIds: ss.exerciseIds,
               });
+            }
+          }
 
+          for (const item of template.items) {
+            if (item.superset) {
+              supersetMap.set(item.superset.id, {
+                id: item.superset.id,
+                supersetColorIndex: item.superset.supersetColorIndex,
+                exerciseIds: item.superset.exerciseIds,
+              });
+            }
+          }
+
+          // Create all supersets
+          for (const ss of supersetMap.values()) {
+            await tx.templateSuperset.create({
+              data: {
+                id: ss.id,
+                templateId: template.id,
+                supersetColorIndex: ss.supersetColorIndex,
+                exerciseIds: ss.exerciseIds,
+              },
+            });
+          }
+
+          // Create exercises nested under top-level supersets
+          if (template.supersets?.length) {
+            for (const ss of template.supersets) {
               for (const se of ss.exercises || []) {
                 await tx.templateExercise.create({
                   data: {
@@ -121,12 +148,14 @@ export class TemplateSyncService {
           }
 
           for (const item of template.items) {
+            const itemSupersetId = item.superset?.id || item.supersetId || null;
+
             await tx.templateItem.create({
               data: {
                 id: item.id,
                 templateId: template.id,
                 sortOrder: item.sortOrder,
-                supersetId: item.supersetId || null,
+                supersetId: itemSupersetId,
               },
             });
 
