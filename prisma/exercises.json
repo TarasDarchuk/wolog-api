@@ -685,7 +685,8 @@
     ],
     "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAlcgYf1qSDgdytXe4UrNBop1xaL0InqPRz6Av",
     "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAeh8hChLVM6riuhFtRGknTHUd39q8X1v20CBc",
-    "exerciseType": "weightReps"
+    "exerciseType": "repsOnly",
+    "includesBodyweight": true
   },
   {
     "id": "5c272ee2-6d41-4126-91fb-0169c4bf5fc4",
@@ -853,7 +854,8 @@
     ],
     "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzA5DLeYkKivToJBdkGEtK0LXFzHcQmfOR45D7n",
     "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAQZ4zaDVE9DAjXh1qT83eivFcu4U0CW7Sf6Pa",
-    "exerciseType": "repsOnly"
+    "exerciseType": "repsOnly",
+    "includesBodyweight": true
   },
   {
     "id": "076cfc41-e381-48cf-ac99-9d0e3f288db5",
@@ -3112,7 +3114,8 @@
     "secondaryMuscles": [],
     "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAkE89OYm7S1QmAYJU6Eye9vqgGRMObfdWDnxk",
     "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAPPuMBuDZ7yi9D5HkYUamTlhVCO28dbuWLBgt",
-    "exerciseType": "repsOnly"
+    "exerciseType": "repsOnly",
+    "includesBodyweight": true
   },
   {
     "id": "e6ec3b26-0101-44a1-ad62-fdc63207e1e4",
@@ -3128,7 +3131,8 @@
     ],
     "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbybvYAWzHFD79eU5g3GiMtJumfpBQIOqEPV2",
     "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzACevkT567MxLg0Za213urFASkmczsjEXYlonQ",
-    "exerciseType": "repsOnly"
+    "exerciseType": "repsOnly",
+    "includesBodyweight": true
   },
   {
     "id": "e44ff5c8-6c88-423e-8bd0-a6756ba5edd1",
@@ -3569,7 +3573,8 @@
     ],
     "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAbC2cX7WzHFD79eU5g3GiMtJumfpBQIOqEPV2",
     "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAGcoK7YhYjJs7R8FLCSy4EicbfeP0UoVnhZmz",
-    "exerciseType": "repsOnly"
+    "exerciseType": "repsOnly",
+    "includesBodyweight": true
   },
   {
     "id": "7bcd3b29-98a6-43b3-99b7-fa9ba3ab1c36",
@@ -3985,7 +3990,8 @@
     ],
     "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjrzFAnOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
     "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzATZ0QSAEf02R43IWtJEhMX15cxaPYUSDgHnq8",
-    "exerciseType": "repsOnly"
+    "exerciseType": "repsOnly",
+    "includesBodyweight": true
   },
   {
     "id": "fa0b0576-3c24-4ecf-9244-4175ee8b3124",
@@ -4141,7 +4147,8 @@
     ],
     "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAjCUBNwOY5uvdCixX6PQ1Sj8NWfbwhk97V4Jz",
     "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAg22lyhIlZ0uYsjPkm2XH1SFneGV4QKpdr7Wc",
-    "exerciseType": "repsOnly"
+    "exerciseType": "repsOnly",
+    "includesBodyweight": true
   },
   {
     "id": "ca1927ff-7d04-4dae-9ac3-38cd9f30c54b",
@@ -5464,7 +5471,7 @@
     "name": "Tibialis Raises",
     "equipment": "None",
     "primaryMuscles": [
-      "Calves"
+      "Tibialis"
     ],
     "secondaryMuscles": [
       "Other"
@@ -5536,7 +5543,8 @@
     ],
     "thumbnailUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAhpDgl7XlZoYW2rsMtq4nT3PaBx7kCmRfDwO9",
     "videoUrl": "https://ov7ptbwmn9.ufs.sh/f/Kbq8hfd7tmzAq08KM2PjwqEr6dCLSvi72a8BDkc5FAbuG1H3",
-    "exerciseType": "weightReps"
+    "exerciseType": "repsOnly",
+    "includesBodyweight": true
   },
   {
     "id": "12fed51b-c106-413f-b358-741e338753ab",

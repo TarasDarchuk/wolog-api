@@ -95,6 +95,43 @@ describe('ExerciseSyncService', () => {
       );
     });
 
+    it('normalizes secondaryMuscles display names to enum values', async () => {
+      prisma.exercise.findUnique.mockResolvedValue(null);
+      prisma.exercise.upsert.mockResolvedValue({});
+
+      const dto = makeExercisePushDto({
+        secondaryMuscles: ['Triceps', 'Lower Back', 'chest'],
+      });
+      await service.push(USER_ID, [dto]);
+
+      expect(prisma.exercise.upsert).toHaveBeenCalledWith(
+        expect.objectContaining({
+          create: expect.objectContaining({
+            secondaryMuscles: ['triceps', 'lowerBack', 'chest'],
+          }),
+        }),
+      );
+    });
+
+    it('defaults primaryMuscles and secondaryMuscles to empty arrays when omitted', async () => {
+      prisma.exercise.findUnique.mockResolvedValue(null);
+      prisma.exercise.upsert.mockResolvedValue({});
+
+      const dto = makeExercisePushDto();
+      delete (dto as any).primaryMuscles;
+      delete (dto as any).secondaryMuscles;
+      await service.push(USER_ID, [dto]);
+
+      expect(prisma.exercise.upsert).toHaveBeenCalledWith(
+        expect.objectContaining({
+          create: expect.objectContaining({
+            primaryMuscles: [],
+            secondaryMuscles: [],
+          }),
+        }),
+      );
+    });
+
     it('rejects with error on exception', async () => {
       prisma.exercise.findUnique.mockRejectedValue(new Error('DB error'));
 

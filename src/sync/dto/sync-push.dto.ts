@@ -189,13 +189,15 @@ export class ExercisePushDto {
   @IsString()
   videoUrl?: string;
 
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  primaryMuscles: string[];
+  primaryMuscles?: string[];
 
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  secondaryMuscles: string[];
+  secondaryMuscles?: string[];
 
   @IsOptional()
   @IsBoolean()
