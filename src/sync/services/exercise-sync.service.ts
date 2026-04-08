@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { ExercisePushDto } from '../dto/sync-push.dto.js';
-import { normalizeMuscleGroups } from '../helpers/normalize-muscle-group.js';
 import { PushResult } from '../interfaces/push-result.interface.js';
 
 @Injectable()
@@ -36,9 +35,7 @@ export class ExerciseSyncService {
         }
 
         const primaryMuscles = exercise.primaryMuscles ?? [];
-        const secondaryMuscles = normalizeMuscleGroups(
-          exercise.secondaryMuscles ?? [],
-        );
+        const secondaryMuscles = exercise.secondaryMuscles ?? [];
 
         await this.prisma.exercise.upsert({
           where: { id: exercise.id },
