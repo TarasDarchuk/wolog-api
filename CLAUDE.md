@@ -24,6 +24,7 @@ src/
 ├── users/                  # GET /users/me
 ├── exercises/              # Public exercises list endpoint
 ├── sync/                   # Push/pull sync engine with conflict resolution
+├── shares/                 # Link-based template sharing (POST auth, GET public)
 └── health/                 # GET /health
 prisma/
 ├── schema.prisma           # Database schema (no url — Prisma 7 uses prisma.config.ts)
@@ -85,6 +86,10 @@ All routes prefixed with `/api/v1`. All routes require JWT auth except those mar
 - `POST /sync/pull` — Pull changed entities since cursor (paginated)
 - `GET /sync/status` — Last sync timestamps per entity type
 
+### Shares
+- `POST /shares` — Create a share (auth required). Body: opaque payload (template + exercises). Returns `{id, url, expiresAt}`. Rate-limited to 30 per user per 24h (returns 429 + `Retry-After`). Payloads > 256 KB return 413. TTL configurable via `SHARE_DEFAULT_TTL_DAYS` (default 90). Share URL prefix configurable via `SHARE_BASE_URL` (default `https://wolog.app/s/`).
+- `GET /shares/:id` — Fetch a share (public). Returns 404 if missing, 410 if expired (kept for grace window). Expired shares are deleted daily after a 7-day grace window.
+
 ### Health (public)
 - `GET /health` — DB connectivity check
 
@@ -127,6 +132,8 @@ See `.env.example`. Required for production:
 - `GOOGLE_CLIENT_ID` — Optional, Google OAuth web client ID
 - `PORT` — Server port (default: `3000`)
 - `NODE_ENV` — `development` or `production`
+- `SHARE_DEFAULT_TTL_DAYS` — TTL for share links in days (default: `90`)
+- `SHARE_BASE_URL` — URL prefix for share links (default: `https://wolog.app/s/`)
 
 ## Related Repo
 

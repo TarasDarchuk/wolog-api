@@ -36,6 +36,7 @@ export function createMockPrismaService() {
     templateSet: createModelMock(),
     templateSuperset: createModelMock(),
     bodyMeasurement: createModelMock(),
+    share: createModelMock(),
     $transaction: jest.fn(),
     $queryRaw: jest.fn(),
     $connect: jest.fn(),

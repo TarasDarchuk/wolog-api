@@ -98,6 +98,7 @@ model User {
   exercises        Exercise[]
   workoutTemplates WorkoutTemplate[]
   bodyMeasurements BodyMeasurement[]
+  shares           Share[]
 }
 
 model RefreshToken {
@@ -304,4 +305,19 @@ model BodyMeasurement {
 
   @@index([userId, updatedAt])
   @@index([userId, deletedAt])
+}
+
+// ─── Shares (link-based template sharing) ──────────────────────────────────
+
+model Share {
+  id          String   @id
+  ownerUserId String   @db.Uuid
+  payloadJson Json
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+
+  owner User @relation(fields: [ownerUserId], references: [id], onDelete: Cascade)
+
+  @@index([ownerUserId, createdAt])
+  @@index([expiresAt])
 }
