@@ -1,5 +1,6 @@
 import {
   IsArray,
+  IsBoolean,
   IsIn,
   IsInt,
   IsObject,
@@ -26,4 +27,7 @@ export class CreateShareDto {
 
   @IsString()
   sourceAppVersion: string;
+
+  @IsBoolean()
+  useMetric: boolean;
 }

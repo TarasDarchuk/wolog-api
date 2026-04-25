@@ -37,6 +37,7 @@ function makeDto(overrides: Partial<CreateShareDto> = {}): CreateShareDto {
     exercises: [{ id: 'e1', name: 'Bench' }],
     creatorName: 'Taras',
     sourceAppVersion: '1.0.0',
+    useMetric: true,
     ...overrides,
   } as CreateShareDto;
 }
@@ -195,7 +196,11 @@ describe('SharesService', () => {
     it('returns payload, createdAt, expiresAt', async () => {
       const createdAt = new Date('2026-04-23T10:00:00.000Z');
       const expiresAt = new Date('2026-07-22T10:00:00.000Z');
-      const payload = { kind: 'template', template: { id: 't1' } };
+      const payload = {
+        kind: 'template',
+        template: { id: 't1' },
+        useMetric: true,
+      };
 
       prisma.share.findUnique.mockResolvedValue({
         id: 'abc123XYz_',
@@ -213,6 +218,20 @@ describe('SharesService', () => {
         createdAt: createdAt.toISOString(),
         expiresAt: expiresAt.toISOString(),
       });
+    });
+
+    it('round-trips useMetric through create -> fetch', async () => {
+      let stored: any;
+      prisma.share.create.mockImplementation(async ({ data }: any) => {
+        stored = { ...data, createdAt: new Date() };
+        return stored;
+      });
+      prisma.share.findUnique.mockImplementation(async () => stored);
+
+      const created = await service.create(USER_ID, makeDto({ useMetric: false }));
+      const fetched = await service.fetch(created.id);
+
+      expect((fetched.payload as any).useMetric).toBe(false);
     });
 
     it('throws NotFoundException when id does not exist', async () => {
