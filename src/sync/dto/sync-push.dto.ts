@@ -192,7 +192,8 @@ export class ExercisePushDto {
 
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
+  @Transform(({ value }) => (Array.isArray(value) ? normalizeMuscleGroups(value) : value))
+  @IsIn(Object.values(MuscleGroup), { each: true })
   primaryMuscles?: string[];
 
   @IsOptional()
