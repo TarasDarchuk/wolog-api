@@ -34,6 +34,9 @@ export class ExerciseSyncService {
           continue;
         }
 
+        const primaryMuscles = exercise.primaryMuscles ?? [];
+        const secondaryMuscles = exercise.secondaryMuscles ?? [];
+
         await this.prisma.exercise.upsert({
           where: { id: exercise.id },
           create: {
@@ -48,8 +51,8 @@ export class ExerciseSyncService {
             restDuration: exercise.restDuration ?? null,
             thumbnailUrl: exercise.thumbnailUrl || null,
             videoUrl: exercise.videoUrl || null,
-            primaryMuscles: exercise.primaryMuscles,
-            secondaryMuscles: exercise.secondaryMuscles,
+            primaryMuscles,
+            secondaryMuscles,
             deletedAt: exercise.deletedAt
               ? new Date(exercise.deletedAt)
               : null,
@@ -63,8 +66,8 @@ export class ExerciseSyncService {
             restDuration: exercise.restDuration ?? null,
             thumbnailUrl: exercise.thumbnailUrl || null,
             videoUrl: exercise.videoUrl || null,
-            primaryMuscles: exercise.primaryMuscles,
-            secondaryMuscles: exercise.secondaryMuscles,
+            primaryMuscles,
+            secondaryMuscles,
             deletedAt: exercise.deletedAt
               ? new Date(exercise.deletedAt)
               : null,

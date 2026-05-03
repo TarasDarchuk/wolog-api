@@ -9,7 +9,7 @@ import {
   IsIn,
   ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   ExerciseType,
   MuscleGroup,
@@ -17,6 +17,7 @@ import {
   SetType,
   MeasurementType,
 } from '../../generated/prisma/client.js';
+import { normalizeMuscleGroups } from '../helpers/normalize-muscle-group.js';
 
 // ─── Heart Rate Sample DTO ──────────────────────────────────────────────────
 
@@ -189,13 +190,17 @@ export class ExercisePushDto {
   @IsString()
   videoUrl?: string;
 
+  @IsOptional()
   @IsArray()
-  @IsString({ each: true })
-  primaryMuscles: string[];
+  @Transform(({ value }) => (Array.isArray(value) ? normalizeMuscleGroups(value) : value))
+  @IsIn(Object.values(MuscleGroup), { each: true })
+  primaryMuscles?: string[];
 
+  @IsOptional()
   @IsArray()
-  @IsString({ each: true })
-  secondaryMuscles: string[];
+  @Transform(({ value }) => (Array.isArray(value) ? normalizeMuscleGroups(value) : value))
+  @IsIn(Object.values(MuscleGroup), { each: true })
+  secondaryMuscles?: string[];
 
   @IsOptional()
   @IsBoolean()

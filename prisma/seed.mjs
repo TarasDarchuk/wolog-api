@@ -81,18 +81,17 @@ async function main() {
   const raw = JSON.parse(readFileSync(exercisesPath, 'utf-8'));
   console.log(`Found ${raw.length} exercises in ${exercisesPath}`);
 
-  const BATCH_SIZE = 50;
   let created = 0;
   let skipped = 0;
 
-  for (let i = 0; i < raw.length; i += BATCH_SIZE) {
-    const batch = raw.slice(i, i + BATCH_SIZE);
-    const ops = batch.map((ex) => {
-      const equipment = equipmentMap[ex.equipment] || 'other';
-      const primaryMuscle = muscleGroupMap[ex.primaryMuscles[0]] || 'other';
-      const exerciseType = ex.exerciseType || 'weightReps';
+  for (let i = 0; i < raw.length; i++) {
+    const ex = raw[i];
+    const equipment = equipmentMap[ex.equipment] || 'other';
+    const primaryMuscle = muscleGroupMap[ex.primaryMuscles[0]] || 'other';
+    const exerciseType = ex.exerciseType || 'weightReps';
 
-      return prisma.exercise.upsert({
+    try {
+      await prisma.exercise.upsert({
         where: { id: ex.id },
         create: {
           id: ex.id,
@@ -109,17 +108,13 @@ async function main() {
         },
         update: {},
       });
-    });
-
-    try {
-      await prisma.$transaction(ops);
-      created += batch.length;
+      created++;
     } catch (error) {
-      console.warn(`Batch at index ${i} failed:`, error.message);
-      skipped += batch.length;
+      console.warn(`Skipped "${ex.name}" (${ex.id}):`, error.message);
+      skipped++;
     }
 
-    console.log(`Progress: ${Math.min(i + BATCH_SIZE, raw.length)}/${raw.length}`);
+    if ((i + 1) % 100 === 0) console.log(`Progress: ${i + 1}/${raw.length}`);
   }
 
   console.log(`Seeded ${created} exercises (${skipped} skipped)`);
