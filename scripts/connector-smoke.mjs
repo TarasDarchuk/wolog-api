@@ -149,6 +149,10 @@ const created = await http('POST', `${API}/routines`, {
 check('create routine', created.status === 201 || created.status === 200,
   created.status === 403 ? 'PRO_REQUIRED — user already has 5 routines; use a fresh email' : JSON.stringify(created.data).slice(0, 120));
 const routineId = created.data?.routine?.id;
+if (!routineId) {
+  console.log('\nCannot continue without a created routine. Aborting.');
+  process.exit(1);
+}
 if (created.data?.resolutions) {
   for (const r of created.data.resolutions) {
     console.log(`      ${r.requested} → ${r.resolvedTo} (${r.method}, ${r.confidence}${r.createdCustom ? ', created custom' : ''})`);
