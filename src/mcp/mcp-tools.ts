@@ -95,12 +95,29 @@ const ROUTINE_SCHEMA = {
   additionalProperties: false,
 };
 
+export interface McpToolAnnotations {
+  title: string;
+  readOnlyHint: boolean;
+  destructiveHint: boolean;
+  idempotentHint: boolean;
+  openWorldHint: boolean;
+}
+
 export interface McpToolDefinition {
   name: string;
   description: string;
   inputSchema: Record<string, unknown>;
+  annotations: McpToolAnnotations;
   scope: string | null;
 }
+
+// All tools operate on the authorized user's own Wolog data (closed world).
+const READ_ONLY = {
+  readOnlyHint: true,
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: false,
+};
 
 export const MCP_SERVER_INSTRUCTIONS = `Wolog workout connector. Rules:
 - ALL weights are kilograms, durations seconds, distances meters. Never send pounds — convert first.
@@ -122,6 +139,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       },
       additionalProperties: false,
     },
+    annotations: { title: 'Search exercises', ...READ_ONLY },
     scope: null,
   },
   {
@@ -133,6 +151,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       properties: {},
       additionalProperties: false,
     },
+    annotations: { title: 'List routines', ...READ_ONLY },
     scope: 'routines:read',
   },
   {
@@ -145,6 +164,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       required: ['id'],
       additionalProperties: false,
     },
+    annotations: { title: 'Read routine', ...READ_ONLY },
     scope: 'routines:read',
   },
   {
@@ -158,6 +178,13 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       },
       required: ['routine'],
       additionalProperties: false,
+    },
+    annotations: {
+      title: 'Create routine',
+      readOnlyHint: false,
+      destructiveHint: false, // purely additive
+      idempotentHint: false, // repeating it creates another routine
+      openWorldHint: false,
     },
     scope: 'routines:write',
   },
@@ -179,6 +206,13 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       required: ['id', 'routine'],
       additionalProperties: false,
     },
+    annotations: {
+      title: 'Update routine',
+      readOnlyHint: false,
+      destructiveHint: true, // rows missing from the payload are deleted
+      idempotentHint: true, // same payload → same resulting routine
+      openWorldHint: false,
+    },
     scope: 'routines:write',
   },
   {
@@ -198,6 +232,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       },
       additionalProperties: false,
     },
+    annotations: { title: 'Read workout history', ...READ_ONLY },
     scope: 'history:read',
   },
 ];
