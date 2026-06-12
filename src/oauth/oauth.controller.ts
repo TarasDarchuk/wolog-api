@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -117,6 +118,9 @@ export class OAuthController {
     } catch (error) {
       if (error instanceof AuthorizeRedirectError) {
         return { redirect: error.toRedirectUrl() };
+      }
+      if (error instanceof AuthorizePageError) {
+        throw new BadRequestException(error.message);
       }
       throw error;
     }
