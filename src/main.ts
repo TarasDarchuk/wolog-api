@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe, Logger } from '@nestjs/common';
+import { ValidationPipe, Logger, RequestMethod } from '@nestjs/common';
 import helmet from 'helmet';
 import { json, urlencoded } from 'express';
 import { AppModule } from './app.module.js';
@@ -13,7 +13,32 @@ async function bootstrap() {
   app.use(helmet());
   app.use(json({ limit: '10mb' }));
   app.use(urlencoded({ extended: true, limit: '10mb' }));
-  app.setGlobalPrefix('api/v1');
+  // OAuth provider, discovery metadata, MCP endpoint, and the GPT Action
+  // spec live at the root — external clients expect them unprefixed.
+  app.setGlobalPrefix('api/v1', {
+    exclude: [
+      { path: 'oauth/authorize', method: RequestMethod.ALL },
+      { path: 'oauth/consent', method: RequestMethod.ALL },
+      { path: 'oauth/token', method: RequestMethod.ALL },
+      { path: 'oauth/revoke', method: RequestMethod.ALL },
+      { path: 'oauth/register', method: RequestMethod.ALL },
+      {
+        path: '.well-known/oauth-authorization-server',
+        method: RequestMethod.ALL,
+      },
+      { path: '.well-known/openid-configuration', method: RequestMethod.ALL },
+      {
+        path: '.well-known/oauth-protected-resource',
+        method: RequestMethod.ALL,
+      },
+      {
+        path: '.well-known/oauth-protected-resource/mcp',
+        method: RequestMethod.ALL,
+      },
+      { path: 'mcp', method: RequestMethod.ALL },
+      { path: 'openapi.json', method: RequestMethod.ALL },
+    ],
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

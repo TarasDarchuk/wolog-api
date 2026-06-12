@@ -90,6 +90,7 @@ model User {
   appleUserId  String?  @unique
   googleUserId String?  @unique
   displayName  String?
+  isPro        Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -99,6 +100,8 @@ model User {
   workoutTemplates WorkoutTemplate[]
   bodyMeasurements BodyMeasurement[]
   shares           Share[]
+  oauthAuthCodes   OAuthAuthorizationCode[]
+  oauthTokens      OAuthToken[]
 }
 
 model RefreshToken {
@@ -305,6 +308,57 @@ model BodyMeasurement {
 
   @@index([userId, updatedAt])
   @@index([userId, deletedAt])
+}
+
+// ─── AI Connector OAuth (third-party authorization layer) ──────────────────
+
+model OAuthClient {
+  id           String   @id
+  name         String
+  secretHash   String? // null = public client (PKCE required)
+  redirectUris String[]
+  createdAt    DateTime @default(now())
+
+  authCodes OAuthAuthorizationCode[]
+  tokens    OAuthToken[]
+}
+
+model OAuthAuthorizationCode {
+  id                  String    @id @default(uuid()) @db.Uuid
+  codeHash            String    @unique
+  clientId            String
+  userId              String    @db.Uuid
+  redirectUri         String
+  scopes              String[]
+  codeChallenge       String?
+  codeChallengeMethod String?
+  expiresAt           DateTime
+  usedAt              DateTime?
+  createdAt           DateTime  @default(now())
+
+  client OAuthClient @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  user   User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt])
+}
+
+model OAuthToken {
+  id               String    @id @default(uuid()) @db.Uuid
+  userId           String    @db.Uuid
+  clientId         String
+  scopes           String[]
+  accessTokenHash  String    @unique
+  refreshTokenHash String    @unique
+  accessExpiresAt  DateTime
+  refreshExpiresAt DateTime
+  revokedAt        DateTime?
+  createdAt        DateTime  @default(now())
+
+  user   User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client OAuthClient @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@index([userId, clientId])
+  @@index([refreshExpiresAt])
 }
 
 // ─── Shares (link-based template sharing) ──────────────────────────────────

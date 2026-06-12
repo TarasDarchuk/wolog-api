@@ -25,6 +25,11 @@ src/
 ├── exercises/              # Public exercises list endpoint
 ├── sync/                   # Push/pull sync engine with conflict resolution
 ├── shares/                 # Link-based template sharing (POST auth, GET public)
+├── oauth/                  # OAuth 2.0 provider for AI connectors (consent, PKCE, scoped tokens)
+├── routines/               # AI-facing routines REST (create + id-keyed merge PATCH)
+├── workouts/               # AI-facing history read (workouts, per-exercise e1RM)
+├── mcp/                    # Remote MCP server for Claude (stateless JSON-RPC at /mcp)
+├── openapi/                # OpenAPI 3.1 spec for the ChatGPT Action (/openapi.json)
 └── health/                 # GET /health
 prisma/
 ├── schema.prisma           # Database schema (no url — Prisma 7 uses prisma.config.ts)
@@ -93,6 +98,15 @@ All routes prefixed with `/api/v1`. All routes require JWT auth except those mar
 ### Health (public)
 - `GET /health` — DB connectivity check
 
+### AI Connector (see `docs/AI-CONNECTOR.md`)
+Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) read history/routines and create/update routines for a user, authorized through an OAuth consent screen (`/oauth/*`, root-level — excluded from the `/api/v1` prefix). Scopes: `routines:read`, `routines:write`, `history:read`.
+- `GET /routines`, `GET /routines/:id` — read (scope `routines:read`)
+- `POST /routines` — create; server resolves exercise names → catalog UUIDs, returns a resolution report; free tier capped at 5 routines (403 `PRO_REQUIRED`, `User.isPro` lifts it)
+- `PATCH /routines/:id` — **id-keyed merge** (never delete-and-replace); `baseUpdatedAt` → 409 with current routine on conflict; bumps `updatedAt` so the change reaches the phone via pull sync
+- `GET /workouts`, `GET /exercises/:id/history` — history + Epley e1RM (scope `history:read`)
+- All weights kg, durations seconds, distances meters
+- Connector endpoints accept scoped OAuth tokens (`wlga_…`) or first-party app JWTs (full scopes)
+
 ## Architecture Decisions
 
 - **Global JWT guard**: Every route requires auth by default. Use `@Public()` decorator to opt out.
@@ -134,6 +148,11 @@ See `.env.example`. Required for production:
 - `NODE_ENV` — `development` or `production`
 - `SHARE_DEFAULT_TTL_DAYS` — TTL for share links in days (default: `90`)
 - `SHARE_BASE_URL` — URL prefix for share links (default: `https://wolog.app/s/`)
+- `PUBLIC_BASE_URL` — Public API URL, used in OAuth discovery + OpenAPI spec
+- `APPLE_WEB_CLIENT_ID` — Apple Services ID for web sign-in on the OAuth consent screen
+- `OAUTH_STATIC_CLIENTS` — Optional JSON array of pre-registered OAuth clients (ChatGPT Action)
+- `CONNECTOR_ACCESS_TTL_MINUTES` / `CONNECTOR_REFRESH_TTL_DAYS` — Connector token lifetimes (60 / 30)
+- `OAUTH_DEV_LOGIN` — `true` enables email dev sign-in on the consent screen (non-production only)
 
 ## Related Repo
 

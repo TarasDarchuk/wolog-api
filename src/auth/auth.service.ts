@@ -33,11 +33,30 @@ export class AuthService {
   }
 
   async signInWithApple(dto: AppleAuthDto): Promise<AuthResponseDto> {
+    const user = await this.findOrCreateAppleUser(
+      dto.identityToken,
+      [this.configService.get('APPLE_CLIENT_ID')!],
+      dto.displayName,
+    );
+    return this.generateTokens(user.id, user.email, dto.deviceName);
+  }
+
+  /**
+   * Verifies an Apple identity token against the given audiences (app bundle
+   * ID and/or web Services ID) and returns the matching user, creating or
+   * linking one if needed. Used by both app sign-in and the OAuth consent
+   * screen.
+   */
+  async findOrCreateAppleUser(
+    identityToken: string,
+    audiences: string[],
+    displayName?: string,
+  ) {
     let applePayload: { sub: string; email?: string };
 
     try {
-      applePayload = await appleSignin.verifyIdToken(dto.identityToken, {
-        audience: this.configService.get('APPLE_CLIENT_ID'),
+      applePayload = await appleSignin.verifyIdToken(identityToken, {
+        audience: audiences,
       });
     } catch {
       throw new UnauthorizedException('Invalid Apple identity token');
@@ -71,15 +90,25 @@ export class AuthService {
         data: {
           appleUserId,
           email: email || null,
-          displayName: dto.displayName || null,
+          displayName: displayName || null,
         },
       });
     }
 
-    return this.generateTokens(user.id, user.email, dto.deviceName);
+    return user;
   }
 
   async signInWithGoogle(dto: GoogleAuthDto): Promise<AuthResponseDto> {
+    const user = await this.findOrCreateGoogleUser(dto.idToken);
+    return this.generateTokens(user.id, user.email, dto.deviceName);
+  }
+
+  /**
+   * Verifies a Google ID token and returns the matching user, creating or
+   * linking one if needed. Used by both app sign-in and the OAuth consent
+   * screen.
+   */
+  async findOrCreateGoogleUser(idToken: string) {
     if (!this.googleClient) {
       throw new UnauthorizedException('Google Sign-In is not configured');
     }
@@ -88,7 +117,7 @@ export class AuthService {
 
     try {
       const ticket = await this.googleClient.verifyIdToken({
-        idToken: dto.idToken,
+        idToken,
         audience: this.configService.get('GOOGLE_CLIENT_ID'),
       });
       const payload = ticket.getPayload();
@@ -137,7 +166,7 @@ export class AuthService {
       });
     }
 
-    return this.generateTokens(user.id, user.email, dto.deviceName);
+    return user;
   }
 
   async refreshAccessToken(dto: RefreshTokenDto): Promise<AuthResponseDto> {

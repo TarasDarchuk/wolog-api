@@ -1,4 +1,11 @@
-import { IsOptional, IsInt, Min, Max } from 'class-validator';
+import {
+  IsOptional,
+  IsInt,
+  IsString,
+  MaxLength,
+  Min,
+  Max,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class ListExercisesDto {
@@ -14,4 +21,9 @@ export class ListExercisesDto {
   @IsInt()
   @Min(0)
   offset?: number = 0;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  query?: string;
 }
