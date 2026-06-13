@@ -62,6 +62,10 @@ export class OAuthController {
     try {
       const validated = await this.oauth.validateAuthorizeRequest(query);
       res.setHeader('Content-Security-Policy', CONSENT_PAGE_CSP);
+      // Apple (usePopup) and Google GSI sign-in open a popup and post the
+      // credential back to this page. Helmet's default COOP of `same-origin`
+      // would isolate the cross-origin popup and break that callback.
+      res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
       res
         .status(200)
         .type('html')
