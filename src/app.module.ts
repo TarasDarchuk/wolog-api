@@ -16,6 +16,7 @@ import { WorkoutsModule } from './workouts/workouts.module.js';
 import { McpModule } from './mcp/mcp.module.js';
 import { OpenApiModule } from './openapi/openapi.module.js';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
+import { FaviconController } from './common/favicon.controller.js';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
     McpModule,
     OpenApiModule,
   ],
+  controllers: [FaviconController],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: ThrottlerGuard },

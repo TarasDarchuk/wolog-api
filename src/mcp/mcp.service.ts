@@ -130,7 +130,20 @@ export class McpService {
     return {
       protocolVersion,
       capabilities: { tools: {} },
-      serverInfo: { name: 'wolog-connector', version: '1.0.0' },
+      serverInfo: {
+        name: 'wolog-connector',
+        title: 'Wolog',
+        version: '1.0.0',
+        websiteUrl: 'https://wolog.app',
+        // MCP 2025-11-25 (SEP-973). Ignored by clients that predate it.
+        icons: [
+          {
+            src: 'https://wolog.app/icon-512.png',
+            mimeType: 'image/png',
+            sizes: ['512x512'],
+          },
+        ],
+      },
       instructions: MCP_SERVER_INSTRUCTIONS,
     };
   }

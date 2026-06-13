@@ -41,6 +41,11 @@ async function bootstrap() {
       },
       { path: 'mcp', method: RequestMethod.ALL },
       { path: 'openapi.json', method: RequestMethod.ALL },
+      { path: 'favicon.ico', method: RequestMethod.ALL },
+      { path: 'favicon.png', method: RequestMethod.ALL },
+      { path: 'icon-192.png', method: RequestMethod.ALL },
+      { path: 'icon-512.png', method: RequestMethod.ALL },
+      { path: 'apple-icon.png', method: RequestMethod.ALL },
     ],
   });
 
