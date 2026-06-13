@@ -26,18 +26,49 @@ export class AuthService {
     private jwtService: JwtService,
     private configService: ConfigService,
   ) {
-    const googleClientId = this.configService.get('GOOGLE_CLIENT_ID');
-    if (googleClientId) {
-      this.googleClient = new OAuth2Client(googleClientId);
+    if (this.googleAudiences().length > 0) {
+      this.googleClient = new OAuth2Client(this.googleAudiences()[0]);
     }
   }
 
+  /**
+   * Accepted Google `aud` values. The iOS app's tokens carry the iOS client
+   * id (GOOGLE_CLIENT_ID); the web consent screen's GSI tokens carry the web
+   * client id (GOOGLE_WEB_CLIENT_ID). Verify against both so either origin
+   * resolves to the same user.
+   */
+  private googleAudiences(): string[] {
+    return [
+      this.configService.get<string>('GOOGLE_CLIENT_ID'),
+      this.configService.get<string>('GOOGLE_WEB_CLIENT_ID'),
+    ].filter((id): id is string => !!id);
+  }
+
   async signInWithApple(dto: AppleAuthDto): Promise<AuthResponseDto> {
+    const user = await this.findOrCreateAppleUser(
+      dto.identityToken,
+      [this.configService.get('APPLE_CLIENT_ID')!],
+      dto.displayName,
+    );
+    return this.generateTokens(user.id, user.email, dto.deviceName);
+  }
+
+  /**
+   * Verifies an Apple identity token against the given audiences (app bundle
+   * ID and/or web Services ID) and returns the matching user, creating or
+   * linking one if needed. Used by both app sign-in and the OAuth consent
+   * screen.
+   */
+  async findOrCreateAppleUser(
+    identityToken: string,
+    audiences: string[],
+    displayName?: string,
+  ) {
     let applePayload: { sub: string; email?: string };
 
     try {
-      applePayload = await appleSignin.verifyIdToken(dto.identityToken, {
-        audience: this.configService.get('APPLE_CLIENT_ID'),
+      applePayload = await appleSignin.verifyIdToken(identityToken, {
+        audience: audiences,
       });
     } catch {
       throw new UnauthorizedException('Invalid Apple identity token');
@@ -71,15 +102,25 @@ export class AuthService {
         data: {
           appleUserId,
           email: email || null,
-          displayName: dto.displayName || null,
+          displayName: displayName || null,
         },
       });
     }
 
-    return this.generateTokens(user.id, user.email, dto.deviceName);
+    return user;
   }
 
   async signInWithGoogle(dto: GoogleAuthDto): Promise<AuthResponseDto> {
+    const user = await this.findOrCreateGoogleUser(dto.idToken);
+    return this.generateTokens(user.id, user.email, dto.deviceName);
+  }
+
+  /**
+   * Verifies a Google ID token and returns the matching user, creating or
+   * linking one if needed. Used by both app sign-in and the OAuth consent
+   * screen.
+   */
+  async findOrCreateGoogleUser(idToken: string) {
     if (!this.googleClient) {
       throw new UnauthorizedException('Google Sign-In is not configured');
     }
@@ -88,8 +129,8 @@ export class AuthService {
 
     try {
       const ticket = await this.googleClient.verifyIdToken({
-        idToken: dto.idToken,
-        audience: this.configService.get('GOOGLE_CLIENT_ID'),
+        idToken,
+        audience: this.googleAudiences(),
       });
       const payload = ticket.getPayload();
       if (!payload?.sub) {
@@ -137,7 +178,7 @@ export class AuthService {
       });
     }
 
-    return this.generateTokens(user.id, user.email, dto.deviceName);
+    return user;
   }
 
   async refreshAccessToken(dto: RefreshTokenDto): Promise<AuthResponseDto> {

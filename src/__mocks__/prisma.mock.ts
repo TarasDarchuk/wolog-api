@@ -18,6 +18,7 @@ function createModelMock() {
     delete: jest.fn(),
     deleteMany: jest.fn(),
     count: jest.fn(),
+    aggregate: jest.fn(),
   };
 }
 
@@ -37,6 +38,9 @@ export function createMockPrismaService() {
     templateSuperset: createModelMock(),
     bodyMeasurement: createModelMock(),
     share: createModelMock(),
+    oAuthClient: createModelMock(),
+    oAuthAuthorizationCode: createModelMock(),
+    oAuthToken: createModelMock(),
     $transaction: jest.fn(),
     $queryRaw: jest.fn(),
     $connect: jest.fn(),
@@ -44,7 +48,9 @@ export function createMockPrismaService() {
   };
 
   // $transaction calls the callback with the same mock (tx has same shape)
-  mock.$transaction.mockImplementation((cb: (tx: typeof mock) => Promise<unknown>) => cb(mock));
+  mock.$transaction.mockImplementation(
+    (cb: (tx: typeof mock) => Promise<unknown>) => cb(mock),
+  );
 
   return mock;
 }
@@ -107,7 +113,9 @@ export function makeExercisePushDto(overrides: Record<string, unknown> = {}) {
   };
 }
 
-export function makeMeasurementPushDto(overrides: Record<string, unknown> = {}) {
+export function makeMeasurementPushDto(
+  overrides: Record<string, unknown> = {},
+) {
   return {
     id: 'measurement-1',
     date: NOW,
@@ -189,7 +197,9 @@ export function makeExistingExercise(overrides: Record<string, unknown> = {}) {
   };
 }
 
-export function makeExistingMeasurement(overrides: Record<string, unknown> = {}) {
+export function makeExistingMeasurement(
+  overrides: Record<string, unknown> = {},
+) {
   return {
     id: 'measurement-1',
     userId: USER_ID,

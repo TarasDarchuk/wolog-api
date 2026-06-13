@@ -6,6 +6,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { safeBodyForLog } from '../utils/redact.js';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -20,7 +21,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     if (status >= 400 && status < 500) {
       this.logger.warn(
         `${status} ${request.method} ${request.url} | ` +
-          `Body: ${JSON.stringify(request.body)} | ` +
+          `Body: ${safeBodyForLog(request.body)} | ` +
           `Error: ${JSON.stringify(exception.getResponse())}`,
       );
     }

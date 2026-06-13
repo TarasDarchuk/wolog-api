@@ -10,7 +10,13 @@ import { UsersModule } from './users/users.module.js';
 import { SyncModule } from './sync/sync.module.js';
 import { ExercisesModule } from './exercises/exercises.module.js';
 import { SharesModule } from './shares/shares.module.js';
+import { OAuthModule } from './oauth/oauth.module.js';
+import { RoutinesModule } from './routines/routines.module.js';
+import { WorkoutsModule } from './workouts/workouts.module.js';
+import { McpModule } from './mcp/mcp.module.js';
+import { OpenApiModule } from './openapi/openapi.module.js';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
+import { FaviconController } from './common/favicon.controller.js';
 
 @Module({
   imports: [
@@ -24,7 +30,13 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
     SyncModule,
     ExercisesModule,
     SharesModule,
+    OAuthModule,
+    RoutinesModule,
+    WorkoutsModule,
+    McpModule,
+    OpenApiModule,
   ],
+  controllers: [FaviconController],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: ThrottlerGuard },
