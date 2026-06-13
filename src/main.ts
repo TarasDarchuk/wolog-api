@@ -35,6 +35,10 @@ async function bootstrap() {
         path: '.well-known/oauth-protected-resource/mcp',
         method: RequestMethod.ALL,
       },
+      {
+        path: '.well-known/apple-developer-domain-association.txt',
+        method: RequestMethod.ALL,
+      },
       { path: 'mcp', method: RequestMethod.ALL },
       { path: 'openapi.json', method: RequestMethod.ALL },
     ],
