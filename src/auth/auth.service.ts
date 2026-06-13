@@ -26,10 +26,22 @@ export class AuthService {
     private jwtService: JwtService,
     private configService: ConfigService,
   ) {
-    const googleClientId = this.configService.get('GOOGLE_CLIENT_ID');
-    if (googleClientId) {
-      this.googleClient = new OAuth2Client(googleClientId);
+    if (this.googleAudiences().length > 0) {
+      this.googleClient = new OAuth2Client(this.googleAudiences()[0]);
     }
+  }
+
+  /**
+   * Accepted Google `aud` values. The iOS app's tokens carry the iOS client
+   * id (GOOGLE_CLIENT_ID); the web consent screen's GSI tokens carry the web
+   * client id (GOOGLE_WEB_CLIENT_ID). Verify against both so either origin
+   * resolves to the same user.
+   */
+  private googleAudiences(): string[] {
+    return [
+      this.configService.get<string>('GOOGLE_CLIENT_ID'),
+      this.configService.get<string>('GOOGLE_WEB_CLIENT_ID'),
+    ].filter((id): id is string => !!id);
   }
 
   async signInWithApple(dto: AppleAuthDto): Promise<AuthResponseDto> {
@@ -118,7 +130,7 @@ export class AuthService {
     try {
       const ticket = await this.googleClient.verifyIdToken({
         idToken,
-        audience: this.configService.get('GOOGLE_CLIENT_ID'),
+        audience: this.googleAudiences(),
       });
       const payload = ticket.getPayload();
       if (!payload?.sub) {

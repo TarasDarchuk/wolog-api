@@ -83,7 +83,8 @@ export class OAuthController {
               code_challenge_method: query.code_challenge_method,
             },
             appleWebClientId: this.config.get('APPLE_WEB_CLIENT_ID'),
-            googleClientId: this.config.get('GOOGLE_CLIENT_ID'),
+            // Web sign-in needs a Web-application client id, not the iOS one.
+            googleClientId: this.config.get('GOOGLE_WEB_CLIENT_ID'),
             devLoginEnabled: this.oauth.devLoginEnabled,
             baseUrl: this.oauth.publicBaseUrl,
           }),
