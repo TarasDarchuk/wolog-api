@@ -370,5 +370,57 @@ describe('AuthService', () => {
         UnauthorizedException,
       );
     });
+
+    it('includes isPro in the selected fields', async () => {
+      const service = createAuthService(prisma);
+      prisma.user.findUnique.mockResolvedValue({
+        id: USER_ID,
+        email: 'test@example.com',
+        displayName: 'Test User',
+        appleUserId: 'apple-123',
+        googleUserId: null,
+        isPro: true,
+        createdAt: new Date(),
+      });
+
+      const result = await service.getUserProfile(USER_ID);
+
+      expect(result.isPro).toBe(true);
+      expect(prisma.user.findUnique).toHaveBeenCalledWith(
+        expect.objectContaining({
+          select: expect.objectContaining({ isPro: true }),
+        }),
+      );
+    });
+  });
+
+  // ─── Set Pro Status ───────────────────────────────────────────────────
+
+  describe('setProStatus', () => {
+    it('updates the user isPro flag and echoes it back', async () => {
+      const service = createAuthService(prisma);
+      prisma.user.update.mockResolvedValue({});
+
+      const result = await service.setProStatus(USER_ID, true);
+
+      expect(prisma.user.update).toHaveBeenCalledWith({
+        where: { id: USER_ID },
+        data: { isPro: true },
+      });
+      expect(result).toEqual({ isPro: true });
+    });
+
+    it('can clear Pro (e.g. subscription lapsed)', async () => {
+      const service = createAuthService(prisma);
+      prisma.user.update.mockResolvedValue({});
+
+      const result = await service.setProStatus(USER_ID, false);
+
+      expect(prisma.user.update).toHaveBeenCalledWith({
+        where: { id: USER_ID },
+        data: { isPro: false },
+      });
+      expect(result).toEqual({ isPro: false });
+    });
   });
 });

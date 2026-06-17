@@ -250,6 +250,7 @@ export class AuthService {
         displayName: true,
         appleUserId: true,
         googleUserId: true,
+        isPro: true,
         createdAt: true,
       },
     });
@@ -261,6 +262,18 @@ export class AuthService {
       appleUserId: undefined,
       googleUserId: undefined,
     };
+  }
+
+  /**
+   * Sets the user's Pro entitlement. Called by the app (first-party JWT only)
+   * reporting its current subscription state; lifts the free-tier routine cap.
+   */
+  async setProStatus(userId: string, isPro: boolean): Promise<{ isPro: boolean }> {
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { isPro },
+    });
+    return { isPro };
   }
 
   private async generateTokens(
