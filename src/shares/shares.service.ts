@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   GoneException,
   HttpException,
   HttpStatus,
@@ -64,6 +65,17 @@ export class SharesService {
   }
 
   async create(userId: string, dto: CreateShareDto) {
+    if (dto.kind === 'template' && !dto.template) {
+      throw new BadRequestException(
+        'template payload is required for kind "template"',
+      );
+    }
+    if (dto.kind === 'program' && !dto.program) {
+      throw new BadRequestException(
+        'program payload is required for kind "program"',
+      );
+    }
+
     const serialized = JSON.stringify(dto);
     if (Buffer.byteLength(serialized, 'utf8') > MAX_PAYLOAD_BYTES) {
       throw new PayloadTooLargeException(

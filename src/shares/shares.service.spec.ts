@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   GoneException,
   NotFoundException,
   PayloadTooLargeException,
@@ -187,6 +188,40 @@ describe('SharesService', () => {
       const result = await service.create(USER_ID, makeDto());
 
       expect(result.url).toBe(`https://example.com/x/${result.id}`);
+    });
+
+    it('accepts kind "program" with a program payload', async () => {
+      prisma.share.create.mockImplementation(async ({ data }: any) => ({
+        ...data,
+        createdAt: new Date(),
+      }));
+      const dto = makeDto({
+        payloadVersion: 2,
+        kind: 'program',
+        template: undefined,
+        exercises: [],
+        program: { id: 'p1', name: 'Beginner PPL', routines: [] },
+      });
+
+      await expect(service.create(USER_ID, dto)).resolves.toBeDefined();
+    });
+
+    it('rejects kind "program" without a program payload', async () => {
+      const dto = makeDto({ kind: 'program', program: undefined });
+
+      await expect(service.create(USER_ID, dto)).rejects.toBeInstanceOf(
+        BadRequestException,
+      );
+      expect(prisma.share.create).not.toHaveBeenCalled();
+    });
+
+    it('rejects kind "template" without a template payload', async () => {
+      const dto = makeDto({ template: undefined });
+
+      await expect(service.create(USER_ID, dto)).rejects.toBeInstanceOf(
+        BadRequestException,
+      );
+      expect(prisma.share.create).not.toHaveBeenCalled();
     });
   });
 
