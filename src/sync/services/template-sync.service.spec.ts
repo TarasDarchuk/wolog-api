@@ -113,6 +113,42 @@ describe('TemplateSyncService', () => {
       ]);
     });
 
+    it('writes folderId when provided', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date(PAST) }),
+      );
+
+      const dto = makeTemplatePushDto({ folderId: 'folder-1' });
+      await service.push(USER_ID, [dto]);
+
+      expect(prisma.workoutTemplate.upsert).toHaveBeenCalledWith(
+        expect.objectContaining({
+          create: expect.objectContaining({ folderId: 'folder-1' }),
+          update: expect.objectContaining({ folderId: 'folder-1' }),
+        }),
+      );
+    });
+
+    it('clears folderId on explicit null but leaves it untouched when absent', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date(PAST) }),
+      );
+
+      await service.push(USER_ID, [makeTemplatePushDto({ folderId: null })]);
+      expect(prisma.workoutTemplate.upsert).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          update: expect.objectContaining({ folderId: null }),
+        }),
+      );
+
+      await service.push(USER_ID, [makeTemplatePushDto()]);
+      const lastCall =
+        prisma.workoutTemplate.upsert.mock.calls[
+          prisma.workoutTemplate.upsert.mock.calls.length - 1
+        ][0];
+      expect('folderId' in lastCall.update).toBe(false);
+    });
+
     it('creates supersets with nested exercises and sets', async () => {
       prisma.workoutTemplate.findUnique.mockResolvedValue(null);
 

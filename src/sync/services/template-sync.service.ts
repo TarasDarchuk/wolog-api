@@ -54,11 +54,19 @@ export class TemplateSyncService {
             });
           }
 
+          // folderId absent = old client that doesn't know about folders (leave
+          // the server value untouched); explicit null = removed from folder.
+          const folderIdPatch =
+            template.folderId === undefined
+              ? {}
+              : { folderId: template.folderId };
+
           await tx.workoutTemplate.upsert({
             where: { id: template.id },
             create: {
               id: template.id,
               userId,
+              folderId: template.folderId ?? null,
               name: template.name,
               notes: template.notes || '',
               sortOrder: template.sortOrder,
@@ -68,6 +76,7 @@ export class TemplateSyncService {
                 : null,
             },
             update: {
+              ...folderIdPatch,
               name: template.name,
               notes: template.notes || '',
               sortOrder: template.sortOrder,
@@ -78,7 +87,10 @@ export class TemplateSyncService {
           });
 
           // Collect all supersets: from top-level array and from item-level superset fields
-          const supersetMap = new Map<string, { id: string; supersetColorIndex: number; exerciseIds: string[] }>();
+          const supersetMap = new Map<
+            string,
+            { id: string; supersetColorIndex: number; exerciseIds: string[] }
+          >();
 
           if (template.supersets?.length) {
             for (const ss of template.supersets) {

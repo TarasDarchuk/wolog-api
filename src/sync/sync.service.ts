@@ -5,6 +5,7 @@ import { EntityPushResult } from './interfaces/push-result.interface.js';
 import { WorkoutSyncService } from './services/workout-sync.service.js';
 import { ExerciseSyncService } from './services/exercise-sync.service.js';
 import { TemplateSyncService } from './services/template-sync.service.js';
+import { FolderSyncService } from './services/folder-sync.service.js';
 import { MeasurementSyncService } from './services/measurement-sync.service.js';
 import { PrismaService } from '../prisma/prisma.service.js';
 
@@ -15,6 +16,7 @@ export class SyncService {
     private readonly workoutSync: WorkoutSyncService,
     private readonly exerciseSync: ExerciseSyncService,
     private readonly templateSync: TemplateSyncService,
+    private readonly folderSync: FolderSyncService,
     private readonly measurementSync: MeasurementSyncService,
   ) {}
 
@@ -26,6 +28,7 @@ export class SyncService {
       workouts: { accepted: [], rejected: [] },
       exercises: { accepted: [], rejected: [] },
       templates: { accepted: [], rejected: [] },
+      folders: { accepted: [], rejected: [] },
       measurements: { accepted: [], rejected: [] },
     };
 
@@ -36,6 +39,10 @@ export class SyncService {
 
     if (dto.workouts?.length) {
       results.workouts = await this.workoutSync.push(userId, dto.workouts);
+    }
+
+    if (dto.folders?.length) {
+      results.folders = await this.folderSync.push(userId, dto.folders);
     }
 
     if (dto.templates?.length) {
@@ -56,28 +63,33 @@ export class SyncService {
     const limit = dto.limit || 50;
     const since = dto.since || {};
 
-    const [workouts, exercises, templates, measurements] = await Promise.all([
-      this.workoutSync.pull(userId, since.workouts, limit),
-      this.exerciseSync.pull(userId, since.exercises, limit),
-      this.templateSync.pull(userId, since.templates, limit),
-      this.measurementSync.pull(userId, since.measurements, limit),
-    ]);
+    const [workouts, exercises, templates, folders, measurements] =
+      await Promise.all([
+        this.workoutSync.pull(userId, since.workouts, limit),
+        this.exerciseSync.pull(userId, since.exercises, limit),
+        this.templateSync.pull(userId, since.templates, limit),
+        this.folderSync.pull(userId, since.folders, limit),
+        this.measurementSync.pull(userId, since.measurements, limit),
+      ]);
 
     return {
       workouts: workouts.data,
       exercises: exercises.data,
       templates: templates.data,
+      folders: folders.data,
       measurements: measurements.data,
       cursors: {
         workouts: workouts.cursor,
         exercises: exercises.cursor,
         templates: templates.cursor,
+        folders: folders.cursor,
         measurements: measurements.cursor,
       },
       hasMore: {
         workouts: workouts.hasMore,
         exercises: exercises.hasMore,
         templates: templates.hasMore,
+        folders: folders.hasMore,
         measurements: measurements.hasMore,
       },
     };
@@ -89,7 +101,7 @@ export class SyncService {
 
     const deletedBefore = { userId, deletedAt: { lt: cutoff } };
 
-    const [workouts, exercises, templates, measurements] =
+    const [workouts, exercises, templates, folders, measurements] =
       await this.prisma.$transaction(async (tx) => {
         const { count: workoutCount } = await tx.workout.deleteMany({
           where: deletedBefore,
@@ -103,27 +115,40 @@ export class SyncService {
           where: deletedBefore,
         });
 
-        const { count: measurementCount } =
-          await tx.bodyMeasurement.deleteMany({
-            where: deletedBefore,
-          });
+        const { count: folderCount } = await tx.routineFolder.deleteMany({
+          where: deletedBefore,
+        });
 
-        return [workoutCount, exerciseCount, templateCount, measurementCount];
+        const { count: measurementCount } = await tx.bodyMeasurement.deleteMany(
+          {
+            where: deletedBefore,
+          },
+        );
+
+        return [
+          workoutCount,
+          exerciseCount,
+          templateCount,
+          folderCount,
+          measurementCount,
+        ];
       });
 
     return {
-      purged: { workouts, exercises, templates, measurements },
+      purged: { workouts, exercises, templates, folders, measurements },
     };
   }
 
   async getStatus(userId: string) {
-    const [workouts, exercises, templates, measurements] = await Promise.all([
-      this.workoutSync.getLatestTimestamp(userId),
-      this.exerciseSync.getLatestTimestamp(userId),
-      this.templateSync.getLatestTimestamp(userId),
-      this.measurementSync.getLatestTimestamp(userId),
-    ]);
+    const [workouts, exercises, templates, folders, measurements] =
+      await Promise.all([
+        this.workoutSync.getLatestTimestamp(userId),
+        this.exerciseSync.getLatestTimestamp(userId),
+        this.templateSync.getLatestTimestamp(userId),
+        this.folderSync.getLatestTimestamp(userId),
+        this.measurementSync.getLatestTimestamp(userId),
+      ]);
 
-    return { workouts, exercises, templates, measurements };
+    return { workouts, exercises, templates, folders, measurements };
   }
 }

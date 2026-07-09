@@ -7,5 +7,6 @@ export interface EntityPushResult {
   workouts: PushResult;
   exercises: PushResult;
   templates: PushResult;
+  folders: PushResult;
   measurements: PushResult;
 }

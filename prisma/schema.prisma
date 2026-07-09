@@ -98,6 +98,7 @@ model User {
   workouts         Workout[]
   exercises        Exercise[]
   workoutTemplates WorkoutTemplate[]
+  routineFolders   RoutineFolder[]
   bodyMeasurements BodyMeasurement[]
   shares           Share[]
   oauthAuthCodes   OAuthAuthorizationCode[]
@@ -218,6 +219,9 @@ model Exercise {
 model WorkoutTemplate {
   id        String    @id @db.Uuid
   userId    String    @db.Uuid
+  // Loose reference to RoutineFolder (no FK) — folders and templates sync
+  // independently, so a template may arrive before its folder exists.
+  folderId  String?   @db.Uuid
   name      String    @default("")
   notes     String    @default("")
   sortOrder Int       @default(0)
@@ -290,6 +294,23 @@ model TemplateSuperset {
   exercises TemplateExercise[]
 
   @@index([templateId])
+}
+
+// ─── Routine Folders ────────────────────────────────────────────────────────
+
+model RoutineFolder {
+  id        String    @id @db.Uuid
+  userId    String    @db.Uuid
+  name      String    @default("")
+  sortOrder Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@index([userId, deletedAt])
 }
 
 // ─── Body Measurements ─────────────────────────────────────────────────────
