@@ -32,6 +32,7 @@ export function createMockPrismaService() {
     workoutSuperset: createModelMock(),
     exercise: createModelMock(),
     workoutTemplate: createModelMock(),
+    routineFolder: createModelMock(),
     templateItem: createModelMock(),
     templateExercise: createModelMock(),
     templateSet: createModelMock(),
@@ -160,6 +161,17 @@ export function makeTemplatePushDto(overrides: Record<string, unknown> = {}) {
   };
 }
 
+export function makeFolderPushDto(overrides: Record<string, unknown> = {}) {
+  return {
+    id: 'folder-1',
+    name: 'Push Days',
+    sortOrder: 0,
+    createdAt: NOW,
+    updatedAt: NOW,
+    ...overrides,
+  };
+}
+
 // ─── Existing Record Builders (DB records with Date objects) ───────────────
 
 export function makeExistingWorkout(overrides: Record<string, unknown> = {}) {
@@ -219,6 +231,19 @@ export function makeExistingTemplate(overrides: Record<string, unknown> = {}) {
     userId: USER_ID,
     name: 'Push Day Template',
     notes: '',
+    sortOrder: 0,
+    createdAt: new Date(NOW),
+    updatedAt: new Date(NOW),
+    deletedAt: null,
+    ...overrides,
+  };
+}
+
+export function makeExistingFolder(overrides: Record<string, unknown> = {}) {
+  return {
+    id: 'folder-1',
+    userId: USER_ID,
+    name: 'Push Days',
     sortOrder: 0,
     createdAt: new Date(NOW),
     updatedAt: new Date(NOW),

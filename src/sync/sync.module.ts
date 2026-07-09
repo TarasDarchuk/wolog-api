@@ -4,6 +4,7 @@ import { SyncService } from './sync.service.js';
 import { WorkoutSyncService } from './services/workout-sync.service.js';
 import { ExerciseSyncService } from './services/exercise-sync.service.js';
 import { TemplateSyncService } from './services/template-sync.service.js';
+import { FolderSyncService } from './services/folder-sync.service.js';
 import { MeasurementSyncService } from './services/measurement-sync.service.js';
 
 @Module({
@@ -13,6 +14,7 @@ import { MeasurementSyncService } from './services/measurement-sync.service.js';
     WorkoutSyncService,
     ExerciseSyncService,
     TemplateSyncService,
+    FolderSyncService,
     MeasurementSyncService,
   ],
 })

@@ -23,6 +23,10 @@ export class SyncPullSinceDto {
 
   @IsOptional()
   @IsDateString()
+  folders?: string;
+
+  @IsOptional()
+  @IsDateString()
   measurements?: string;
 }
 
@@ -43,5 +47,6 @@ export class SyncStatusResponseDto {
   workouts: string | null;
   exercises: string | null;
   templates: string | null;
+  folders: string | null;
   measurements: string | null;
 }

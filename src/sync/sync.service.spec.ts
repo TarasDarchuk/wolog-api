@@ -9,7 +9,9 @@ import {
 function createMockEntitySyncService() {
   return {
     push: jest.fn().mockResolvedValue({ accepted: [], rejected: [] }),
-    pull: jest.fn().mockResolvedValue({ data: [], cursor: null, hasMore: false }),
+    pull: jest
+      .fn()
+      .mockResolvedValue({ data: [], cursor: null, hasMore: false }),
     getLatestTimestamp: jest.fn().mockResolvedValue(null),
   };
 }
@@ -20,6 +22,7 @@ describe('SyncService', () => {
   let workoutSync: ReturnType<typeof createMockEntitySyncService>;
   let exerciseSync: ReturnType<typeof createMockEntitySyncService>;
   let templateSync: ReturnType<typeof createMockEntitySyncService>;
+  let folderSync: ReturnType<typeof createMockEntitySyncService>;
   let measurementSync: ReturnType<typeof createMockEntitySyncService>;
 
   beforeEach(() => {
@@ -27,6 +30,7 @@ describe('SyncService', () => {
     workoutSync = createMockEntitySyncService();
     exerciseSync = createMockEntitySyncService();
     templateSync = createMockEntitySyncService();
+    folderSync = createMockEntitySyncService();
     measurementSync = createMockEntitySyncService();
 
     service = new SyncService(
@@ -34,6 +38,7 @@ describe('SyncService', () => {
       workoutSync as any,
       exerciseSync as any,
       templateSync as any,
+      folderSync as any,
       measurementSync as any,
     );
   });
@@ -68,6 +73,7 @@ describe('SyncService', () => {
       expect(workoutSync.push).not.toHaveBeenCalled();
       expect(exerciseSync.push).not.toHaveBeenCalled();
       expect(templateSync.push).not.toHaveBeenCalled();
+      expect(folderSync.push).not.toHaveBeenCalled();
       expect(measurementSync.push).not.toHaveBeenCalled();
       expect(result.workouts).toEqual({ accepted: [], rejected: [] });
     });
@@ -98,6 +104,7 @@ describe('SyncService', () => {
       expect(workoutSync.pull).toHaveBeenCalledWith(USER_ID, undefined, 50);
       expect(exerciseSync.pull).toHaveBeenCalledWith(USER_ID, undefined, 50);
       expect(templateSync.pull).toHaveBeenCalledWith(USER_ID, undefined, 50);
+      expect(folderSync.pull).toHaveBeenCalledWith(USER_ID, undefined, 50);
       expect(measurementSync.pull).toHaveBeenCalledWith(USER_ID, undefined, 50);
     });
 
@@ -134,12 +141,19 @@ describe('SyncService', () => {
       prisma.workout.deleteMany.mockResolvedValue({ count: 3 });
       prisma.exercise.deleteMany.mockResolvedValue({ count: 1 });
       prisma.workoutTemplate.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.routineFolder.deleteMany.mockResolvedValue({ count: 1 });
       prisma.bodyMeasurement.deleteMany.mockResolvedValue({ count: 2 });
 
       const result = await service.purge(USER_ID);
 
       expect(result).toEqual({
-        purged: { workouts: 3, exercises: 1, templates: 0, measurements: 2 },
+        purged: {
+          workouts: 3,
+          exercises: 1,
+          templates: 0,
+          folders: 1,
+          measurements: 2,
+        },
       });
       expect(prisma.$transaction).toHaveBeenCalled();
       expect(prisma.workout.deleteMany).toHaveBeenCalledWith({
@@ -158,6 +172,7 @@ describe('SyncService', () => {
       workoutSync.getLatestTimestamp.mockResolvedValue(NOW);
       exerciseSync.getLatestTimestamp.mockResolvedValue(PAST);
       templateSync.getLatestTimestamp.mockResolvedValue(null);
+      folderSync.getLatestTimestamp.mockResolvedValue(null);
       measurementSync.getLatestTimestamp.mockResolvedValue(null);
 
       const result = await service.getStatus(USER_ID);
@@ -166,6 +181,7 @@ describe('SyncService', () => {
         workouts: NOW,
         exercises: PAST,
         templates: null,
+        folders: null,
         measurements: null,
       });
     });

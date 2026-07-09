@@ -192,13 +192,17 @@ export class ExercisePushDto {
 
   @IsOptional()
   @IsArray()
-  @Transform(({ value }) => (Array.isArray(value) ? normalizeMuscleGroups(value) : value))
+  @Transform(({ value }) =>
+    Array.isArray(value) ? normalizeMuscleGroups(value) : value,
+  )
   @IsIn(Object.values(MuscleGroup), { each: true })
   primaryMuscles?: string[];
 
   @IsOptional()
   @IsArray()
-  @Transform(({ value }) => (Array.isArray(value) ? normalizeMuscleGroups(value) : value))
+  @Transform(({ value }) =>
+    Array.isArray(value) ? normalizeMuscleGroups(value) : value,
+  )
   @IsIn(Object.values(MuscleGroup), { each: true })
   secondaryMuscles?: string[];
 
@@ -315,6 +319,11 @@ export class TemplatePushDto {
   @IsUUID()
   id: string;
 
+  // undefined = client doesn't know about folders; null = not in any folder
+  @IsOptional()
+  @IsUUID()
+  folderId?: string | null;
+
   @IsString()
   name: string;
 
@@ -345,6 +354,29 @@ export class TemplatePushDto {
   @ValidateNested({ each: true })
   @Type(() => TemplateSupersetPushDto)
   supersets?: TemplateSupersetPushDto[];
+}
+
+// ─── Routine Folder DTO ─────────────────────────────────────────────────────
+
+export class FolderPushDto {
+  @IsUUID()
+  id: string;
+
+  @IsString()
+  name: string;
+
+  @IsNumber()
+  sortOrder: number;
+
+  @IsDateString()
+  createdAt: string;
+
+  @IsDateString()
+  updatedAt: string;
+
+  @IsOptional()
+  @IsDateString()
+  deletedAt?: string;
 }
 
 // ─── Body Measurement DTO ───────────────────────────────────────────────────
@@ -394,6 +426,12 @@ export class SyncPushRequestDto {
   @ValidateNested({ each: true })
   @Type(() => TemplatePushDto)
   templates?: TemplatePushDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => FolderPushDto)
+  folders?: FolderPushDto[];
 
   @IsOptional()
   @IsArray()
