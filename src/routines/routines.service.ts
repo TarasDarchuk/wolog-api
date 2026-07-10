@@ -12,11 +12,13 @@ import {
   ExerciseResolverService,
 } from '../exercises/exercise-resolver.service.js';
 import {
+  CreateProgramDto,
   CreateRoutineDto,
   RoutineExerciseDto,
   RoutineItemDto,
   UpdateRoutineDto,
 } from './dto/routine.dto.js';
+import { FoldersService, FolderView } from './folders.service.js';
 import { RoutineView, toRoutineView } from './routine-mapper.js';
 
 export const FREE_ROUTINE_LIMIT = 5;
@@ -95,6 +97,7 @@ export class RoutinesService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly resolver: ExerciseResolverService,
+    private readonly folders: FoldersService,
   ) {}
 
   // ─── Read ─────────────────────────────────────────────────────────────────
@@ -108,20 +111,38 @@ export class RoutinesService {
       },
     });
 
+    const folders = await this.prisma.routineFolder.findMany({
+      where: { userId, deletedAt: null },
+      select: { id: true, name: true },
+    });
+    const folderNameById = new Map(folders.map((f) => [f.id, f.name]));
+
     return {
-      routines: templates.map((t) => ({
-        id: t.id,
-        name: t.name,
-        notes: t.notes || null,
-        exerciseCount: t.items.filter((i) => i.exercise).length,
-        updatedAt: t.updatedAt.toISOString(),
-      })),
+      routines: templates.map((t) => {
+        // A dangling folderId (folder deleted) reports as unfiled, like the app.
+        const folderName = t.folderId
+          ? (folderNameById.get(t.folderId) ?? null)
+          : null;
+        return {
+          id: t.id,
+          name: t.name,
+          notes: t.notes || null,
+          folderId: folderName ? t.folderId : null,
+          folderName,
+          exerciseCount: t.items.filter((i) => i.exercise).length,
+          updatedAt: t.updatedAt.toISOString(),
+        };
+      }),
     };
   }
 
-  async getOne(userId: string, routineId: string): Promise<RoutineView> {
+  async getOne(
+    userId: string,
+    routineId: string,
+  ): Promise<RoutineView & { folder: FolderView | null }> {
     const template = await this.loadTemplate(userId, routineId);
-    return toRoutineView(template);
+    const folder = await this.folders.folderInfo(userId, template.folderId);
+    return { ...toRoutineView(template), folder };
   }
 
   private async loadTemplate(userId: string, routineId: string) {
@@ -137,8 +158,11 @@ export class RoutinesService {
 
   // ─── Create ───────────────────────────────────────────────────────────────
 
-  async create(userId: string, dto: CreateRoutineDto) {
-    await this.enforceRoutineLimit(userId);
+  async create(userId: string, dto: CreateRoutineDto, skipLimitCheck = false) {
+    if (!skipLimitCheck) {
+      await this.enforceRoutineLimit(userId, 1);
+    }
+    const folderId = (await this.folders.resolveRef(userId, dto)) ?? null;
 
     const { entries, groups } = expandItems(dto.items);
     this.requireResolvableRefs(entries);
@@ -164,6 +188,7 @@ export class RoutinesService {
           userId,
           name: dto.name,
           notes: dto.notes || '',
+          folderId,
           sortOrder,
         },
       });
@@ -232,6 +257,33 @@ export class RoutinesService {
   }
 
   /**
+   * Create a complete training program: a folder named after the program
+   * plus every routine inside it. The free routine limit is checked up
+   * front for the whole batch so a partial program is never created.
+   */
+  async createProgram(userId: string, dto: CreateProgramDto) {
+    await this.enforceRoutineLimit(userId, dto.routines.length);
+    const { folder, created } = await this.folders.createOrGet(
+      userId,
+      dto.name,
+    );
+
+    const routines: Awaited<ReturnType<RoutinesService['getOne']>>[] = [];
+    const resolutions: ExerciseResolution[] = [];
+    for (const routineDto of dto.routines) {
+      const result = await this.create(
+        userId,
+        { ...routineDto, folderId: folder.id, folderName: undefined },
+        true,
+      );
+      routines.push(result.routine);
+      resolutions.push(...result.resolutions);
+    }
+
+    return { folder: { ...folder, created }, routines, resolutions };
+  }
+
+  /**
    * Per-set targets: use the provided sets, or materialize
    * targetSets × targetReps placeholder sets so the app always has set rows.
    */
@@ -284,11 +336,15 @@ export class RoutinesService {
       resolutions = await this.mergeItems(userId, existing, dto.items);
     }
 
+    // undefined = leave folder unchanged; null = remove from folder.
+    const folderRef = await this.folders.resolveRef(userId, dto);
+
     await this.prisma.workoutTemplate.update({
       where: { id: routineId },
       data: {
         ...(dto.name !== undefined ? { name: dto.name } : {}),
         ...(dto.notes !== undefined ? { notes: dto.notes ?? '' } : {}),
+        ...(folderRef !== undefined ? { folderId: folderRef } : {}),
         // Explicit bump: this is what moves the routine past the app's pull
         // cursor so the change reaches the phone.
         updatedAt: new Date(),
@@ -564,7 +620,7 @@ export class RoutinesService {
     }
   }
 
-  private async enforceRoutineLimit(userId: string) {
+  private async enforceRoutineLimit(userId: string, adding: number) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
       select: { isPro: true },
@@ -574,7 +630,7 @@ export class RoutinesService {
     const count = await this.prisma.workoutTemplate.count({
       where: { userId, deletedAt: null },
     });
-    if (count >= FREE_ROUTINE_LIMIT) {
+    if (count + adding > FREE_ROUTINE_LIMIT) {
       throw new ForbiddenException({
         message: `Free accounts are limited to ${FREE_ROUTINE_LIMIT} routines. Upgrade to Wolog Pro for unlimited routines.`,
         error: 'Forbidden',

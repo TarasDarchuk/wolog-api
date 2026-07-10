@@ -1,4 +1,6 @@
 import {
+  ArrayMaxSize,
+  ArrayMinSize,
   IsArray,
   IsDateString,
   IsInt,
@@ -133,10 +135,34 @@ export class CreateRoutineDto {
   @MaxLength(5000)
   notes?: string;
 
+  // Optional folder reference: folderId (must exist) or folderName
+  // (resolved case-insensitively, created if missing).
+  @IsOptional()
+  @IsUUID()
+  folderId?: string | null;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  folderName?: string | null;
+
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => RoutineItemDto)
   items: RoutineItemDto[];
+}
+
+export class CreateProgramDto {
+  @IsString()
+  @MaxLength(120)
+  name: string;
+
+  @IsArray()
+  @ArrayMinSize(1)
+  @ArrayMaxSize(14)
+  @ValidateNested({ each: true })
+  @Type(() => CreateRoutineDto)
+  routines: CreateRoutineDto[];
 }
 
 export class UpdateRoutineDto {
@@ -163,6 +189,18 @@ export class UpdateRoutineDto {
   @IsString()
   @MaxLength(5000)
   notes?: string;
+
+  // Folder assignment: folderId string files the routine there, explicit
+  // null (or folderName null / "") removes it from its folder, absent = no
+  // change. folderName resolves case-insensitively and creates when missing.
+  @IsOptional()
+  @IsUUID()
+  folderId?: string | null;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  folderName?: string | null;
 
   @IsOptional()
   @IsArray()

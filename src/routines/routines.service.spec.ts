@@ -25,6 +25,7 @@ import {
   PAST,
 } from '../__mocks__/prisma.mock.js';
 import { RoutinesService } from './routines.service.js';
+import { FoldersService } from './folders.service.js';
 
 function makeTemplateTree(overrides: Record<string, unknown> = {}) {
   return {
@@ -104,12 +105,19 @@ describe('RoutinesService', () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
         RoutinesService,
+        FoldersService,
         { provide: PrismaService, useValue: prisma },
         { provide: ExerciseResolverService, useValue: resolver },
       ],
     }).compile();
 
     service = moduleRef.get(RoutinesService);
+
+    // Folder-related defaults: no folders unless a test sets them up.
+    prisma.routineFolder.findMany.mockResolvedValue([]);
+    prisma.routineFolder.findFirst.mockResolvedValue(null);
+    prisma.routineFolder.findUnique.mockResolvedValue(null);
+    prisma.workoutTemplate.groupBy.mockResolvedValue([]);
   });
 
   describe('list', () => {
@@ -130,6 +138,8 @@ describe('RoutinesService', () => {
           id: 'template-1',
           name: 'Push Day',
           notes: null,
+          folderId: null,
+          folderName: null,
           exerciseCount: 1,
           updatedAt: NOW,
         },
@@ -421,6 +431,65 @@ describe('RoutinesService', () => {
           items: [{ exercise: { id: '4242aaaa-0000-0000-0000-000000000000' } }],
         } as any),
       ).rejects.toThrow(BadRequestException);
+    });
+  });
+
+  // ─── createProgram ───────────────────────────────────────────────────────
+
+  describe('createProgram', () => {
+    const programDto = {
+      name: 'Push Pull Legs',
+      routines: [
+        {
+          name: 'Push',
+          items: [{ exercise: { name: 'Bench Press (Barbell)' } }],
+        },
+        {
+          name: 'Pull',
+          items: [{ exercise: { name: 'Lat Pulldown (Cable)' } }],
+        },
+      ],
+    } as any;
+
+    it('checks the free limit for the whole batch before creating anything', async () => {
+      prisma.user.findUnique.mockResolvedValue({ isPro: false });
+      prisma.workoutTemplate.count.mockResolvedValue(4); // 4 + 2 > 5
+
+      await expect(
+        service.createProgram(USER_ID, programDto),
+      ).rejects.toBeInstanceOf(ForbiddenException);
+      expect(prisma.routineFolder.create).not.toHaveBeenCalled();
+      expect(prisma.workoutTemplate.create).not.toHaveBeenCalled();
+    });
+
+    it('creates the folder and every routine inside it', async () => {
+      prisma.user.findUnique.mockResolvedValue({ isPro: true });
+      prisma.routineFolder.findFirst.mockResolvedValue(null);
+      prisma.routineFolder.aggregate.mockResolvedValue({
+        _max: { sortOrder: null },
+      });
+      prisma.routineFolder.create.mockImplementation(
+        async ({ data }: any) => data,
+      );
+
+      const createSpy = jest
+        .spyOn(service, 'create')
+        .mockResolvedValue({ routine: { id: 'r' }, resolutions: [] } as any);
+
+      const result = await service.createProgram(USER_ID, programDto);
+
+      expect(result.folder.name).toBe('Push Pull Legs');
+      expect(result.folder.created).toBe(true);
+      expect(result.routines).toHaveLength(2);
+      expect(createSpy).toHaveBeenCalledTimes(2);
+      expect(createSpy).toHaveBeenCalledWith(
+        USER_ID,
+        expect.objectContaining({
+          name: 'Push',
+          folderId: expect.any(String),
+        }),
+        true,
+      );
     });
   });
 });

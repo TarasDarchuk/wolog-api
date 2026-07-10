@@ -95,6 +95,19 @@ const ROUTINE_SCHEMA = {
   additionalProperties: false,
 };
 
+const FOLDER_FIELDS = {
+  folderId: {
+    type: ['string', 'null'],
+    description:
+      'Folder to file the routine under (from list_folders). null removes the routine from its folder.',
+  },
+  folderName: {
+    type: 'string',
+    description:
+      'Folder by name — matched case-insensitively, created if missing. Alternative to folderId.',
+  },
+};
+
 export interface McpToolAnnotations {
   title: string;
   readOnlyHint: boolean;
@@ -123,7 +136,8 @@ export const MCP_SERVER_INSTRUCTIONS = `Wolog workout connector. Rules:
 - ALL weights are kilograms, durations seconds, distances meters. Never send pounds — convert first.
 - Before update_routine, ALWAYS call get_routine and edit the returned structure, preserving every id (routine, item, exercise, set). Only change the fields you mean to change.
 - Prefer referencing exercises by name and trust server resolution; check the resolution report in the response and tell the user about low-confidence or created-custom matches.
-- Use get_workout_history (optionally per exercise) to ground progression decisions; it includes per-session best sets and estimated 1RM.`;
+- Use get_workout_history (optionally per exercise) to ground progression decisions; it includes per-session best sets and estimated 1RM.
+- Routines can be grouped into folders. When the user asks for a multi-day training program or plan (e.g. push/pull/legs, upper/lower), use create_program — one call that creates a folder named after the program with all its routines inside.`;
 
 export const MCP_TOOLS: McpToolDefinition[] = [
   {
@@ -174,7 +188,11 @@ export const MCP_TOOLS: McpToolDefinition[] = [
     inputSchema: {
       type: 'object',
       properties: {
-        routine: { ...ROUTINE_SCHEMA, required: ['name', 'items'] },
+        routine: {
+          ...ROUTINE_SCHEMA,
+          properties: { ...ROUTINE_SCHEMA.properties, ...FOLDER_FIELDS },
+          required: ['name', 'items'],
+        },
       },
       required: ['routine'],
       additionalProperties: false,
@@ -196,7 +214,10 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       type: 'object',
       properties: {
         id: { type: 'string', description: 'Routine id' },
-        routine: ROUTINE_SCHEMA,
+        routine: {
+          ...ROUTINE_SCHEMA,
+          properties: { ...ROUTINE_SCHEMA.properties, ...FOLDER_FIELDS },
+        },
         baseUpdatedAt: {
           type: 'string',
           description:
@@ -211,6 +232,108 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       readOnlyHint: false,
       destructiveHint: true, // rows missing from the payload are deleted
       idempotentHint: true, // same payload → same resulting routine
+      openWorldHint: false,
+    },
+    scope: 'routines:write',
+  },
+  {
+    name: 'create_program',
+    description:
+      'Create a complete multi-day training program in ONE call: a folder named after the program plus every routine inside it. Use whenever the user asks for a program or plan (e.g. push/pull/legs, upper/lower, full body). Weights kg. The free-tier routine limit is checked for the whole batch up front. Returns the folder, the created routines with ids, and a per-exercise resolution report.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          description: 'Program name — becomes the folder name',
+        },
+        routines: {
+          type: 'array',
+          minItems: 1,
+          maxItems: 14,
+          description: 'One entry per training day',
+          items: { ...ROUTINE_SCHEMA, required: ['name', 'items'] },
+        },
+      },
+      required: ['name', 'routines'],
+      additionalProperties: false,
+    },
+    annotations: {
+      title: 'Create program',
+      readOnlyHint: false,
+      destructiveHint: false,
+      idempotentHint: false,
+      openWorldHint: false,
+    },
+    scope: 'routines:write',
+  },
+  {
+    name: 'list_folders',
+    description:
+      "List the user's routine folders (id, name, routineCount, updatedAt). Folders group routines; a training program is a folder of routines.",
+    inputSchema: {
+      type: 'object',
+      properties: {},
+      additionalProperties: false,
+    },
+    annotations: { title: 'List folders', ...READ_ONLY },
+    scope: 'routines:read',
+  },
+  {
+    name: 'create_folder',
+    description:
+      'Create a routine folder. If a folder with the same name already exists (case-insensitive) it is returned instead of duplicated.',
+    inputSchema: {
+      type: 'object',
+      properties: { name: { type: 'string' } },
+      required: ['name'],
+      additionalProperties: false,
+    },
+    annotations: {
+      title: 'Create folder',
+      readOnlyHint: false,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+    scope: 'routines:write',
+  },
+  {
+    name: 'rename_folder',
+    description: 'Rename a routine folder.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: { type: 'string', description: 'Folder id' },
+        name: { type: 'string', description: 'New folder name' },
+      },
+      required: ['id', 'name'],
+      additionalProperties: false,
+    },
+    annotations: {
+      title: 'Rename folder',
+      readOnlyHint: false,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+    scope: 'routines:write',
+  },
+  {
+    name: 'delete_folder',
+    description:
+      'Delete a routine folder. Routines inside are moved out of the folder — they are NOT deleted.',
+    inputSchema: {
+      type: 'object',
+      properties: { id: { type: 'string', description: 'Folder id' } },
+      required: ['id'],
+      additionalProperties: false,
+    },
+    annotations: {
+      title: 'Delete folder',
+      readOnlyHint: false,
+      destructiveHint: true,
+      idempotentHint: true,
       openWorldHint: false,
     },
     scope: 'routines:write',

@@ -14,7 +14,11 @@ import { RequireScopes } from '../common/decorators/require-scopes.decorator.js'
 import { ConnectorAuthGuard } from '../common/guards/connector-auth.guard.js';
 import { SCOPE_ROUTINES_READ, SCOPE_ROUTINES_WRITE } from '../oauth/scopes.js';
 import { RoutinesService } from './routines.service.js';
-import { CreateRoutineDto, UpdateRoutineDto } from './dto/routine.dto.js';
+import {
+  CreateProgramDto,
+  CreateRoutineDto,
+  UpdateRoutineDto,
+} from './dto/routine.dto.js';
 
 /**
  * AI-connector routines REST (§6). Authenticated by connector OAuth tokens
@@ -49,6 +53,15 @@ export class RoutinesController {
     @Body() dto: CreateRoutineDto,
   ) {
     return this.routines.create(userId, dto);
+  }
+
+  @Post('programs')
+  @RequireScopes(SCOPE_ROUTINES_WRITE)
+  async createProgram(
+    @CurrentUser('id') userId: string,
+    @Body() dto: CreateProgramDto,
+  ) {
+    return this.routines.createProgram(userId, dto);
   }
 
   @Patch(':id')

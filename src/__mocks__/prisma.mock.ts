@@ -19,6 +19,7 @@ function createModelMock() {
     deleteMany: jest.fn(),
     count: jest.fn(),
     aggregate: jest.fn(),
+    groupBy: jest.fn(),
   };
 }
 

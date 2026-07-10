@@ -7,9 +7,11 @@ import {
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { ExercisesService } from '../exercises/exercises.service.js';
+import { FoldersService } from '../routines/folders.service.js';
 import { RoutinesService } from '../routines/routines.service.js';
 import { WorkoutsService } from '../workouts/workouts.service.js';
 import {
+  CreateProgramDto,
   CreateRoutineDto,
   UpdateRoutineDto,
 } from '../routines/dto/routine.dto.js';
@@ -67,6 +69,7 @@ export class McpService {
   constructor(
     private readonly exercises: ExercisesService,
     private readonly routines: RoutinesService,
+    private readonly folders: FoldersService,
     private readonly workouts: WorkoutsService,
   ) {}
 
@@ -210,6 +213,36 @@ export class McpService {
           baseUpdatedAt: args.baseUpdatedAt ?? args.routine?.baseUpdatedAt,
         });
         return this.routines.update(userId, args.id, dto);
+      }
+      case 'create_program': {
+        const dto = await toDto(CreateProgramDto, {
+          name: args.name,
+          routines: args.routines,
+        });
+        return this.routines.createProgram(userId, dto);
+      }
+      case 'list_folders':
+        return this.folders.list(userId);
+      case 'create_folder': {
+        if (typeof args.name !== 'string' || !args.name.trim()) {
+          throw new BadRequestException('name is required');
+        }
+        return this.folders.createOrGet(userId, args.name);
+      }
+      case 'rename_folder': {
+        if (typeof args.id !== 'string') {
+          throw new BadRequestException('id is required');
+        }
+        if (typeof args.name !== 'string' || !args.name.trim()) {
+          throw new BadRequestException('name is required');
+        }
+        return this.folders.rename(userId, args.id, args.name);
+      }
+      case 'delete_folder': {
+        if (typeof args.id !== 'string') {
+          throw new BadRequestException('id is required');
+        }
+        return this.folders.remove(userId, args.id);
       }
       case 'get_workout_history': {
         if (args.exerciseId) {

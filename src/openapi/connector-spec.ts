@@ -102,7 +102,7 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
       title: 'Wolog AI Connector',
       version: '1.0.0',
       description:
-        'Read workout history and routines, and create/update routines, in a Wolog user’s account. ' +
+        'Read workout history, routines, and folders, and create/update routines, folders, and multi-day programs in a Wolog user’s account. ' +
         'ALL weights are kilograms, durations seconds, distances meters. ' +
         'Always GET a routine before PATCHing it and preserve every id in the structure you send back.',
     },
@@ -198,6 +198,8 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
                             id: { type: 'string' },
                             name: { type: 'string' },
                             notes: { type: ['string', 'null'] },
+                            folderId: { type: ['string', 'null'] },
+                            folderName: { type: ['string', 'null'] },
                             exerciseCount: { type: 'integer' },
                             updatedAt: { type: 'string', format: 'date-time' },
                           },
@@ -224,6 +226,15 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
                   properties: {
                     name: { type: 'string' },
                     notes: { type: 'string' },
+                    folderId: {
+                      type: ['string', 'null'],
+                      description: 'Folder to file the routine under',
+                    },
+                    folderName: {
+                      type: 'string',
+                      description:
+                        'Folder by name — matched case-insensitively, created if missing',
+                    },
                     items: { type: 'array', items: ITEM_SCHEMA },
                   },
                 },
@@ -301,6 +312,16 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
                   properties: {
                     name: { type: 'string' },
                     notes: { type: 'string' },
+                    folderId: {
+                      type: ['string', 'null'],
+                      description:
+                        'Move the routine into a folder; null moves it out',
+                    },
+                    folderName: {
+                      type: 'string',
+                      description:
+                        'Folder by name — matched case-insensitively, created if missing',
+                    },
                     items: { type: 'array', items: ITEM_SCHEMA },
                     baseUpdatedAt: {
                       type: 'string',
@@ -336,6 +357,121 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
                 'Routine changed since baseUpdatedAt — body contains the current routine; re-read and retry',
             },
           },
+        },
+      },
+      '/routines/programs': {
+        post: {
+          operationId: 'createProgram',
+          summary:
+            'Create a multi-day program in one call: a folder named after the program plus every routine inside it. Weights kg.',
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['name', 'routines'],
+                  properties: {
+                    name: {
+                      type: 'string',
+                      description: 'Program name — becomes the folder name',
+                    },
+                    routines: {
+                      type: 'array',
+                      minItems: 1,
+                      maxItems: 14,
+                      items: {
+                        type: 'object',
+                        required: ['name', 'items'],
+                        properties: {
+                          name: { type: 'string' },
+                          notes: { type: 'string' },
+                          items: { type: 'array', items: ITEM_SCHEMA },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          responses: {
+            '201': {
+              description:
+                'Folder + created routines + exercise resolution report',
+            },
+            '403': {
+              description:
+                'Free-tier routine limit would be exceeded (code PRO_REQUIRED) — tell the user to upgrade to Wolog Pro',
+            },
+          },
+        },
+      },
+      '/folders': {
+        get: {
+          operationId: 'listFolders',
+          summary:
+            'List routine folders (id, name, routineCount). A program is a folder of routines.',
+          responses: { '200': { description: 'Folders' } },
+        },
+        post: {
+          operationId: 'createFolder',
+          summary:
+            'Create a folder (returns the existing one on a case-insensitive name match)',
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['name'],
+                  properties: { name: { type: 'string' } },
+                },
+              },
+            },
+          },
+          responses: { '201': { description: 'Folder (with created flag)' } },
+        },
+      },
+      '/folders/{id}': {
+        patch: {
+          operationId: 'renameFolder',
+          summary: 'Rename a folder',
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              required: true,
+              schema: { type: 'string' },
+            },
+          ],
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['name'],
+                  properties: { name: { type: 'string' } },
+                },
+              },
+            },
+          },
+          responses: { '200': { description: 'Renamed folder' } },
+        },
+        delete: {
+          operationId: 'deleteFolder',
+          summary:
+            'Delete a folder — routines inside move out of the folder, they are NOT deleted',
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              required: true,
+              schema: { type: 'string' },
+            },
+          ],
+          responses: { '200': { description: 'Deletion summary' } },
         },
       },
       '/workouts': {
