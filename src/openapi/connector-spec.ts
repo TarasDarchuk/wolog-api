@@ -477,7 +477,8 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
       '/workouts': {
         get: {
           operationId: 'getWorkoutHistory',
-          summary: 'Recent completed workouts, newest first (weights kg)',
+          summary:
+            'Recent completed workouts, newest first (weights kg). Performed work only: skipped sets and discarded/zero-duration sessions are excluded',
           parameters: [
             {
               name: 'since',

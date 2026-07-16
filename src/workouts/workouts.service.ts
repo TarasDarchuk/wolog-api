@@ -26,7 +26,15 @@ export function epleyE1Rm(
 export class WorkoutsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  /** Recent completed workouts, newest first (§7). All weights kg. */
+  /**
+   * Recent completed workouts, newest first (§7). All weights kg.
+   *
+   * Only performed work is returned: sets the user never checked off are
+   * omitted, and so are sessions with zero duration or zero completed sets.
+   * A workout discarded in the app after it already synced shows up here as a
+   * zero-duration "completed" workout full of untouched target sets — without
+   * these filters it pollutes history with numbers the user never lifted.
+   */
   async listWorkouts(
     userId: string,
     options: { since?: string; exerciseId?: string; limit: number },
@@ -34,11 +42,14 @@ export class WorkoutsService {
     const where: Prisma.WorkoutWhereInput = {
       userId,
       deletedAt: null,
-      completedAt: options.since
-        ? { not: null, gte: new Date(options.since) }
-        : { not: null },
+      completedAt: {
+        not: null,
+        gt: this.prisma.workout.fields.startedAt,
+        ...(options.since ? { gte: new Date(options.since) } : {}),
+      },
+      exercises: { some: { sets: { some: { isCompleted: true } } } },
       ...(options.exerciseId
-        ? { exercises: { some: { exerciseId: options.exerciseId } } }
+        ? { AND: [{ exercises: { some: { exerciseId: options.exerciseId } } }] }
         : {}),
     };
 
@@ -50,7 +61,10 @@ export class WorkoutsService {
         exercises: {
           orderBy: { sortOrder: 'asc' },
           include: {
-            sets: { orderBy: { setNumber: 'asc' } },
+            sets: {
+              where: { isCompleted: true },
+              orderBy: { setNumber: 'asc' },
+            },
             exercise: { select: { name: true } },
           },
         },
@@ -63,11 +77,13 @@ export class WorkoutsService {
         name: w.name,
         startedAt: w.startedAt.toISOString(),
         completedAt: w.completedAt?.toISOString() ?? null,
-        exercises: w.exercises.map((we) => ({
-          exerciseId: we.exerciseId,
-          name: we.exercise?.name ?? null,
-          sets: we.sets.map((s) => this.mapSet(s)),
-        })),
+        exercises: w.exercises
+          .filter((we) => we.sets.length > 0)
+          .map((we) => ({
+            exerciseId: we.exerciseId,
+            name: we.exercise?.name ?? null,
+            sets: we.sets.map((s) => this.mapSet(s)),
+          })),
       })),
     };
   }
@@ -75,6 +91,10 @@ export class WorkoutsService {
   /**
    * Recent sets for one exercise across workouts, with derived best set and
    * Epley e1RM per session — the progressive-overload data source (§7).
+   *
+   * Same performed-work filters as listWorkouts: only completed sets, only
+   * sessions with a positive duration where this exercise has at least one
+   * completed set.
    */
   async exerciseHistory(userId: string, exerciseId: string, limit: number) {
     const exercise = await this.prisma.exercise.findUnique({
@@ -93,15 +113,22 @@ export class WorkoutsService {
       where: {
         userId,
         deletedAt: null,
-        completedAt: { not: null },
-        exercises: { some: { exerciseId } },
+        completedAt: { not: null, gt: this.prisma.workout.fields.startedAt },
+        exercises: {
+          some: { exerciseId, sets: { some: { isCompleted: true } } },
+        },
       },
       orderBy: { completedAt: 'desc' },
       take: limit,
       include: {
         exercises: {
           where: { exerciseId },
-          include: { sets: { orderBy: { setNumber: 'asc' } } },
+          include: {
+            sets: {
+              where: { isCompleted: true },
+              orderBy: { setNumber: 'asc' },
+            },
+          },
         },
       },
     });
@@ -111,12 +138,9 @@ export class WorkoutsService {
         .flatMap((we) => we.sets)
         .map((s) => this.mapSet(s));
 
-      const completedSets = sets.filter((s) => s.isCompleted);
-      const scoredSets = completedSets.length > 0 ? completedSets : sets;
-
       let bestSet: HistorySet | null = null;
       let bestE1Rm: number | null = null;
-      for (const set of scoredSets) {
+      for (const set of sets) {
         const e1rm = epleyE1Rm(set.weight, set.reps);
         if (
           bestSet === null ||

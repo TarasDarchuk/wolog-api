@@ -73,6 +73,13 @@ Under `/api/v1` (connector token or app JWT):
 | `GET /workouts?since=&exerciseId=&limit=` | history:read | Completed workouts |
 | `GET /exercises/:id/history?limit=` | history:read | Per-session sets + best set + Epley e1RM |
 
+History endpoints return **performed work only**: sets with
+`isCompleted: false` (untouched targets) are omitted, and workouts with zero
+duration (`completedAt <= startedAt`) or no completed sets are excluded
+entirely. A session discarded in the app after it already synced is stored
+server-side as a zero-duration workout of unperformed target sets — hiding it
+here keeps connector history consistent with what the app shows.
+
 MCP tools: `list_exercises`, `list_routines`, `get_routine`, `create_routine`,
 `update_routine`, `get_workout_history` — same services underneath. Each tool
 carries annotations (`readOnlyHint`/`destructiveHint`/`idempotentHint`).

@@ -341,7 +341,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'get_workout_history',
     description:
-      'Read recent completed workouts (weights kg). With exerciseId, returns per-session sets for that exercise plus derived best set and estimated 1RM (Epley) — use this to plan progressive overload.',
+      'Read recent completed workouts (weights kg). Only performed work is returned — skipped sets and discarded/zero-duration sessions are excluded. With exerciseId, returns per-session sets for that exercise plus derived best set and estimated 1RM (Epley) — use this to plan progressive overload.',
     inputSchema: {
       type: 'object',
       properties: {
