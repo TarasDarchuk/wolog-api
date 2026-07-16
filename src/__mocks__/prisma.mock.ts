@@ -6,6 +6,11 @@
 
 function createModelMock() {
   return {
+    // Field references (prisma.model.fields.column) as stable sentinels so
+    // tests can assert where-clauses that compare columns.
+    fields: new Proxy({} as Record<string, string>, {
+      get: (_target, prop) => `fieldRef:${String(prop)}`,
+    }),
     findUnique: jest.fn(),
     findUniqueOrThrow: jest.fn(),
     findFirst: jest.fn(),
