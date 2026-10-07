@@ -228,6 +228,70 @@ describe('TemplateSyncService', () => {
       // The code checks existingSets.length === 0 before creating
     });
 
+    it('stores template set type, normal and absent as null', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(null);
+
+      const dto = makeTemplatePushDto({
+        items: [
+          {
+            id: 'item-1',
+            sortOrder: 0,
+            exercise: {
+              id: 'texercise-1',
+              exerciseId: 'ex-1',
+              sortOrder: 0,
+              sets: [
+                { id: 'ts-1', setNumber: 1, targetReps: 10, type: 'warmup' },
+                { id: 'ts-2', setNumber: 2, targetReps: 8, type: 'normal' },
+                { id: 'ts-3', setNumber: 3, targetReps: 8 },
+                { id: 'ts-4', setNumber: 3, targetReps: 12, type: 'dropset' },
+              ],
+            },
+          },
+        ],
+      });
+
+      const result = await service.push(USER_ID, [dto]);
+
+      expect(result.accepted).toEqual(['template-1']);
+      const { data } = prisma.templateSet.createMany.mock.calls[0][0];
+      expect(data.map((s: any) => s.type)).toEqual([
+        'warmup',
+        null,
+        null,
+        'dropset',
+      ]);
+    });
+
+    it('stores set type for exercises nested under top-level supersets', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(null);
+
+      const dto = makeTemplatePushDto({
+        items: [],
+        supersets: [
+          {
+            id: 'ss-1',
+            supersetColorIndex: 0,
+            exerciseIds: ['ex-1'],
+            exercises: [
+              {
+                id: 'se-1',
+                exerciseId: 'ex-1',
+                sortOrder: 0,
+                sets: [{ id: 'ts-1', setNumber: 1, type: 'failure' }],
+              },
+            ],
+          },
+        ],
+      });
+
+      await service.push(USER_ID, [dto]);
+
+      expect(prisma.templateSet.createMany).toHaveBeenCalledWith({
+        data: [expect.objectContaining({ id: 'ts-1', type: 'failure' })],
+      });
+    });
+
     it('creates item without exercise when exercise is undefined', async () => {
       prisma.workoutTemplate.findUnique.mockResolvedValue(null);
 

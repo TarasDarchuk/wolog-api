@@ -270,6 +270,30 @@ describe('SharesService', () => {
       expect((fetched.payload as any).useMetric).toBe(false);
     });
 
+    it('round-trips template set types untouched', async () => {
+      let stored: any;
+      prisma.share.create.mockImplementation(async ({ data }: any) => {
+        stored = { ...data, createdAt: new Date() };
+        return stored;
+      });
+      prisma.share.findUnique.mockImplementation(async () => stored);
+
+      const sets = [
+        { id: 's1', setNumber: 1, targetReps: 10, type: 'warmup' },
+        { id: 's2', setNumber: 1, targetReps: 5 },
+        { id: 's3', setNumber: 1, targetReps: 8, type: 'dropset' },
+      ];
+      const created = await service.create(
+        USER_ID,
+        makeDto({ template: { id: 't1', items: [{ exercise: { sets } }] } }),
+      );
+      const fetched = await service.fetch(created.id);
+
+      expect(
+        (fetched.payload as any).template.items[0].exercise.sets,
+      ).toEqual(sets);
+    });
+
     it('throws NotFoundException when id does not exist', async () => {
       prisma.share.findUnique.mockResolvedValue(null);
       await expect(service.fetch('missing__1')).rejects.toThrow(

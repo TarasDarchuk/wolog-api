@@ -14,6 +14,7 @@ export interface DbTemplateSet {
   targetReps: number | null;
   targetDuration: number | null;
   targetDistance: number | null;
+  type: string | null;
 }
 
 export interface DbTemplateExercise {
@@ -57,6 +58,7 @@ export interface RoutineSetView {
   targetReps: number | null;
   targetDuration: number | null;
   targetDistance: number | null;
+  type: string; // normal | warmup | dropset | failure
 }
 
 export interface RoutineExerciseView {
@@ -97,6 +99,7 @@ function mapSet(set: DbTemplateSet): RoutineSetView {
     targetReps: set.targetReps,
     targetDuration: set.targetDuration,
     targetDistance: set.targetDistance,
+    type: set.type ?? 'normal',
   };
 }
 

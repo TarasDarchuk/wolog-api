@@ -3,6 +3,7 @@ import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { TemplatePushDto } from '../dto/sync-push.dto.js';
 import { TemplatePushResult } from '../interfaces/push-result.interface.js';
+import { toStoredTemplateSetType } from '../../common/utils/set-type.js';
 
 @Injectable()
 export class TemplateSyncService {
@@ -169,6 +170,7 @@ export class TemplateSyncService {
                       targetReps: s.targetReps ?? null,
                       targetDuration: s.targetDuration ?? null,
                       targetDistance: s.targetDistance ?? null,
+                      type: toStoredTemplateSetType(s.type),
                     })),
                   });
                 }
@@ -228,6 +230,7 @@ export class TemplateSyncService {
                       targetReps: s.targetReps ?? null,
                       targetDuration: s.targetDuration ?? null,
                       targetDistance: s.targetDistance ?? null,
+                      type: toStoredTemplateSetType(s.type),
                     })),
                   });
                 }

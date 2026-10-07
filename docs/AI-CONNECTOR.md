@@ -71,7 +71,7 @@ Under `/api/v1` (connector token or app JWT):
 | `POST /routines` | routines:write | Create (resolution report, Pro gate) |
 | `PATCH /routines/:id` | routines:write | Id-keyed merge, 409 on stale baseUpdatedAt |
 | `GET /workouts?since=&exerciseId=&limit=` | history:read | Completed workouts |
-| `GET /exercises/:id/history?limit=` | history:read | Per-session sets + best set + Epley e1RM |
+| `GET /exercises/:id/history?limit=` | history:read | Per-session sets + best set + Epley e1RM (warmup sets excluded) |
 
 History endpoints return **performed work only**: sets with
 `isCompleted: false` (untouched targets) are omitted, and workouts with zero

@@ -3,6 +3,7 @@ import {
   ArrayMinSize,
   IsArray,
   IsDateString,
+  IsIn,
   IsInt,
   IsNumber,
   IsOptional,
@@ -14,6 +15,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { SET_TYPES } from '../../common/utils/set-type.js';
 
 // AI-facing routine schema (§8 of the connector spec). Weights kg, durations
 // seconds, distances meters. Each item is exactly one of exercise | superset.
@@ -47,6 +49,12 @@ export class RoutineSetDto {
   @IsNumber()
   @Min(0)
   targetDistance?: number; // meters
+
+  // normal | warmup | dropset | failure. Absent = normal on create; on update
+  // of an existing set, absent keeps the set's current type.
+  @IsOptional()
+  @IsIn(SET_TYPES)
+  type?: string;
 }
 
 export class RoutineExerciseDto {

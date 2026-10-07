@@ -180,6 +180,41 @@ describe('WorkoutsService', () => {
       expect(session.sets).toHaveLength(2);
     });
 
+    it('excludes warmup sets from best set and e1RM', async () => {
+      prisma.workout.findMany.mockResolvedValue([
+        {
+          id: 'workout-1',
+          name: 'Push Day',
+          completedAt: new Date(NOW),
+          exercises: [
+            {
+              sets: [
+                makeSet({ setNumber: 1, weight: 140, reps: 5, type: 'warmup' }),
+                makeSet({ setNumber: 2, weight: 100, reps: 5 }),
+              ],
+            },
+          ],
+        },
+        {
+          id: 'workout-2',
+          name: 'Warmup only',
+          completedAt: new Date(NOW),
+          exercises: [
+            { sets: [makeSet({ weight: 60, reps: 10, type: 'warmup' })] },
+          ],
+        },
+      ]);
+
+      const result = await service.exerciseHistory(USER_ID, 'ex-1', 10);
+
+      expect(result.sessions[0].bestSet).toMatchObject({ weight: 100 });
+      expect(result.sessions[0].estimatedOneRepMax).toBeCloseTo(116.67, 1);
+      // Warmups are still listed, just not counted.
+      expect(result.sessions[0].sets).toHaveLength(2);
+      expect(result.sessions[1].bestSet).toBeNull();
+      expect(result.sessions[1].estimatedOneRepMax).toBeNull();
+    });
+
     it('only counts sessions and sets that were actually performed', async () => {
       prisma.workout.findMany.mockResolvedValue([]);
       await service.exerciseHistory(USER_ID, 'ex-1', 10);

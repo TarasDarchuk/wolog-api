@@ -277,6 +277,8 @@ model TemplateSet {
   targetReps         Int?
   targetDuration     Float?
   targetDistance     Float?
+  // null = normal (older clients never send a type)
+  type               SetType?
 
   templateExercise TemplateExercise @relation(fields: [templateExerciseId], references: [id], onDelete: Cascade)
 

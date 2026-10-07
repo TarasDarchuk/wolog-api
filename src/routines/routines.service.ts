@@ -20,6 +20,7 @@ import {
 } from './dto/routine.dto.js';
 import { FoldersService, FolderView } from './folders.service.js';
 import { RoutineView, toRoutineView } from './routine-mapper.js';
+import { toStoredTemplateSetType } from '../common/utils/set-type.js';
 
 export const FREE_ROUTINE_LIMIT = 5;
 
@@ -246,6 +247,7 @@ export class RoutinesService {
               targetReps: s.targetReps ?? null,
               targetDuration: s.targetDuration ?? null,
               targetDistance: s.targetDistance ?? null,
+              type: toStoredTemplateSetType(s.type),
             })),
           });
         }
@@ -295,6 +297,7 @@ export class RoutinesService {
       targetReps?: number;
       targetDuration?: number;
       targetDistance?: number;
+      type?: string;
     }>;
   } {
     const targetReps = dto.targetReps ?? dto.sets?.[0]?.targetReps ?? 10;
@@ -536,7 +539,7 @@ export class RoutinesService {
           });
 
           if (dtoEx.sets !== undefined) {
-            const existingSetIds = new Set(te.sets.map((s) => s.id));
+            const existingSetsById = new Map(te.sets.map((s) => [s.id, s]));
             for (let s = 0; s < dtoEx.sets.length; s++) {
               const setDto = dtoEx.sets[s];
               const values = {
@@ -546,10 +549,21 @@ export class RoutinesService {
                 targetDuration: setDto.targetDuration ?? null,
                 targetDistance: setDto.targetDistance ?? null,
               };
-              if (setDto.id && existingSetIds.has(setDto.id)) {
+              const existingSet = setDto.id
+                ? existingSetsById.get(setDto.id)
+                : undefined;
+              if (existingSet) {
+                // Absent type keeps the current one, so callers that don't
+                // know about set types can't silently reset warmups.
                 await tx.templateSet.update({
-                  where: { id: setDto.id },
-                  data: values,
+                  where: { id: existingSet.id },
+                  data: {
+                    ...values,
+                    type:
+                      setDto.type !== undefined
+                        ? toStoredTemplateSetType(setDto.type)
+                        : existingSet.type,
+                  },
                 });
               } else {
                 await tx.templateSet.create({
@@ -557,6 +571,7 @@ export class RoutinesService {
                     id: uuidv4(),
                     templateExerciseId: p.teId,
                     ...values,
+                    type: toStoredTemplateSetType(setDto.type),
                   },
                 });
               }
@@ -598,6 +613,7 @@ export class RoutinesService {
                 targetReps: s.targetReps ?? null,
                 targetDuration: s.targetDuration ?? null,
                 targetDistance: s.targetDistance ?? null,
+                type: toStoredTemplateSetType(s.type),
               })),
             });
           }

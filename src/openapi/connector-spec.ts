@@ -16,6 +16,12 @@ const SET_SCHEMA = {
     targetReps: { type: ['integer', 'null'] },
     targetDuration: { type: ['number', 'null'], description: 'Seconds' },
     targetDistance: { type: ['number', 'null'], description: 'Meters' },
+    type: {
+      type: 'string',
+      enum: ['normal', 'warmup', 'dropset', 'failure'],
+      description:
+        'Set type (default normal). Warmup sets come first and are excluded from volume and records. A drop set goes directly after the set it drops from and does not get its own set number. On update, keep the type returned by get_routine; omitting it keeps the current type of the set.',
+    },
   },
 };
 
@@ -501,7 +507,7 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
         get: {
           operationId: 'getExerciseHistory',
           summary:
-            'Per-session sets for one exercise with derived best set and estimated 1RM (Epley) — use for progressive overload',
+            'Per-session sets for one exercise with derived best set and estimated 1RM (Epley) — use for progressive overload. Warmup sets are excluded from best set and e1RM.',
           parameters: [
             {
               name: 'id',

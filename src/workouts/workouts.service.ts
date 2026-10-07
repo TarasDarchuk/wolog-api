@@ -140,7 +140,9 @@ export class WorkoutsService {
 
       let bestSet: HistorySet | null = null;
       let bestE1Rm: number | null = null;
+      // Warmups don't count toward records (same as the app).
       for (const set of sets) {
+        if (set.type === 'warmup') continue;
         const e1rm = epleyE1Rm(set.weight, set.reps);
         if (
           bestSet === null ||

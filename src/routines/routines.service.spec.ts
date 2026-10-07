@@ -63,6 +63,7 @@ function makeTemplateTree(overrides: Record<string, unknown> = {}) {
               targetReps: 6,
               targetDuration: null,
               targetDistance: null,
+              type: null,
             },
             {
               id: 'set-2',
@@ -72,6 +73,7 @@ function makeTemplateTree(overrides: Record<string, unknown> = {}) {
               targetReps: 6,
               targetDuration: null,
               targetDistance: null,
+              type: null,
             },
           ],
         },
@@ -166,6 +168,18 @@ describe('RoutinesService', () => {
       expect(view.updatedAt).toBe(NOW);
     });
 
+    it('reports set type per set, null stored as normal', async () => {
+      const tree = makeTemplateTree();
+      tree.items[0].exercise.sets[0].type = 'warmup' as any;
+      prisma.workoutTemplate.findUnique.mockResolvedValue(tree);
+
+      const view = await service.getOne(USER_ID, 'template-1');
+      expect(view.items[0].exercise!.sets.map((s) => s.type)).toEqual([
+        'warmup',
+        'normal',
+      ]);
+    });
+
     it("rejects another user's routine as not found", async () => {
       prisma.workoutTemplate.findUnique.mockResolvedValue(
         makeTemplateTree({ userId: OTHER_USER_ID }),
@@ -255,6 +269,33 @@ describe('RoutinesService', () => {
       expect(setsArg.data).toHaveLength(4);
       expect(setsArg.data[0]).toMatchObject({ setNumber: 1, targetReps: 6 });
       expect(result.resolutions).toHaveLength(1);
+    });
+
+    it('persists set types, storing normal and absent as null', async () => {
+      await service.create(USER_ID, {
+        name: 'Upper A',
+        items: [
+          {
+            exercise: {
+              name: 'Bench Press',
+              sets: [
+                { targetWeight: 40, targetReps: 10, type: 'warmup' },
+                { targetWeight: 80, targetReps: 6, type: 'normal' },
+                { targetWeight: 80, targetReps: 6 },
+                { targetWeight: 60, targetReps: 8, type: 'dropset' },
+              ],
+            },
+          },
+        ],
+      } as any);
+
+      const setsArg = prisma.templateSet.createMany.mock.calls[0][0];
+      expect(setsArg.data.map((s: any) => s.type)).toEqual([
+        'warmup',
+        null,
+        null,
+        'dropset',
+      ]);
     });
 
     it('creates supersets with one item per member exercise', async () => {
@@ -375,6 +416,52 @@ describe('RoutinesService', () => {
         expect.objectContaining({
           where: { id: 'template-1' },
           data: expect.objectContaining({ updatedAt: expect.any(Date) }),
+        }),
+      );
+    });
+
+    it('preserves set type when the caller omits it and applies it when sent', async () => {
+      const tree = makeTemplateTree();
+      tree.items[0].exercise.sets[0].type = 'warmup' as any;
+      tree.items[0].exercise.sets[1].type = 'failure' as any;
+      prisma.workoutTemplate.findUnique.mockResolvedValue(tree);
+
+      await service.update(USER_ID, 'template-1', {
+        items: [
+          {
+            id: 'item-1',
+            exercise: {
+              id: 'te-1',
+              sets: [
+                { id: 'set-1', targetWeight: 40, targetReps: 10 },
+                {
+                  id: 'set-2',
+                  targetWeight: 65,
+                  targetReps: 6,
+                  type: 'normal',
+                },
+                { targetWeight: 50, targetReps: 8, type: 'dropset' },
+              ],
+            },
+          },
+        ],
+      } as any);
+
+      expect(prisma.templateSet.update).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: { id: 'set-1' },
+          data: expect.objectContaining({ type: 'warmup' }),
+        }),
+      );
+      expect(prisma.templateSet.update).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: { id: 'set-2' },
+          data: expect.objectContaining({ type: null }),
+        }),
+      );
+      expect(prisma.templateSet.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: expect.objectContaining({ setNumber: 3, type: 'dropset' }),
         }),
       );
     });

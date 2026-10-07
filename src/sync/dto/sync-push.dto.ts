@@ -242,6 +242,11 @@ export class TemplateSetPushDto {
   @IsOptional()
   @IsNumber()
   targetDistance?: number;
+
+  // Absent for normal sets (and from clients that predate set types)
+  @IsOptional()
+  @IsIn(Object.values(SetType))
+  type?: string;
 }
 
 export class TemplateExercisePushDto {

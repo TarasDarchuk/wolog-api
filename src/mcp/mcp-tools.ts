@@ -23,6 +23,12 @@ const SET_SCHEMA = {
       type: 'number',
       description: 'Target distance in meters',
     },
+    type: {
+      type: 'string',
+      enum: ['normal', 'warmup', 'dropset', 'failure'],
+      description:
+        'Set type (default normal). Warmup sets come first and are excluded from volume and records. A drop set goes directly after the set it drops from and does not get its own set number. On update, keep the type returned by get_routine; omitting it keeps the current type of the set.',
+    },
   },
   additionalProperties: false,
 };
@@ -53,7 +59,7 @@ const EXERCISE_SCHEMA = {
       type: 'array',
       items: SET_SCHEMA,
       description:
-        'Optional per-set targets. Omit on update to leave existing sets untouched; omit on create to materialize targetSets × targetReps.',
+        'Optional per-set targets, in order: warmup sets first, each drop set right after the set it drops from. Omit on update to leave existing sets untouched; omit on create to materialize targetSets × targetReps (all normal).',
     },
   },
   additionalProperties: false,
@@ -136,7 +142,8 @@ export const MCP_SERVER_INSTRUCTIONS = `Wolog workout connector. Rules:
 - ALL weights are kilograms, durations seconds, distances meters. Never send pounds — convert first.
 - Before update_routine, ALWAYS call get_routine and edit the returned structure, preserving every id (routine, item, exercise, set). Only change the fields you mean to change.
 - Prefer referencing exercises by name and trust server resolution; check the resolution report in the response and tell the user about low-confidence or created-custom matches.
-- Use get_workout_history (optionally per exercise) to ground progression decisions; it includes per-session best sets and estimated 1RM.
+- Routine sets have a type: normal, warmup, dropset or failure. Warmup sets come first and are excluded from volume and records; a drop set goes directly after the set it drops from and does not get its own set number. Preserve each set's type on update.
+- Use get_workout_history (optionally per exercise) to ground progression decisions; it includes per-session best sets and estimated 1RM (warmup sets excluded).
 - Routines can be grouped into folders. When the user asks for a multi-day training program or plan (e.g. push/pull/legs, upper/lower), use create_program — one call that creates a folder named after the program with all its routines inside.`;
 
 export const MCP_TOOLS: McpToolDefinition[] = [
@@ -159,7 +166,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'list_routines',
     description:
-      "List the user's workout routines (summaries: id, name, notes, exerciseCount, updatedAt).",
+      "List the user's workout routines (summaries: id, name, notes, exerciseCount, updatedAt). Call get_routine for exercises and sets, including each set's type.",
     inputSchema: {
       type: 'object',
       properties: {},
@@ -171,7 +178,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'get_routine',
     description:
-      'Read one routine in full, including every id and the current updatedAt. ALWAYS call this before update_routine.',
+      "Read one routine in full, including every id, each set's type (normal | warmup | dropset | failure) and the current updatedAt. ALWAYS call this before update_routine.",
     inputSchema: {
       type: 'object',
       properties: { id: { type: 'string', description: 'Routine id' } },
@@ -184,7 +191,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'create_routine',
     description:
-      "Create a new routine in the user's Wolog app (appears on next app sync). Weights kg. Reference exercises by name (server resolves) or exerciseId. Returns the created routine with all ids plus a per-exercise resolution report — surface low-confidence or created-custom resolutions to the user.",
+      "Create a new routine in the user's Wolog app (appears on next app sync). Weights kg. Reference exercises by name (server resolves) or exerciseId. Sets may carry a type (default normal): warmups first and excluded from volume/records; drop sets directly after the set they drop from, without their own number. Returns the created routine with all ids plus a per-exercise resolution report — surface low-confidence or created-custom resolutions to the user.",
     inputSchema: {
       type: 'object',
       properties: {
@@ -209,7 +216,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'update_routine',
     description:
-      'Update an existing routine with an id-keyed merge (rows with ids are updated in place; rows without ids are inserted; rows missing from the payload are deleted). Send back the structure from get_routine with ids preserved, mutating only what changed. Pass baseUpdatedAt from get_routine for conflict detection; on 409 re-read and retry.',
+      'Update an existing routine with an id-keyed merge (rows with ids are updated in place; rows without ids are inserted; rows missing from the payload are deleted). Send back the structure from get_routine with ids and set types preserved, mutating only what changed. Pass baseUpdatedAt from get_routine for conflict detection; on 409 re-read and retry.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -239,7 +246,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'create_program',
     description:
-      'Create a complete multi-day training program in ONE call: a folder named after the program plus every routine inside it. Use whenever the user asks for a program or plan (e.g. push/pull/legs, upper/lower, full body). Weights kg. The free-tier routine limit is checked for the whole batch up front. Returns the folder, the created routines with ids, and a per-exercise resolution report.',
+      'Create a complete multi-day training program in ONE call: a folder named after the program plus every routine inside it. Use whenever the user asks for a program or plan (e.g. push/pull/legs, upper/lower, full body). Weights kg. Sets may carry a type (default normal): warmups first and excluded from volume/records; drop sets directly after the set they drop from, without their own number. The free-tier routine limit is checked for the whole batch up front. Returns the folder, the created routines with ids, and a per-exercise resolution report.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -341,7 +348,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'get_workout_history',
     description:
-      'Read recent completed workouts (weights kg). Only performed work is returned — skipped sets and discarded/zero-duration sessions are excluded. With exerciseId, returns per-session sets for that exercise plus derived best set and estimated 1RM (Epley) — use this to plan progressive overload.',
+      'Read recent completed workouts (weights kg). Only performed work is returned — skipped sets and discarded/zero-duration sessions are excluded. With exerciseId, returns per-session sets for that exercise plus derived best set and estimated 1RM (Epley) — use this to plan progressive overload. Each set has a type; warmup sets are excluded from best set and estimated 1RM (and should be left out of any volume you compute).',
     inputSchema: {
       type: 'object',
       properties: {
