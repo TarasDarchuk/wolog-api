@@ -229,8 +229,9 @@ describe('SharesService', () => {
 
   describe('fetch', () => {
     it('returns payload, createdAt, expiresAt', async () => {
-      const createdAt = new Date('2026-04-23T10:00:00.000Z');
-      const expiresAt = new Date('2026-07-22T10:00:00.000Z');
+      // Relative to now so the fixture never expires
+      const createdAt = new Date(Date.now() - 24 * 60 * 60 * 1000);
+      const expiresAt = new Date(Date.now() + 89 * 24 * 60 * 60 * 1000);
       const payload = {
         kind: 'template',
         template: { id: 't1' },
