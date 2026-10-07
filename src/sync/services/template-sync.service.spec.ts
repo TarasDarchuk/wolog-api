@@ -19,7 +19,7 @@ describe('TemplateSyncService', () => {
     prisma = createMockPrismaService();
     service = new TemplateSyncService(prisma as any);
     // Default stubs for all create/delete calls inside transaction
-    prisma.workoutTemplate.upsert.mockResolvedValue({});
+    prisma.workoutTemplate.upsert.mockResolvedValue({ updatedAt: new Date(NOW) });
     prisma.templateItem.create.mockResolvedValue({});
     prisma.templateExercise.create.mockResolvedValue({});
     prisma.templateExercise.findUnique.mockResolvedValue(null);
@@ -241,6 +241,162 @@ describe('TemplateSyncService', () => {
       expect(prisma.templateItem.create).toHaveBeenCalledWith({
         data: expect.objectContaining({ id: 'item-bare' }),
       });
+    });
+  });
+
+  // ─── Push: optimistic concurrency (baseUpdatedAt) ──────────────────────
+
+  describe('push with baseUpdatedAt', () => {
+    const BASE = '2025-06-01T12:00:00.123Z';
+    const WRITTEN = '2025-06-01T12:05:00.456Z';
+
+    beforeEach(() => {
+      prisma.workoutTemplate.upsert.mockResolvedValue({
+        updatedAt: new Date(WRITTEN),
+      });
+    });
+
+    it('accepts when base equals server updatedAt and returns the new version', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date(BASE) }),
+      );
+
+      const result = await service.push(USER_ID, [
+        makeTemplatePushDto({ baseUpdatedAt: BASE }),
+      ]);
+
+      expect(result.accepted).toEqual(['template-1']);
+      expect(result.rejected).toEqual([]);
+      expect(result.acceptedVersions).toEqual([
+        { id: 'template-1', updatedAt: WRITTEN },
+      ]);
+    });
+
+    it('rejects with conflict when server changed after base, without writing', async () => {
+      // e.g. routines.service.update bumped updatedAt after the client's base
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date(FUTURE) }),
+      );
+
+      const result = await service.push(USER_ID, [
+        // Client clock is even later — must not matter
+        makeTemplatePushDto({ baseUpdatedAt: BASE, updatedAt: '2030-01-01T00:00:00.000Z' }),
+      ]);
+
+      expect(result.accepted).toEqual([]);
+      expect(result.rejected).toEqual([
+        { id: 'template-1', reason: 'conflict' },
+      ]);
+      expect(result.acceptedVersions).toEqual([]);
+      expect(prisma.$transaction).not.toHaveBeenCalled();
+      expect(prisma.workoutTemplate.upsert).not.toHaveBeenCalled();
+    });
+
+    it('accepts deletion even when base is stale', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date(FUTURE) }),
+      );
+
+      const result = await service.push(USER_ID, [
+        makeTemplatePushDto({ baseUpdatedAt: PAST, deletedAt: NOW }),
+      ]);
+
+      expect(result.accepted).toEqual(['template-1']);
+      expect(result.rejected).toEqual([]);
+      expect(prisma.workoutTemplate.upsert).toHaveBeenCalledWith(
+        expect.objectContaining({
+          update: expect.objectContaining({ deletedAt: new Date(NOW) }),
+        }),
+      );
+    });
+
+    it('ignores client clock: accepts when base matches even if updatedAt is older than server', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date(BASE) }),
+      );
+
+      const result = await service.push(USER_ID, [
+        makeTemplatePushDto({ baseUpdatedAt: BASE, updatedAt: PAST }),
+      ]);
+
+      expect(result.accepted).toEqual(['template-1']);
+    });
+
+    it('accepts a new template (no existing) with base', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(null);
+
+      const result = await service.push(USER_ID, [
+        makeTemplatePushDto({ baseUpdatedAt: BASE }),
+      ]);
+
+      expect(result.accepted).toEqual(['template-1']);
+      expect(result.acceptedVersions).toEqual([
+        { id: 'template-1', updatedAt: WRITTEN },
+      ]);
+    });
+
+    it('compares with millisecond precision', async () => {
+      // Same second, server 1ms later than base → conflict
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date('2025-06-01T12:00:00.124Z') }),
+      );
+      const conflict = await service.push(USER_ID, [
+        makeTemplatePushDto({ baseUpdatedAt: BASE }),
+      ]);
+      expect(conflict.rejected).toEqual([
+        { id: 'template-1', reason: 'conflict' },
+      ]);
+
+      // Exact ms match → no conflict
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date(BASE) }),
+      );
+      const ok = await service.push(USER_ID, [
+        makeTemplatePushDto({ baseUpdatedAt: BASE }),
+      ]);
+      expect(ok.accepted).toEqual(['template-1']);
+    });
+
+    it('still rejects forbidden before the conflict check', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ userId: OTHER_USER_ID, updatedAt: new Date(FUTURE) }),
+      );
+
+      const result = await service.push(USER_ID, [
+        makeTemplatePushDto({ baseUpdatedAt: BASE }),
+      ]);
+
+      expect(result.rejected).toEqual([
+        { id: 'template-1', reason: 'forbidden' },
+      ]);
+    });
+  });
+
+  describe('push without baseUpdatedAt (legacy clients)', () => {
+    it('keeps server_newer rejection based on client updatedAt', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date(FUTURE) }),
+      );
+
+      const result = await service.push(USER_ID, [makeTemplatePushDto()]);
+
+      expect(result.rejected).toEqual([
+        { id: 'template-1', reason: 'server_newer' },
+      ]);
+      expect(result.acceptedVersions).toEqual([]);
+    });
+
+    it('accepts when client is newer and still reports acceptedVersions', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeExistingTemplate({ updatedAt: new Date(PAST) }),
+      );
+
+      const result = await service.push(USER_ID, [makeTemplatePushDto()]);
+
+      expect(result.accepted).toEqual(['template-1']);
+      expect(result.acceptedVersions).toEqual([
+        { id: 'template-1', updatedAt: new Date(NOW).toISOString() },
+      ]);
     });
   });
 

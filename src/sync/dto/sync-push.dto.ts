@@ -340,6 +340,12 @@ export class TemplatePushDto {
   @IsDateString()
   updatedAt: string;
 
+  // Server updatedAt the client last saw (from pull or acceptedVersions).
+  // When present, enables optimistic concurrency instead of last-write-wins.
+  @IsOptional()
+  @IsDateString()
+  baseUpdatedAt?: string;
+
   @IsOptional()
   @IsDateString()
   deletedAt?: string;

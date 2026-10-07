@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { TemplatePushDto } from '../dto/sync-push.dto.js';
-import { PushResult } from '../interfaces/push-result.interface.js';
+import { TemplatePushResult } from '../interfaces/push-result.interface.js';
 
 @Injectable()
 export class TemplateSyncService {
@@ -13,8 +13,12 @@ export class TemplateSyncService {
   async push(
     userId: string,
     templates: TemplatePushDto[],
-  ): Promise<PushResult> {
-    const result: PushResult = { accepted: [], rejected: [] };
+  ): Promise<TemplatePushResult> {
+    const result: TemplatePushResult = {
+      accepted: [],
+      rejected: [],
+      acceptedVersions: [],
+    };
 
     for (const template of templates) {
       try {
@@ -29,12 +33,24 @@ export class TemplateSyncService {
           continue;
         }
 
-        if (existing && existing.updatedAt > clientUpdatedAt) {
+        if (template.baseUpdatedAt) {
+          // Optimistic concurrency: reject if the server copy changed after the
+          // version the client based its edit on. Deletions always win.
+          if (
+            !template.deletedAt &&
+            existing &&
+            existing.updatedAt.getTime() > Date.parse(template.baseUpdatedAt)
+          ) {
+            result.rejected.push({ id: template.id, reason: 'conflict' });
+            continue;
+          }
+        } else if (existing && existing.updatedAt > clientUpdatedAt) {
+          // Legacy clients: last-write-wins against the client clock
           result.rejected.push({ id: template.id, reason: 'server_newer' });
           continue;
         }
 
-        await this.prisma.$transaction(async (tx) => {
+        const savedUpdatedAt = await this.prisma.$transaction(async (tx) => {
           if (existing) {
             await tx.templateSet.deleteMany({
               where: {
@@ -61,7 +77,8 @@ export class TemplateSyncService {
               ? {}
               : { folderId: template.folderId };
 
-          await tx.workoutTemplate.upsert({
+          // Nothing below touches workoutTemplate, so this is the final version
+          const saved = await tx.workoutTemplate.upsert({
             where: { id: template.id },
             create: {
               id: template.id,
@@ -217,9 +234,15 @@ export class TemplateSyncService {
               }
             }
           }
+
+          return saved.updatedAt;
         });
 
         result.accepted.push(template.id);
+        result.acceptedVersions!.push({
+          id: template.id,
+          updatedAt: savedUpdatedAt.toISOString(),
+        });
       } catch (error) {
         this.logger.error(`Failed to push template ${template.id}`, error);
         result.rejected.push({ id: template.id, reason: 'error' });
