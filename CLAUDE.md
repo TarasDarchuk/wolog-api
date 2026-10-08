@@ -153,7 +153,7 @@ See `.env.example`. Required for production:
 - `JWT_SECRET` — Random secret for signing tokens
 - `JWT_ACCESS_EXPIRY` — Access token TTL (default: `15m`)
 - `JWT_REFRESH_EXPIRY_DAYS` — Refresh token TTL in days (default: `30`)
-- `APPLE_CLIENT_ID` — iOS app bundle ID (`com.tarasdarchuk.wolog`)
+- `APPLE_CLIENT_ID` — iOS app bundle ID(s), comma-separated (`com.tarasdarchuk.wolog`; dev server also `com.tarasdarchuk.wolog.dev`)
 - `GOOGLE_CLIENT_ID` — Optional, Google OAuth web client ID
 - `PORT` — Server port (default: `3000`)
 - `NODE_ENV` — `development` or `production`

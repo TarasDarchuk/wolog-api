@@ -31,7 +31,11 @@ import * as bcrypt from 'bcrypt';
 
 function createAuthService(
   prisma: MockPrismaService,
-  opts: { googleClientId?: string; storage?: MockStorageService } = {},
+  opts: {
+    googleClientId?: string;
+    appleClientId?: string;
+    storage?: MockStorageService;
+  } = {},
 ) {
   const mockJwtService = {
     sign: jest.fn().mockReturnValue('jwt-access-token'),
@@ -40,7 +44,7 @@ function createAuthService(
   const mockConfigService = {
     get: jest.fn((key: string, defaultValue?: unknown) => {
       const config: Record<string, unknown> = {
-        APPLE_CLIENT_ID: 'com.tarasdarchuk.wolog',
+        APPLE_CLIENT_ID: opts.appleClientId ?? 'com.tarasdarchuk.wolog',
         JWT_ACCESS_EXPIRY: '15m',
         JWT_REFRESH_EXPIRY_DAYS: 30,
       };
@@ -81,6 +85,36 @@ describe('AuthService', () => {
   // ─── Sign in with Apple ────────────────────────────────────────────────
 
   describe('signInWithApple', () => {
+    it('verifies against the configured bundle ID', async () => {
+      const service = createAuthService(prisma);
+      (appleSignin.verifyIdToken as jest.Mock).mockResolvedValue({
+        sub: 'apple-existing',
+      });
+      prisma.user.findUnique.mockResolvedValue(makeExistingUser());
+
+      await service.signInWithApple({ identityToken: 'valid-token' });
+
+      expect(appleSignin.verifyIdToken).toHaveBeenCalledWith('valid-token', {
+        audience: ['com.tarasdarchuk.wolog'],
+      });
+    });
+
+    it('accepts a comma-separated list of bundle IDs', async () => {
+      const service = createAuthService(prisma, {
+        appleClientId: 'com.tarasdarchuk.wolog, com.tarasdarchuk.wolog.dev,',
+      });
+      (appleSignin.verifyIdToken as jest.Mock).mockResolvedValue({
+        sub: 'apple-existing',
+      });
+      prisma.user.findUnique.mockResolvedValue(makeExistingUser());
+
+      await service.signInWithApple({ identityToken: 'valid-token' });
+
+      expect(appleSignin.verifyIdToken).toHaveBeenCalledWith('valid-token', {
+        audience: ['com.tarasdarchuk.wolog', 'com.tarasdarchuk.wolog.dev'],
+      });
+    });
+
     it('creates a new user on first sign-in', async () => {
       const service = createAuthService(prisma);
       (appleSignin.verifyIdToken as jest.Mock).mockResolvedValue({
@@ -162,14 +196,12 @@ describe('AuthService', () => {
         sub: 'apple-different',
         email: 'taken@test.com',
       });
-      prisma.user.findUnique
-        .mockResolvedValueOnce(null)
-        .mockResolvedValueOnce(
-          makeExistingUser({
-            appleUserId: 'apple-other',
-            email: 'taken@test.com',
-          }),
-        );
+      prisma.user.findUnique.mockResolvedValueOnce(null).mockResolvedValueOnce(
+        makeExistingUser({
+          appleUserId: 'apple-other',
+          email: 'taken@test.com',
+        }),
+      );
 
       await expect(
         service.signInWithApple({ identityToken: 'valid-token' }),
@@ -368,9 +400,7 @@ describe('AuthService', () => {
 
       await service.deleteAccount(USER_ID);
 
-      expect(storage.deletePrefix).toHaveBeenCalledWith(
-        `photos/${USER_ID}/`,
-      );
+      expect(storage.deletePrefix).toHaveBeenCalledWith(`photos/${USER_ID}/`);
     });
 
     it('still succeeds when photo storage cleanup fails', async () => {

@@ -217,7 +217,7 @@ export class OAuthService {
 
     if (provider === 'apple') {
       const audiences = [
-        this.config.get<string>('APPLE_CLIENT_ID'),
+        ...this.authService.appleAppAudiences(),
         this.config.get<string>('APPLE_WEB_CLIENT_ID'),
       ].filter((a): a is string => !!a);
       const user = await this.authService.findOrCreateAppleUser(

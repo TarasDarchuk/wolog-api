@@ -11,10 +11,7 @@ import { OAuth2Client } from 'google-auth-library';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import { PrismaService } from '../prisma/prisma.service.js';
-import {
-  StorageService,
-  photoPrefix,
-} from '../storage/storage.service.js';
+import { StorageService, photoPrefix } from '../storage/storage.service.js';
 import {
   AppleAuthDto,
   GoogleAuthDto,
@@ -51,10 +48,21 @@ export class AuthService {
     ].filter((id): id is string => !!id);
   }
 
+  /**
+   * App bundle IDs accepted for Sign in with Apple. `APPLE_CLIENT_ID` may be a
+   * comma-separated list (e.g. release + dev bundle IDs on the dev server).
+   */
+  appleAppAudiences(): string[] {
+    return (this.configService.get<string>('APPLE_CLIENT_ID') ?? '')
+      .split(',')
+      .map((id) => id.trim())
+      .filter((id) => !!id);
+  }
+
   async signInWithApple(dto: AppleAuthDto): Promise<AuthResponseDto> {
     const user = await this.findOrCreateAppleUser(
       dto.identityToken,
-      [this.configService.get('APPLE_CLIENT_ID')!],
+      this.appleAppAudiences(),
       dto.displayName,
     );
     return this.generateTokens(user.id, user.email, dto.deviceName);

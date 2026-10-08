@@ -77,6 +77,7 @@ describe('OAuthService', () => {
   let service: OAuthService;
   let authService: {
     findOrCreateAppleUser: jest.Mock;
+    appleAppAudiences: jest.Mock;
     findOrCreateGoogleUser: jest.Mock;
   };
 
@@ -87,6 +88,7 @@ describe('OAuthService', () => {
     const clientService = new OAuthClientService(prisma as any, config);
     authService = {
       findOrCreateAppleUser: jest.fn(),
+      appleAppAudiences: jest.fn().mockReturnValue([]),
       findOrCreateGoogleUser: jest.fn(),
     };
     service = new OAuthService(
