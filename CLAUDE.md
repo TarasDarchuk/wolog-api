@@ -83,7 +83,9 @@ All routes prefixed with `/api/v1`. All routes require JWT auth except those mar
 - `DELETE /auth/account` — Delete account + all data (cascade)
 
 ### Users
-- `GET /users/me` — Current user profile
+- `GET /users/me` — Current user profile, incl. `trainingProfile` (`null` if never set)
+- `PUT /users/me/training-profile` — Onboarding answers, full replace (omitted → `null`, `goals` → `[]`). `goals` ≤2 unique of `gainMuscle|getStronger|loseWeight` (primary first), `level` `beginner|intermediate|advanced`, `equipment` `fullGym|dumbbells|bodyweight`, `daysPerWeek` 2–6, `useMetric`, `starterProgramId`, `onboardingCompletedAt`. Exposed to the MCP connector as `get_training_profile` (scope `history:read`)
+- `PUT /users/me/pro` — App reports subscription state (first-party JWT only)
 
 ### Exercises (public)
 - `GET /exercises` — List seeded exercises (params: `limit`, `offset`)
@@ -130,9 +132,9 @@ Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) 
 
 ## Prisma Schema
 
-15 models, 5 enums mirrored from iOS `SharedEnums.swift`:
+16 models, 5 enums mirrored from iOS `SharedEnums.swift`:
 - **Enums**: ExerciseType (8), MuscleGroup (21), Equipment (10), SetType (4), MeasurementType (15)
-- **Auth**: User, RefreshToken
+- **Auth**: User, RefreshToken, TrainingProfile (1:1, cascade)
 - **Workouts**: Workout → WorkoutExercise → ExerciseSet, WorkoutSuperset, Photo
 - **Templates**: WorkoutTemplate → TemplateItem → TemplateExercise → TemplateSet, TemplateSuperset
 - **Other**: Exercise, BodyMeasurement (→ Photo via `photoId`)

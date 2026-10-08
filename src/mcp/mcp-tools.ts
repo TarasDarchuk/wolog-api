@@ -140,6 +140,7 @@ const READ_ONLY = {
 
 export const MCP_SERVER_INSTRUCTIONS = `Wolog workout connector. Rules:
 - ALL weights are kilograms, durations seconds, distances meters. Never send pounds — convert first.
+- Before designing a routine or program, call get_training_profile and tailor it to the user's goals (primary first), experience level, available equipment and days per week. Ask only about what the profile leaves null.
 - Before update_routine, ALWAYS call get_routine and edit the returned structure, preserving every id (routine, item, exercise, set). Only change the fields you mean to change.
 - Prefer referencing exercises by name and trust server resolution; check the resolution report in the response and tell the user about low-confidence or created-custom matches.
 - Routine sets have a type: normal, warmup, dropset or failure. Warmup sets come first and are excluded from volume and records; a drop set goes directly after the set it drops from and does not get its own set number. Preserve each set's type on update.
@@ -147,6 +148,18 @@ export const MCP_SERVER_INSTRUCTIONS = `Wolog workout connector. Rules:
 - Routines can be grouped into folders. When the user asks for a multi-day training program or plan (e.g. push/pull/legs, upper/lower), use create_program — one call that creates a folder named after the program with all its routines inside.`;
 
 export const MCP_TOOLS: McpToolDefinition[] = [
+  {
+    name: 'get_training_profile',
+    description:
+      "Read the user's training profile from app onboarding: goals (ordered, primary first; gainMuscle | getStronger | loseWeight), level (beginner | intermediate | advanced), equipment (fullGym | dumbbells | bodyweight), daysPerWeek (2–6), useMetric, starterProgramId (bundled starter program they installed) and onboardingCompletedAt. Any field may be null and trainingProfile itself is null if the user never completed onboarding. useMetric is only the app's display preference — tool inputs and outputs are always kg. Use it to choose split, volume, exercise selection and weekly frequency.",
+    inputSchema: {
+      type: 'object',
+      properties: {},
+      additionalProperties: false,
+    },
+    annotations: { title: 'Read training profile', ...READ_ONLY },
+    scope: 'history:read',
+  },
   {
     name: 'list_exercises',
     description:

@@ -12,6 +12,7 @@ import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { StorageService, photoPrefix } from '../storage/storage.service.js';
+import { TRAINING_PROFILE_SELECT } from '../users/training-profile.service.js';
 import {
   AppleAuthDto,
   GoogleAuthDto,
@@ -278,11 +279,13 @@ export class AuthService {
         googleUserId: true,
         isPro: true,
         createdAt: true,
+        trainingProfile: { select: TRAINING_PROFILE_SELECT },
       },
     });
     if (!user) throw new UnauthorizedException('User not found');
     return {
       ...user,
+      trainingProfile: user.trainingProfile ?? null,
       hasApple: !!user.appleUserId,
       hasGoogle: !!user.googleUserId,
       appleUserId: undefined,

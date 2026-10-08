@@ -37,6 +37,7 @@ export function createMockPrismaService() {
     exerciseSet: createModelMock(),
     workoutSuperset: createModelMock(),
     photo: createModelMock(),
+    trainingProfile: createModelMock(),
     exercise: createModelMock(),
     workoutTemplate: createModelMock(),
     routineFolder: createModelMock(),

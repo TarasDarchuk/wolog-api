@@ -10,6 +10,7 @@ import { ExercisesService } from '../exercises/exercises.service.js';
 import { FoldersService } from '../routines/folders.service.js';
 import { RoutinesService } from '../routines/routines.service.js';
 import { WorkoutsService } from '../workouts/workouts.service.js';
+import { TrainingProfileService } from '../users/training-profile.service.js';
 import {
   CreateProgramDto,
   CreateRoutineDto,
@@ -71,6 +72,7 @@ export class McpService {
     private readonly routines: RoutinesService,
     private readonly folders: FoldersService,
     private readonly workouts: WorkoutsService,
+    private readonly trainingProfiles: TrainingProfileService,
   ) {}
 
   /** Returns null for notifications (no response body → HTTP 202). */
@@ -192,6 +194,8 @@ export class McpService {
         });
         return this.exercises.list(dto, userId);
       }
+      case 'get_training_profile':
+        return { trainingProfile: await this.trainingProfiles.get(userId) };
       case 'list_routines':
         return this.routines.list(userId);
       case 'get_routine': {

@@ -15,6 +15,7 @@ import { ExerciseResolverService } from '../exercises/exercise-resolver.service.
 import { RoutinesService } from '../routines/routines.service.js';
 import { FoldersService } from '../routines/folders.service.js';
 import { WorkoutsService } from '../workouts/workouts.service.js';
+import { TrainingProfileService } from '../users/training-profile.service.js';
 import {
   createMockPrismaService,
   MockPrismaService,
@@ -131,6 +132,7 @@ describe('McpService — routine set types', () => {
         { provide: ExerciseResolverService, useValue: resolver },
         { provide: ExercisesService, useValue: {} },
         { provide: WorkoutsService, useValue: {} },
+        TrainingProfileService,
       ],
     }).compile();
     service = moduleRef.get(McpService);
@@ -282,5 +284,86 @@ describe('McpService — routine set types', () => {
 
     expect(isError).toBe(true);
     expect(prisma.workoutTemplate.create).not.toHaveBeenCalled();
+  });
+});
+
+describe('McpService — get_training_profile', () => {
+  let service: McpService;
+  let prisma: MockPrismaService;
+
+  const call = async (scopes: string[]) => {
+    const res: any = await service.handleMessage(
+      {
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'tools/call',
+        params: { name: 'get_training_profile', arguments: {} },
+      },
+      { userId: USER_ID, scopes },
+    );
+    return {
+      isError: !!res.result.isError,
+      text: res.result.content[0].text as string,
+    };
+  };
+
+  beforeEach(async () => {
+    prisma = createMockPrismaService();
+    const moduleRef = await Test.createTestingModule({
+      providers: [
+        McpService,
+        TrainingProfileService,
+        { provide: PrismaService, useValue: prisma },
+        { provide: RoutinesService, useValue: {} },
+        { provide: FoldersService, useValue: {} },
+        { provide: ExercisesService, useValue: {} },
+        { provide: WorkoutsService, useValue: {} },
+      ],
+    }).compile();
+    service = moduleRef.get(McpService);
+  });
+
+  it('is listed as a read-only tool', () => {
+    const tool = MCP_TOOLS.find((t) => t.name === 'get_training_profile')!;
+    expect(tool.annotations.readOnlyHint).toBe(true);
+    expect(tool.scope).toBe('history:read');
+  });
+
+  it("returns the user's profile", async () => {
+    const profile = {
+      goals: ['gainMuscle'],
+      level: 'beginner',
+      equipment: 'fullGym',
+      daysPerWeek: 3,
+      useMetric: true,
+      starterProgramId: 'beginner-full-body',
+      onboardingCompletedAt: new Date(PAST),
+      updatedAt: new Date(NOW),
+    };
+    prisma.trainingProfile.findUnique.mockResolvedValue(profile);
+
+    const res = await call(['history:read']);
+
+    expect(res.isError).toBe(false);
+    expect(JSON.parse(res.text).trainingProfile).toMatchObject({
+      goals: ['gainMuscle'],
+      level: 'beginner',
+      daysPerWeek: 3,
+    });
+    expect(prisma.trainingProfile.findUnique).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { userId: USER_ID } }),
+    );
+  });
+
+  it('returns trainingProfile: null when never set', async () => {
+    prisma.trainingProfile.findUnique.mockResolvedValue(null);
+    const res = await call(['history:read']);
+    expect(JSON.parse(res.text)).toEqual({ trainingProfile: null });
+  });
+
+  it('requires the history:read scope', async () => {
+    const res = await call(['routines:read']);
+    expect(res.isError).toBe(true);
+    expect(prisma.trainingProfile.findUnique).not.toHaveBeenCalled();
   });
 });
