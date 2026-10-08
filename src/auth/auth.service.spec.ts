@@ -369,7 +369,7 @@ describe('AuthService', () => {
       await service.deleteAccount(USER_ID);
 
       expect(storage.deletePrefix).toHaveBeenCalledWith(
-        `workout-photos/${USER_ID}/`,
+        `photos/${USER_ID}/`,
       );
     });
 

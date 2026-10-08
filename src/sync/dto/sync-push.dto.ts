@@ -427,6 +427,19 @@ export class FolderPushDto {
 
 // ─── Body Measurement DTO ───────────────────────────────────────────────────
 
+export class MeasurementPhotoPushDto {
+  @IsUUID()
+  id: string;
+
+  @IsInt()
+  @Min(1)
+  width: number;
+
+  @IsInt()
+  @Min(1)
+  height: number;
+}
+
 export class MeasurementPushDto {
   @IsUUID()
   id: string;
@@ -443,6 +456,12 @@ export class MeasurementPushDto {
   @IsOptional()
   @IsString()
   photoUrl?: string;
+
+  // undefined = client predates photos (keep photoId); null = clear it
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => MeasurementPhotoPushDto)
+  photo?: MeasurementPhotoPushDto | null;
 
   @IsDateString()
   updatedAt: string;

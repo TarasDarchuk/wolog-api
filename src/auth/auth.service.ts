@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { PrismaService } from '../prisma/prisma.service.js';
 import {
   StorageService,
-  workoutPhotoPrefix,
+  photoPrefix,
 } from '../storage/storage.service.js';
 import {
   AppleAuthDto,
@@ -250,7 +250,7 @@ export class AuthService {
     // Rows are gone (cascade); remove the photo bytes too. A storage failure
     // must not fail the account deletion — log it for manual cleanup.
     try {
-      await this.storage.deletePrefix(workoutPhotoPrefix(userId));
+      await this.storage.deletePrefix(photoPrefix(userId));
     } catch (error) {
       this.logger.error(
         `Failed to delete workout photos of deleted user ${userId}`,

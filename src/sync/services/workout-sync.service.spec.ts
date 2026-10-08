@@ -23,6 +23,7 @@ function makePhotoDto(id: string, sortOrder = 0) {
 function makePhotoRow(id: string, overrides: Record<string, unknown> = {}) {
   return {
     id,
+    userId: USER_ID,
     workoutId: 'workout-1',
     sortOrder: 0,
     width: 1536,
@@ -193,23 +194,23 @@ describe('WorkoutSyncService', () => {
       prisma.workout.upsert.mockResolvedValue({});
       prisma.workoutExercise.createMany.mockResolvedValue({ count: 1 });
       prisma.exerciseSet.createMany.mockResolvedValue({ count: 1 });
-      prisma.workoutPhoto.findMany.mockResolvedValue([]);
-      prisma.workoutPhoto.upsert.mockResolvedValue({});
-      prisma.workoutPhoto.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.photo.findMany.mockResolvedValue([]);
+      prisma.photo.upsert.mockResolvedValue({});
+      prisma.photo.deleteMany.mockResolvedValue({ count: 0 });
     });
 
     it('leaves photos untouched when the key is missing (old clients)', async () => {
       const result = await service.push(USER_ID, [makeWorkoutPushDto()]);
 
       expect(result.accepted).toEqual(['workout-1']);
-      expect(prisma.workoutPhoto.findMany).not.toHaveBeenCalled();
-      expect(prisma.workoutPhoto.upsert).not.toHaveBeenCalled();
-      expect(prisma.workoutPhoto.deleteMany).not.toHaveBeenCalled();
+      expect(prisma.photo.findMany).not.toHaveBeenCalled();
+      expect(prisma.photo.upsert).not.toHaveBeenCalled();
+      expect(prisma.photo.deleteMany).not.toHaveBeenCalled();
       expect(storage.deleteQuietly).not.toHaveBeenCalled();
     });
 
     it('deletes all photos and their objects when photos is []', async () => {
-      prisma.workoutPhoto.findMany.mockResolvedValue([
+      prisma.photo.findMany.mockResolvedValue([
         { id: PHOTO_A },
         { id: PHOTO_B },
       ]);
@@ -219,16 +220,16 @@ describe('WorkoutSyncService', () => {
       ]);
 
       expect(result.accepted).toEqual(['workout-1']);
-      expect(prisma.workoutPhoto.findMany).toHaveBeenCalledWith({
+      expect(prisma.photo.findMany).toHaveBeenCalledWith({
         where: { workoutId: 'workout-1', id: { notIn: [] } },
         select: { id: true },
       });
-      expect(prisma.workoutPhoto.deleteMany).toHaveBeenCalledWith({
+      expect(prisma.photo.deleteMany).toHaveBeenCalledWith({
         where: { id: { in: [PHOTO_A, PHOTO_B] } },
       });
       expect(storage.deleteQuietly).toHaveBeenCalledWith([
-        `workout-photos/${USER_ID}/${PHOTO_A}.jpg`,
-        `workout-photos/${USER_ID}/${PHOTO_B}.jpg`,
+        `photos/${USER_ID}/${PHOTO_A}.jpg`,
+        `photos/${USER_ID}/${PHOTO_B}.jpg`,
       ]);
     });
 
@@ -242,7 +243,7 @@ describe('WorkoutSyncService', () => {
       storage.deleteQuietly.mockImplementation(async () => {
         order.push('storage');
       });
-      prisma.workoutPhoto.findMany
+      prisma.photo.findMany
         .mockResolvedValueOnce([]) // ownership check
         .mockResolvedValueOnce([{ id: PHOTO_B }]); // removed photos
 
@@ -254,10 +255,10 @@ describe('WorkoutSyncService', () => {
     });
 
     it('does not delete storage objects when the transaction fails', async () => {
-      prisma.workoutPhoto.findMany
+      prisma.photo.findMany
         .mockResolvedValueOnce([])
         .mockResolvedValueOnce([{ id: PHOTO_B }]);
-      prisma.workoutPhoto.upsert.mockRejectedValue(new Error('DB error'));
+      prisma.photo.upsert.mockRejectedValue(new Error('DB error'));
 
       const result = await service.push(USER_ID, [
         makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A)] }),
@@ -269,16 +270,17 @@ describe('WorkoutSyncService', () => {
 
     it('upserts photos without ever touching uploadedAt', async () => {
       // PHOTO_A is already uploaded on the server
-      prisma.workoutPhoto.findMany.mockResolvedValue([]);
+      prisma.photo.findMany.mockResolvedValue([]);
 
       await service.push(USER_ID, [
         makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A, 3)] }),
       ]);
 
-      expect(prisma.workoutPhoto.upsert).toHaveBeenCalledWith({
+      expect(prisma.photo.upsert).toHaveBeenCalledWith({
         where: { id: PHOTO_A },
         create: {
           id: PHOTO_A,
+          userId: USER_ID,
           workoutId: 'workout-1',
           sortOrder: 3,
           width: 1536,
@@ -292,30 +294,30 @@ describe('WorkoutSyncService', () => {
           height: 2048,
         },
       });
-      const call = prisma.workoutPhoto.upsert.mock.calls[0][0];
+      const call = prisma.photo.upsert.mock.calls[0][0];
       expect(call.update).not.toHaveProperty('uploadedAt');
       expect(call.update).not.toHaveProperty('byteSize');
       expect(call.create).not.toHaveProperty('uploadedAt');
     });
 
     it('keeps listed photos and deletes only the unlisted ones', async () => {
-      prisma.workoutPhoto.findMany
-        .mockResolvedValueOnce([{ workout: { userId: USER_ID } }])
+      prisma.photo.findMany
+        .mockResolvedValueOnce([{ userId: USER_ID }])
         .mockResolvedValueOnce([{ id: PHOTO_B }]);
 
       await service.push(USER_ID, [
         makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A)] }),
       ]);
 
-      expect(prisma.workoutPhoto.findMany).toHaveBeenLastCalledWith({
+      expect(prisma.photo.findMany).toHaveBeenLastCalledWith({
         where: { workoutId: 'workout-1', id: { notIn: [PHOTO_A] } },
         select: { id: true },
       });
-      expect(prisma.workoutPhoto.deleteMany).toHaveBeenCalledWith({
+      expect(prisma.photo.deleteMany).toHaveBeenCalledWith({
         where: { id: { in: [PHOTO_B] } },
       });
       expect(storage.deleteQuietly).toHaveBeenCalledWith([
-        `workout-photos/${USER_ID}/${PHOTO_B}.jpg`,
+        `photos/${USER_ID}/${PHOTO_B}.jpg`,
       ]);
     });
 
@@ -323,13 +325,22 @@ describe('WorkoutSyncService', () => {
       await service.push(USER_ID, [makeWorkoutPushDto()]);
 
       expect(prisma.exerciseSet.deleteMany).toHaveBeenCalled();
-      expect(prisma.workoutPhoto.deleteMany).not.toHaveBeenCalled();
+      expect(prisma.photo.deleteMany).not.toHaveBeenCalled();
+    });
+
+    it('checks photo ownership by the photo owner (workout or measurement photo)', async () => {
+      await service.push(USER_ID, [
+        makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A)] }),
+      ]);
+
+      expect(prisma.photo.findMany).toHaveBeenNthCalledWith(1, {
+        where: { id: { in: [PHOTO_A] } },
+        select: { userId: true },
+      });
     });
 
     it("rejects a workout claiming another user's photo as forbidden", async () => {
-      prisma.workoutPhoto.findMany.mockResolvedValueOnce([
-        { workout: { userId: OTHER_USER_ID } },
-      ]);
+      prisma.photo.findMany.mockResolvedValueOnce([{ userId: OTHER_USER_ID }]);
 
       const result = await service.push(USER_ID, [
         makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A)] }),
@@ -339,7 +350,7 @@ describe('WorkoutSyncService', () => {
         { id: 'workout-1', reason: 'forbidden' },
       ]);
       expect(prisma.$transaction).not.toHaveBeenCalled();
-      expect(prisma.workoutPhoto.upsert).not.toHaveBeenCalled();
+      expect(prisma.photo.upsert).not.toHaveBeenCalled();
     });
 
     it('creates photos for a new workout without looking for removals', async () => {
@@ -352,10 +363,10 @@ describe('WorkoutSyncService', () => {
       ]);
 
       expect(result.accepted).toEqual(['workout-1']);
-      expect(prisma.workoutPhoto.upsert).toHaveBeenCalledTimes(2);
-      expect(prisma.workoutPhoto.deleteMany).not.toHaveBeenCalled();
+      expect(prisma.photo.upsert).toHaveBeenCalledTimes(2);
+      expect(prisma.photo.deleteMany).not.toHaveBeenCalled();
       // Only the ownership check queried photos
-      expect(prisma.workoutPhoto.findMany).toHaveBeenCalledTimes(1);
+      expect(prisma.photo.findMany).toHaveBeenCalledTimes(1);
     });
   });
 

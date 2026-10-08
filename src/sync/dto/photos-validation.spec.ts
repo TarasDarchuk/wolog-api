@@ -1,8 +1,12 @@
 import 'reflect-metadata';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import { WorkoutPushDto } from './sync-push.dto';
-import { makeWorkoutPushDto, PAST } from '../../__mocks__/prisma.mock';
+import { MeasurementPushDto, WorkoutPushDto } from './sync-push.dto';
+import {
+  makeMeasurementPushDto,
+  makeWorkoutPushDto,
+  PAST,
+} from '../../__mocks__/prisma.mock';
 
 const OPTIONS = { whitelist: true, forbidNonWhitelisted: true };
 const UUID = '00000000-0000-4000-8000-000000000001';
@@ -56,5 +60,48 @@ describe('WorkoutPushDto photos', () => {
   ])('rejects a photo with %s', async (_name, override) => {
     const errors = await errorsFor({ photos: [{ ...photo(), ...override }] });
     expect(errors.map((e) => e.property)).toEqual(['photos']);
+  });
+});
+
+describe('MeasurementPushDto photo', () => {
+  async function measurementErrors(overrides: Record<string, unknown>) {
+    const dto = plainToInstance(MeasurementPushDto, {
+      ...makeMeasurementPushDto(),
+      id: UUID,
+      ...overrides,
+    });
+    return validate(dto, OPTIONS);
+  }
+
+  it('accepts a missing photo key, null, and a photo object', async () => {
+    expect(await measurementErrors({})).toHaveLength(0);
+    expect(await measurementErrors({ photo: null })).toHaveLength(0);
+    expect(
+      await measurementErrors({
+        photo: { id: UUID, width: 1536, height: 2048 },
+      }),
+    ).toHaveLength(0);
+  });
+
+  it('keeps missing and null distinguishable', () => {
+    const missing = plainToInstance(
+      MeasurementPushDto,
+      makeMeasurementPushDto(),
+    );
+    const cleared = plainToInstance(MeasurementPushDto, {
+      ...makeMeasurementPushDto(),
+      photo: null,
+    });
+    expect(missing.photo).toBeUndefined();
+    expect(cleared.photo).toBeNull();
+  });
+
+  it.each([
+    ['non-UUID id', { id: 'photo-1', width: 1, height: 1 }],
+    ['missing width', { id: UUID, height: 1 }],
+    ['unknown field', { id: UUID, width: 1, height: 1, uploaded: true }],
+  ])('rejects a photo with %s', async (_name, photo) => {
+    const errors = await measurementErrors({ photo });
+    expect(errors.map((e) => e.property)).toEqual(['photo']);
   });
 });

@@ -100,6 +100,7 @@ model User {
   workoutTemplates WorkoutTemplate[]
   routineFolders   RoutineFolder[]
   bodyMeasurements BodyMeasurement[]
+  photos           Photo[]
   shares           Share[]
   oauthAuthCodes   OAuthAuthorizationCode[]
   oauthTokens      OAuthToken[]
@@ -139,25 +140,31 @@ model Workout {
   user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   exercises WorkoutExercise[]
   supersets WorkoutSuperset[]
-  photos    WorkoutPhoto[]
+  photos    Photo[]
 
   @@index([userId, updatedAt])
   @@index([userId, deletedAt])
 }
 
-model WorkoutPhoto {
+// Workout photos (workoutId set) and measurement progress photos (workoutId
+// null, referenced by BodyMeasurement.photoId — no FK, several measurements
+// share one photo). Bytes live in the bucket at photos/{userId}/{id}.jpg.
+model Photo {
   id         String    @id @db.Uuid // client-generated
-  workoutId  String    @db.Uuid
-  sortOrder  Int
+  userId     String    @db.Uuid
+  workoutId  String?   @db.Uuid
+  sortOrder  Int       @default(0) // workout photos only
   width      Int
   height     Int
-  createdAt  DateTime // client value
+  createdAt  DateTime  @default(now()) // client value for workout photos
   uploadedAt DateTime? // set by /photos/:id/complete; null = bytes not in storage yet
   byteSize   Int?
 
-  workout Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workout Workout? @relation(fields: [workoutId], references: [id], onDelete: Cascade)
 
   @@index([workoutId])
+  @@index([userId])
 }
 
 model WorkoutExercise {
@@ -340,6 +347,7 @@ model BodyMeasurement {
   type      MeasurementType @default(weight)
   value     Float           @default(0)
   photoUrl  String?
+  photoId   String?         @db.Uuid // progress photo, shared by measurements saved together
   updatedAt DateTime        @updatedAt
   deletedAt DateTime?
 
@@ -347,6 +355,7 @@ model BodyMeasurement {
 
   @@index([userId, updatedAt])
   @@index([userId, deletedAt])
+  @@index([photoId])
 }
 
 // ─── AI Connector OAuth (third-party authorization layer) ──────────────────

@@ -1,8 +1,8 @@
 import {
   StorageNotConfiguredError,
   StorageService,
-  workoutPhotoKey,
-  workoutPhotoPrefix,
+  photoKey,
+  photoPrefix,
 } from './storage.service';
 
 function createService(env: Record<string, string | undefined>) {
@@ -22,22 +22,22 @@ const CONFIGURED = {
 
 describe('StorageService', () => {
   it('builds per-user photo keys', () => {
-    expect(workoutPhotoKey('u1', 'p1')).toBe('workout-photos/u1/p1.jpg');
-    expect(workoutPhotoPrefix('u1')).toBe('workout-photos/u1/');
+    expect(photoKey('u1', 'p1')).toBe('photos/u1/p1.jpg');
+    expect(photoPrefix('u1')).toBe('photos/u1/');
   });
 
   it('presigns a path-style PUT and returns every signed header', async () => {
     const service = createService(CONFIGURED);
 
     const { url, headers } = await service.presignPut(
-      'workout-photos/u1/p1.jpg',
+      'photos/u1/p1.jpg',
       'image/jpeg',
       412345,
     );
 
     const parsed = new URL(url);
     expect(parsed.origin).toBe('https://storage.example.com');
-    expect(parsed.pathname).toBe('/photos-bucket/workout-photos/u1/p1.jpg');
+    expect(parsed.pathname).toBe('/photos-bucket/photos/u1/p1.jpg');
     expect(Number(parsed.searchParams.get('X-Amz-Expires'))).toBe(900);
     // No default CRC32 checksum baked into the URL
     expect(url).not.toMatch(/checksum/i);
@@ -58,7 +58,7 @@ describe('StorageService', () => {
   it('presigns a GET valid for an hour', async () => {
     const service = createService(CONFIGURED);
 
-    const url = await service.presignGet('workout-photos/u1/p1.jpg');
+    const url = await service.presignGet('photos/u1/p1.jpg');
 
     expect(new URL(url).searchParams.get('X-Amz-Expires')).toBe('3600');
   });

@@ -141,20 +141,26 @@ describe('SyncService', () => {
   // ─── Purge ─────────────────────────────────────────────────────────────
 
   describe('purge', () => {
-    it('deletes storage objects of photos of purged workouts', async () => {
-      prisma.workoutPhoto.findMany.mockResolvedValue([
-        { id: 'photo-1' },
-        { id: 'photo-2' },
-      ]);
-      prisma.workout.deleteMany.mockResolvedValue({ count: 1 });
+    beforeEach(() => {
+      prisma.photo.findMany.mockResolvedValue([]);
+      prisma.photo.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.bodyMeasurement.findMany.mockResolvedValue([]);
+      prisma.workout.deleteMany.mockResolvedValue({ count: 0 });
       prisma.exercise.deleteMany.mockResolvedValue({ count: 0 });
       prisma.workoutTemplate.deleteMany.mockResolvedValue({ count: 0 });
       prisma.routineFolder.deleteMany.mockResolvedValue({ count: 0 });
       prisma.bodyMeasurement.deleteMany.mockResolvedValue({ count: 0 });
+    });
+
+    it('deletes storage objects of photos of purged workouts', async () => {
+      prisma.photo.findMany.mockResolvedValueOnce([
+        { id: 'photo-1' },
+        { id: 'photo-2' },
+      ]);
 
       await service.purge(USER_ID);
 
-      expect(prisma.workoutPhoto.findMany).toHaveBeenCalledWith({
+      expect(prisma.photo.findMany).toHaveBeenNthCalledWith(1, {
         where: {
           workout: expect.objectContaining({
             userId: USER_ID,
@@ -164,26 +170,52 @@ describe('SyncService', () => {
         select: { id: true },
       });
       expect(storage.deleteQuietly).toHaveBeenCalledWith([
-        `workout-photos/${USER_ID}/photo-1.jpg`,
-        `workout-photos/${USER_ID}/photo-2.jpg`,
+        `photos/${USER_ID}/photo-1.jpg`,
+        `photos/${USER_ID}/photo-2.jpg`,
+      ]);
+    });
+
+    it('removes measurement photos no remaining measurement references', async () => {
+      prisma.bodyMeasurement.findMany.mockResolvedValue([
+        { photoId: 'kept-photo' },
+      ]);
+      prisma.photo.findMany
+        .mockResolvedValueOnce([]) // photos of purged workouts
+        .mockResolvedValueOnce([{ id: 'orphan-photo' }]);
+
+      await service.purge(USER_ID);
+
+      // Orphans are searched after the measurements are purged
+      expect(
+        prisma.bodyMeasurement.deleteMany.mock.invocationCallOrder[0],
+      ).toBeLessThan(
+        prisma.bodyMeasurement.findMany.mock.invocationCallOrder[0],
+      );
+      expect(prisma.photo.findMany).toHaveBeenNthCalledWith(2, {
+        where: {
+          userId: USER_ID,
+          workoutId: null,
+          id: { notIn: ['kept-photo'] },
+        },
+        select: { id: true },
+      });
+      expect(prisma.photo.deleteMany).toHaveBeenCalledWith({
+        where: { id: { in: ['orphan-photo'] } },
+      });
+      expect(storage.deleteQuietly).toHaveBeenCalledWith([
+        `photos/${USER_ID}/orphan-photo.jpg`,
       ]);
     });
 
     it('does not touch storage when no photos are purged', async () => {
-      prisma.workoutPhoto.findMany.mockResolvedValue([]);
-      prisma.workout.deleteMany.mockResolvedValue({ count: 1 });
-      prisma.exercise.deleteMany.mockResolvedValue({ count: 0 });
-      prisma.workoutTemplate.deleteMany.mockResolvedValue({ count: 0 });
-      prisma.routineFolder.deleteMany.mockResolvedValue({ count: 0 });
-      prisma.bodyMeasurement.deleteMany.mockResolvedValue({ count: 0 });
-
       await service.purge(USER_ID);
 
+      expect(prisma.photo.deleteMany).not.toHaveBeenCalled();
       expect(storage.deleteQuietly).not.toHaveBeenCalled();
     });
 
     it('hard-deletes soft-deleted records older than 30 days', async () => {
-      prisma.workoutPhoto.findMany.mockResolvedValue([]);
+      prisma.photo.findMany.mockResolvedValue([]);
       prisma.workout.deleteMany.mockResolvedValue({ count: 3 });
       prisma.exercise.deleteMany.mockResolvedValue({ count: 1 });
       prisma.workoutTemplate.deleteMany.mockResolvedValue({ count: 0 });

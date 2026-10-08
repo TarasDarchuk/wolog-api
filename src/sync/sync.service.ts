@@ -8,7 +8,7 @@ import { TemplateSyncService } from './services/template-sync.service.js';
 import { FolderSyncService } from './services/folder-sync.service.js';
 import { MeasurementSyncService } from './services/measurement-sync.service.js';
 import { PrismaService } from '../prisma/prisma.service.js';
-import { StorageService, workoutPhotoKey } from '../storage/storage.service.js';
+import { StorageService, photoKey } from '../storage/storage.service.js';
 
 @Injectable()
 export class SyncService {
@@ -107,9 +107,9 @@ export class SyncService {
 
     const [workouts, exercises, templates, folders, measurements] =
       await this.prisma.$transaction(async (tx) => {
-        // Photo rows cascade with their workouts; remember them so the
-        // storage objects can be removed once the transaction commits.
-        const photos = await tx.workoutPhoto.findMany({
+        // Workout photo rows cascade with their workouts; remember them so
+        // the storage objects can be removed once the transaction commits.
+        const photos = await tx.photo.findMany({
           where: { workout: deletedBefore },
           select: { id: true },
         });
@@ -137,6 +137,27 @@ export class SyncService {
           },
         );
 
+        // Progress photos no remaining measurement references are orphans.
+        const referenced = await tx.bodyMeasurement.findMany({
+          where: { userId, photoId: { not: null } },
+          select: { photoId: true },
+          distinct: ['photoId'],
+        });
+        const orphans = await tx.photo.findMany({
+          where: {
+            userId,
+            workoutId: null,
+            id: { notIn: referenced.map((m) => m.photoId!) },
+          },
+          select: { id: true },
+        });
+        if (orphans.length) {
+          await tx.photo.deleteMany({
+            where: { id: { in: orphans.map((p) => p.id) } },
+          });
+          purgedPhotoIds.push(...orphans.map((p) => p.id));
+        }
+
         return [
           workoutCount,
           exerciseCount,
@@ -148,7 +169,7 @@ export class SyncService {
 
     if (purgedPhotoIds.length) {
       await this.storage.deleteQuietly(
-        purgedPhotoIds.map((id) => workoutPhotoKey(userId, id)),
+        purgedPhotoIds.map((id) => photoKey(userId, id)),
       );
     }
 

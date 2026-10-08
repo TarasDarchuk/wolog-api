@@ -3,10 +3,7 @@ import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { WorkoutPhotoPushDto, WorkoutPushDto } from '../dto/sync-push.dto.js';
 import { PushResult } from '../interfaces/push-result.interface.js';
-import {
-  StorageService,
-  workoutPhotoKey,
-} from '../../storage/storage.service.js';
+import { StorageService, photoKey } from '../../storage/storage.service.js';
 
 @Injectable()
 export class WorkoutSyncService {
@@ -141,6 +138,7 @@ export class WorkoutSyncService {
           if (workout.photos) {
             removedPhotoIds = await this.replacePhotos(
               tx,
+              userId,
               workout.id,
               !!existing,
               workout.photos,
@@ -150,7 +148,7 @@ export class WorkoutSyncService {
 
         if (removedPhotoIds.length) {
           await this.storage.deleteQuietly(
-            removedPhotoIds.map((id) => workoutPhotoKey(userId, id)),
+            removedPhotoIds.map((id) => photoKey(userId, id)),
           );
         }
 
@@ -164,16 +162,16 @@ export class WorkoutSyncService {
     return result;
   }
 
-  /** True if any of the photo ids already belongs to another user's workout. */
+  /** True if any of the photo ids is already owned by another user. */
   private async ownsForeignPhoto(
     userId: string,
     photos: WorkoutPhotoPushDto[],
   ): Promise<boolean> {
-    const rows = await this.prisma.workoutPhoto.findMany({
+    const rows = await this.prisma.photo.findMany({
       where: { id: { in: photos.map((p) => p.id) } },
-      select: { workout: { select: { userId: true } } },
+      select: { userId: true },
     });
-    return rows.some((r) => r.workout.userId !== userId);
+    return rows.some((r) => r.userId !== userId);
   }
 
   /**
@@ -184,6 +182,7 @@ export class WorkoutSyncService {
    */
   private async replacePhotos(
     tx: Prisma.TransactionClient,
+    userId: string,
     workoutId: string,
     workoutExisted: boolean,
     photos: WorkoutPhotoPushDto[],
@@ -192,21 +191,22 @@ export class WorkoutSyncService {
     let removedIds: string[] = [];
 
     if (workoutExisted) {
-      const removed = await tx.workoutPhoto.findMany({
+      const removed = await tx.photo.findMany({
         where: { workoutId, id: { notIn: ids } },
         select: { id: true },
       });
       removedIds = removed.map((r) => r.id);
       if (removedIds.length) {
-        await tx.workoutPhoto.deleteMany({ where: { id: { in: removedIds } } });
+        await tx.photo.deleteMany({ where: { id: { in: removedIds } } });
       }
     }
 
     for (const photo of photos) {
-      await tx.workoutPhoto.upsert({
+      await tx.photo.upsert({
         where: { id: photo.id },
         create: {
           id: photo.id,
+          userId,
           workoutId,
           sortOrder: photo.sortOrder,
           width: photo.width,

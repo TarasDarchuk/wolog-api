@@ -28,13 +28,13 @@ export interface PresignedPut {
   headers: Record<string, string>;
 }
 
-/** Object key for a workout photo. */
-export function workoutPhotoKey(userId: string, photoId: string): string {
-  return `workout-photos/${userId}/${photoId}.jpg`;
+/** Object key for a photo (workout or measurement progress photo). */
+export function photoKey(userId: string, photoId: string): string {
+  return `photos/${userId}/${photoId}.jpg`;
 }
 
-export function workoutPhotoPrefix(userId: string): string {
-  return `workout-photos/${userId}/`;
+export function photoPrefix(userId: string): string {
+  return `photos/${userId}/`;
 }
 
 /**
