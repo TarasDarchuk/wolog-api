@@ -1,6 +1,7 @@
 import { SyncService } from './sync.service';
 import {
   createMockPrismaService,
+  createMockStorageService,
   USER_ID,
   NOW,
   PAST,
@@ -24,6 +25,7 @@ describe('SyncService', () => {
   let templateSync: ReturnType<typeof createMockEntitySyncService>;
   let folderSync: ReturnType<typeof createMockEntitySyncService>;
   let measurementSync: ReturnType<typeof createMockEntitySyncService>;
+  let storage: ReturnType<typeof createMockStorageService>;
 
   beforeEach(() => {
     prisma = createMockPrismaService();
@@ -32,6 +34,7 @@ describe('SyncService', () => {
     templateSync = createMockEntitySyncService();
     folderSync = createMockEntitySyncService();
     measurementSync = createMockEntitySyncService();
+    storage = createMockStorageService();
 
     service = new SyncService(
       prisma as any,
@@ -40,6 +43,7 @@ describe('SyncService', () => {
       templateSync as any,
       folderSync as any,
       measurementSync as any,
+      storage as any,
     );
   });
 
@@ -137,7 +141,49 @@ describe('SyncService', () => {
   // ─── Purge ─────────────────────────────────────────────────────────────
 
   describe('purge', () => {
+    it('deletes storage objects of photos of purged workouts', async () => {
+      prisma.workoutPhoto.findMany.mockResolvedValue([
+        { id: 'photo-1' },
+        { id: 'photo-2' },
+      ]);
+      prisma.workout.deleteMany.mockResolvedValue({ count: 1 });
+      prisma.exercise.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.workoutTemplate.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.routineFolder.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.bodyMeasurement.deleteMany.mockResolvedValue({ count: 0 });
+
+      await service.purge(USER_ID);
+
+      expect(prisma.workoutPhoto.findMany).toHaveBeenCalledWith({
+        where: {
+          workout: expect.objectContaining({
+            userId: USER_ID,
+            deletedAt: { lt: expect.any(Date) },
+          }),
+        },
+        select: { id: true },
+      });
+      expect(storage.deleteQuietly).toHaveBeenCalledWith([
+        `workout-photos/${USER_ID}/photo-1.jpg`,
+        `workout-photos/${USER_ID}/photo-2.jpg`,
+      ]);
+    });
+
+    it('does not touch storage when no photos are purged', async () => {
+      prisma.workoutPhoto.findMany.mockResolvedValue([]);
+      prisma.workout.deleteMany.mockResolvedValue({ count: 1 });
+      prisma.exercise.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.workoutTemplate.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.routineFolder.deleteMany.mockResolvedValue({ count: 0 });
+      prisma.bodyMeasurement.deleteMany.mockResolvedValue({ count: 0 });
+
+      await service.purge(USER_ID);
+
+      expect(storage.deleteQuietly).not.toHaveBeenCalled();
+    });
+
     it('hard-deletes soft-deleted records older than 30 days', async () => {
+      prisma.workoutPhoto.findMany.mockResolvedValue([]);
       prisma.workout.deleteMany.mockResolvedValue({ count: 3 });
       prisma.exercise.deleteMany.mockResolvedValue({ count: 1 });
       prisma.workoutTemplate.deleteMany.mockResolvedValue({ count: 0 });

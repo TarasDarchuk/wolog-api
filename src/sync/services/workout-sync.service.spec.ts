@@ -9,15 +9,40 @@ import {
   FUTURE,
   makeWorkoutPushDto,
   makeExistingWorkout,
+  createMockStorageService,
+  MockStorageService,
 } from '../../__mocks__/prisma.mock';
+
+const PHOTO_A = '11111111-1111-4111-8111-111111111111';
+const PHOTO_B = '22222222-2222-4222-8222-222222222222';
+
+function makePhotoDto(id: string, sortOrder = 0) {
+  return { id, sortOrder, width: 1536, height: 2048, createdAt: PAST };
+}
+
+function makePhotoRow(id: string, overrides: Record<string, unknown> = {}) {
+  return {
+    id,
+    workoutId: 'workout-1',
+    sortOrder: 0,
+    width: 1536,
+    height: 2048,
+    createdAt: new Date(PAST),
+    uploadedAt: null,
+    byteSize: null,
+    ...overrides,
+  };
+}
 
 describe('WorkoutSyncService', () => {
   let service: WorkoutSyncService;
   let prisma: MockPrismaService;
+  let storage: MockStorageService;
 
   beforeEach(() => {
     prisma = createMockPrismaService();
-    service = new WorkoutSyncService(prisma as any);
+    storage = createMockStorageService();
+    service = new WorkoutSyncService(prisma as any, storage as any);
   });
 
   // ─── Push ──────────────────────────────────────────────────────────────
@@ -105,9 +130,7 @@ describe('WorkoutSyncService', () => {
 
       const result = await service.push(USER_ID, [makeWorkoutPushDto()]);
 
-      expect(result.rejected).toEqual([
-        { id: 'workout-1', reason: 'error' },
-      ]);
+      expect(result.rejected).toEqual([{ id: 'workout-1', reason: 'error' }]);
     });
 
     it('creates supersets when provided', async () => {
@@ -160,11 +183,187 @@ describe('WorkoutSyncService', () => {
     });
   });
 
+  // ─── Push: photos ──────────────────────────────────────────────────────
+
+  describe('push photos', () => {
+    beforeEach(() => {
+      prisma.workout.findUnique.mockResolvedValue(
+        makeExistingWorkout({ updatedAt: new Date(PAST) }),
+      );
+      prisma.workout.upsert.mockResolvedValue({});
+      prisma.workoutExercise.createMany.mockResolvedValue({ count: 1 });
+      prisma.exerciseSet.createMany.mockResolvedValue({ count: 1 });
+      prisma.workoutPhoto.findMany.mockResolvedValue([]);
+      prisma.workoutPhoto.upsert.mockResolvedValue({});
+      prisma.workoutPhoto.deleteMany.mockResolvedValue({ count: 0 });
+    });
+
+    it('leaves photos untouched when the key is missing (old clients)', async () => {
+      const result = await service.push(USER_ID, [makeWorkoutPushDto()]);
+
+      expect(result.accepted).toEqual(['workout-1']);
+      expect(prisma.workoutPhoto.findMany).not.toHaveBeenCalled();
+      expect(prisma.workoutPhoto.upsert).not.toHaveBeenCalled();
+      expect(prisma.workoutPhoto.deleteMany).not.toHaveBeenCalled();
+      expect(storage.deleteQuietly).not.toHaveBeenCalled();
+    });
+
+    it('deletes all photos and their objects when photos is []', async () => {
+      prisma.workoutPhoto.findMany.mockResolvedValue([
+        { id: PHOTO_A },
+        { id: PHOTO_B },
+      ]);
+
+      const result = await service.push(USER_ID, [
+        makeWorkoutPushDto({ photos: [] }),
+      ]);
+
+      expect(result.accepted).toEqual(['workout-1']);
+      expect(prisma.workoutPhoto.findMany).toHaveBeenCalledWith({
+        where: { workoutId: 'workout-1', id: { notIn: [] } },
+        select: { id: true },
+      });
+      expect(prisma.workoutPhoto.deleteMany).toHaveBeenCalledWith({
+        where: { id: { in: [PHOTO_A, PHOTO_B] } },
+      });
+      expect(storage.deleteQuietly).toHaveBeenCalledWith([
+        `workout-photos/${USER_ID}/${PHOTO_A}.jpg`,
+        `workout-photos/${USER_ID}/${PHOTO_B}.jpg`,
+      ]);
+    });
+
+    it('deletes storage objects only after the transaction commits', async () => {
+      const order: string[] = [];
+      prisma.$transaction.mockImplementation(async (cb: any) => {
+        const res = await cb(prisma);
+        order.push('commit');
+        return res;
+      });
+      storage.deleteQuietly.mockImplementation(async () => {
+        order.push('storage');
+      });
+      prisma.workoutPhoto.findMany
+        .mockResolvedValueOnce([]) // ownership check
+        .mockResolvedValueOnce([{ id: PHOTO_B }]); // removed photos
+
+      await service.push(USER_ID, [
+        makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A)] }),
+      ]);
+
+      expect(order).toEqual(['commit', 'storage']);
+    });
+
+    it('does not delete storage objects when the transaction fails', async () => {
+      prisma.workoutPhoto.findMany
+        .mockResolvedValueOnce([])
+        .mockResolvedValueOnce([{ id: PHOTO_B }]);
+      prisma.workoutPhoto.upsert.mockRejectedValue(new Error('DB error'));
+
+      const result = await service.push(USER_ID, [
+        makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A)] }),
+      ]);
+
+      expect(result.rejected).toEqual([{ id: 'workout-1', reason: 'error' }]);
+      expect(storage.deleteQuietly).not.toHaveBeenCalled();
+    });
+
+    it('upserts photos without ever touching uploadedAt', async () => {
+      // PHOTO_A is already uploaded on the server
+      prisma.workoutPhoto.findMany.mockResolvedValue([]);
+
+      await service.push(USER_ID, [
+        makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A, 3)] }),
+      ]);
+
+      expect(prisma.workoutPhoto.upsert).toHaveBeenCalledWith({
+        where: { id: PHOTO_A },
+        create: {
+          id: PHOTO_A,
+          workoutId: 'workout-1',
+          sortOrder: 3,
+          width: 1536,
+          height: 2048,
+          createdAt: new Date(PAST),
+        },
+        update: {
+          workoutId: 'workout-1',
+          sortOrder: 3,
+          width: 1536,
+          height: 2048,
+        },
+      });
+      const call = prisma.workoutPhoto.upsert.mock.calls[0][0];
+      expect(call.update).not.toHaveProperty('uploadedAt');
+      expect(call.update).not.toHaveProperty('byteSize');
+      expect(call.create).not.toHaveProperty('uploadedAt');
+    });
+
+    it('keeps listed photos and deletes only the unlisted ones', async () => {
+      prisma.workoutPhoto.findMany
+        .mockResolvedValueOnce([{ workout: { userId: USER_ID } }])
+        .mockResolvedValueOnce([{ id: PHOTO_B }]);
+
+      await service.push(USER_ID, [
+        makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A)] }),
+      ]);
+
+      expect(prisma.workoutPhoto.findMany).toHaveBeenLastCalledWith({
+        where: { workoutId: 'workout-1', id: { notIn: [PHOTO_A] } },
+        select: { id: true },
+      });
+      expect(prisma.workoutPhoto.deleteMany).toHaveBeenCalledWith({
+        where: { id: { in: [PHOTO_B] } },
+      });
+      expect(storage.deleteQuietly).toHaveBeenCalledWith([
+        `workout-photos/${USER_ID}/${PHOTO_B}.jpg`,
+      ]);
+    });
+
+    it('does not rebuild photos with the other children', async () => {
+      await service.push(USER_ID, [makeWorkoutPushDto()]);
+
+      expect(prisma.exerciseSet.deleteMany).toHaveBeenCalled();
+      expect(prisma.workoutPhoto.deleteMany).not.toHaveBeenCalled();
+    });
+
+    it("rejects a workout claiming another user's photo as forbidden", async () => {
+      prisma.workoutPhoto.findMany.mockResolvedValueOnce([
+        { workout: { userId: OTHER_USER_ID } },
+      ]);
+
+      const result = await service.push(USER_ID, [
+        makeWorkoutPushDto({ photos: [makePhotoDto(PHOTO_A)] }),
+      ]);
+
+      expect(result.rejected).toEqual([
+        { id: 'workout-1', reason: 'forbidden' },
+      ]);
+      expect(prisma.$transaction).not.toHaveBeenCalled();
+      expect(prisma.workoutPhoto.upsert).not.toHaveBeenCalled();
+    });
+
+    it('creates photos for a new workout without looking for removals', async () => {
+      prisma.workout.findUnique.mockResolvedValue(null);
+
+      const result = await service.push(USER_ID, [
+        makeWorkoutPushDto({
+          photos: [makePhotoDto(PHOTO_A, 0), makePhotoDto(PHOTO_B, 1)],
+        }),
+      ]);
+
+      expect(result.accepted).toEqual(['workout-1']);
+      expect(prisma.workoutPhoto.upsert).toHaveBeenCalledTimes(2);
+      expect(prisma.workoutPhoto.deleteMany).not.toHaveBeenCalled();
+      // Only the ownership check queried photos
+      expect(prisma.workoutPhoto.findMany).toHaveBeenCalledTimes(1);
+    });
+  });
+
   // ─── Pull ──────────────────────────────────────────────────────────────
 
   describe('pull', () => {
     it('returns all with includes when no since', async () => {
-      const records = [makeExistingWorkout()];
+      const records = [makeExistingWorkout({ photos: [] })];
       prisma.workout.findMany.mockResolvedValue(records);
 
       const result = await service.pull(USER_ID, undefined, 50);
@@ -177,10 +376,57 @@ describe('WorkoutSyncService', () => {
           include: expect.objectContaining({
             exercises: expect.anything(),
             supersets: true,
+            photos: { orderBy: { sortOrder: 'asc' } },
           }),
           take: 51,
         }),
       );
+    });
+
+    it('returns photos with `uploaded` and without server-only fields', async () => {
+      prisma.workout.findMany.mockResolvedValue([
+        makeExistingWorkout({
+          photos: [
+            makePhotoRow(PHOTO_A, {
+              sortOrder: 0,
+              uploadedAt: new Date(NOW),
+              byteSize: 412345,
+            }),
+            makePhotoRow(PHOTO_B, { sortOrder: 1 }),
+          ],
+        }),
+      ]);
+
+      const result = await service.pull(USER_ID, undefined, 50);
+
+      expect(result.data[0].photos).toEqual([
+        {
+          id: PHOTO_A,
+          sortOrder: 0,
+          width: 1536,
+          height: 2048,
+          createdAt: new Date(PAST),
+          uploaded: true,
+        },
+        {
+          id: PHOTO_B,
+          sortOrder: 1,
+          width: 1536,
+          height: 2048,
+          createdAt: new Date(PAST),
+          uploaded: false,
+        },
+      ]);
+    });
+
+    it('always includes a photos array', async () => {
+      prisma.workout.findMany.mockResolvedValue([
+        makeExistingWorkout({ photos: [] }),
+      ]);
+
+      const result = await service.pull(USER_ID, undefined, 50);
+
+      expect(result.data[0].photos).toEqual([]);
     });
 
     it('filters by updatedAt when since is provided', async () => {

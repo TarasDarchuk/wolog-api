@@ -36,6 +36,7 @@ export function createMockPrismaService() {
     workoutExercise: createModelMock(),
     exerciseSet: createModelMock(),
     workoutSuperset: createModelMock(),
+    workoutPhoto: createModelMock(),
     exercise: createModelMock(),
     workoutTemplate: createModelMock(),
     routineFolder: createModelMock(),
@@ -63,6 +64,21 @@ export function createMockPrismaService() {
 }
 
 export type MockPrismaService = ReturnType<typeof createMockPrismaService>;
+
+// ─── Mock StorageService ───────────────────────────────────────────────────
+
+export function createMockStorageService() {
+  return {
+    presignPut: jest.fn(),
+    presignGet: jest.fn(),
+    head: jest.fn(),
+    delete: jest.fn().mockResolvedValue(undefined),
+    deletePrefix: jest.fn().mockResolvedValue(0),
+    deleteQuietly: jest.fn().mockResolvedValue(undefined),
+  };
+}
+
+export type MockStorageService = ReturnType<typeof createMockStorageService>;
 
 // ─── DTO Builders ──────────────────────────────────────────────────────────
 

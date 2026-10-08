@@ -24,6 +24,8 @@ src/
 ├── users/                  # GET /users/me
 ├── exercises/              # Public exercises list endpoint
 ├── sync/                   # Push/pull sync engine with conflict resolution
+├── storage/                # StorageService: S3-compatible bucket (presigned PUT/GET, head, delete)
+├── photos/                 # Workout photo upload/complete/download-url + abandoned-upload cleanup
 ├── shares/                 # Link-based template sharing (POST auth, GET public)
 ├── oauth/                  # OAuth 2.0 provider for AI connectors (consent, PKCE, scoped tokens)
 ├── routines/               # AI-facing routines REST (create + id-keyed merge PATCH)
@@ -91,6 +93,13 @@ All routes prefixed with `/api/v1`. All routes require JWT auth except those mar
 - `POST /sync/pull` — Pull changed entities since cursor (paginated)
 - `GET /sync/status` — Last sync timestamps per entity type
 
+### Photos (see `../wolog/docs/workout-photos-api.md`)
+Photo metadata rides in workout push/pull (`photos` key: missing = untouched, present = full list); bytes go straight to the bucket at `workout-photos/{userId}/{photoId}.jpg`.
+- `POST /photos/:id/upload-url` — presigned PUT (15 min) + signed headers. Body `{contentType: "image/jpeg", byteSize ≤ 10 MB}`
+- `POST /photos/:id/complete` — HEAD the object (409 if missing), set `uploadedAt`, bump workout `updatedAt`; idempotent → 204
+- `GET /photos/:id/download-url` — presigned GET (1 h)
+- All return 404 for unknown/foreign photos (client re-pushes the workout on 404 — never 403, never create rows)
+
 ### Shares
 - `POST /shares` — Create a share (auth required). Body: opaque payload (template + exercises). Returns `{id, url, expiresAt}`. Rate-limited to 30 per user per 24h (returns 429 + `Retry-After`). Payloads > 256 KB return 413. TTL configurable via `SHARE_DEFAULT_TTL_DAYS` (default 90). Share URL prefix configurable via `SHARE_BASE_URL` (default `https://wolog.app/s/`).
 - `GET /shares/:id` — Fetch a share (public). Returns 404 if missing, 410 if expired (kept for grace window). Expired shares are deleted daily after a 7-day grace window.
@@ -119,10 +128,10 @@ Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) 
 
 ## Prisma Schema
 
-14 models, 5 enums mirrored from iOS `SharedEnums.swift`:
+15 models, 5 enums mirrored from iOS `SharedEnums.swift`:
 - **Enums**: ExerciseType (8), MuscleGroup (21), Equipment (10), SetType (4), MeasurementType (15)
 - **Auth**: User, RefreshToken
-- **Workouts**: Workout → WorkoutExercise → ExerciseSet, WorkoutSuperset
+- **Workouts**: Workout → WorkoutExercise → ExerciseSet, WorkoutSuperset, WorkoutPhoto
 - **Templates**: WorkoutTemplate → TemplateItem → TemplateExercise → TemplateSet, TemplateSuperset
 - **Other**: Exercise, BodyMeasurement
 
@@ -152,6 +161,7 @@ See `.env.example`. Required for production:
 - `APPLE_WEB_CLIENT_ID` — Apple Services ID for web sign-in on the OAuth consent screen
 - `OAUTH_STATIC_CLIENTS` — Optional JSON array of pre-registered OAuth clients (ChatGPT Action)
 - `CONNECTOR_ACCESS_TTL_MINUTES` / `CONNECTOR_REFRESH_TTL_DAYS` — Connector token lifetimes (60 / 30)
+- `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` — workout photo bucket (Railway bucket `workout-photos`; set as `${{workout-photos.*}}` references). Without them photo endpoints return 503
 - `OAUTH_DEV_LOGIN` — `true` enables email dev sign-in on the consent screen (non-production only)
 
 ## Related Repo

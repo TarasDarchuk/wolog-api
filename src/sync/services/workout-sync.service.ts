@@ -1,14 +1,21 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
-import { WorkoutPushDto } from '../dto/sync-push.dto.js';
+import { WorkoutPhotoPushDto, WorkoutPushDto } from '../dto/sync-push.dto.js';
 import { PushResult } from '../interfaces/push-result.interface.js';
+import {
+  StorageService,
+  workoutPhotoKey,
+} from '../../storage/storage.service.js';
 
 @Injectable()
 export class WorkoutSyncService {
   private readonly logger = new Logger(WorkoutSyncService.name);
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly storage: StorageService,
+  ) {}
 
   async push(userId: string, workouts: WorkoutPushDto[]): Promise<PushResult> {
     const result: PushResult = { accepted: [], rejected: [] };
@@ -31,7 +38,19 @@ export class WorkoutSyncService {
           continue;
         }
 
+        if (
+          workout.photos?.length &&
+          (await this.ownsForeignPhoto(userId, workout.photos))
+        ) {
+          result.rejected.push({ id: workout.id, reason: 'forbidden' });
+          continue;
+        }
+
+        let removedPhotoIds: string[] = [];
+
         await this.prisma.$transaction(async (tx) => {
+          // Photos are not part of the children rebuild: they are only
+          // touched when the client sends the `photos` key.
           if (existing) {
             await tx.exerciseSet.deleteMany({
               where: { workoutExercise: { workoutId: workout.id } },
@@ -74,9 +93,7 @@ export class WorkoutSyncService {
               heartRateSamples: workout.heartRateSamples
                 ? (workout.heartRateSamples as unknown as Prisma.InputJsonValue)
                 : Prisma.JsonNull,
-              deletedAt: workout.deletedAt
-                ? new Date(workout.deletedAt)
-                : null,
+              deletedAt: workout.deletedAt ? new Date(workout.deletedAt) : null,
             },
           });
 
@@ -120,7 +137,22 @@ export class WorkoutSyncService {
               })),
             });
           }
+
+          if (workout.photos) {
+            removedPhotoIds = await this.replacePhotos(
+              tx,
+              workout.id,
+              !!existing,
+              workout.photos,
+            );
+          }
         });
+
+        if (removedPhotoIds.length) {
+          await this.storage.deleteQuietly(
+            removedPhotoIds.map((id) => workoutPhotoKey(userId, id)),
+          );
+        }
 
         result.accepted.push(workout.id);
       } catch (error) {
@@ -130,6 +162,67 @@ export class WorkoutSyncService {
     }
 
     return result;
+  }
+
+  /** True if any of the photo ids already belongs to another user's workout. */
+  private async ownsForeignPhoto(
+    userId: string,
+    photos: WorkoutPhotoPushDto[],
+  ): Promise<boolean> {
+    const rows = await this.prisma.workoutPhoto.findMany({
+      where: { id: { in: photos.map((p) => p.id) } },
+      select: { workout: { select: { userId: true } } },
+    });
+    return rows.some((r) => r.workout.userId !== userId);
+  }
+
+  /**
+   * Makes `photos` the workout's full photo list: upserts by id (never
+   * touching uploadedAt/byteSize) and deletes rows not in the list.
+   * Returns the ids of deleted photos so their objects can be removed
+   * after the transaction commits.
+   */
+  private async replacePhotos(
+    tx: Prisma.TransactionClient,
+    workoutId: string,
+    workoutExisted: boolean,
+    photos: WorkoutPhotoPushDto[],
+  ): Promise<string[]> {
+    const ids = photos.map((p) => p.id);
+    let removedIds: string[] = [];
+
+    if (workoutExisted) {
+      const removed = await tx.workoutPhoto.findMany({
+        where: { workoutId, id: { notIn: ids } },
+        select: { id: true },
+      });
+      removedIds = removed.map((r) => r.id);
+      if (removedIds.length) {
+        await tx.workoutPhoto.deleteMany({ where: { id: { in: removedIds } } });
+      }
+    }
+
+    for (const photo of photos) {
+      await tx.workoutPhoto.upsert({
+        where: { id: photo.id },
+        create: {
+          id: photo.id,
+          workoutId,
+          sortOrder: photo.sortOrder,
+          width: photo.width,
+          height: photo.height,
+          createdAt: new Date(photo.createdAt),
+        },
+        update: {
+          workoutId,
+          sortOrder: photo.sortOrder,
+          width: photo.width,
+          height: photo.height,
+        },
+      });
+    }
+
+    return removedIds;
   }
 
   async pull(userId: string, since: string | undefined, limit: number) {
@@ -146,13 +239,26 @@ export class WorkoutSyncService {
           orderBy: { sortOrder: 'asc' },
         },
         supersets: true,
+        photos: { orderBy: { sortOrder: 'asc' } },
       },
       orderBy: { updatedAt: 'asc' },
       take: limit + 1,
     });
 
     const hasMore = workouts.length > limit;
-    const data = hasMore ? workouts.slice(0, limit) : workouts;
+    const data = (hasMore ? workouts.slice(0, limit) : workouts).map(
+      ({ photos, ...w }) => ({
+        ...w,
+        photos: (photos ?? []).map((p) => ({
+          id: p.id,
+          sortOrder: p.sortOrder,
+          width: p.width,
+          height: p.height,
+          createdAt: p.createdAt,
+          uploaded: p.uploadedAt != null,
+        })),
+      }),
+    );
     const cursor =
       data.length > 0
         ? data[data.length - 1].updatedAt.toISOString()

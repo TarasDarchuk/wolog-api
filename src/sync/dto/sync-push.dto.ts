@@ -1,5 +1,7 @@
 import {
+  ArrayMaxSize,
   IsArray,
+  IsInt,
   IsOptional,
   IsString,
   IsNumber,
@@ -7,6 +9,7 @@ import {
   IsDateString,
   IsUUID,
   IsIn,
+  Min,
   ValidateNested,
 } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
@@ -104,6 +107,29 @@ export class WorkoutSupersetPushDto {
   exerciseIds: string[];
 }
 
+// ─── Workout Photo DTO ──────────────────────────────────────────────────────
+
+export const MAX_PHOTOS_PER_WORKOUT = 10;
+
+export class WorkoutPhotoPushDto {
+  @IsUUID()
+  id: string;
+
+  @IsInt()
+  sortOrder: number;
+
+  @IsInt()
+  @Min(1)
+  width: number;
+
+  @IsInt()
+  @Min(1)
+  height: number;
+
+  @IsDateString()
+  createdAt: string;
+}
+
 // ─── Workout DTO ────────────────────────────────────────────────────────────
 
 export class WorkoutPushDto {
@@ -154,6 +180,15 @@ export class WorkoutPushDto {
   @ValidateNested({ each: true })
   @Type(() => WorkoutSupersetPushDto)
   supersets: WorkoutSupersetPushDto[];
+
+  // undefined = client predates photos (leave them untouched);
+  // present (possibly []) = the full list
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(MAX_PHOTOS_PER_WORKOUT)
+  @ValidateNested({ each: true })
+  @Type(() => WorkoutPhotoPushDto)
+  photos?: WorkoutPhotoPushDto[];
 }
 
 // ─── Custom Exercise DTO ────────────────────────────────────────────────────

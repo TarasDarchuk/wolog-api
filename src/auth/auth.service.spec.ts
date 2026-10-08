@@ -5,6 +5,8 @@ import {
   MockPrismaService,
   USER_ID,
   makeExistingUser,
+  createMockStorageService,
+  MockStorageService,
 } from '../__mocks__/prisma.mock';
 
 // ─── External library mocks ─────────────────────────────────────────────────
@@ -27,7 +29,10 @@ import * as bcrypt from 'bcrypt';
 
 // ─── Helper: build AuthService with mocked deps ─────────────────────────────
 
-function createAuthService(prisma: MockPrismaService, opts: { googleClientId?: string } = {}) {
+function createAuthService(
+  prisma: MockPrismaService,
+  opts: { googleClientId?: string; storage?: MockStorageService } = {},
+) {
   const mockJwtService = {
     sign: jest.fn().mockReturnValue('jwt-access-token'),
   };
@@ -47,12 +52,15 @@ function createAuthService(prisma: MockPrismaService, opts: { googleClientId?: s
   };
 
   // Stub user lookup for generateTokens()
-  prisma.user.findUniqueOrThrow.mockResolvedValue(
-    makeExistingUser(),
-  );
+  prisma.user.findUniqueOrThrow.mockResolvedValue(makeExistingUser());
   prisma.refreshToken.create.mockResolvedValue({});
 
-  return new AuthService(prisma as any, mockJwtService as any, mockConfigService as any);
+  return new AuthService(
+    prisma as any,
+    mockJwtService as any,
+    mockConfigService as any,
+    (opts.storage ?? createMockStorageService()) as any,
+  );
 }
 
 // ─── Tests ───────────────────────────────────────────────────────────────────
@@ -81,7 +89,11 @@ describe('AuthService', () => {
       });
       prisma.user.findUnique.mockResolvedValue(null); // no existing by appleUserId or email
       prisma.user.create.mockResolvedValue(
-        makeExistingUser({ appleUserId: 'apple-new', email: 'new@test.com', displayName: 'New User' }),
+        makeExistingUser({
+          appleUserId: 'apple-new',
+          email: 'new@test.com',
+          displayName: 'New User',
+        }),
       );
 
       const result = await service.signInWithApple({
@@ -153,7 +165,10 @@ describe('AuthService', () => {
       prisma.user.findUnique
         .mockResolvedValueOnce(null)
         .mockResolvedValueOnce(
-          makeExistingUser({ appleUserId: 'apple-other', email: 'taken@test.com' }),
+          makeExistingUser({
+            appleUserId: 'apple-other',
+            email: 'taken@test.com',
+          }),
         );
 
       await expect(
@@ -304,7 +319,12 @@ describe('AuthService', () => {
     it('revokes the matching refresh token', async () => {
       const service = createAuthService(prisma);
       prisma.refreshToken.findMany.mockResolvedValue([
-        { id: 'rt-1', tokenHash: 'hashed', tokenFamily: 'aaaaaaaa', revokedAt: null },
+        {
+          id: 'rt-1',
+          tokenHash: 'hashed',
+          tokenFamily: 'aaaaaaaa',
+          revokedAt: null,
+        },
       ]);
       (bcrypt.compare as jest.Mock).mockResolvedValue(true);
 
@@ -321,7 +341,9 @@ describe('AuthService', () => {
       prisma.refreshToken.findMany.mockResolvedValue([]);
 
       // Should not throw
-      await expect(service.logout('aaaaaaaa-not-found')).resolves.toBeUndefined();
+      await expect(
+        service.logout('aaaaaaaa-not-found'),
+      ).resolves.toBeUndefined();
     });
   });
 
@@ -337,6 +359,28 @@ describe('AuthService', () => {
       expect(prisma.user.delete).toHaveBeenCalledWith({
         where: { id: USER_ID },
       });
+    });
+
+    it('deletes every workout photo object of the user', async () => {
+      const storage = createMockStorageService();
+      const service = createAuthService(prisma, { storage });
+      prisma.user.delete.mockResolvedValue({});
+
+      await service.deleteAccount(USER_ID);
+
+      expect(storage.deletePrefix).toHaveBeenCalledWith(
+        `workout-photos/${USER_ID}/`,
+      );
+    });
+
+    it('still succeeds when photo storage cleanup fails', async () => {
+      const storage = createMockStorageService();
+      storage.deletePrefix.mockRejectedValue(new Error('S3 down'));
+      const service = createAuthService(prisma, { storage });
+      prisma.user.delete.mockResolvedValue({});
+
+      await expect(service.deleteAccount(USER_ID)).resolves.toBeUndefined();
+      expect(prisma.user.delete).toHaveBeenCalled();
     });
   });
 

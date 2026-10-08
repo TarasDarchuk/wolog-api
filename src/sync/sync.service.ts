@@ -8,6 +8,7 @@ import { TemplateSyncService } from './services/template-sync.service.js';
 import { FolderSyncService } from './services/folder-sync.service.js';
 import { MeasurementSyncService } from './services/measurement-sync.service.js';
 import { PrismaService } from '../prisma/prisma.service.js';
+import { StorageService, workoutPhotoKey } from '../storage/storage.service.js';
 
 @Injectable()
 export class SyncService {
@@ -18,6 +19,7 @@ export class SyncService {
     private readonly templateSync: TemplateSyncService,
     private readonly folderSync: FolderSyncService,
     private readonly measurementSync: MeasurementSyncService,
+    private readonly storage: StorageService,
   ) {}
 
   async push(
@@ -101,8 +103,18 @@ export class SyncService {
 
     const deletedBefore = { userId, deletedAt: { lt: cutoff } };
 
+    let purgedPhotoIds: string[] = [];
+
     const [workouts, exercises, templates, folders, measurements] =
       await this.prisma.$transaction(async (tx) => {
+        // Photo rows cascade with their workouts; remember them so the
+        // storage objects can be removed once the transaction commits.
+        const photos = await tx.workoutPhoto.findMany({
+          where: { workout: deletedBefore },
+          select: { id: true },
+        });
+        purgedPhotoIds = photos.map((p) => p.id);
+
         const { count: workoutCount } = await tx.workout.deleteMany({
           where: deletedBefore,
         });
@@ -133,6 +145,12 @@ export class SyncService {
           measurementCount,
         ];
       });
+
+    if (purgedPhotoIds.length) {
+      await this.storage.deleteQuietly(
+        purgedPhotoIds.map((id) => workoutPhotoKey(userId, id)),
+      );
+    }
 
     return {
       purged: { workouts, exercises, templates, folders, measurements },

@@ -1,5 +1,6 @@
 import {
   Injectable,
+  Logger,
   UnauthorizedException,
   ConflictException,
 } from '@nestjs/common';
@@ -11,6 +12,10 @@ import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import { PrismaService } from '../prisma/prisma.service.js';
 import {
+  StorageService,
+  workoutPhotoPrefix,
+} from '../storage/storage.service.js';
+import {
   AppleAuthDto,
   GoogleAuthDto,
   RefreshTokenDto,
@@ -19,12 +24,14 @@ import {
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
   private googleClient: OAuth2Client | null = null;
 
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
     private configService: ConfigService,
+    private storage: StorageService,
   ) {
     if (this.googleAudiences().length > 0) {
       this.googleClient = new OAuth2Client(this.googleAudiences()[0]);
@@ -239,6 +246,17 @@ export class AuthService {
 
   async deleteAccount(userId: string): Promise<void> {
     await this.prisma.user.delete({ where: { id: userId } });
+
+    // Rows are gone (cascade); remove the photo bytes too. A storage failure
+    // must not fail the account deletion — log it for manual cleanup.
+    try {
+      await this.storage.deletePrefix(workoutPhotoPrefix(userId));
+    } catch (error) {
+      this.logger.error(
+        `Failed to delete workout photos of deleted user ${userId}`,
+        error,
+      );
+    }
   }
 
   async getUserProfile(userId: string) {
@@ -268,7 +286,10 @@ export class AuthService {
    * Sets the user's Pro entitlement. Called by the app (first-party JWT only)
    * reporting its current subscription state; lifts the free-tier routine cap.
    */
-  async setProStatus(userId: string, isPro: boolean): Promise<{ isPro: boolean }> {
+  async setProStatus(
+    userId: string,
+    isPro: boolean,
+  ): Promise<{ isPro: boolean }> {
     await this.prisma.user.update({
       where: { id: userId },
       data: { isPro },

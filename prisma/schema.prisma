@@ -139,9 +139,25 @@ model Workout {
   user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   exercises WorkoutExercise[]
   supersets WorkoutSuperset[]
+  photos    WorkoutPhoto[]
 
   @@index([userId, updatedAt])
   @@index([userId, deletedAt])
+}
+
+model WorkoutPhoto {
+  id         String    @id @db.Uuid // client-generated
+  workoutId  String    @db.Uuid
+  sortOrder  Int
+  width      Int
+  height     Int
+  createdAt  DateTime // client value
+  uploadedAt DateTime? // set by /photos/:id/complete; null = bytes not in storage yet
+  byteSize   Int?
+
+  workout Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+
+  @@index([workoutId])
 }
 
 model WorkoutExercise {
