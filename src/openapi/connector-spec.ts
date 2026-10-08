@@ -108,8 +108,9 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
       title: 'Wolog AI Connector',
       version: '1.0.0',
       description:
-        'Read workout history, routines, and folders, and create/update routines, folders, and multi-day programs in a Wolog user’s account. ' +
+        'Read the user’s training profile, workout history, routines, and folders, and create/update routines, folders, and multi-day programs in a Wolog user’s account. ' +
         'ALL weights are kilograms, durations seconds, distances meters. ' +
+        'Before designing a routine or program, GET /training-profile and tailor it to the goals, level, equipment and days per week. ' +
         'Always GET a routine before PATCHing it and preserve every id in the structure you send back.',
     },
     servers: [{ url: `${base}/api/v1` }],
@@ -478,6 +479,74 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
             },
           ],
           responses: { '200': { description: 'Deletion summary' } },
+        },
+      },
+      '/training-profile': {
+        get: {
+          operationId: 'getTrainingProfile',
+          summary:
+            'Onboarding answers: goals (primary first), level, equipment, days per week. trainingProfile and any field may be null. Read before designing routines or programs.',
+          responses: {
+            '200': {
+              description: 'The training profile',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      trainingProfile: {
+                        type: ['object', 'null'],
+                        properties: {
+                          goals: {
+                            type: 'array',
+                            maxItems: 2,
+                            items: {
+                              type: 'string',
+                              enum: ['gainMuscle', 'getStronger', 'loseWeight'],
+                            },
+                            description: 'Ordered, primary goal first',
+                          },
+                          level: {
+                            type: ['string', 'null'],
+                            enum: [
+                              'beginner',
+                              'intermediate',
+                              'advanced',
+                              null,
+                            ],
+                          },
+                          equipment: {
+                            type: ['string', 'null'],
+                            enum: ['fullGym', 'dumbbells', 'bodyweight', null],
+                          },
+                          daysPerWeek: {
+                            type: ['integer', 'null'],
+                            minimum: 2,
+                            maximum: 6,
+                          },
+                          useMetric: {
+                            type: ['boolean', 'null'],
+                            description:
+                              'App display preference only — API weights are always kg',
+                          },
+                          starterProgramId: {
+                            type: ['string', 'null'],
+                            description:
+                              'Bundled starter program the user installed in the app',
+                          },
+                          onboardingCompletedAt: {
+                            type: ['string', 'null'],
+                            format: 'date-time',
+                          },
+                          updatedAt: { type: 'string', format: 'date-time' },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       },
       '/workouts': {

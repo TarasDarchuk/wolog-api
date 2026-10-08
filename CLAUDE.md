@@ -84,7 +84,7 @@ All routes prefixed with `/api/v1`. All routes require JWT auth except those mar
 
 ### Users
 - `GET /users/me` — Current user profile, incl. `trainingProfile` (`null` if never set)
-- `PUT /users/me/training-profile` — Onboarding answers, full replace (omitted → `null`, `goals` → `[]`). `goals` ≤2 unique of `gainMuscle|getStronger|loseWeight` (primary first), `level` `beginner|intermediate|advanced`, `equipment` `fullGym|dumbbells|bodyweight`, `daysPerWeek` 2–6, `useMetric`, `starterProgramId`, `onboardingCompletedAt`. Exposed to the MCP connector as `get_training_profile` (scope `history:read`)
+- `PUT /users/me/training-profile` — Onboarding answers, full replace (omitted → `null`, `goals` → `[]`). `goals` ≤2 unique of `gainMuscle|getStronger|loseWeight` (primary first), `level` `beginner|intermediate|advanced`, `equipment` `fullGym|dumbbells|bodyweight`, `daysPerWeek` 2–6, `useMetric`, `starterProgramId`, `onboardingCompletedAt`. Exposed to AI connectors as MCP `get_training_profile` and `GET /training-profile` (scope `history:read`)
 - `PUT /users/me/pro` — App reports subscription state (first-party JWT only)
 
 ### Exercises (public)
@@ -117,6 +117,7 @@ Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) 
 - `POST /routines` — create; server resolves exercise names → catalog UUIDs, returns a resolution report; free tier capped at 5 routines (403 `PRO_REQUIRED`, `User.isPro` lifts it)
 - `PATCH /routines/:id` — **id-keyed merge** (never delete-and-replace); `baseUpdatedAt` → 409 with current routine on conflict; bumps `updatedAt` so the change reaches the phone via pull sync
 - `GET /workouts`, `GET /exercises/:id/history` — history + Epley e1RM (scope `history:read`)
+- `GET /training-profile` — onboarding answers (scope `history:read`; MCP tool `get_training_profile`)
 - All weights kg, durations seconds, distances meters
 - Connector endpoints accept scoped OAuth tokens (`wlga_…`) or first-party app JWTs (full scopes)
 
