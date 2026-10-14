@@ -34,6 +34,7 @@ function createAuthService(
   opts: {
     googleClientId?: string;
     appleClientId?: string;
+    appleWebClientId?: string;
     storage?: MockStorageService;
   } = {},
 ) {
@@ -48,6 +49,9 @@ function createAuthService(
         JWT_ACCESS_EXPIRY: '15m',
         JWT_REFRESH_EXPIRY_DAYS: 30,
       };
+      if (opts.appleWebClientId) {
+        config['APPLE_WEB_CLIENT_ID'] = opts.appleWebClientId;
+      }
       if (opts.googleClientId) {
         config['GOOGLE_CLIENT_ID'] = opts.googleClientId;
       }
@@ -112,6 +116,22 @@ describe('AuthService', () => {
 
       expect(appleSignin.verifyIdToken).toHaveBeenCalledWith('valid-token', {
         audience: ['com.tarasdarchuk.wolog', 'com.tarasdarchuk.wolog.dev'],
+      });
+    });
+
+    it('also accepts the web Services ID', async () => {
+      const service = createAuthService(prisma, {
+        appleWebClientId: 'com.tarasdarchuk.wolog.web',
+      });
+      (appleSignin.verifyIdToken as jest.Mock).mockResolvedValue({
+        sub: 'apple-existing',
+      });
+      prisma.user.findUnique.mockResolvedValue(makeExistingUser());
+
+      await service.signInWithApple({ identityToken: 'valid-token' });
+
+      expect(appleSignin.verifyIdToken).toHaveBeenCalledWith('valid-token', {
+        audience: ['com.tarasdarchuk.wolog', 'com.tarasdarchuk.wolog.web'],
       });
     });
 

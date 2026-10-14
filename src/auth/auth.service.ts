@@ -60,10 +60,22 @@ export class AuthService {
       .filter((id) => !!id);
   }
 
+  /**
+   * Every accepted Sign in with Apple `aud`: the app bundle IDs plus the web
+   * Services ID (`APPLE_WEB_CLIENT_ID`) used by the web app and the OAuth
+   * consent screen.
+   */
+  appleAudiences(): string[] {
+    return [
+      ...this.appleAppAudiences(),
+      this.configService.get<string>('APPLE_WEB_CLIENT_ID'),
+    ].filter((id): id is string => !!id);
+  }
+
   async signInWithApple(dto: AppleAuthDto): Promise<AuthResponseDto> {
     const user = await this.findOrCreateAppleUser(
       dto.identityToken,
-      this.appleAppAudiences(),
+      this.appleAudiences(),
       dto.displayName,
     );
     return this.generateTokens(user.id, user.email, dto.deviceName);
