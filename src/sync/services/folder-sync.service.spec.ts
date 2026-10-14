@@ -135,7 +135,9 @@ describe('FolderSyncService', () => {
 
     it('detects hasMore with limit+1 trick', async () => {
       const records = Array.from({ length: 3 }, (_, i) =>
-        makeExistingFolder({ id: `f-${i}` }),
+        makeExistingFolder({ id: `f-${i}`,
+          updatedAt: new Date(Date.UTC(2026, 0, 1 + i)),
+        }),
       );
       prisma.routineFolder.findMany.mockResolvedValue(records);
 

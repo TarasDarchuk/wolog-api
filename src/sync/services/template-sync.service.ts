@@ -4,6 +4,7 @@ import { PrismaService } from '../../prisma/prisma.service.js';
 import { TemplatePushDto } from '../dto/sync-push.dto.js';
 import { TemplatePushResult } from '../interfaces/push-result.interface.js';
 import { toStoredTemplateSetType } from '../../common/utils/set-type.js';
+import { pullPage } from '../helpers/pull-page.js';
 
 @Injectable()
 export class TemplateSyncService {
@@ -258,31 +259,33 @@ export class TemplateSyncService {
   async pull(userId: string, since: string | undefined, limit: number) {
     const where: Prisma.WorkoutTemplateWhereInput = {
       userId,
-      ...(since ? { updatedAt: { gt: new Date(since) } } : {}),
     };
 
-    const templates = await this.prisma.workoutTemplate.findMany({
-      where,
-      include: {
-        items: {
+    const { rows: templates, hasMore } = await pullPage(
+      (updatedAt, take) =>
+        this.prisma.workoutTemplate.findMany({
+          where: { ...where, ...(updatedAt ? { updatedAt } : {}) },
           include: {
-            exercise: {
-              include: { sets: true },
+            items: {
+              include: {
+                exercise: {
+                  include: { sets: true },
+                },
+                superset: {
+                  include: { exercises: { include: { sets: true } } },
+                },
+              },
+              orderBy: { sortOrder: 'asc' },
             },
-            superset: {
-              include: { exercises: { include: { sets: true } } },
-            },
+            supersets: true,
           },
-          orderBy: { sortOrder: 'asc' },
-        },
-        supersets: true,
-      },
-      orderBy: { updatedAt: 'asc' },
-      take: limit + 1,
-    });
-
-    const hasMore = templates.length > limit;
-    const data = hasMore ? templates.slice(0, limit) : templates;
+          orderBy: [{ updatedAt: 'asc' }, { id: 'asc' }],
+          take,
+        }),
+      since,
+      limit,
+    );
+    const data = templates;
     const cursor =
       data.length > 0
         ? data[data.length - 1].updatedAt.toISOString()

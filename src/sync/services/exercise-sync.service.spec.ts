@@ -159,7 +159,9 @@ describe('ExerciseSyncService', () => {
 
     it('detects hasMore with limit+1 trick', async () => {
       const records = Array.from({ length: 3 }, (_, i) =>
-        makeExistingExercise({ id: `ex-${i}` }),
+        makeExistingExercise({ id: `ex-${i}`,
+          updatedAt: new Date(Date.UTC(2026, 0, 1 + i)),
+        }),
       );
       prisma.exercise.findMany.mockResolvedValue(records);
 

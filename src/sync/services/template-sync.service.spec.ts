@@ -503,7 +503,9 @@ describe('TemplateSyncService', () => {
 
     it('detects hasMore with limit+1 trick', async () => {
       const records = Array.from({ length: 3 }, (_, i) =>
-        makeExistingTemplate({ id: `t-${i}` }),
+        makeExistingTemplate({ id: `t-${i}`,
+          updatedAt: new Date(Date.UTC(2026, 0, 1 + i)),
+        }),
       );
       prisma.workoutTemplate.findMany.mockResolvedValue(records);
 

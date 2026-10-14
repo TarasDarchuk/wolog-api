@@ -4,6 +4,7 @@ import { PrismaService } from '../../prisma/prisma.service.js';
 import { WorkoutPhotoPushDto, WorkoutPushDto } from '../dto/sync-push.dto.js';
 import { PushResult } from '../interfaces/push-result.interface.js';
 import { StorageService, photoKeys } from '../../storage/storage.service.js';
+import { pullPage } from '../helpers/pull-page.js';
 
 @Injectable()
 export class WorkoutSyncService {
@@ -228,37 +229,37 @@ export class WorkoutSyncService {
   async pull(userId: string, since: string | undefined, limit: number) {
     const where: Prisma.WorkoutWhereInput = {
       userId,
-      ...(since ? { updatedAt: { gt: new Date(since) } } : {}),
     };
 
-    const workouts = await this.prisma.workout.findMany({
-      where,
-      include: {
-        exercises: {
-          include: { sets: true },
-          orderBy: { sortOrder: 'asc' },
-        },
-        supersets: true,
-        photos: { orderBy: { sortOrder: 'asc' } },
-      },
-      orderBy: { updatedAt: 'asc' },
-      take: limit + 1,
-    });
-
-    const hasMore = workouts.length > limit;
-    const data = (hasMore ? workouts.slice(0, limit) : workouts).map(
-      ({ photos, ...w }) => ({
-        ...w,
-        photos: (photos ?? []).map((p) => ({
-          id: p.id,
-          sortOrder: p.sortOrder,
-          width: p.width,
-          height: p.height,
-          createdAt: p.createdAt,
-          uploaded: p.uploadedAt != null,
-        })),
-      }),
+    const { rows: workouts, hasMore } = await pullPage(
+      (updatedAt, take) =>
+        this.prisma.workout.findMany({
+          where: { ...where, ...(updatedAt ? { updatedAt } : {}) },
+          include: {
+            exercises: {
+              include: { sets: true },
+              orderBy: { sortOrder: 'asc' },
+            },
+            supersets: true,
+            photos: { orderBy: { sortOrder: 'asc' } },
+          },
+          orderBy: [{ updatedAt: 'asc' }, { id: 'asc' }],
+          take,
+        }),
+      since,
+      limit,
     );
+    const data = workouts.map(({ photos, ...w }) => ({
+      ...w,
+      photos: (photos ?? []).map((p) => ({
+        id: p.id,
+        sortOrder: p.sortOrder,
+        width: p.width,
+        height: p.height,
+        createdAt: p.createdAt,
+        uploaded: p.uploadedAt != null,
+      })),
+    }));
     const cursor =
       data.length > 0
         ? data[data.length - 1].updatedAt.toISOString()

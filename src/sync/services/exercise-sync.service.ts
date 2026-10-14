@@ -3,6 +3,7 @@ import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { ExercisePushDto } from '../dto/sync-push.dto.js';
 import { PushResult } from '../interfaces/push-result.interface.js';
+import { pullPage } from '../helpers/pull-page.js';
 
 @Injectable()
 export class ExerciseSyncService {
@@ -87,17 +88,19 @@ export class ExerciseSyncService {
   async pull(userId: string, since: string | undefined, limit: number) {
     const where: Prisma.ExerciseWhereInput = {
       userId,
-      ...(since ? { updatedAt: { gt: new Date(since) } } : {}),
     };
 
-    const exercises = await this.prisma.exercise.findMany({
-      where,
-      orderBy: { updatedAt: 'asc' },
-      take: limit + 1,
-    });
-
-    const hasMore = exercises.length > limit;
-    const data = hasMore ? exercises.slice(0, limit) : exercises;
+    const { rows: exercises, hasMore } = await pullPage(
+      (updatedAt, take) =>
+        this.prisma.exercise.findMany({
+          where: { ...where, ...(updatedAt ? { updatedAt } : {}) },
+          orderBy: [{ updatedAt: 'asc' }, { id: 'asc' }],
+          take,
+        }),
+      since,
+      limit,
+    );
+    const data = exercises;
     const cursor =
       data.length > 0
         ? data[data.length - 1].updatedAt.toISOString()

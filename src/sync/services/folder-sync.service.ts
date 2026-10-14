@@ -3,6 +3,7 @@ import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { FolderPushDto } from '../dto/sync-push.dto.js';
 import { PushResult } from '../interfaces/push-result.interface.js';
+import { pullPage } from '../helpers/pull-page.js';
 
 @Injectable()
 export class FolderSyncService {
@@ -61,17 +62,19 @@ export class FolderSyncService {
   async pull(userId: string, since: string | undefined, limit: number) {
     const where: Prisma.RoutineFolderWhereInput = {
       userId,
-      ...(since ? { updatedAt: { gt: new Date(since) } } : {}),
     };
 
-    const folders = await this.prisma.routineFolder.findMany({
-      where,
-      orderBy: { updatedAt: 'asc' },
-      take: limit + 1,
-    });
-
-    const hasMore = folders.length > limit;
-    const data = hasMore ? folders.slice(0, limit) : folders;
+    const { rows: folders, hasMore } = await pullPage(
+      (updatedAt, take) =>
+        this.prisma.routineFolder.findMany({
+          where: { ...where, ...(updatedAt ? { updatedAt } : {}) },
+          orderBy: [{ updatedAt: 'asc' }, { id: 'asc' }],
+          take,
+        }),
+      since,
+      limit,
+    );
+    const data = folders;
     const cursor =
       data.length > 0
         ? data[data.length - 1].updatedAt.toISOString()

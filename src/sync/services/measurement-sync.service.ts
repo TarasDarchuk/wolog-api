@@ -4,6 +4,7 @@ import { PrismaService } from '../../prisma/prisma.service.js';
 import { MeasurementPushDto } from '../dto/sync-push.dto.js';
 import { PushResult } from '../interfaces/push-result.interface.js';
 import { StorageService, photoKeys } from '../../storage/storage.service.js';
+import { pullPage } from '../helpers/pull-page.js';
 
 @Injectable()
 export class MeasurementSyncService {
@@ -131,17 +132,19 @@ export class MeasurementSyncService {
   async pull(userId: string, since: string | undefined, limit: number) {
     const where: Prisma.BodyMeasurementWhereInput = {
       userId,
-      ...(since ? { updatedAt: { gt: new Date(since) } } : {}),
     };
 
-    const measurements = await this.prisma.bodyMeasurement.findMany({
-      where,
-      orderBy: { updatedAt: 'asc' },
-      take: limit + 1,
-    });
-
-    const hasMore = measurements.length > limit;
-    const page = hasMore ? measurements.slice(0, limit) : measurements;
+    const { rows: measurements, hasMore } = await pullPage(
+      (updatedAt, take) =>
+        this.prisma.bodyMeasurement.findMany({
+          where: { ...where, ...(updatedAt ? { updatedAt } : {}) },
+          orderBy: [{ updatedAt: 'asc' }, { id: 'asc' }],
+          take,
+        }),
+      since,
+      limit,
+    );
+    const page = measurements;
 
     const photoIds = [
       ...new Set(page.map((m) => m.photoId).filter((id) => id != null)),

@@ -328,7 +328,9 @@ describe('MeasurementSyncService', () => {
 
     it('detects hasMore with limit+1 trick', async () => {
       const records = Array.from({ length: 3 }, (_, i) =>
-        makeExistingMeasurement({ id: `m-${i}` }),
+        makeExistingMeasurement({ id: `m-${i}`,
+          updatedAt: new Date(Date.UTC(2026, 0, 1 + i)),
+        }),
       );
       prisma.bodyMeasurement.findMany.mockResolvedValue(records);
 
