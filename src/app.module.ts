@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
-import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AppConfigModule } from './config/config.module.js';
 import { PrismaModule } from './prisma/prisma.module.js';
@@ -18,6 +18,7 @@ import { WorkoutsModule } from './workouts/workouts.module.js';
 import { McpModule } from './mcp/mcp.module.js';
 import { OpenApiModule } from './openapi/openapi.module.js';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
+import { UserThrottlerGuard } from './common/guards/user-throttler.guard.js';
 import { FaviconController } from './common/favicon.controller.js';
 
 @Module({
@@ -43,7 +44,8 @@ import { FaviconController } from './common/favicon.controller.js';
   controllers: [FaviconController],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },
-    { provide: APP_GUARD, useClass: ThrottlerGuard },
+    // Order matters: the throttler keys on req.user set by JwtAuthGuard.
+    { provide: APP_GUARD, useClass: UserThrottlerGuard },
   ],
 })
 export class AppModule {}

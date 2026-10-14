@@ -52,7 +52,7 @@ export class ConnectorAuthGuard implements CanActivate {
     const req = context.switchToHttp().getRequest<ConnectorRequest>();
     const res = context.switchToHttp().getResponse<Response>();
 
-    const authenticated = await this.tryAuthenticate(req);
+    const authenticated = await this.authenticate(req);
     if (!authenticated) {
       this.setChallengeHeader(res);
       throw new UnauthorizedException('Missing or invalid bearer token');
@@ -73,7 +73,13 @@ export class ConnectorAuthGuard implements CanActivate {
     return true;
   }
 
-  protected async tryAuthenticate(req: ConnectorRequest): Promise<boolean> {
+  /**
+   * Resolves the bearer token onto req.user/req.authScopes. Idempotent: a
+   * request already authenticated by this guard (e.g. by UserThrottlerGuard,
+   * which runs earlier) is not looked up again.
+   */
+  async authenticate(req: ConnectorRequest): Promise<boolean> {
+    if (req.user && req.authScopes) return true;
     const token = extractBearer(req);
     if (!token) return false;
 
@@ -120,7 +126,7 @@ export class ConnectorAuthGuard implements CanActivate {
 export class OptionalConnectorAuthGuard extends ConnectorAuthGuard {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest<ConnectorRequest>();
-    await this.tryAuthenticate(req);
+    await this.authenticate(req);
     return true;
   }
 }

@@ -124,6 +124,7 @@ Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) 
 ## Architecture Decisions
 
 - **Global JWT guard**: Every route requires auth by default. Use `@Public()` decorator to opt out.
+- **Per-user rate limiting**: `UserThrottlerGuard` keys on the user id (app JWT or connector token, resolved before the controller guard), falling back to client IP (`trust proxy` = 1 for Railway). AI-connector traffic comes from shared provider IPs, so IP keys would throttle users against each other.
 - **Atomic aggregates**: Workout + children (exercises, sets, supersets) sync as one unit in a transaction. On update, children are deleted and re-inserted.
 - **Last-write-wins**: `updatedAt` comparison. Server-newer entities are rejected back to client.
 - **Soft deletes**: Top-level entities (Workout, Exercise, WorkoutTemplate, BodyMeasurement) have `deletedAt`. Children cascade-delete with their parent.

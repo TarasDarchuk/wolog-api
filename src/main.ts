@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe, Logger, RequestMethod } from '@nestjs/common';
 import helmet from 'helmet';
 import { json, urlencoded } from 'express';
@@ -7,9 +8,14 @@ import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.
 import { HttpExceptionFilter } from './common/filters/http-exception.filter.js';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { bodyParser: false });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    bodyParser: false,
+  });
   const logger = new Logger('Bootstrap');
 
+  // Railway's edge proxy sits in front of the app; trust its X-Forwarded-For
+  // so req.ip (rate-limit fallback key) is the real client, not the proxy.
+  app.set('trust proxy', 1);
   app.use(helmet());
   app.use(json({ limit: '10mb' }));
   app.use(urlencoded({ extended: true, limit: '10mb' }));
