@@ -125,7 +125,7 @@ Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) 
 ## Architecture Decisions
 
 - **Global JWT guard**: Every route requires auth by default. Use `@Public()` decorator to opt out.
-- **Per-user rate limiting**: `UserThrottlerGuard` keys on the user id (app JWT or connector token, resolved before the controller guard), falling back to client IP (`trust proxy` = 1 for Railway). AI-connector traffic comes from shared provider IPs, so IP keys would throttle users against each other.
+- **Per-user rate limiting**: `UserThrottlerGuard` keys on the user id (app JWT or connector token, resolved before the controller guard), falling back to client IP (`trust proxy` = 1 for Railway; for the web app's BFF, the `X-Wolog-Client-IP` it forwards with `BFF_SHARED_SECRET`). AI-connector traffic comes from shared provider IPs, so IP keys would throttle users against each other.
 - **Atomic aggregates**: Workout + children (exercises, sets, supersets) sync as one unit in a transaction. On update, children are deleted and re-inserted.
 - **Last-write-wins**: `updatedAt` comparison. Server-newer entities are rejected back to client.
 - **Soft deletes**: Top-level entities (Workout, Exercise, WorkoutTemplate, BodyMeasurement) have `deletedAt`. Children cascade-delete with their parent.
@@ -169,6 +169,7 @@ See `.env.example`. Required for production:
 - `OAUTH_STATIC_CLIENTS` — Optional JSON array of pre-registered OAuth clients (ChatGPT Action)
 - `CONNECTOR_ACCESS_TTL_MINUTES` / `CONNECTOR_REFRESH_TTL_DAYS` — Connector token lifetimes (60 / 30)
 - `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` — workout photo bucket (Railway bucket service `workout-photos`; set as `${{workout-photos.*}}` references). Without them photo endpoints return 503
+- `BFF_SHARED_SECRET` — Shared with the web app (my.wolog.app). Its server-side calls send `X-Wolog-Bff-Secret` + `X-Wolog-Client-IP`, and the rate limiter keys anonymous web traffic on that IP instead of the BFF's
 - `OAUTH_DEV_LOGIN` — `true` enables email dev sign-in on the consent screen (non-production only)
 
 ## Related Repo

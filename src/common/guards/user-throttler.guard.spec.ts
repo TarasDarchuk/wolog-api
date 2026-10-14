@@ -1,3 +1,4 @@
+import type { ConfigService } from '@nestjs/config';
 import { Reflector } from '@nestjs/core';
 import { ThrottlerStorageService } from '@nestjs/throttler';
 import type {
@@ -13,6 +14,10 @@ describe('UserThrottlerGuard.getTracker', () => {
     new ThrottlerStorageService(),
     new Reflector(),
     { authenticate } as unknown as ConnectorAuthGuard,
+    {
+      get: (key: string) =>
+        key === 'BFF_SHARED_SECRET' ? 'bff-secret' : undefined,
+    } as unknown as ConfigService,
   );
   const track = (req: object): Promise<string> =>
     (
@@ -54,5 +59,30 @@ describe('UserThrottlerGuard.getTracker', () => {
   it('uses the IP for anonymous requests without a lookup', async () => {
     expect(await track({ ip: '5.6.7.8', headers: {} })).toBe('5.6.7.8');
     expect(authenticate).not.toHaveBeenCalled();
+  });
+
+  it('keys anonymous BFF calls on the forwarded client IP', async () => {
+    const key = await track({
+      ip: '76.76.21.1',
+      headers: {
+        'x-wolog-bff-secret': 'bff-secret',
+        'x-wolog-client-ip': '9.9.9.9',
+      },
+    });
+    expect(key).toBe('bff:9.9.9.9');
+  });
+
+  it('ignores a forwarded IP without the right secret', async () => {
+    const key = await track({
+      ip: '76.76.21.1',
+      headers: { 'x-wolog-bff-secret': 'nope', 'x-wolog-client-ip': '9.9.9.9' },
+    });
+    expect(key).toBe('76.76.21.1');
+    expect(
+      await track({
+        ip: '76.76.21.1',
+        headers: { 'x-wolog-client-ip': '9.9.9.9' },
+      }),
+    ).toBe('76.76.21.1');
   });
 });
