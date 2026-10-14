@@ -358,6 +358,18 @@ export class RoutinesService {
     return { routine, resolutions };
   }
 
+  // ─── Delete ───────────────────────────────────────────────────────────────
+
+  /** Soft-delete a routine; the deletion reaches the phone via pull sync. */
+  async remove(userId: string, routineId: string) {
+    await this.loadTemplate(userId, routineId);
+    await this.prisma.workoutTemplate.update({
+      where: { id: routineId },
+      data: { deletedAt: new Date(), updatedAt: new Date() },
+    });
+    return { deleted: true };
+  }
+
   private async mergeItems(
     userId: string,
     existing: Awaited<ReturnType<RoutinesService['loadTemplate']>>,

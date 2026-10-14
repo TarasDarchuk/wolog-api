@@ -523,6 +523,31 @@ describe('RoutinesService', () => {
 
   // ─── createProgram ───────────────────────────────────────────────────────
 
+  describe('remove', () => {
+    it('soft-deletes an owned routine and bumps updatedAt', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(makeTemplateTree());
+
+      await expect(service.remove(USER_ID, 'template-1')).resolves.toEqual({
+        deleted: true,
+      });
+      expect(prisma.workoutTemplate.update).toHaveBeenCalledWith({
+        where: { id: 'template-1' },
+        data: { deletedAt: expect.any(Date), updatedAt: expect.any(Date) },
+      });
+    });
+
+    it("rejects another user's routine as not found", async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(
+        makeTemplateTree({ userId: OTHER_USER_ID }),
+      );
+
+      await expect(service.remove(USER_ID, 'template-1')).rejects.toThrow(
+        NotFoundException,
+      );
+      expect(prisma.workoutTemplate.update).not.toHaveBeenCalled();
+    });
+  });
+
   describe('createProgram', () => {
     const programDto = {
       name: 'Push Pull Legs',

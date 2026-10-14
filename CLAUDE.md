@@ -116,6 +116,7 @@ Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) 
 - `GET /routines`, `GET /routines/:id` — read (scope `routines:read`)
 - `POST /routines` — create; server resolves exercise names → catalog UUIDs, returns a resolution report; free tier capped at 5 routines (403 `PRO_REQUIRED`, `User.isPro` lifts it)
 - `PATCH /routines/:id` — **id-keyed merge** (never delete-and-replace); `baseUpdatedAt` → 409 with current routine on conflict; bumps `updatedAt` so the change reaches the phone via pull sync
+- `DELETE /routines/:id` — soft delete (bumps `updatedAt`, reaches the phone via pull sync)
 - `GET /workouts`, `GET /exercises/:id/history` — history + Epley e1RM (scope `history:read`)
 - `GET /training-profile` — onboarding answers (scope `history:read`; MCP tool `get_training_profile`)
 - All weights kg, durations seconds, distances meters
@@ -164,7 +165,7 @@ See `.env.example`. Required for production:
 - `SHARE_DEFAULT_TTL_DAYS` — TTL for share links in days (default: `90`)
 - `SHARE_BASE_URL` — URL prefix for share links (default: `https://wolog.app/s/`)
 - `PUBLIC_BASE_URL` — Public API URL, used in OAuth discovery + OpenAPI spec
-- `APPLE_WEB_CLIENT_ID` — Apple Services ID for web sign-in on the OAuth consent screen
+- `APPLE_WEB_CLIENT_ID` — Apple Services ID for web sign-in (OAuth consent screen and the my.wolog.app web app via `POST /auth/apple`)
 - `OAUTH_STATIC_CLIENTS` — Optional JSON array of pre-registered OAuth clients (ChatGPT Action)
 - `CONNECTOR_ACCESS_TTL_MINUTES` / `CONNECTOR_REFRESH_TTL_DAYS` — Connector token lifetimes (60 / 30)
 - `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` — workout photo bucket (Railway bucket service `workout-photos`; set as `${{workout-photos.*}}` references). Without them photo endpoints return 503

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseUUIDPipe,
@@ -72,5 +73,14 @@ export class RoutinesController {
     @Body() dto: UpdateRoutineDto,
   ) {
     return this.routines.update(userId, id, dto);
+  }
+
+  @Delete(':id')
+  @RequireScopes(SCOPE_ROUTINES_WRITE)
+  async remove(
+    @CurrentUser('id') userId: string,
+    @Param('id', ParseUUIDPipe) id: string,
+  ) {
+    return this.routines.remove(userId, id);
   }
 }
