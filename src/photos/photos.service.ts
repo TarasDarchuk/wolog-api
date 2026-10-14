@@ -11,6 +11,7 @@ import {
   StorageNotConfiguredError,
   StorageService,
   photoKey,
+  photoKeys,
 } from '../storage/storage.service.js';
 import { PhotoUploadUrlDto } from './dto/upload-url.dto.js';
 
@@ -45,9 +46,8 @@ export class PhotosService {
     const photo = await this.findOwnedPhoto(userId, photoId);
     if (photo.uploadedAt) return;
 
-    const object = await this.withStorage(() =>
-      this.storage.head(photoKey(userId, photoId)),
-    );
+    const found = await this.findObject(userId, photoId);
+    const object = found?.object;
     if (!object) {
       throw new ConflictException('Photo has not been uploaded yet');
     }
@@ -77,9 +77,10 @@ export class PhotosService {
   async createDownloadUrl(userId: string, photoId: string) {
     const photo = await this.findOwnedPhoto(userId, photoId);
     if (!photo.uploadedAt) throw new NotFoundException('Photo not found');
-    const url = await this.withStorage(() =>
-      this.storage.presignGet(photoKey(userId, photoId)),
-    );
+    // Older iOS uploads live under an uppercase-id key; serve whichever exists.
+    const found = await this.findObject(userId, photoId);
+    const key = found?.key ?? photoKey(userId, photoId);
+    const url = await this.withStorage(() => this.storage.presignGet(key));
     return { url };
   }
 
@@ -140,10 +141,19 @@ export class PhotosService {
     await this.storage.deleteQuietly(
       abandoned
         .filter((p) => !survivors.has(p.id))
-        .map((p) => photoKey(p.userId, p.id)),
+        .flatMap((p) => photoKeys(p.userId, p.id)),
     );
     this.logger.log(`Cleaned up ${count} abandoned photo upload(s)`);
     return { deleted: count };
+  }
+
+  /** The key the photo's bytes are stored under, if any (see photoKeys). */
+  private async findObject(userId: string, photoId: string) {
+    for (const key of photoKeys(userId, photoId)) {
+      const object = await this.withStorage(() => this.storage.head(key));
+      if (object) return { key, object };
+    }
+    return null;
   }
 
   /**

@@ -96,7 +96,7 @@ All routes prefixed with `/api/v1`. All routes require JWT auth except those mar
 - `GET /sync/status` — Last sync timestamps per entity type
 
 ### Photos (see `../wolog/docs/photo-sync-api.md`)
-One `Photo` table for workout photos (`workoutId` set, ≤10 per workout) and measurement progress photos (`workoutId` null, referenced by `BodyMeasurement.photoId` — no FK, shared by measurements saved together). Bytes go straight to the bucket at `photos/{userId}/{photoId}.jpg`.
+One `Photo` table for workout photos (`workoutId` set, ≤10 per workout) and measurement progress photos (`workoutId` null, referenced by `BodyMeasurement.photoId` — no FK, shared by measurements saved together). Bytes go straight to the bucket at `photos/{userId}/{photoId}.jpg`, ids lowercased (`photoKey`); iOS sends uppercase `UUID.uuidString` while Postgres returns lowercase, and S3 keys are case-sensitive. Objects uploaded before the fix sit under the uppercase-id key: `complete` and `download-url` look under both (`photoKeys`), deletes remove both.
 - Workout push `photos`: missing = untouched, present = full list (upsert, never reset `uploadedAt`; removed ones deleted + objects). Pull always returns `photos` with `uploaded`
 - Measurement push `photo`: missing = keep `photoId`, `null` = clear, object = set + upsert row. Unreferenced progress photos are deleted. Pull returns `photo` (`null` or `{id,width,height,uploaded}`)
 - `POST /photos/:id/upload-url` — presigned PUT (15 min) + signed headers. Body `{contentType: "image/jpeg", byteSize ≤ 10 MB}`

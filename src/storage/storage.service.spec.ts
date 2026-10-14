@@ -2,6 +2,7 @@ import {
   StorageNotConfiguredError,
   StorageService,
   photoKey,
+  photoKeys,
   photoPrefix,
 } from './storage.service';
 
@@ -24,6 +25,15 @@ describe('StorageService', () => {
   it('builds per-user photo keys', () => {
     expect(photoKey('u1', 'p1')).toBe('photos/u1/p1.jpg');
     expect(photoPrefix('u1')).toBe('photos/u1/');
+  });
+
+  it('lowercases ids so iOS (uppercase) and Postgres (lowercase) agree', () => {
+    expect(photoKey('u1', 'ABCD-EF')).toBe('photos/u1/abcd-ef.jpg');
+    expect(photoKeys('u1', 'abcd-ef')).toEqual([
+      'photos/u1/abcd-ef.jpg',
+      'photos/u1/ABCD-EF.jpg',
+    ]);
+    expect(photoKeys('u1', '1234')).toEqual(['photos/u1/1234.jpg']);
   });
 
   it('presigns a path-style PUT and returns every signed header', async () => {

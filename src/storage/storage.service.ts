@@ -28,9 +28,23 @@ export interface PresignedPut {
   headers: Record<string, string>;
 }
 
-/** Object key for a photo (workout or measurement progress photo). */
+/**
+ * Object key for a photo (workout or measurement progress photo). Always
+ * lowercase: Postgres returns UUIDs lowercase, while iOS sends
+ * UUID.uuidString uppercase, and S3 keys are case-sensitive.
+ */
 export function photoKey(userId: string, photoId: string): string {
-  return `photos/${userId}/${photoId}.jpg`;
+  return `photos/${userId.toLowerCase()}/${photoId.toLowerCase()}.jpg`;
+}
+
+/**
+ * Every key a photo may be stored under: the canonical lowercase key, plus
+ * the uppercase-id key that iOS uploads used before keys were normalized.
+ */
+export function photoKeys(userId: string, photoId: string): string[] {
+  const legacy = `photos/${userId.toLowerCase()}/${photoId.toUpperCase()}.jpg`;
+  const canonical = photoKey(userId, photoId);
+  return legacy === canonical ? [canonical] : [canonical, legacy];
 }
 
 export function photoPrefix(userId: string): string {

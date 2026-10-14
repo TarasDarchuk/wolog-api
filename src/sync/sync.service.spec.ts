@@ -169,9 +169,12 @@ describe('SyncService', () => {
         },
         select: { id: true },
       });
+      // Canonical key plus the legacy uppercase-id key older iOS uploads used.
       expect(storage.deleteQuietly).toHaveBeenCalledWith([
         `photos/${USER_ID}/photo-1.jpg`,
+        `photos/${USER_ID}/PHOTO-1.jpg`,
         `photos/${USER_ID}/photo-2.jpg`,
+        `photos/${USER_ID}/PHOTO-2.jpg`,
       ]);
     });
 
@@ -204,6 +207,7 @@ describe('SyncService', () => {
       });
       expect(storage.deleteQuietly).toHaveBeenCalledWith([
         `photos/${USER_ID}/orphan-photo.jpg`,
+        `photos/${USER_ID}/ORPHAN-PHOTO.jpg`,
       ]);
     });
 

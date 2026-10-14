@@ -3,7 +3,7 @@ import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { WorkoutPhotoPushDto, WorkoutPushDto } from '../dto/sync-push.dto.js';
 import { PushResult } from '../interfaces/push-result.interface.js';
-import { StorageService, photoKey } from '../../storage/storage.service.js';
+import { StorageService, photoKeys } from '../../storage/storage.service.js';
 
 @Injectable()
 export class WorkoutSyncService {
@@ -148,7 +148,7 @@ export class WorkoutSyncService {
 
         if (removedPhotoIds.length) {
           await this.storage.deleteQuietly(
-            removedPhotoIds.map((id) => photoKey(userId, id)),
+            removedPhotoIds.flatMap((id) => photoKeys(userId, id)),
           );
         }
 

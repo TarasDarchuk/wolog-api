@@ -3,7 +3,7 @@ import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { MeasurementPushDto } from '../dto/sync-push.dto.js';
 import { PushResult } from '../interfaces/push-result.interface.js';
-import { StorageService, photoKey } from '../../storage/storage.service.js';
+import { StorageService, photoKeys } from '../../storage/storage.service.js';
 
 @Injectable()
 export class MeasurementSyncService {
@@ -98,7 +98,7 @@ export class MeasurementSyncService {
         });
 
         if (orphanedPhotoId) {
-          await this.storage.deleteQuietly([photoKey(userId, orphanedPhotoId)]);
+          await this.storage.deleteQuietly(photoKeys(userId, orphanedPhotoId));
         }
 
         result.accepted.push(m.id);

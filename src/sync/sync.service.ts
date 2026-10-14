@@ -8,7 +8,7 @@ import { TemplateSyncService } from './services/template-sync.service.js';
 import { FolderSyncService } from './services/folder-sync.service.js';
 import { MeasurementSyncService } from './services/measurement-sync.service.js';
 import { PrismaService } from '../prisma/prisma.service.js';
-import { StorageService, photoKey } from '../storage/storage.service.js';
+import { StorageService, photoKeys } from '../storage/storage.service.js';
 
 @Injectable()
 export class SyncService {
@@ -169,7 +169,7 @@ export class SyncService {
 
     if (purgedPhotoIds.length) {
       await this.storage.deleteQuietly(
-        purgedPhotoIds.map((id) => photoKey(userId, id)),
+        purgedPhotoIds.flatMap((id) => photoKeys(userId, id)),
       );
     }
 

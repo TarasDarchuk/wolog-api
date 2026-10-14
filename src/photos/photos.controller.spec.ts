@@ -232,6 +232,26 @@ describe('PhotosController (HTTP)', () => {
       expect(prisma.workout.update).not.toHaveBeenCalled();
     });
 
+    it('accepts an object found under the legacy uppercase-id key', async () => {
+      const id = 'aaaaaaaa-1111-4111-8111-111111111111';
+      const legacy = `photos/${USER_ID}/${id.toUpperCase()}.jpg`;
+      prisma.photo.findFirst.mockResolvedValue(makePhoto({ id }));
+      prisma.photo.updateMany.mockResolvedValue({ count: 1 });
+      storage.head.mockImplementation((key: string) =>
+        Promise.resolve(key === legacy ? { contentLength: 99 } : null),
+      );
+
+      await request(app.getHttpServer())
+        .post(`/photos/${id.toUpperCase()}/complete`)
+        .expect(204);
+
+      expect(prisma.photo.updateMany).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: expect.objectContaining({ byteSize: 99 }),
+        }),
+      );
+    });
+
     it('409s when the object is not in storage', async () => {
       prisma.photo.findFirst.mockResolvedValue(makePhoto());
       storage.head.mockResolvedValue(null);
@@ -299,6 +319,26 @@ describe('PhotosController (HTTP)', () => {
       expect(storage.presignGet).toHaveBeenCalledWith(KEY);
     });
 
+    it('serves an object stored under the legacy uppercase-id key', async () => {
+      // iOS sends UUID.uuidString (uppercase); Postgres returns lowercase.
+      const id = 'aaaaaaaa-1111-4111-8111-111111111111';
+      const legacy = `photos/${USER_ID}/${id.toUpperCase()}.jpg`;
+      prisma.photo.findFirst.mockResolvedValue(
+        makePhoto({ id, uploadedAt: new Date(NOW) }),
+      );
+      storage.head.mockImplementation((key: string) =>
+        Promise.resolve(key === legacy ? { contentLength: 1 } : null),
+      );
+      storage.presignGet.mockResolvedValue('https://bucket.example/get');
+
+      await request(app.getHttpServer())
+        .get(`/photos/${id}/download-url`)
+        .expect(200);
+
+      expect(storage.head).toHaveBeenCalledWith(`photos/${USER_ID}/${id}.jpg`);
+      expect(storage.presignGet).toHaveBeenCalledWith(legacy);
+    });
+
     it('404s when the photo is not uploaded yet', async () => {
       prisma.photo.findFirst.mockResolvedValue(makePhoto());
 
@@ -360,6 +400,7 @@ describe('PhotosService.cleanupAbandonedUploads', () => {
     });
     expect(storage.deleteQuietly).toHaveBeenCalledWith([
       `photos/${USER_ID}/p1.jpg`,
+      `photos/${USER_ID}/P1.jpg`,
     ]);
   });
 
@@ -387,6 +428,7 @@ describe('PhotosService.cleanupAbandonedUploads', () => {
     });
     expect(storage.deleteQuietly).toHaveBeenCalledWith([
       `photos/${USER_ID}/stale.jpg`,
+      `photos/${USER_ID}/STALE.jpg`,
     ]);
   });
 
