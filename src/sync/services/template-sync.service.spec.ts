@@ -31,6 +31,10 @@ describe('TemplateSyncService', () => {
     prisma.templateExercise.deleteMany.mockResolvedValue({ count: 0 });
     prisma.templateItem.deleteMany.mockResolvedValue({ count: 0 });
     prisma.templateSuperset.deleteMany.mockResolvedValue({ count: 0 });
+    // No child id belongs to another template
+    prisma.templateItem.findMany.mockResolvedValue([]);
+    prisma.templateSuperset.findMany.mockResolvedValue([]);
+    prisma.templateExercise.findMany.mockResolvedValue([]);
   });
 
   // ─── Push ──────────────────────────────────────────────────────────────
@@ -218,8 +222,11 @@ describe('TemplateSyncService', () => {
     it('skips set creation when sets already exist for exercise', async () => {
       prisma.workoutTemplate.findUnique.mockResolvedValue(null);
       prisma.templateExercise.findUnique.mockResolvedValue(null);
-      // Simulate sets already existing (created during superset phase)
-      prisma.templateSet.findMany.mockResolvedValue([{ id: 'existing-set' }]);
+      // Simulate sets already existing (created during superset phase); the first
+      // findMany is the foreign-id check
+      prisma.templateSet.findMany
+        .mockResolvedValueOnce([])
+        .mockResolvedValue([{ id: 'existing-set' }]);
 
       const result = await service.push(USER_ID, [makeTemplatePushDto()]);
 
@@ -309,6 +316,85 @@ describe('TemplateSyncService', () => {
   });
 
   // ─── Push: optimistic concurrency (baseUpdatedAt) ──────────────────────
+
+  describe('push with child ids owned by another template', () => {
+    const SUPERSET_DTO = {
+      id: 'SS-1',
+      supersetColorIndex: 0,
+      exerciseIds: ['TEXERCISE-1'],
+      exercises: [],
+    };
+
+    it('reassigns ids held by another template of the same user', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(null);
+      prisma.templateItem.findMany.mockResolvedValue([
+        { id: 'item-1', template: { userId: USER_ID } },
+      ]);
+      prisma.templateSuperset.findMany.mockResolvedValue([
+        { id: 'ss-1', template: { userId: USER_ID } },
+      ]);
+      prisma.templateExercise.findMany.mockResolvedValue([
+        {
+          id: 'texercise-1',
+          templateItem: { template: { userId: USER_ID } },
+        },
+      ]);
+      const dto = makeTemplatePushDto();
+      (dto.items[0] as any).superset = SUPERSET_DTO;
+
+      const result = await service.push(USER_ID, [dto]);
+
+      expect(result.accepted).toEqual(['template-1']);
+      const item = prisma.templateItem.create.mock.calls[0][0].data;
+      const superset = prisma.templateSuperset.create.mock.calls[0][0].data;
+      const exercise = prisma.templateExercise.create.mock.calls[0][0].data;
+      expect(item.id).not.toBe('item-1');
+      expect(superset.id).not.toBe('SS-1');
+      expect(item.supersetId).toBe(superset.id);
+      expect(exercise.id).not.toBe('texercise-1');
+      expect(exercise.templateItemId).toBe(item.id);
+      expect(superset.exerciseIds).toEqual([exercise.id]);
+      // Set id not taken — kept, but attached to the new exercise id
+      expect(prisma.templateSet.createMany).toHaveBeenCalledWith({
+        data: [
+          expect.objectContaining({
+            id: 'tset-1',
+            templateExerciseId: exercise.id,
+          }),
+        ],
+      });
+      expect(prisma.templateExercise.update).not.toHaveBeenCalled();
+    });
+
+    it("rejects as forbidden when an id belongs to another user's template", async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(null);
+      prisma.templateExercise.findMany.mockResolvedValue([
+        {
+          id: 'texercise-1',
+          templateItem: { template: { userId: OTHER_USER_ID } },
+        },
+      ]);
+
+      const result = await service.push(USER_ID, [makeTemplatePushDto()]);
+
+      expect(result.rejected).toEqual([
+        { id: 'template-1', reason: 'forbidden' },
+      ]);
+      expect(prisma.$transaction).not.toHaveBeenCalled();
+    });
+
+    it('only looks for ids outside the pushed template', async () => {
+      prisma.workoutTemplate.findUnique.mockResolvedValue(null);
+
+      await service.push(USER_ID, [makeTemplatePushDto()]);
+
+      expect(prisma.templateItem.findMany).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: { id: { in: ['item-1'] }, templateId: { not: 'template-1' } },
+        }),
+      );
+    });
+  });
 
   describe('push with baseUpdatedAt', () => {
     const BASE = '2025-06-01T12:00:00.123Z';

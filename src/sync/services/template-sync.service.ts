@@ -1,7 +1,12 @@
+import { randomUUID } from 'node:crypto';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
-import { TemplatePushDto } from '../dto/sync-push.dto.js';
+import {
+  TemplateExercisePushDto,
+  TemplatePushDto,
+  TemplateSupersetPushDto,
+} from '../dto/sync-push.dto.js';
 import { TemplatePushResult } from '../interfaces/push-result.interface.js';
 import { toStoredTemplateSetType } from '../../common/utils/set-type.js';
 import { pullPage } from '../helpers/pull-page.js';
@@ -22,7 +27,7 @@ export class TemplateSyncService {
       acceptedVersions: [],
     };
 
-    for (const template of templates) {
+    for (let template of templates) {
       try {
         const existing = await this.prisma.workoutTemplate.findUnique({
           where: { id: template.id },
@@ -51,6 +56,13 @@ export class TemplateSyncService {
           result.rejected.push({ id: template.id, reason: 'server_newer' });
           continue;
         }
+
+        const remapped = await this.remapForeignChildIds(userId, template);
+        if (!remapped) {
+          result.rejected.push({ id: template.id, reason: 'forbidden' });
+          continue;
+        }
+        template = remapped;
 
         const savedUpdatedAt = await this.prisma.$transaction(async (tx) => {
           if (existing) {
@@ -254,6 +266,121 @@ export class TemplateSyncService {
     }
 
     return result;
+  }
+
+  /**
+   * Children are replaced by id, so an id that already belongs to another template
+   * fails the create (P2002) on every push, forever — or, for a template exercise,
+   * gets silently moved over. A device that re-keyed a routine but kept its children
+   * hits this. Ids held by another template of the same user get fresh ones (the
+   * pull hands them back to the client); ids of another user's template → null.
+   */
+  private async remapForeignChildIds(
+    userId: string,
+    template: TemplatePushDto,
+  ): Promise<TemplatePushDto | null> {
+    const supersets = [
+      ...(template.supersets ?? []),
+      ...template.items.flatMap((i) => (i.superset ? [i.superset] : [])),
+    ];
+    const exercises = [
+      ...supersets.flatMap((ss) => ss.exercises ?? []),
+      ...template.items.flatMap((i) => (i.exercise ? [i.exercise] : [])),
+    ];
+    const itemIds = template.items.map((i) => i.id);
+    const supersetIds = supersets.map((ss) => ss.id);
+    const exerciseIds = exercises.map((e) => e.id);
+    const setIds = exercises.flatMap((e) => (e.sets ?? []).map((s) => s.id));
+
+    const notThis = { not: template.id };
+    const [items, sss, exs, sets] = await Promise.all([
+      this.prisma.templateItem.findMany({
+        where: { id: { in: itemIds }, templateId: notThis },
+        select: { id: true, template: { select: { userId: true } } },
+      }),
+      this.prisma.templateSuperset.findMany({
+        where: { id: { in: supersetIds }, templateId: notThis },
+        select: { id: true, template: { select: { userId: true } } },
+      }),
+      this.prisma.templateExercise.findMany({
+        where: {
+          id: { in: exerciseIds },
+          templateItem: { templateId: notThis },
+        },
+        select: {
+          id: true,
+          templateItem: { select: { template: { select: { userId: true } } } },
+        },
+      }),
+      this.prisma.templateSet.findMany({
+        where: {
+          id: { in: setIds },
+          templateExercise: { templateItem: { templateId: notThis } },
+        },
+        select: {
+          id: true,
+          templateExercise: {
+            select: {
+              templateItem: {
+                select: { template: { select: { userId: true } } },
+              },
+            },
+          },
+        },
+      }),
+    ]);
+
+    const owners = [
+      ...items.map((r) => ({ id: r.id, userId: r.template?.userId })),
+      ...sss.map((r) => ({ id: r.id, userId: r.template?.userId })),
+      ...exs.map((r) => ({
+        id: r.id,
+        userId: r.templateItem?.template?.userId,
+      })),
+      ...sets.map((r) => ({
+        id: r.id,
+        userId: r.templateExercise?.templateItem?.template?.userId,
+      })),
+    ];
+    if (owners.length === 0) return template;
+    if (owners.some((o) => o.userId !== userId)) {
+      this.logger.warn(
+        `Template ${template.id} reuses child ids of another user's template`,
+      );
+      return null;
+    }
+
+    // Postgres returns ids lowercased; clients send them uppercase
+    const fresh = new Map(
+      owners.map((o) => [o.id.toLowerCase(), randomUUID()]),
+    );
+    const map = (id: string) => fresh.get(id.toLowerCase()) ?? id;
+    this.logger.warn(
+      `Template ${template.id}: ${fresh.size} child ids belong to another template of the same user — reassigned`,
+    );
+
+    const copyExercise = (e: TemplateExercisePushDto) => ({
+      ...e,
+      id: map(e.id),
+      sets: (e.sets ?? []).map((s) => ({ ...s, id: map(s.id) })),
+    });
+    const copySuperset = (ss: TemplateSupersetPushDto) => ({
+      ...ss,
+      id: map(ss.id),
+      exerciseIds: ss.exerciseIds.map(map),
+      exercises: (ss.exercises ?? []).map(copyExercise),
+    });
+    return {
+      ...template,
+      supersets: template.supersets?.map(copySuperset),
+      items: template.items.map((i) => ({
+        ...i,
+        id: map(i.id),
+        supersetId: i.supersetId ? map(i.supersetId) : i.supersetId,
+        exercise: i.exercise ? copyExercise(i.exercise) : i.exercise,
+        superset: i.superset ? copySuperset(i.superset) : i.superset,
+      })),
+    };
   }
 
   async pull(userId: string, since: string | undefined, limit: number) {
