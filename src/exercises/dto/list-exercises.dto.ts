@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsOptional,
   IsInt,
   IsString,
@@ -6,7 +7,7 @@ import {
   Min,
   Max,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
 export class ListExercisesDto {
   @IsOptional()
@@ -26,4 +27,12 @@ export class ListExercisesDto {
   @IsString()
   @MaxLength(120)
   query?: string;
+
+  /** Only the caller's custom exercises (needs a signed-in caller). */
+  @IsOptional()
+  @Transform(({ value }: { value: unknown }) =>
+    value === 'true' ? true : value === 'false' ? false : value,
+  )
+  @IsBoolean()
+  customOnly?: boolean;
 }

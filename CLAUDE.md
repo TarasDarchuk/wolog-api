@@ -113,6 +113,7 @@ One `Photo` table for workout photos (`workoutId` set, ≤10 per workout) and me
 
 ### AI Connector (see `docs/AI-CONNECTOR.md`)
 Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) read history/routines and create/update routines for a user, authorized through an OAuth consent screen (`/oauth/*`, root-level — excluded from the `/api/v1` prefix). Scopes: `routines:read`, `routines:write`, `history:read`.
+- `POST /exercises`, `PATCH /exercises/:id`, `DELETE /exercises/:id` — the user's **custom** exercises only (scope `routines:write`; library exercises read-only → 403). Delete is refused (409) while any workout or live routine uses the exercise. MCP: `create_exercise`, `update_exercise`, `delete_exercise`; `list_exercises` takes `customOnly`
 - `GET /routines`, `GET /routines/:id` — read (scope `routines:read`)
 - `POST /routines` — create; server resolves exercise names → catalog UUIDs, returns a resolution report; free tier capped at 5 routines (403 `PRO_REQUIRED`, `User.isPro` lifts it)
 - `PATCH /routines/:id` — **id-keyed merge** (never delete-and-replace); `baseUpdatedAt` → 409 with current routine on conflict; bumps `updatedAt` so the change reaches the phone via pull sync

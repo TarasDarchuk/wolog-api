@@ -7,6 +7,7 @@ import {
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { ExercisesService } from '../exercises/exercises.service.js';
+import { CustomExercisesService } from '../exercises/custom-exercises.service.js';
 import { FoldersService } from '../routines/folders.service.js';
 import { RoutinesService } from '../routines/routines.service.js';
 import { WorkoutsService } from '../workouts/workouts.service.js';
@@ -17,6 +18,10 @@ import {
   UpdateRoutineDto,
 } from '../routines/dto/routine.dto.js';
 import { ListExercisesDto } from '../exercises/dto/list-exercises.dto.js';
+import {
+  CreateCustomExerciseDto,
+  UpdateCustomExerciseDto,
+} from '../exercises/dto/custom-exercise.dto.js';
 import { MCP_SERVER_INSTRUCTIONS, MCP_TOOLS } from './mcp-tools.js';
 
 const SUPPORTED_PROTOCOL_VERSIONS = ['2025-06-18', '2025-03-26', '2024-11-05'];
@@ -69,6 +74,7 @@ export class McpService {
 
   constructor(
     private readonly exercises: ExercisesService,
+    private readonly customExercises: CustomExercisesService,
     private readonly routines: RoutinesService,
     private readonly folders: FoldersService,
     private readonly workouts: WorkoutsService,
@@ -189,10 +195,29 @@ export class McpService {
       case 'list_exercises': {
         const dto = await toDto(ListExercisesDto, {
           query: args.query,
+          customOnly: args.customOnly,
           limit: args.limit ?? 50,
           offset: args.offset ?? 0,
         });
         return this.exercises.list(dto, userId);
+      }
+      case 'create_exercise': {
+        const dto = await toDto(CreateCustomExerciseDto, args);
+        return this.customExercises.create(userId, dto);
+      }
+      case 'update_exercise': {
+        if (typeof args.id !== 'string') {
+          throw new BadRequestException('id is required');
+        }
+        const { id, ...fields } = args;
+        const dto = await toDto(UpdateCustomExerciseDto, fields);
+        return this.customExercises.update(userId, id, dto);
+      }
+      case 'delete_exercise': {
+        if (typeof args.id !== 'string') {
+          throw new BadRequestException('id is required');
+        }
+        return this.customExercises.remove(userId, args.id);
       }
       case 'get_training_profile':
         return { trainingProfile: await this.trainingProfiles.get(userId) };

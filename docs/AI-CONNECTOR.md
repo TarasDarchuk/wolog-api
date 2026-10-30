@@ -65,7 +65,10 @@ Under `/api/v1` (connector token or app JWT):
 
 | Route | Scope | Purpose |
 |---|---|---|
-| `GET /exercises?query=` | — (public; token merges customs) | Catalog search |
+| `GET /exercises?query=` | — (public; token merges customs) | Catalog search; `customOnly=true` → only the caller's customs |
+| `POST /exercises` | routines:write | Create a custom exercise (same-name custom → returned, `created: false`; library name → 409) |
+| `PATCH /exercises/:id` | routines:write | Partial update of an own custom exercise; library → 403, foreign → 404 |
+| `DELETE /exercises/:id` | routines:write | Soft delete; 409 if used by any workout (never deletable) or live routine (listed) |
 | `GET /routines` | routines:read | Summaries |
 | `GET /routines/:id` | routines:read | Full routine with ids + updatedAt |
 | `POST /routines` | routines:write | Create (resolution report, Pro gate) |
@@ -81,8 +84,15 @@ entirely. A session discarded in the app after it already synced is stored
 server-side as a zero-duration workout of unperformed target sets — hiding it
 here keeps connector history consistent with what the app shows.
 
-MCP tools: `list_exercises`, `list_routines`, `get_routine`, `create_routine`,
-`update_routine`, `get_workout_history` — same services underneath. Each tool
+MCP tools: `list_exercises`, `create_exercise`, `update_exercise`,
+`delete_exercise`, `list_routines`, `get_routine`, `create_routine`,
+`update_routine`, `create_program`, folder tools, `get_training_profile`,
+`get_workout_history` — same services underneath.
+
+Custom exercise deletion is refused while anything references the exercise:
+iOS before 1.4.2 hard-purges a soft-deleted exercise after 5 days even when
+workouts still point at it (crash), and the server purge cascades into those
+workout rows. Each tool
 carries annotations (`readOnlyHint`/`destructiveHint`/`idempotentHint`).
 
 ## Environment variables
