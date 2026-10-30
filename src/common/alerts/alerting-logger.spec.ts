@@ -55,6 +55,19 @@ describe('AlertingLogger', () => {
     expect(text).toContain(error.stack!.split('\n')[1].trim());
   });
 
+  it('includes an Error passed as the cause of a message', () => {
+    const logger = makeLogger();
+    logger.error(
+      'Failed to push workout W',
+      new Error('Unique constraint'),
+      'WorkoutSyncService',
+    );
+
+    const [text] = sentTexts();
+    expect(text).toContain('Failed to push workout W');
+    expect(text).toContain('Error: Unique constraint');
+  });
+
   it('does not alert on warnings', () => {
     makeLogger().warn('401 POST /api/v1/sync/push', 'HTTP');
     expect(send).not.toHaveBeenCalled();

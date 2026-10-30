@@ -57,13 +57,17 @@ export class AlertingLogger extends ConsoleLogger {
       (p): p is string => typeof p === 'string',
     );
     const context = params.length ? params[params.length - 1] : '';
+    // `logger.error('Failed to push X', error)` passes the cause as a param.
+    const cause = optionalParams.find((p): p is Error => p instanceof Error);
     const stack =
       params.length > 1
         ? params[0]
         : message instanceof Error
           ? message.stack
-          : undefined;
-    const text = describe(message);
+          : cause?.stack;
+    const text = cause
+      ? `${describe(message)}\n${describe(cause)}`
+      : describe(message);
 
     const key = `${context}|${text.split('\n')[0]}`;
     const now = this.now();
