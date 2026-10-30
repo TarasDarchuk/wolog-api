@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import {
   DeleteObjectCommand,
   DeleteObjectsCommand,
@@ -154,6 +155,38 @@ export class StorageService {
         return null;
       }
       throw error;
+    }
+  }
+
+  /**
+   * Uploads and deletes a tiny object the way the app does (presigned PUT),
+   * so a bucket that stops accepting uploads — e.g. credentials rotated
+   * under a running process — shows up as an error alert within the hour
+   * instead of silently stranding every photo upload.
+   */
+  @Cron(CronExpression.EVERY_HOUR)
+  async probeUploads(): Promise<void> {
+    if (!this.client) return;
+    const key = 'diagnostics/upload-probe.jpg';
+    const body = Buffer.from('wolog upload probe');
+    try {
+      const { url, headers } = await this.presignPut(
+        key,
+        'image/jpeg',
+        body.length,
+      );
+      const res = await fetch(url, { method: 'PUT', headers, body });
+      if (!res.ok) {
+        const detail = (await res.text()).slice(0, 300);
+        throw new Error(`presigned PUT returned ${res.status}: ${detail}`);
+      }
+      await this.delete(key);
+    } catch (error) {
+      this.logger.error(
+        `Photo upload probe failed — app uploads are likely failing too: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
+      );
     }
   }
 

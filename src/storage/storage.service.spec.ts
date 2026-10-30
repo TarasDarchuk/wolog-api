@@ -89,4 +89,48 @@ describe('StorageService', () => {
 
     await expect(service.deleteQuietly(['a', 'b'])).resolves.toBeUndefined();
   });
+  describe('probeUploads', () => {
+    afterEach(() => jest.restoreAllMocks());
+
+    it('uploads through a presigned PUT, then deletes the probe object', async () => {
+      const service = createService(CONFIGURED);
+      const fetchSpy = jest
+        .spyOn(global, 'fetch')
+        .mockResolvedValue(new Response(null, { status: 200 }));
+      const del = jest.spyOn(service, 'delete').mockResolvedValue();
+      const error = jest.spyOn(service['logger'], 'error');
+
+      await service.probeUploads();
+
+      const [url, init] = fetchSpy.mock.calls[0] as [string, RequestInit];
+      expect(new URL(url).pathname).toBe(
+        '/photos-bucket/diagnostics/upload-probe.jpg',
+      );
+      expect(init.method).toBe('PUT');
+      expect(del).toHaveBeenCalledWith('diagnostics/upload-probe.jpg');
+      expect(error).not.toHaveBeenCalled();
+    });
+
+    it('logs an error (which alerts) when the bucket rejects the upload', async () => {
+      const service = createService(CONFIGURED);
+      jest
+        .spyOn(global, 'fetch')
+        .mockResolvedValue(new Response('<Code>AccessDenied</Code>', { status: 403 }));
+      const error = jest
+        .spyOn(service['logger'], 'error')
+        .mockImplementation(() => undefined);
+
+      await service.probeUploads();
+
+      expect(error).toHaveBeenCalledWith(
+        expect.stringContaining('presigned PUT returned 403'),
+      );
+    });
+
+    it('does nothing when storage is not configured', async () => {
+      const fetchSpy = jest.spyOn(global, 'fetch');
+      await createService({}).probeUploads();
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+  });
 });

@@ -6,12 +6,15 @@ import { json, urlencoded } from 'express';
 import { AppModule } from './app.module.js';
 import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.js';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter.js';
+import { AlertingLogger } from './common/alerts/alerting-logger.js';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bodyParser: false,
+    logger: new AlertingLogger(),
   });
   const logger = new Logger('Bootstrap');
+  process.on('unhandledRejection', (reason) => logger.error(reason));
 
   // Railway's edge proxy sits in front of the app; trust its X-Forwarded-For
   // so req.ip (rate-limit fallback key) is the real client, not the proxy.

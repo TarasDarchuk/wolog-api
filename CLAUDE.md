@@ -168,7 +168,8 @@ See `.env.example`. Required for production:
 - `APPLE_WEB_CLIENT_ID` — Apple Services ID for web sign-in (OAuth consent screen and the my.wolog.app web app via `POST /auth/apple`)
 - `OAUTH_STATIC_CLIENTS` — Optional JSON array of pre-registered OAuth clients (ChatGPT Action)
 - `CONNECTOR_ACCESS_TTL_MINUTES` / `CONNECTOR_REFRESH_TTL_DAYS` — Connector token lifetimes (60 / 30)
-- `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` — workout photo bucket (Railway bucket service `workout-photos`; set as `${{workout-photos.*}}` references). Without them photo endpoints return 503
+- `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` — workout photo bucket (Railway bucket service `workout-photos`; set as `${{workout-photos.*}}` references). Without them photo endpoints return 503. Read once at startup: after resetting the bucket credentials, **redeploy wolog-api**, or presigned uploads keep failing with 403 (Oct 2026: a week of stranded photo uploads). An hourly probe (`StorageService.probeUploads`) does a real presigned PUT and logs an error if it fails
+- `TELEGRAM_ALERT_BOT_TOKEN`, `TELEGRAM_ALERT_CHAT_ID` — optional. Every error-level log (unhandled 5xx, failed sync pushes, S3 failures, the upload probe) is forwarded to this Telegram chat by `AlertingLogger` (deduplicated per 30 min, max 20/hour)
 - `BFF_SHARED_SECRET` — Shared with the web app (my.wolog.app). Its server-side calls send `X-Wolog-Bff-Secret` + `X-Wolog-Client-IP`, and the rate limiter keys anonymous web traffic on that IP instead of the BFF's
 - `OAUTH_DEV_LOGIN` — `true` enables email dev sign-in on the consent screen (non-production only)
 
