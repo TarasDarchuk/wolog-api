@@ -169,12 +169,13 @@ model Photo {
 }
 
 model WorkoutExercise {
-  id         String   @id @db.Uuid
-  workoutId  String   @db.Uuid
-  exerciseId String   @db.Uuid
-  sortOrder  Int      @default(0)
-  notes      String?
-  updatedAt  DateTime @updatedAt
+  id               String   @id @db.Uuid
+  workoutId        String   @db.Uuid
+  exerciseId       String   @db.Uuid
+  sortOrder        Int      @default(0)
+  notes            String?
+  restTimerSeconds Int?
+  updatedAt        DateTime @updatedAt
 
   workout  Workout       @relation(fields: [workoutId], references: [id], onDelete: Cascade)
   exercise Exercise      @relation(fields: [exerciseId], references: [id], onDelete: Cascade)

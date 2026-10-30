@@ -182,6 +182,26 @@ describe('WorkoutSyncService', () => {
         ],
       });
     });
+    it('stores per-exercise rest, null when the client omits it', async () => {
+      prisma.workout.findUnique.mockResolvedValue(null);
+      prisma.workout.upsert.mockResolvedValue({});
+      prisma.workoutExercise.createMany.mockResolvedValue({ count: 2 });
+      prisma.exerciseSet.createMany.mockResolvedValue({ count: 0 });
+      const dto = makeWorkoutPushDto();
+      dto.exercises = [
+        { ...dto.exercises[0], restTimerSeconds: 90, sets: [] },
+        { ...dto.exercises[0], id: 'we-2', sets: [] },
+      ];
+
+      await service.push(USER_ID, [dto]);
+
+      expect(prisma.workoutExercise.createMany).toHaveBeenCalledWith({
+        data: [
+          expect.objectContaining({ id: 'we-1', restTimerSeconds: 90 }),
+          expect.objectContaining({ id: 'we-2', restTimerSeconds: null }),
+        ],
+      });
+    });
   });
 
   // ─── Push: photos ──────────────────────────────────────────────────────

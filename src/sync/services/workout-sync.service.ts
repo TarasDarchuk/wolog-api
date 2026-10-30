@@ -103,6 +103,7 @@ export class WorkoutSyncService {
                 exerciseId: we.exerciseId,
                 sortOrder: we.sortOrder,
                 notes: we.notes || null,
+                restTimerSeconds: we.restTimerSeconds ?? null,
               })),
             });
 

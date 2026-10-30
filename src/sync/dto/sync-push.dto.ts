@@ -87,6 +87,12 @@ export class WorkoutExercisePushDto {
   @IsUUID()
   supersetId?: string;
 
+  /** Rest between sets for this exercise in this workout; omitted = none. */
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  restTimerSeconds?: number;
+
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => ExerciseSetPushDto)
