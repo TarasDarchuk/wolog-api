@@ -3,6 +3,7 @@ import {
   Catch,
   ArgumentsHost,
   HttpException,
+  HttpStatus,
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
@@ -16,16 +17,29 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
-    const status = exception.getStatus();
+    const status: number = exception.getStatus();
+    const body = exception.getResponse();
 
-    if (status >= 400 && status < 500) {
+    if (status >= 400 && status < 500 && !isUnknownRoute(status, body)) {
+      // An expired access token is routine (the app refreshes and retries),
+      // so don't dump the user's workout payload into the logs for it.
+      const bodyPart =
+        status === (HttpStatus.UNAUTHORIZED as number)
+          ? ''
+          : `Body: ${safeBodyForLog(request.body)} | `;
       this.logger.warn(
-        `${status} ${request.method} ${request.url} | ` +
-          `Body: ${safeBodyForLog(request.body)} | ` +
-          `Error: ${JSON.stringify(exception.getResponse())}`,
+        `${status} ${request.method} ${request.url} | ${bodyPart}` +
+          `Error: ${JSON.stringify(body)}`,
       );
     }
 
-    response.status(status).json(exception.getResponse());
+    response.status(status).json(body);
   }
+}
+
+/** Express router 404 ("Cannot GET /wp/…") — scanner noise, not our 404s. */
+function isUnknownRoute(status: number, body: unknown): boolean {
+  if (status !== (HttpStatus.NOT_FOUND as number)) return false;
+  const message = (body as { message?: unknown } | null)?.message;
+  return typeof message === 'string' && /^Cannot [A-Z]+ \//.test(message);
 }
