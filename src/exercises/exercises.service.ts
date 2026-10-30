@@ -18,9 +18,11 @@ export class ExercisesService {
 
     const where: Prisma.ExerciseWhereInput = {
       deletedAt: null,
-      ...(userId
-        ? { OR: [{ isCustom: false }, { userId }] }
-        : { isCustom: false }),
+      ...(!userId
+        ? { isCustom: false }
+        : dto.customOnly
+          ? { userId, isCustom: true }
+          : { OR: [{ isCustom: false }, { userId }] }),
       ...(dto.query
         ? { name: { contains: dto.query.trim(), mode: 'insensitive' } }
         : {}),

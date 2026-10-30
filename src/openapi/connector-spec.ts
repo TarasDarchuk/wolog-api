@@ -49,6 +49,81 @@ const EXERCISE_SCHEMA = {
   },
 };
 
+const MUSCLE_GROUPS = [
+  'chest',
+  'lats',
+  'lowerBack',
+  'traps',
+  'upperBack',
+  'abductors',
+  'adductors',
+  'calves',
+  'tibialis',
+  'glutes',
+  'hamstrings',
+  'quadriceps',
+  'shoulders',
+  'neck',
+  'biceps',
+  'triceps',
+  'forearms',
+  'abdominals',
+  'cardio',
+  'fullBody',
+  'other',
+];
+
+const CUSTOM_EXERCISE_FIELDS = {
+  name: { type: 'string', maxLength: 120 },
+  muscleGroup: { type: 'string', enum: MUSCLE_GROUPS },
+  equipment: {
+    type: 'string',
+    enum: [
+      'barbell',
+      'dumbbell',
+      'bodyweight',
+      'cable',
+      'machine',
+      'kettlebell',
+      'plate',
+      'resistanceBand',
+      'suspension',
+      'other',
+    ],
+  },
+  exerciseType: {
+    type: 'string',
+    enum: [
+      'weightReps',
+      'repsOnly',
+      'weightedBodyweight',
+      'assistedBodyweight',
+      'duration',
+      'weightDuration',
+      'distanceDuration',
+      'weightDistance',
+    ],
+    description:
+      'What a set records: weightReps (kg × reps), repsOnly, weightedBodyweight (added kg × reps), assistedBodyweight (assistance kg × reps), duration (seconds), weightDuration (kg × seconds), distanceDuration (meters + seconds), weightDistance (kg × meters)',
+  },
+  includesBodyweight: { type: 'boolean' },
+  secondaryMuscles: {
+    type: 'array',
+    items: { type: 'string', enum: MUSCLE_GROUPS },
+  },
+  restDuration: {
+    type: ['integer', 'null'],
+    description: 'Default rest between sets, seconds',
+  },
+};
+
+const EXERCISE_ID_PARAM = {
+  name: 'id',
+  in: 'path',
+  required: true,
+  schema: { type: 'string' },
+};
+
 const ITEM_SCHEMA = {
   type: 'object',
   description: 'Exactly one of "exercise" or "superset"',
@@ -154,6 +229,12 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
               schema: { type: 'integer', maximum: 200 },
             },
             { name: 'offset', in: 'query', schema: { type: 'integer' } },
+            {
+              name: 'customOnly',
+              in: 'query',
+              description: "Only the user's own custom exercises",
+              schema: { type: 'boolean' },
+            },
           ],
           responses: {
             '200': {
@@ -183,6 +264,56 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
                 },
               },
             },
+          },
+        },
+        post: {
+          operationId: 'createCustomExercise',
+          summary:
+            'Create a custom exercise (search listExercises first; a library name is refused with 409, an existing custom one is returned with created=false)',
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: [
+                    'name',
+                    'muscleGroup',
+                    'equipment',
+                    'exerciseType',
+                  ],
+                  properties: CUSTOM_EXERCISE_FIELDS,
+                },
+              },
+            },
+          },
+          responses: { '201': { description: 'Exercise (with created flag)' } },
+        },
+      },
+      '/exercises/{id}': {
+        patch: {
+          operationId: 'updateCustomExercise',
+          summary:
+            'Change a custom exercise (isCustom true). Send only changed fields. Library exercises are read-only (403). Changing exerciseType does not convert logged sets.',
+          parameters: [EXERCISE_ID_PARAM],
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: { type: 'object', properties: CUSTOM_EXERCISE_FIELDS },
+              },
+            },
+          },
+          responses: { '200': { description: 'Updated exercise' } },
+        },
+        delete: {
+          operationId: 'deleteCustomExercise',
+          summary:
+            'Delete an unused custom exercise. 409 if it has logged workouts (cannot be deleted) or is used in routines (listed — remove it from them first)',
+          parameters: [EXERCISE_ID_PARAM],
+          responses: {
+            '200': { description: 'Deleted' },
+            '409': { description: 'Exercise is in use' },
           },
         },
       },
@@ -554,7 +685,7 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
         get: {
           operationId: 'getWorkoutHistory',
           summary:
-            'Recent completed workouts, newest first (weights kg). Performed work only: skipped sets and discarded/zero-duration sessions are excluded',
+            'Recent completed workouts, newest first (weights kg), up to `limit` — not all-time: use getPersonalRecords for PRs. Performed work only: skipped sets and discarded/zero-duration sessions are excluded',
           parameters: [
             {
               name: 'since',
@@ -577,7 +708,7 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
         get: {
           operationId: 'getExerciseHistory',
           summary:
-            'Per-session sets for one exercise with derived best set and estimated 1RM (Epley) — use for progressive overload. Warmup sets are excluded from best set and e1RM.',
+            'Recent per-session sets for one exercise with derived best set and estimated 1RM (Epley), plus `allTime` records over the whole history — use for progressive overload. Warmup sets are excluded from best set and e1RM.',
           parameters: [
             {
               name: 'id',
@@ -594,6 +725,22 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
           responses: {
             '200': { description: 'Sessions with sets, best set, e1RM' },
           },
+        },
+      },
+      '/personal-records': {
+        get: {
+          operationId: 'getPersonalRecords',
+          summary:
+            "All-time personal records per exercise over the user's entire history (kg): best estimated 1RM, heaviest weight, most reps, longest duration/distance, each with set, date and workoutId. Call before setting target weights.",
+          parameters: [
+            {
+              name: 'exerciseIds',
+              in: 'query',
+              description: 'Optional comma-separated exercise ids',
+              schema: { type: 'string' },
+            },
+          ],
+          responses: { '200': { description: 'Records per exercise' } },
         },
       },
     },

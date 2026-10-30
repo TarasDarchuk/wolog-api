@@ -114,6 +114,82 @@ const FOLDER_FIELDS = {
   },
 };
 
+const MUSCLE_GROUPS = [
+  'chest',
+  'lats',
+  'lowerBack',
+  'traps',
+  'upperBack',
+  'abductors',
+  'adductors',
+  'calves',
+  'tibialis',
+  'glutes',
+  'hamstrings',
+  'quadriceps',
+  'shoulders',
+  'neck',
+  'biceps',
+  'triceps',
+  'forearms',
+  'abdominals',
+  'cardio',
+  'fullBody',
+  'other',
+];
+
+const CUSTOM_EXERCISE_FIELDS = {
+  name: { type: 'string', maxLength: 120 },
+  muscleGroup: {
+    type: 'string',
+    enum: MUSCLE_GROUPS,
+    description: 'Primary muscle group',
+  },
+  equipment: {
+    type: 'string',
+    enum: [
+      'barbell',
+      'dumbbell',
+      'bodyweight',
+      'cable',
+      'machine',
+      'kettlebell',
+      'plate',
+      'resistanceBand',
+      'suspension',
+      'other',
+    ],
+  },
+  exerciseType: {
+    type: 'string',
+    enum: [
+      'weightReps',
+      'repsOnly',
+      'weightedBodyweight',
+      'assistedBodyweight',
+      'duration',
+      'weightDuration',
+      'distanceDuration',
+      'weightDistance',
+    ],
+    description:
+      'What a set records: weightReps (kg × reps), repsOnly, weightedBodyweight (added kg × reps, e.g. weighted pull-up), assistedBodyweight (assistance kg × reps), duration (seconds), weightDuration (kg × seconds, e.g. farmer hold), distanceDuration (meters + seconds, e.g. running), weightDistance (kg × meters, e.g. sled push)',
+  },
+  includesBodyweight: {
+    type: 'boolean',
+    description: 'Body weight counts toward the load (e.g. dips, pull-ups)',
+  },
+  secondaryMuscles: {
+    type: 'array',
+    items: { type: 'string', enum: MUSCLE_GROUPS },
+  },
+  restDuration: {
+    type: ['integer', 'null'],
+    minimum: 0,
+    description: 'Default rest between sets in seconds',
+  },
+};
+
 export interface McpToolAnnotations {
   title: string;
   readOnlyHint: boolean;
@@ -145,7 +221,8 @@ export const MCP_SERVER_INSTRUCTIONS = `Wolog workout connector. Rules:
 - Before update_routine, ALWAYS call get_routine and edit the returned structure, preserving every id (routine, item, exercise, set). Only change the fields you mean to change.
 - Prefer referencing exercises by name and trust server resolution; check the resolution report in the response and tell the user about low-confidence or created-custom matches.
 - Routine sets have a type: normal, warmup, dropset or failure. Warmup sets come first and are excluded from volume and records; a drop set goes directly after the set it drops from and does not get its own set number. Preserve each set's type on update.
-- Use get_workout_history (optionally per exercise) to ground progression decisions; it includes per-session best sets and estimated 1RM (warmup sets excluded).
+- Use get_personal_records for all-time PRs and get_workout_history (optionally per exercise) for recent sessions to ground progression decisions; get_workout_history only covers recent sessions, never treat its best set as the user's record. Warmup sets are excluded from records and estimated 1RM.
+- Custom exercises (isCustom true in list_exercises) can be created, changed and deleted with create_exercise, update_exercise and delete_exercise. Library exercises are read-only. Search the library before creating one.
 - Routines can be grouped into folders. When the user asks for a multi-day training program or plan (e.g. push/pull/legs, upper/lower), use create_program — one call that creates a folder named after the program with all its routines inside.`;
 
 export const MCP_TOOLS: McpToolDefinition[] = [
@@ -164,11 +241,15 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'list_exercises',
     description:
-      "Search the exercise catalog (library + the user's custom exercises). Use to discover exact exercise names/ids. Returns id, name, muscleGroup, equipment, exerciseType.",
+      "Search the exercise catalog (library + the user's custom exercises). Use to discover exact exercise names/ids. Returns id, name, muscleGroup, equipment, exerciseType, isCustom. Only exercises with isCustom true can be changed or deleted.",
     inputSchema: {
       type: 'object',
       properties: {
         query: { type: 'string', description: 'Substring name filter' },
+        customOnly: {
+          type: 'boolean',
+          description: "Only the user's own custom exercises",
+        },
         limit: { type: 'integer', minimum: 1, maximum: 200 },
         offset: { type: 'integer', minimum: 0 },
       },
@@ -176,6 +257,66 @@ export const MCP_TOOLS: McpToolDefinition[] = [
     },
     annotations: { title: 'Search exercises', ...READ_ONLY },
     scope: null,
+  },
+  {
+    name: 'create_exercise',
+    description:
+      "Create a custom exercise in the user's library (appears in the app on next sync). Search list_exercises first: if the library already has the exercise, use it — creating a custom copy of a library name is refused. If the user already has a custom exercise with this name it is returned (created: false) instead of duplicated.",
+    inputSchema: {
+      type: 'object',
+      properties: CUSTOM_EXERCISE_FIELDS,
+      required: ['name', 'muscleGroup', 'equipment', 'exerciseType'],
+      additionalProperties: false,
+    },
+    annotations: {
+      title: 'Create custom exercise',
+      readOnlyHint: false,
+      destructiveHint: false,
+      idempotentHint: true, // same name returns the existing exercise
+      openWorldHint: false,
+    },
+    scope: 'routines:write',
+  },
+  {
+    name: 'update_exercise',
+    description:
+      "Change one of the user's custom exercises (isCustom true from list_exercises): rename, change muscle group, equipment, type, etc. Send only the fields to change. Library exercises are read-only. Changing exerciseType does not convert already logged sets — confirm with the user before changing the type of an exercise that has history.",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: { type: 'string', description: 'Custom exercise id' },
+        ...CUSTOM_EXERCISE_FIELDS,
+      },
+      required: ['id'],
+      additionalProperties: false,
+    },
+    annotations: {
+      title: 'Update custom exercise',
+      readOnlyHint: false,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+    scope: 'routines:write',
+  },
+  {
+    name: 'delete_exercise',
+    description:
+      "Delete one of the user's custom exercises. Only unused exercises can be deleted: one with logged workouts is refused (its history would be lost), and one used in routines is refused with the list of those routines — remove it from them with update_routine first, after asking the user.",
+    inputSchema: {
+      type: 'object',
+      properties: { id: { type: 'string', description: 'Custom exercise id' } },
+      required: ['id'],
+      additionalProperties: false,
+    },
+    annotations: {
+      title: 'Delete custom exercise',
+      readOnlyHint: false,
+      destructiveHint: true,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+    scope: 'routines:write',
   },
   {
     name: 'list_routines',
@@ -362,7 +503,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'get_workout_history',
     description:
-      'Read recent completed workouts (weights kg). Only performed work is returned — skipped sets and discarded/zero-duration sessions are excluded. With exerciseId, returns per-session sets for that exercise plus derived best set and estimated 1RM (Epley) — use this to plan progressive overload. Each set has a type; warmup sets are excluded from best set and estimated 1RM (and should be left out of any volume you compute).',
+      'Read RECENT completed workouts (weights kg) — newest first, limited to the last `limit` sessions, so it does not show all-time records: use get_personal_records for PRs. Only performed work is returned — skipped sets and discarded/zero-duration sessions are excluded. With exerciseId, returns per-session sets for that exercise plus derived best set and estimated 1RM (Epley), and `allTime` records over the whole history — use both to plan progressive overload. Each set has a type; warmup sets are excluded from best set and estimated 1RM (and should be left out of any volume you compute).',
     inputSchema: {
       type: 'object',
       properties: {
@@ -377,6 +518,26 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       additionalProperties: false,
     },
     annotations: { title: 'Read workout history', ...READ_ONLY },
+    scope: 'history:read',
+  },
+  {
+    name: 'get_personal_records',
+    description:
+      "All-time personal records per exercise over the user's ENTIRE workout history (weights kg): best estimated 1RM (Epley), heaviest weight, most reps, longest duration and distance — each with the set, date and workoutId — plus session count and last performed date. Warmups and unperformed sets are excluded. Call this before setting target weights or judging progress; get_workout_history only covers recent sessions.",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        exerciseIds: {
+          type: 'array',
+          items: { type: 'string' },
+          maxItems: 100,
+          description:
+            'Limit to these exercises; omit for every exercise the user has logged',
+        },
+      },
+      additionalProperties: false,
+    },
+    annotations: { title: 'Read personal records', ...READ_ONLY },
     scope: 'history:read',
   },
 ];

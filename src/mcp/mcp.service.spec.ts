@@ -12,6 +12,7 @@ import { Test } from '@nestjs/testing';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { ExercisesService } from '../exercises/exercises.service.js';
 import { ExerciseResolverService } from '../exercises/exercise-resolver.service.js';
+import { CustomExercisesService } from '../exercises/custom-exercises.service.js';
 import { RoutinesService } from '../routines/routines.service.js';
 import { FoldersService } from '../routines/folders.service.js';
 import { WorkoutsService } from '../workouts/workouts.service.js';
@@ -131,6 +132,7 @@ describe('McpService — routine set types', () => {
         { provide: PrismaService, useValue: prisma },
         { provide: ExerciseResolverService, useValue: resolver },
         { provide: ExercisesService, useValue: {} },
+        { provide: CustomExercisesService, useValue: {} },
         { provide: WorkoutsService, useValue: {} },
         TrainingProfileService,
       ],
@@ -317,6 +319,7 @@ describe('McpService — get_training_profile', () => {
         { provide: RoutinesService, useValue: {} },
         { provide: FoldersService, useValue: {} },
         { provide: ExercisesService, useValue: {} },
+        { provide: CustomExercisesService, useValue: {} },
         { provide: WorkoutsService, useValue: {} },
       ],
     }).compile();

@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { isUUID } from 'class-validator';
 import { Prisma } from '../generated/prisma/client.js';
 import { PrismaService } from '../prisma/prisma.service.js';
 
@@ -20,6 +21,40 @@ export function epleyE1Rm(
   if (!weight || !reps || weight <= 0 || reps <= 0) return null;
   if (reps === 1) return weight;
   return Math.round(weight * (1 + reps / 30) * 100) / 100;
+}
+
+export interface RecordSet {
+  value: number;
+  weight: number | null; // kg
+  reps: number | null;
+  duration: number | null; // seconds
+  distance: number | null; // meters
+  workoutId: string;
+  completedAt: string;
+}
+
+export interface ExerciseRecords {
+  exerciseId: string;
+  name: string;
+  exerciseType: string;
+  sessions: number;
+  lastPerformedAt: string;
+  bestE1Rm: RecordSet | null;
+  heaviestWeight: RecordSet | null;
+  mostReps: RecordSet | null;
+  longestDuration: RecordSet | null;
+  longestDistance: RecordSet | null;
+}
+
+/** One record row per metric: the top set by `order`, as JSON. */
+function recordAgg(value: Prisma.Sql, filter: Prisma.Sql, order: Prisma.Sql) {
+  return Prisma.sql`(array_agg(jsonb_build_object(
+      'value', ${value},
+      'weight', s.weight, 'reps', s.reps,
+      'duration', s.duration, 'distance', s.distance,
+      'workoutId', s."workoutId",
+      'completedAt', to_char(s."completedAt", 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')
+    ) ORDER BY ${order}, s."completedAt") FILTER (WHERE ${filter}))[1]`;
 }
 
 @Injectable()
@@ -97,6 +132,7 @@ export class WorkoutsService {
    * completed set.
    */
   async exerciseHistory(userId: string, exerciseId: string, limit: number) {
+    if (!isUUID(exerciseId)) throw new NotFoundException('Exercise not found');
     const exercise = await this.prisma.exercise.findUnique({
       where: { id: exerciseId },
       select: { id: true, name: true, userId: true, deletedAt: true },
@@ -167,7 +203,80 @@ export class WorkoutsService {
       };
     });
 
-    return { exerciseId: exercise.id, name: exercise.name, sessions };
+    const [allTime] = await this.personalRecords(userId, [exerciseId]);
+    return {
+      exerciseId: exercise.id,
+      name: exercise.name,
+      allTime: allTime ?? null,
+      sessions,
+    };
+  }
+
+  /**
+   * All-time records per exercise over the user's whole performed history
+   * (same filters as above: completed sets of completed, non-discarded
+   * workouts; warmups excluded). `sessions` in exerciseHistory is only the
+   * most recent page, so PRs set earlier would otherwise be invisible.
+   *
+   * Assisted exercises get no weight records: there less assistance is better.
+   */
+  async personalRecords(
+    userId: string,
+    exerciseIds?: string[],
+  ): Promise<ExerciseRecords[]> {
+    const e1rm = Prisma.sql`CASE WHEN s.reps = 1 THEN s.weight ELSE s.weight * (1 + s.reps / 30.0) END`;
+    const weighted = Prisma.sql`s.weight > 0 AND s."exerciseType" <> 'assistedBodyweight'`;
+    const byExercise = exerciseIds?.length
+      ? Prisma.sql`AND we."exerciseId" = ANY(${exerciseIds}::uuid[])`
+      : Prisma.empty;
+
+    return this.prisma.$queryRaw<ExerciseRecords[]>`
+      WITH s AS (
+        SELECT we."exerciseId", e.name, e."exerciseType"::text AS "exerciseType",
+               w.id AS "workoutId", w."completedAt",
+               es.weight, es.reps, es.duration, es.distance
+        FROM "ExerciseSet" es
+        JOIN "WorkoutExercise" we ON we.id = es."workoutExerciseId"
+        JOIN "Workout" w ON w.id = we."workoutId"
+        JOIN "Exercise" e ON e.id = we."exerciseId"
+        WHERE w."userId" = ${userId}::uuid
+          AND w."deletedAt" IS NULL
+          AND w."completedAt" > w."startedAt"
+          AND es."isCompleted"
+          AND es.type <> 'warmup'
+          ${byExercise}
+      )
+      SELECT s."exerciseId", s.name, s."exerciseType",
+        count(DISTINCT s."workoutId")::int AS sessions,
+        to_char(max(s."completedAt"), 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') AS "lastPerformedAt",
+        ${recordAgg(
+          Prisma.sql`round((${e1rm})::numeric, 2)`,
+          Prisma.sql`${weighted} AND s.reps > 0`,
+          Prisma.sql`${e1rm} DESC`,
+        )} AS "bestE1Rm",
+        ${recordAgg(
+          Prisma.sql`s.weight`,
+          weighted,
+          Prisma.sql`s.weight DESC, s.reps DESC NULLS LAST`,
+        )} AS "heaviestWeight",
+        ${recordAgg(
+          Prisma.sql`s.reps`,
+          Prisma.sql`s.reps > 0`,
+          Prisma.sql`s.reps DESC, s.weight DESC NULLS LAST`,
+        )} AS "mostReps",
+        ${recordAgg(
+          Prisma.sql`s.duration`,
+          Prisma.sql`s.duration > 0`,
+          Prisma.sql`s.duration DESC`,
+        )} AS "longestDuration",
+        ${recordAgg(
+          Prisma.sql`s.distance`,
+          Prisma.sql`s.distance > 0`,
+          Prisma.sql`s.distance DESC`,
+        )} AS "longestDistance"
+      FROM s
+      GROUP BY s."exerciseId", s.name, s."exerciseType"
+      ORDER BY sessions DESC, s.name`;
   }
 
   private mapSet(s: {

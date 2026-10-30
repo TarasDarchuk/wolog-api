@@ -37,4 +37,17 @@ describe('ExercisesService', () => {
       expect.objectContaining({ take: 10, skip: 20 }),
     );
   });
+
+  it('lists only the caller’s custom exercises with customOnly', async () => {
+    prisma.exercise.findMany.mockResolvedValue([]);
+    prisma.exercise.count.mockResolvedValue(0);
+
+    await service.list({ limit: 50, offset: 0, customOnly: true }, 'user-1');
+
+    expect(prisma.exercise.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: { deletedAt: null, userId: 'user-1', isCustom: true },
+      }),
+    );
+  });
 });
