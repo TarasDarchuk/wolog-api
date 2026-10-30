@@ -221,7 +221,7 @@ export const MCP_SERVER_INSTRUCTIONS = `Wolog workout connector. Rules:
 - Before update_routine, ALWAYS call get_routine and edit the returned structure, preserving every id (routine, item, exercise, set). Only change the fields you mean to change.
 - Prefer referencing exercises by name and trust server resolution; check the resolution report in the response and tell the user about low-confidence or created-custom matches.
 - Routine sets have a type: normal, warmup, dropset or failure. Warmup sets come first and are excluded from volume and records; a drop set goes directly after the set it drops from and does not get its own set number. Preserve each set's type on update.
-- Use get_workout_history (optionally per exercise) to ground progression decisions; it includes per-session best sets and estimated 1RM (warmup sets excluded).
+- Use get_personal_records for all-time PRs and get_workout_history (optionally per exercise) for recent sessions to ground progression decisions; get_workout_history only covers recent sessions, never treat its best set as the user's record. Warmup sets are excluded from records and estimated 1RM.
 - Custom exercises (isCustom true in list_exercises) can be created, changed and deleted with create_exercise, update_exercise and delete_exercise. Library exercises are read-only. Search the library before creating one.
 - Routines can be grouped into folders. When the user asks for a multi-day training program or plan (e.g. push/pull/legs, upper/lower), use create_program — one call that creates a folder named after the program with all its routines inside.`;
 
@@ -503,7 +503,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   {
     name: 'get_workout_history',
     description:
-      'Read recent completed workouts (weights kg). Only performed work is returned — skipped sets and discarded/zero-duration sessions are excluded. With exerciseId, returns per-session sets for that exercise plus derived best set and estimated 1RM (Epley) — use this to plan progressive overload. Each set has a type; warmup sets are excluded from best set and estimated 1RM (and should be left out of any volume you compute).',
+      'Read RECENT completed workouts (weights kg) — newest first, limited to the last `limit` sessions, so it does not show all-time records: use get_personal_records for PRs. Only performed work is returned — skipped sets and discarded/zero-duration sessions are excluded. With exerciseId, returns per-session sets for that exercise plus derived best set and estimated 1RM (Epley), and `allTime` records over the whole history — use both to plan progressive overload. Each set has a type; warmup sets are excluded from best set and estimated 1RM (and should be left out of any volume you compute).',
     inputSchema: {
       type: 'object',
       properties: {
@@ -518,6 +518,26 @@ export const MCP_TOOLS: McpToolDefinition[] = [
       additionalProperties: false,
     },
     annotations: { title: 'Read workout history', ...READ_ONLY },
+    scope: 'history:read',
+  },
+  {
+    name: 'get_personal_records',
+    description:
+      "All-time personal records per exercise over the user's ENTIRE workout history (weights kg): best estimated 1RM (Epley), heaviest weight, most reps, longest duration and distance — each with the set, date and workoutId — plus session count and last performed date. Warmups and unperformed sets are excluded. Call this before setting target weights or judging progress; get_workout_history only covers recent sessions.",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        exerciseIds: {
+          type: 'array',
+          items: { type: 'string' },
+          maxItems: 100,
+          description:
+            'Limit to these exercises; omit for every exercise the user has logged',
+        },
+      },
+      additionalProperties: false,
+    },
+    annotations: { title: 'Read personal records', ...READ_ONLY },
     scope: 'history:read',
   },
 ];

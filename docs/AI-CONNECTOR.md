@@ -75,7 +75,8 @@ Under `/api/v1` (connector token or app JWT):
 | `PATCH /routines/:id` | routines:write | Id-keyed merge, 409 on stale baseUpdatedAt |
 | `GET /training-profile` | history:read | Onboarding answers (goals, level, equipment, daysPerWeek); MCP tool `get_training_profile` |
 | `GET /workouts?since=&exerciseId=&limit=` | history:read | Completed workouts |
-| `GET /exercises/:id/history?limit=` | history:read | Per-session sets + best set + Epley e1RM (warmup sets excluded) |
+| `GET /exercises/:id/history?limit=` | history:read | Recent per-session sets + best set + Epley e1RM (warmup sets excluded), plus `allTime` records |
+| `GET /personal-records?exerciseIds=` | history:read | All-time records per exercise over the whole history (best e1RM, heaviest, most reps, longest duration/distance); MCP tool `get_personal_records` |
 
 History endpoints return **performed work only**: sets with
 `isCompleted: false` (untouched targets) are omitted, and workouts with zero
@@ -87,7 +88,7 @@ here keeps connector history consistent with what the app shows.
 MCP tools: `list_exercises`, `create_exercise`, `update_exercise`,
 `delete_exercise`, `list_routines`, `get_routine`, `create_routine`,
 `update_routine`, `create_program`, folder tools, `get_training_profile`,
-`get_workout_history` — same services underneath.
+`get_workout_history`, `get_personal_records` — same services underneath.
 
 Custom exercise deletion is refused while anything references the exercise:
 iOS before 1.4.2 hard-purges a soft-deleted exercise after 5 days even when

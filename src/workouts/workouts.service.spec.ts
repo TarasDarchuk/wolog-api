@@ -11,6 +11,9 @@ import {
 } from '../__mocks__/prisma.mock.js';
 import { epleyE1Rm, WorkoutsService } from './workouts.service.js';
 
+const EX_1 = '44444444-0000-4000-8000-000000000001';
+const EX_9 = '44444444-0000-4000-8000-000000000009';
+
 function makeSet(overrides: Record<string, unknown> = {}) {
   return {
     setNumber: 1,
@@ -145,11 +148,12 @@ describe('WorkoutsService', () => {
   describe('exerciseHistory', () => {
     beforeEach(() => {
       prisma.exercise.findUnique.mockResolvedValue({
-        id: 'ex-1',
+        id: EX_1,
         name: 'Bench Press (Barbell)',
         userId: null,
         deletedAt: null,
       });
+      prisma.$queryRaw.mockResolvedValue([]);
     });
 
     it('derives the best set and e1RM per session', async () => {
@@ -169,7 +173,7 @@ describe('WorkoutsService', () => {
         },
       ]);
 
-      const result = await service.exerciseHistory(USER_ID, 'ex-1', 10);
+      const result = await service.exerciseHistory(USER_ID, EX_1, 10);
       expect(result.name).toBe('Bench Press (Barbell)');
       expect(result.sessions).toHaveLength(1);
 
@@ -205,7 +209,7 @@ describe('WorkoutsService', () => {
         },
       ]);
 
-      const result = await service.exerciseHistory(USER_ID, 'ex-1', 10);
+      const result = await service.exerciseHistory(USER_ID, EX_1, 10);
 
       expect(result.sessions[0].bestSet).toMatchObject({ weight: 100 });
       expect(result.sessions[0].estimatedOneRepMax).toBeCloseTo(116.67, 1);
@@ -217,7 +221,7 @@ describe('WorkoutsService', () => {
 
     it('only counts sessions and sets that were actually performed', async () => {
       prisma.workout.findMany.mockResolvedValue([]);
-      await service.exerciseHistory(USER_ID, 'ex-1', 10);
+      await service.exerciseHistory(USER_ID, EX_1, 10);
 
       const query = prisma.workout.findMany.mock.calls[0][0];
       expect(query.where.completedAt).toEqual({
@@ -225,23 +229,46 @@ describe('WorkoutsService', () => {
         gt: prisma.workout.fields.startedAt,
       });
       expect(query.where.exercises).toEqual({
-        some: { exerciseId: 'ex-1', sets: { some: { isCompleted: true } } },
+        some: { exerciseId: EX_1, sets: { some: { isCompleted: true } } },
       });
       expect(query.include.exercises.include.sets.where).toEqual({
         isCompleted: true,
       });
     });
 
+    it('adds all-time records beyond the recent sessions', async () => {
+      prisma.workout.findMany.mockResolvedValue([]);
+      const records = { exerciseId: EX_1, heaviestWeight: { value: 95 } };
+      prisma.$queryRaw.mockResolvedValue([records]);
+
+      const result = await service.exerciseHistory(USER_ID, EX_1, 10);
+
+      expect(result.allTime).toBe(records);
+      const values = prisma.$queryRaw.mock.calls[0]
+        .slice(1)
+        .flatMap((v) =>
+          v && typeof v === 'object' && 'values' in v ? v.values : [v],
+        );
+      expect(values).toEqual(expect.arrayContaining([USER_ID, [EX_1]]));
+    });
+
+    it('treats a non-UUID exercise id as not found', async () => {
+      await expect(
+        service.exerciseHistory(USER_ID, 'bench', 10),
+      ).rejects.toThrow(NotFoundException);
+      expect(prisma.exercise.findUnique).not.toHaveBeenCalled();
+    });
+
     it("hides another user's custom exercise", async () => {
       prisma.exercise.findUnique.mockResolvedValue({
-        id: 'ex-9',
+        id: EX_9,
         name: 'Secret Move',
         userId: OTHER_USER_ID,
         deletedAt: null,
       });
-      await expect(
-        service.exerciseHistory(USER_ID, 'ex-9', 10),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.exerciseHistory(USER_ID, EX_9, 10)).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });

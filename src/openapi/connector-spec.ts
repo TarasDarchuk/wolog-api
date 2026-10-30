@@ -685,7 +685,7 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
         get: {
           operationId: 'getWorkoutHistory',
           summary:
-            'Recent completed workouts, newest first (weights kg). Performed work only: skipped sets and discarded/zero-duration sessions are excluded',
+            'Recent completed workouts, newest first (weights kg), up to `limit` — not all-time: use getPersonalRecords for PRs. Performed work only: skipped sets and discarded/zero-duration sessions are excluded',
           parameters: [
             {
               name: 'since',
@@ -708,7 +708,7 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
         get: {
           operationId: 'getExerciseHistory',
           summary:
-            'Per-session sets for one exercise with derived best set and estimated 1RM (Epley) — use for progressive overload. Warmup sets are excluded from best set and e1RM.',
+            'Recent per-session sets for one exercise with derived best set and estimated 1RM (Epley), plus `allTime` records over the whole history — use for progressive overload. Warmup sets are excluded from best set and e1RM.',
           parameters: [
             {
               name: 'id',
@@ -725,6 +725,22 @@ export function buildConnectorOpenApiSpec(publicBaseUrl: string) {
           responses: {
             '200': { description: 'Sessions with sets, best set, e1RM' },
           },
+        },
+      },
+      '/personal-records': {
+        get: {
+          operationId: 'getPersonalRecords',
+          summary:
+            "All-time personal records per exercise over the user's entire history (kg): best estimated 1RM, heaviest weight, most reps, longest duration/distance, each with set, date and workoutId. Call before setting target weights.",
+          parameters: [
+            {
+              name: 'exerciseIds',
+              in: 'query',
+              description: 'Optional comma-separated exercise ids',
+              schema: { type: 'string' },
+            },
+          ],
+          responses: { '200': { description: 'Records per exercise' } },
         },
       },
     },

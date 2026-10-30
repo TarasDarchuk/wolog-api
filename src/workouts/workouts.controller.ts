@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Controller,
   Get,
   Param,
@@ -11,6 +12,7 @@ import { CurrentUser } from '../common/decorators/current-user.decorator.js';
 import { RequireScopes } from '../common/decorators/require-scopes.decorator.js';
 import { ConnectorAuthGuard } from '../common/guards/connector-auth.guard.js';
 import { SCOPE_HISTORY_READ } from '../oauth/scopes.js';
+import { isUUID } from 'class-validator';
 import { WorkoutsService } from './workouts.service.js';
 import {
   ExerciseHistoryDto,
@@ -48,5 +50,31 @@ export class ExerciseHistoryController {
     @Query() dto: ExerciseHistoryDto,
   ) {
     return this.workouts.exerciseHistory(userId, exerciseId, dto.limit!);
+  }
+}
+
+@Public()
+@UseGuards(ConnectorAuthGuard)
+@RequireScopes(SCOPE_HISTORY_READ)
+@Controller('personal-records')
+export class PersonalRecordsController {
+  constructor(private readonly workouts: WorkoutsService) {}
+
+  /** `exerciseIds` is an optional comma-separated list. */
+  @Get()
+  async list(
+    @CurrentUser('id') userId: string,
+    @Query('exerciseIds') exerciseIds?: string,
+  ) {
+    const ids = exerciseIds
+      ?.split(',')
+      .map((id) => id.trim())
+      .filter(Boolean);
+    if (ids && (ids.length > 100 || !ids.every((id) => isUUID(id)))) {
+      throw new BadRequestException(
+        'exerciseIds must be up to 100 comma-separated exercise ids',
+      );
+    }
+    return { records: await this.workouts.personalRecords(userId, ids) };
   }
 }

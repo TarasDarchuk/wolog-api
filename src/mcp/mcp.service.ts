@@ -5,7 +5,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
-import { validate } from 'class-validator';
+import { isUUID, validate } from 'class-validator';
 import { ExercisesService } from '../exercises/exercises.service.js';
 import { CustomExercisesService } from '../exercises/custom-exercises.service.js';
 import { FoldersService } from '../routines/folders.service.js';
@@ -272,6 +272,25 @@ export class McpService {
           throw new BadRequestException('id is required');
         }
         return this.folders.remove(userId, args.id);
+      }
+      case 'get_personal_records': {
+        const ids: unknown = args.exerciseIds;
+        if (
+          ids !== undefined &&
+          (!Array.isArray(ids) ||
+            ids.length > 100 ||
+            !ids.every((id) => typeof id === 'string' && isUUID(id)))
+        ) {
+          throw new BadRequestException(
+            'exerciseIds must be an array of up to 100 exercise ids',
+          );
+        }
+        return {
+          records: await this.workouts.personalRecords(
+            userId,
+            ids as string[] | undefined,
+          ),
+        };
       }
       case 'get_workout_history': {
         if (args.exerciseId) {
