@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client.js';
 import { PrismaService } from '../../prisma/prisma.service.js';
@@ -18,7 +19,7 @@ export class WorkoutSyncService {
   async push(userId: string, workouts: WorkoutPushDto[]): Promise<PushResult> {
     const result: PushResult = { accepted: [], rejected: [] };
 
-    for (const workout of workouts) {
+    for (let workout of workouts) {
       try {
         const existing = await this.prisma.workout.findUnique({
           where: { id: workout.id },
@@ -43,6 +44,13 @@ export class WorkoutSyncService {
           result.rejected.push({ id: workout.id, reason: 'forbidden' });
           continue;
         }
+
+        const remapped = await this.remapForeignChildIds(userId, workout);
+        if (!remapped) {
+          result.rejected.push({ id: workout.id, reason: 'forbidden' });
+          continue;
+        }
+        workout = remapped;
 
         let removedPhotoIds: string[] = [];
 
@@ -162,6 +170,88 @@ export class WorkoutSyncService {
     }
 
     return result;
+  }
+
+  /**
+   * Children are replaced by id, so an id that already belongs to another workout
+   * fails the createMany (P2002) — every workout in a bulk re-push whose children
+   * collide is rejected. Ids held by another workout of the same user get fresh
+   * ones (the pull hands them back to the client); ids of another user's
+   * workout → null.
+   */
+  private async remapForeignChildIds(
+    userId: string,
+    workout: WorkoutPushDto,
+  ): Promise<WorkoutPushDto | null> {
+    const exerciseIds = workout.exercises.map((we) => we.id);
+    const setIds = workout.exercises.flatMap((we) =>
+      (we.sets ?? []).map((s) => s.id),
+    );
+    const supersetIds = (workout.supersets ?? []).map((ss) => ss.id);
+
+    const notThis = { not: workout.id };
+    const [exs, sets, sss] = await Promise.all([
+      this.prisma.workoutExercise.findMany({
+        where: { id: { in: exerciseIds }, workoutId: notThis },
+        select: { id: true, workout: { select: { userId: true } } },
+      }),
+      this.prisma.exerciseSet.findMany({
+        where: {
+          id: { in: setIds },
+          workoutExercise: { workoutId: notThis },
+        },
+        select: {
+          id: true,
+          workoutExercise: {
+            select: { workout: { select: { userId: true } } },
+          },
+        },
+      }),
+      this.prisma.workoutSuperset.findMany({
+        where: { id: { in: supersetIds }, workoutId: notThis },
+        select: { id: true, workout: { select: { userId: true } } },
+      }),
+    ]);
+
+    const owners = [
+      ...exs.map((r) => ({ id: r.id, userId: r.workout?.userId })),
+      ...sets.map((r) => ({
+        id: r.id,
+        userId: r.workoutExercise?.workout?.userId,
+      })),
+      ...sss.map((r) => ({ id: r.id, userId: r.workout?.userId })),
+    ];
+    if (owners.length === 0) return workout;
+    if (owners.some((o) => o.userId !== userId)) {
+      this.logger.warn(
+        `Workout ${workout.id} reuses child ids of another user's workout`,
+      );
+      return null;
+    }
+
+    // Postgres returns ids lowercased; clients send them uppercase
+    const fresh = new Map(
+      owners.map((o) => [o.id.toLowerCase(), randomUUID()]),
+    );
+    const map = (id: string) => fresh.get(id.toLowerCase()) ?? id;
+    this.logger.warn(
+      `Workout ${workout.id}: ${fresh.size} child ids belong to another workout of the same user — reassigned`,
+    );
+
+    return {
+      ...workout,
+      exercises: workout.exercises.map((we) => ({
+        ...we,
+        id: map(we.id),
+        supersetId: we.supersetId ? map(we.supersetId) : we.supersetId,
+        sets: (we.sets ?? []).map((s) => ({ ...s, id: map(s.id) })),
+      })),
+      supersets: workout.supersets?.map((ss) => ({
+        ...ss,
+        id: map(ss.id),
+        exerciseIds: ss.exerciseIds.map(map),
+      })),
+    };
   }
 
   /** True if any of the photo ids is already owned by another user. */

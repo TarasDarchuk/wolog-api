@@ -44,6 +44,81 @@ describe('WorkoutSyncService', () => {
     prisma = createMockPrismaService();
     storage = createMockStorageService();
     service = new WorkoutSyncService(prisma as any, storage as any);
+    // No child id belongs to another workout
+    prisma.workoutExercise.findMany.mockResolvedValue([]);
+    prisma.exerciseSet.findMany.mockResolvedValue([]);
+    prisma.workoutSuperset.findMany.mockResolvedValue([]);
+  });
+
+  // ─── Push: child ids owned by another workout ──────────────────────────
+
+  describe('push with child ids owned by another workout', () => {
+    beforeEach(() => {
+      prisma.workout.findUnique.mockResolvedValue(null);
+      prisma.workout.upsert.mockResolvedValue({});
+      prisma.workoutExercise.createMany.mockResolvedValue({ count: 1 });
+      prisma.exerciseSet.createMany.mockResolvedValue({ count: 1 });
+      prisma.workoutSuperset.createMany.mockResolvedValue({ count: 1 });
+    });
+
+    it('reassigns ids held by another workout of the same user', async () => {
+      prisma.workoutExercise.findMany.mockResolvedValue([
+        { id: 'we-1', workout: { userId: USER_ID } },
+      ]);
+      prisma.workoutSuperset.findMany.mockResolvedValue([
+        { id: 'ss-1', workout: { userId: USER_ID } },
+      ]);
+      const dto = makeWorkoutPushDto({
+        supersets: [
+          { id: 'SS-1', supersetColorIndex: 0, exerciseIds: ['WE-1'] },
+        ],
+      });
+      dto.exercises[0].id = 'WE-1';
+
+      const result = await service.push(USER_ID, [dto]);
+
+      expect(result.accepted).toEqual(['workout-1']);
+      const we = prisma.workoutExercise.createMany.mock.calls[0][0].data[0];
+      const ss = prisma.workoutSuperset.createMany.mock.calls[0][0].data[0];
+      expect(we.id).not.toBe('WE-1');
+      expect(ss.id).not.toBe('SS-1');
+      expect(ss.exerciseIds).toEqual([we.id]);
+      // Set id not taken — kept, but attached to the new exercise id
+      expect(prisma.exerciseSet.createMany).toHaveBeenCalledWith({
+        data: [
+          expect.objectContaining({ id: 'set-1', workoutExerciseId: we.id }),
+        ],
+      });
+    });
+
+    it("rejects as forbidden when an id belongs to another user's workout", async () => {
+      prisma.exerciseSet.findMany.mockResolvedValue([
+        {
+          id: 'set-1',
+          workoutExercise: { workout: { userId: OTHER_USER_ID } },
+        },
+      ]);
+
+      const result = await service.push(USER_ID, [makeWorkoutPushDto()]);
+
+      expect(result.rejected).toEqual([
+        { id: 'workout-1', reason: 'forbidden' },
+      ]);
+      expect(prisma.$transaction).not.toHaveBeenCalled();
+    });
+
+    it('only looks for ids outside the pushed workout', async () => {
+      await service.push(USER_ID, [makeWorkoutPushDto()]);
+
+      expect(prisma.workoutExercise.findMany).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: { id: { in: ['we-1'] }, workoutId: { not: 'workout-1' } },
+        }),
+      );
+      expect(prisma.workoutExercise.createMany).toHaveBeenCalledWith({
+        data: [expect.objectContaining({ id: 'we-1' })],
+      });
+    });
   });
 
   // ─── Push ──────────────────────────────────────────────────────────────
@@ -477,7 +552,8 @@ describe('WorkoutSyncService', () => {
 
     it('detects hasMore with limit+1 trick', async () => {
       const records = Array.from({ length: 3 }, (_, i) =>
-        makeExistingWorkout({ id: `w-${i}`,
+        makeExistingWorkout({
+          id: `w-${i}`,
           updatedAt: new Date(Date.UTC(2026, 0, 1 + i)),
         }),
       );
