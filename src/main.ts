@@ -7,6 +7,7 @@ import { AppModule } from './app.module.js';
 import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.js';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter.js';
 import { AlertingLogger } from './common/alerts/alerting-logger.js';
+import { bodyParserErrorHandler } from './common/filters/body-parser-error.handler.js';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -22,6 +23,7 @@ async function bootstrap() {
   app.use(helmet());
   app.use(json({ limit: '10mb' }));
   app.use(urlencoded({ extended: true, limit: '10mb' }));
+  app.use(bodyParserErrorHandler);
   // OAuth provider, discovery metadata, MCP endpoint, and the GPT Action
   // spec live at the root — external clients expect them unprefixed.
   app.setGlobalPrefix('api/v1', {
