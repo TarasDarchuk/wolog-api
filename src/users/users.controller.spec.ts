@@ -13,6 +13,8 @@ import { join } from 'path';
 import request from 'supertest';
 import { UsersController } from './users.controller';
 import { TrainingProfileService } from './training-profile.service';
+import { SubscriptionsService } from '../subscriptions/subscriptions.service';
+import { AdaptyApiService } from '../subscriptions/adapty-api.service';
 import { AuthService } from '../auth/auth.service';
 import { JwtStrategy } from '../auth/strategies/jwt.strategy';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
@@ -110,6 +112,8 @@ describe('UsersController — training profile (HTTP)', () => {
       providers: [
         AuthService,
         TrainingProfileService,
+        SubscriptionsService,
+        { provide: AdaptyApiService, useValue: {} },
         JwtStrategy,
         { provide: APP_GUARD, useClass: JwtAuthGuard },
         { provide: ConfigService, useValue: config },
@@ -139,6 +143,48 @@ describe('UsersController — training profile (HTTP)', () => {
     expect(res.body.trainingProfile).toBeNull();
     expect(res.body.id).toBe(USER_ID);
     expect(res.body.hasApple).toBe(true);
+  });
+
+  it('gives an account without a cohort (older app version) full access', async () => {
+    prisma.user.findUnique.mockResolvedValue({
+      id: USER_ID,
+      email: 'test@example.com',
+      displayName: 'Test',
+      appleUserId: 'apple-1',
+      googleUserId: null,
+      isPro: false,
+      proExpiresAt: null,
+      paywallCohort: null,
+      createdAt: new Date(),
+      trainingProfile: null,
+    });
+
+    const res = await getMe().expect(200);
+    const body = res.body as { paywallCohort: unknown; access: unknown };
+
+    expect(body.paywallCohort).toBeNull();
+    expect(body.access).toBe('full');
+  });
+
+  it('reports a new-cohort account without Pro as locked', async () => {
+    prisma.user.findUnique.mockResolvedValue({
+      id: USER_ID,
+      email: 'test@example.com',
+      displayName: 'Test',
+      appleUserId: 'apple-1',
+      googleUserId: null,
+      isPro: false,
+      proExpiresAt: null,
+      paywallCohort: 'NEW',
+      createdAt: new Date(),
+      trainingProfile: null,
+    });
+
+    const res = await getMe().expect(200);
+    const body = res.body as { paywallCohort: unknown; access: unknown };
+
+    expect(body.paywallCohort).toBe('new');
+    expect(body.access).toBe('locked');
   });
 
   it('round-trips PUT → GET /users/me', async () => {

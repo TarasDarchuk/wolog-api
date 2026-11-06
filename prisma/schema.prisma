@@ -91,6 +91,12 @@ model User {
   googleUserId String?  @unique
   displayName  String?
   isPro        Boolean  @default(false)
+  /// Subscription expiry from the Adapty webhook (null = unknown / never reported).
+  proExpiresAt DateTime?
+  /// Hard-paywall cohort. Backfilled LEGACY for every account that existed
+  /// before the hard paywall; null (accounts from older app versions) counts
+  /// as legacy. LEGACY never turns into NEW.
+  paywallCohort PaywallCohort?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -105,6 +111,7 @@ model User {
   trainingProfile  TrainingProfile?
   oauthAuthCodes   OAuthAuthorizationCode[]
   oauthTokens      OAuthToken[]
+  subscriptionEvents SubscriptionEvent[]
 }
 
 model RefreshToken {
@@ -442,4 +449,31 @@ model TrainingProfile {
   updatedAt             DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum PaywallCohort {
+  LEGACY
+  NEW
+}
+
+/// Raw Adapty webhook events, kept for our own subscription / A/B analysis.
+model SubscriptionEvent {
+  id              String   @id @default(uuid()) @db.Uuid
+  /// Adapty `event_properties.profile_event_id` — dedup key.
+  profileEventId  String?  @unique
+  userId          String?  @db.Uuid
+  adaptyProfileId String?
+  eventType       String
+  environment     String?
+  productId       String?
+  expiresAt       DateTime?
+  abTestName      String?
+  variationId     String?
+  paywallName     String?
+  payload         Json
+  createdAt       DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }

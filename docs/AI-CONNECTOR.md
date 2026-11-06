@@ -43,6 +43,14 @@ Claude / ChatGPT
 - **Free tier**: routine creation is limited to 5 routines (`User.isPro`
   lifts it); a 6th create returns 403 with `code: "PRO_REQUIRED"`.
   Resolver-created custom exercises are not gated.
+- **Hard paywall**: for a `new`-cohort account without an active
+  subscription (`access: "locked"`, see "Subscriptions" in `CLAUDE.md`) the
+  MCP connector is fully locked — every `tools/call` returns a tool error
+  "A Wolog Pro subscription is required…" before touching any data
+  (`initialize` and `tools/list` still work, so the connector stays
+  installed). On the REST side the same users can still read (GETs stay
+  open), but routine, folder and custom-exercise writes answer **402**
+  `{"error":"subscription_required"}`. Legacy accounts are never locked.
 
 ## Endpoints
 

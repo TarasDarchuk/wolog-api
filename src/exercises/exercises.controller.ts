@@ -17,6 +17,7 @@ import {
   ConnectorAuthGuard,
   OptionalConnectorAuthGuard,
 } from '../common/guards/connector-auth.guard.js';
+import { RequiresAccess } from '../subscriptions/requires-access.guard.js';
 import { SCOPE_ROUTINES_WRITE } from '../oauth/scopes.js';
 import { ExercisesService } from './exercises.service.js';
 import { CustomExercisesService } from './custom-exercises.service.js';
@@ -48,6 +49,7 @@ export class ExercisesController {
   // Custom exercise management for AI connectors. Same scope as routine
   // writes: routine creation already creates custom exercises for unknown names.
   @Public()
+  @RequiresAccess()
   @UseGuards(ConnectorAuthGuard)
   @Post()
   @RequireScopes(SCOPE_ROUTINES_WRITE)
@@ -59,6 +61,7 @@ export class ExercisesController {
   }
 
   @Public()
+  @RequiresAccess()
   @UseGuards(ConnectorAuthGuard)
   @Patch(':id')
   @RequireScopes(SCOPE_ROUTINES_WRITE)
@@ -71,6 +74,7 @@ export class ExercisesController {
   }
 
   @Public()
+  @RequiresAccess()
   @UseGuards(ConnectorAuthGuard)
   @Delete(':id')
   @RequireScopes(SCOPE_ROUTINES_WRITE)

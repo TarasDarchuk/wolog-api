@@ -23,6 +23,10 @@ import {
   UpdateCustomExerciseDto,
 } from '../exercises/dto/custom-exercise.dto.js';
 import { MCP_SERVER_INSTRUCTIONS, MCP_TOOLS } from './mcp-tools.js';
+import { SubscriptionsService } from '../subscriptions/subscriptions.service.js';
+
+export const SUBSCRIPTION_REQUIRED_MESSAGE =
+  'A Wolog Pro subscription is required to use Wolog with AI assistants. The user can subscribe in the Wolog iOS app.';
 
 const SUPPORTED_PROTOCOL_VERSIONS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
@@ -79,6 +83,7 @@ export class McpService {
     private readonly folders: FoldersService,
     private readonly workouts: WorkoutsService,
     private readonly trainingProfiles: TrainingProfileService,
+    private readonly subscriptions: SubscriptionsService,
   ) {}
 
   /** Returns null for notifications (no response body → HTTP 202). */
@@ -171,6 +176,12 @@ export class McpService {
       return this.toolError(
         `This connection is missing the "${tool.scope}" permission. The user must reconnect and grant it.`,
       );
+    }
+
+    // Hard-paywall users without an active subscription: connector fully
+    // locked (history and export stay available in the app and on the web).
+    if ((await this.subscriptions.accessFor(caller.userId)) === 'locked') {
+      return this.toolError(SUBSCRIPTION_REQUIRED_MESSAGE);
     }
 
     try {

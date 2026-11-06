@@ -4,12 +4,15 @@ import { CurrentUser } from '../common/decorators/current-user.decorator.js';
 import { UpdateProDto } from './dto/update-pro.dto.js';
 import { TrainingProfileDto } from './dto/training-profile.dto.js';
 import { TrainingProfileService } from './training-profile.service.js';
+import { PaywallCohortDto } from '../subscriptions/dto/paywall-cohort.dto.js';
+import { SubscriptionsService } from '../subscriptions/subscriptions.service.js';
 
 @Controller('users')
 export class UsersController {
   constructor(
     private readonly authService: AuthService,
     private readonly trainingProfiles: TrainingProfileService,
+    private readonly subscriptions: SubscriptionsService,
   ) {}
 
   @Get('me')
@@ -18,11 +21,21 @@ export class UsersController {
   }
 
   // App-only (first-party JWT — connector/MCP tokens are rejected by the global
-  // guard). The app reports its current subscription state here so the backend
-  // Pro flag stays in lockstep with the entitlement.
+  // guard). The app reports its current subscription state here; for
+  // hard-paywall accounts the Adapty webhook wins (SubscriptionsService).
   @Put('me/pro')
   setPro(@CurrentUser('id') userId: string, @Body() dto: UpdateProDto) {
-    return this.authService.setProStatus(userId, dto.isPro);
+    return this.subscriptions.setProFromClient(userId, dto.isPro);
+  }
+
+  // Hard-paywall cohort, reported by the app after sign-in. One-way: a legacy
+  // account never becomes new (409); see SubscriptionsService.setCohort.
+  @Put('me/paywall-cohort')
+  setPaywallCohort(
+    @CurrentUser('id') userId: string,
+    @Body() dto: PaywallCohortDto,
+  ) {
+    return this.subscriptions.setCohort(userId, dto.cohort);
   }
 
   // Onboarding answers. Full replace — omitted fields are cleared.

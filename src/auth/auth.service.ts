@@ -9,6 +9,8 @@ import { JwtService } from '@nestjs/jwt';
 import * as appleSignin from 'apple-signin-auth';
 import { OAuth2Client } from 'google-auth-library';
 import * as bcrypt from 'bcrypt';
+import { computeAccess } from '../subscriptions/access.js';
+import { cohortToApi } from '../subscriptions/subscriptions.service.js';
 import { v4 as uuidv4 } from 'uuid';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { StorageService, photoPrefix } from '../storage/storage.service.js';
@@ -290,6 +292,8 @@ export class AuthService {
         appleUserId: true,
         googleUserId: true,
         isPro: true,
+        proExpiresAt: true,
+        paywallCohort: true,
         createdAt: true,
         trainingProfile: { select: TRAINING_PROFILE_SELECT },
       },
@@ -297,27 +301,14 @@ export class AuthService {
     if (!user) throw new UnauthorizedException('User not found');
     return {
       ...user,
+      paywallCohort: cohortToApi(user.paywallCohort),
+      access: computeAccess(user),
       trainingProfile: user.trainingProfile ?? null,
       hasApple: !!user.appleUserId,
       hasGoogle: !!user.googleUserId,
       appleUserId: undefined,
       googleUserId: undefined,
     };
-  }
-
-  /**
-   * Sets the user's Pro entitlement. Called by the app (first-party JWT only)
-   * reporting its current subscription state; lifts the free-tier routine cap.
-   */
-  async setProStatus(
-    userId: string,
-    isPro: boolean,
-  ): Promise<{ isPro: boolean }> {
-    await this.prisma.user.update({
-      where: { id: userId },
-      data: { isPro },
-    });
-    return { isPro };
   }
 
   private async generateTokens(

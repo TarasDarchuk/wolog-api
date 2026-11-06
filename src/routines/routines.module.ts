@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { SubscriptionsModule } from '../subscriptions/subscriptions.module.js';
 import { OAuthModule } from '../oauth/oauth.module.js';
 import { ExercisesModule } from '../exercises/exercises.module.js';
 import { FoldersController } from './folders.controller.js';
@@ -7,7 +8,7 @@ import { RoutinesController } from './routines.controller.js';
 import { RoutinesService } from './routines.service.js';
 
 @Module({
-  imports: [OAuthModule, ExercisesModule],
+  imports: [SubscriptionsModule, OAuthModule, ExercisesModule],
   controllers: [RoutinesController, FoldersController],
   providers: [RoutinesService, FoldersService],
   exports: [RoutinesService, FoldersService],
