@@ -28,8 +28,9 @@ export class UsersController {
     return this.subscriptions.setProFromClient(userId, dto.isPro);
   }
 
-  // Hard-paywall cohort, reported by the app after sign-in. One-way: a legacy
-  // account never becomes new (409); see SubscriptionsService.setCohort.
+  // Hard-paywall cohort, reported by the app after sign-in. A set cohort is
+  // final: legacy never becomes new (409), new stays new; see
+  // SubscriptionsService.setCohort.
   @Put('me/paywall-cohort')
   setPaywallCohort(
     @CurrentUser('id') userId: string,

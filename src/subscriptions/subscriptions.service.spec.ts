@@ -247,10 +247,19 @@ describe('SubscriptionsService', () => {
       expect(prisma.user.update).not.toHaveBeenCalled();
     });
 
-    it('allows new → legacy', async () => {
+    it('keeps a new account new when the app reports legacy', async () => {
       prisma.user.findUnique.mockResolvedValue(
         user({ paywallCohort: PaywallCohort.NEW }),
       );
+      await expect(service.setCohort(USER_ID, 'legacy')).resolves.toEqual({
+        paywallCohort: 'new',
+        access: 'locked',
+      });
+      expect(prisma.user.update).not.toHaveBeenCalled();
+    });
+
+    it('lets a null-cohort account become legacy', async () => {
+      prisma.user.findUnique.mockResolvedValue(user({}));
       await expect(service.setCohort(USER_ID, 'legacy')).resolves.toEqual({
         paywallCohort: 'legacy',
         access: 'full',

@@ -78,8 +78,11 @@ export class SubscriptionsService {
   ) {}
 
   /**
-   * Sets the hard-paywall cohort. One-way: LEGACY never becomes NEW, and a
-   * NULL account only becomes NEW while it is brand new and has no workouts.
+   * Sets the hard-paywall cohort. The account's cohort is final once set:
+   * LEGACY never becomes NEW, and NEW never becomes LEGACY (a reinstall
+   * leaves the session in the Keychain, so the device reports legacy — that
+   * must not free a hard-paywall account). Only a NULL account changes: to
+   * LEGACY always, to NEW only while it is brand new and has no workouts.
    */
   async setCohort(userId: string, cohort: CohortValue): Promise<CohortState> {
     const user = await this.prisma.user.findUnique({
@@ -94,10 +97,10 @@ export class SubscriptionsService {
     if (!user) throw new NotFoundException('User not found');
 
     let next: PaywallCohort;
-    if (cohort === 'legacy') {
-      next = PaywallCohort.LEGACY;
-    } else if (user.paywallCohort === PaywallCohort.NEW) {
+    if (user.paywallCohort === PaywallCohort.NEW) {
       next = PaywallCohort.NEW;
+    } else if (cohort === 'legacy') {
+      next = PaywallCohort.LEGACY;
     } else if (user.paywallCohort === PaywallCohort.LEGACY) {
       throw new ConflictException(
         'A legacy account cannot join the new cohort',
