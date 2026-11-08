@@ -4,9 +4,10 @@ import { TrainingProfileController } from './training-profile.controller.js';
 import { TrainingProfileService } from './training-profile.service.js';
 import { AuthModule } from '../auth/auth.module.js';
 import { OAuthModule } from '../oauth/oauth.module.js';
+import { SubscriptionsModule } from '../subscriptions/subscriptions.module.js';
 
 @Module({
-  imports: [AuthModule, OAuthModule],
+  imports: [AuthModule, OAuthModule, SubscriptionsModule],
   controllers: [UsersController, TrainingProfileController],
   providers: [TrainingProfileService],
   exports: [TrainingProfileService],

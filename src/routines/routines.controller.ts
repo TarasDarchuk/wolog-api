@@ -13,6 +13,7 @@ import { Public } from '../common/decorators/public.decorator.js';
 import { CurrentUser } from '../common/decorators/current-user.decorator.js';
 import { RequireScopes } from '../common/decorators/require-scopes.decorator.js';
 import { ConnectorAuthGuard } from '../common/guards/connector-auth.guard.js';
+import { RequiresAccess } from '../subscriptions/requires-access.guard.js';
 import { SCOPE_ROUTINES_READ, SCOPE_ROUTINES_WRITE } from '../oauth/scopes.js';
 import { RoutinesService } from './routines.service.js';
 import {
@@ -49,6 +50,7 @@ export class RoutinesController {
 
   @Post()
   @RequireScopes(SCOPE_ROUTINES_WRITE)
+  @RequiresAccess()
   async create(
     @CurrentUser('id') userId: string,
     @Body() dto: CreateRoutineDto,
@@ -58,6 +60,7 @@ export class RoutinesController {
 
   @Post('programs')
   @RequireScopes(SCOPE_ROUTINES_WRITE)
+  @RequiresAccess()
   async createProgram(
     @CurrentUser('id') userId: string,
     @Body() dto: CreateProgramDto,
@@ -67,6 +70,7 @@ export class RoutinesController {
 
   @Patch(':id')
   @RequireScopes(SCOPE_ROUTINES_WRITE)
+  @RequiresAccess()
   async update(
     @CurrentUser('id') userId: string,
     @Param('id', ParseUUIDPipe) id: string,
@@ -77,6 +81,7 @@ export class RoutinesController {
 
   @Delete(':id')
   @RequireScopes(SCOPE_ROUTINES_WRITE)
+  @RequiresAccess()
   async remove(
     @CurrentUser('id') userId: string,
     @Param('id', ParseUUIDPipe) id: string,

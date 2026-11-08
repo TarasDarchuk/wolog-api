@@ -24,6 +24,8 @@ import {
   NOW,
   PAST,
 } from '../__mocks__/prisma.mock.js';
+import { SubscriptionsService } from '../subscriptions/subscriptions.service';
+import { AdaptyApiService } from '../subscriptions/adapty-api.service';
 import { McpService } from './mcp.service.js';
 import { MCP_TOOLS } from './mcp-tools.js';
 
@@ -127,6 +129,8 @@ describe('McpService — routine set types', () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
         McpService,
+        SubscriptionsService,
+        { provide: AdaptyApiService, useValue: {} },
         RoutinesService,
         FoldersService,
         { provide: PrismaService, useValue: prisma },
@@ -314,6 +318,8 @@ describe('McpService — get_training_profile', () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
         McpService,
+        SubscriptionsService,
+        { provide: AdaptyApiService, useValue: {} },
         TrainingProfileService,
         { provide: PrismaService, useValue: prisma },
         { provide: RoutinesService, useValue: {} },
@@ -367,6 +373,20 @@ describe('McpService — get_training_profile', () => {
   it('requires the history:read scope', async () => {
     const res = await call(['routines:read']);
     expect(res.isError).toBe(true);
+    expect(prisma.trainingProfile.findUnique).not.toHaveBeenCalled();
+  });
+
+  it('is fully locked for a hard-paywall user without a subscription', async () => {
+    prisma.user.findUnique.mockResolvedValue({
+      isPro: false,
+      proExpiresAt: null,
+      paywallCohort: 'NEW',
+    });
+
+    const res = await call(['history:read']);
+
+    expect(res.isError).toBe(true);
+    expect(res.text).toContain('subscription is required');
     expect(prisma.trainingProfile.findUnique).not.toHaveBeenCalled();
   });
 });

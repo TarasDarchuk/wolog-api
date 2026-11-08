@@ -14,6 +14,7 @@ import { Public } from '../common/decorators/public.decorator.js';
 import { CurrentUser } from '../common/decorators/current-user.decorator.js';
 import { RequireScopes } from '../common/decorators/require-scopes.decorator.js';
 import { ConnectorAuthGuard } from '../common/guards/connector-auth.guard.js';
+import { RequiresAccess } from '../subscriptions/requires-access.guard.js';
 import { SCOPE_ROUTINES_READ, SCOPE_ROUTINES_WRITE } from '../oauth/scopes.js';
 import { FoldersService } from './folders.service.js';
 
@@ -41,12 +42,14 @@ export class FoldersController {
 
   @Post()
   @RequireScopes(SCOPE_ROUTINES_WRITE)
+  @RequiresAccess()
   async create(@CurrentUser('id') userId: string, @Body() dto: FolderNameDto) {
     return this.folders.createOrGet(userId, dto.name);
   }
 
   @Patch(':id')
   @RequireScopes(SCOPE_ROUTINES_WRITE)
+  @RequiresAccess()
   async rename(
     @CurrentUser('id') userId: string,
     @Param('id', ParseUUIDPipe) id: string,
@@ -57,6 +60,7 @@ export class FoldersController {
 
   @Delete(':id')
   @RequireScopes(SCOPE_ROUTINES_WRITE)
+  @RequiresAccess()
   async remove(
     @CurrentUser('id') userId: string,
     @Param('id', ParseUUIDPipe) id: string,

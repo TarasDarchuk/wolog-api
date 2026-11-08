@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { SubscriptionsModule } from '../subscriptions/subscriptions.module.js';
 import { OAuthModule } from '../oauth/oauth.module.js';
 import { ExercisesController } from './exercises.controller.js';
 import { ExercisesService } from './exercises.service.js';
@@ -6,7 +7,7 @@ import { ExerciseResolverService } from './exercise-resolver.service.js';
 import { CustomExercisesService } from './custom-exercises.service.js';
 
 @Module({
-  imports: [OAuthModule],
+  imports: [SubscriptionsModule, OAuthModule],
   controllers: [ExercisesController],
   providers: [
     ExercisesService,

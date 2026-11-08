@@ -11,6 +11,7 @@ import {
 import type { Response } from 'express';
 import { Public } from '../common/decorators/public.decorator.js';
 import { CurrentUser } from '../common/decorators/current-user.decorator.js';
+import { RequiresAccess } from '../subscriptions/requires-access.guard.js';
 import { CreateShareDto } from './dto/create-share.dto.js';
 import {
   ShareRateLimitedException,
@@ -22,6 +23,7 @@ export class SharesController {
   constructor(private readonly sharesService: SharesService) {}
 
   @Post()
+  @RequiresAccess()
   @HttpCode(HttpStatus.OK)
   async create(
     @CurrentUser('id') userId: string,

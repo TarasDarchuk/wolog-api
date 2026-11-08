@@ -4,6 +4,7 @@ import { ExercisesModule } from '../exercises/exercises.module.js';
 import { RoutinesModule } from '../routines/routines.module.js';
 import { WorkoutsModule } from '../workouts/workouts.module.js';
 import { UsersModule } from '../users/users.module.js';
+import { SubscriptionsModule } from '../subscriptions/subscriptions.module.js';
 import { McpController } from './mcp.controller.js';
 import { McpService } from './mcp.service.js';
 
@@ -14,6 +15,7 @@ import { McpService } from './mcp.service.js';
     RoutinesModule,
     WorkoutsModule,
     UsersModule,
+    SubscriptionsModule,
   ],
   controllers: [McpController],
   providers: [McpService],

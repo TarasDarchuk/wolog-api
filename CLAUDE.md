@@ -21,7 +21,8 @@ src/
 ├── config/                 # Global ConfigModule (.env)
 ├── prisma/                 # Global PrismaService (uses @prisma/adapter-pg driver)
 ├── auth/                   # Apple/Google auth, JWT, refresh tokens, account deletion
-├── users/                  # GET /users/me
+├── users/                  # GET /users/me, Pro + paywall cohort reports
+├── subscriptions/          # Hard paywall: cohort, access, Adapty webhook + server API, @RequiresAccess (402)
 ├── exercises/              # Public exercises list endpoint
 ├── sync/                   # Push/pull sync engine with conflict resolution
 ├── storage/                # StorageService: S3-compatible bucket (presigned PUT/GET, head, delete)
@@ -83,9 +84,10 @@ All routes prefixed with `/api/v1`. All routes require JWT auth except those mar
 - `DELETE /auth/account` — Delete account + all data (cascade)
 
 ### Users
-- `GET /users/me` — Current user profile, incl. `trainingProfile` (`null` if never set)
+- `GET /users/me` — Current user profile, incl. `trainingProfile` (`null` if never set), `paywallCohort` (`legacy|new|null`) and `access` (`full|locked`) — see Subscriptions
 - `PUT /users/me/training-profile` — Onboarding answers, full replace (omitted → `null`, `goals` → `[]`). `goals` ≤2 unique of `gainMuscle|getStronger|loseWeight` (primary first), `level` `beginner|intermediate|advanced`, `equipment` `fullGym|dumbbells|bodyweight`, `daysPerWeek` 2–6, `useMetric`, `starterProgramId`, `onboardingCompletedAt`. Exposed to AI connectors as MCP `get_training_profile` and `GET /training-profile` (scope `history:read`)
-- `PUT /users/me/pro` — App reports subscription state (first-party JWT only)
+- `PUT /users/me/pro` — App reports subscription state (first-party JWT only). For `new`-cohort accounts the Adapty webhook wins — see Subscriptions
+- `PUT /users/me/paywall-cohort` — `{cohort: "legacy"|"new"}`, one-way (see Subscriptions)
 
 ### Exercises (public)
 - `GET /exercises` — List seeded exercises (params: `limit`, `offset`)
@@ -107,6 +109,14 @@ One `Photo` table for workout photos (`workoutId` set, ≤10 per workout) and me
 ### Shares
 - `POST /shares` — Create a share (auth required). Body: opaque payload (template + exercises). Returns `{id, url, expiresAt}`. Rate-limited to 30 per user per 24h (returns 429 + `Retry-After`). Payloads > 256 KB return 413. TTL configurable via `SHARE_DEFAULT_TTL_DAYS` (default 90). Share URL prefix configurable via `SHARE_BASE_URL` (default `https://wolog.app/s/`).
 - `GET /shares/:id` — Fetch a share (public). Returns 404 if missing, 410 if expired (kept for grace window). Expired shares are deleted daily after a 7-day grace window.
+
+### Subscriptions — hard paywall (`src/subscriptions/`)
+New installs get a hard paywall; everyone who existed before it never changes.
+- **Cohort** `User.paywallCohort`: migration backfilled `LEGACY` for every existing account; `null` (accounts made by older app versions) counts as legacy. `PUT /users/me/paywall-cohort`: a set cohort is final (`new` stays `new` when the app reports legacy — a reinstall keeps the Keychain session, so the device says legacy; `legacy → new` → 409), `null → legacy` always, `null → new` only while the account is < 24 h old with 0 workouts (else 409)
+- **Access** (`computeAccess`): `locked` only for `NEW` without active Pro (`isPro` and `proExpiresAt` + 24 h grace not passed). Legacy/null are always `full` — their free tier is unchanged
+- **Locked users**: sync (`/sync/*`) and photos keep working (no data loss); every GET (history, routines, PRs, exercise history, training profile) stays open — the web shows it read-only with export; writes marked `@RequiresAccess()` (`RequiresAccessGuard`) answer **402** `{"error":"subscription_required","message":…}`: `POST/PATCH/DELETE` on `/routines` (+ `/routines/programs`), `/folders`, `/exercises`, and `POST /shares`. Never put it on sync, photos, `/users/me*`, `/auth/*` or webhooks. On a method that also has `@UseGuards(ConnectorAuthGuard)`, put `@RequiresAccess()` above it (guards run in order; it fails closed without `req.user`). MCP is fully locked: every tool returns "subscription required"
+- **`POST /webhooks/adapty`** (public, no throttle): `Authorization` must equal `ADAPTY_WEBHOOK_SECRET` (timing-safe), `{}` = dashboard handshake, dedup by `event_properties.profile_event_id`, always 200 (Adapty pauses delivery after failures). Every event is stored in `SubscriptionEvent` (A/B test, paywall, product — for our own analysis); events mapped to a user via `customer_user_id` (= Wolog user id) set `isPro`/`proExpiresAt` (`access_level_updated` for `premium`, else `profile_has_access_level`)
+- **Webhook beats the client**: for a `NEW` account that has at least one `SubscriptionEvent`, `PUT /users/me/pro` `isPro: true` is applied only if Adapty's server API (`GET /api/v2/server-side-api/profile/`, `ADAPTY_SECRET_KEY`) shows an active `premium` level; `isPro: false` is ignored while the stored webhook state is active. No key / Adapty down → the app is trusted and a warning logged. Legacy/null accounts, and `NEW` ones the webhook hasn't reported yet (purchase before `Adapty.identify`), still trust the app
 
 ### Health (public)
 - `GET /health` — DB connectivity check
@@ -143,6 +153,7 @@ Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) 
 - **Workouts**: Workout → WorkoutExercise → ExerciseSet, WorkoutSuperset, Photo
 - **Templates**: WorkoutTemplate → TemplateItem → TemplateExercise → TemplateSet, TemplateSuperset
 - **Other**: Exercise, BodyMeasurement (→ Photo via `photoId`)
+- **Subscriptions** (server-only, not synced): `User.paywallCohort` (enum `PaywallCohort` LEGACY|NEW), `User.proExpiresAt`, SubscriptionEvent (raw Adapty webhook events)
 
 All IDs are client-generated UUIDs. All syncable entities have `updatedAt` + `deletedAt`.
 
@@ -172,6 +183,8 @@ See `.env.example`. Required for production:
 - `CONNECTOR_ACCESS_TTL_MINUTES` / `CONNECTOR_REFRESH_TTL_DAYS` — Connector token lifetimes (60 / 30)
 - `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` — workout photo bucket (Railway bucket service `workout-photos`; set as `${{workout-photos.*}}` references). Without them photo endpoints return 503. Read once at startup: after resetting the bucket credentials, **redeploy wolog-api**, or presigned uploads keep failing with 403 (Oct 2026: a week of stranded photo uploads). An hourly probe (`StorageService.probeUploads`) does a real presigned PUT and logs an error if it fails
 - `TELEGRAM_ALERT_BOT_TOKEN`, `TELEGRAM_ALERT_CHAT_ID` — optional. Every error-level log (unhandled 5xx, failed sync pushes, S3 failures, the upload probe) is forwarded to this Telegram chat by `AlertingLogger` (deduplicated per 30 min, max 20/hour)
+- `ADAPTY_WEBHOOK_SECRET` — must equal the Adapty dashboard webhook "Authorization header value". One webhook per server: sandbox → dev, production → prod. Unset → the webhook answers 401
+- `ADAPTY_SECRET_KEY` — Adapty secret API key (App Settings → General → API keys) for the server API that verifies `isPro: true` claims. Optional: unset → the app's claim is trusted (warning logged)
 - `BFF_SHARED_SECRET` — Shared with the web app (my.wolog.app). Its server-side calls send `X-Wolog-Bff-Secret` + `X-Wolog-Client-IP`, and the rate limiter keys anonymous web traffic on that IP instead of the BFF's
 - `OAUTH_DEV_LOGIN` — `true` enables email dev sign-in on the consent screen (non-production only)
 
@@ -180,3 +193,13 @@ See `.env.example`. Required for production:
 iOS app: `../wolog/` (SwiftUI + SwiftData)
 - Exercises JSON seed data: `../wolog/wolog/Resources/exercises.json` (also copied to `prisma/exercises.json`)
 - Enum definitions: `../wolog/wolog/Shared/SharedEnums.swift`
+
+## Notion
+
+The whole Wolog product (iOS app `wolog`, API `wolog-api`, web app `wolog-web`, landing `wolog-landing`) shares one Notion page, "Wolog": https://app.notion.com/p/3241b7ea87b881e19e29f9589a4b6499 (read and write it through the Notion MCP).
+
+- **Feature Roadmap** database: unbuilt ideas only, tagged with `Project` (iOS / API / Web / Landing). When Taras mentions an idea for later, add a row there. When work here ships one of those ideas, delete its row.
+- **Epic: Trainer**, **Epic: Coach** and **Epic: Hard Paywall** databases: big multi-task features, one row per task. A new big feature gets its own `Epic: …` database on the Wolog page instead of crowding Feature Roadmap.
+- **Video Content System — Short-form**: marketing video process.
+
+The code is the source of truth for status, bugs and decisions. Don't create trackers, logs or checklists in Notion.

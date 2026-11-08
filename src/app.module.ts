@@ -16,6 +16,7 @@ import { OAuthModule } from './oauth/oauth.module.js';
 import { RoutinesModule } from './routines/routines.module.js';
 import { WorkoutsModule } from './workouts/workouts.module.js';
 import { McpModule } from './mcp/mcp.module.js';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module.js';
 import { OpenApiModule } from './openapi/openapi.module.js';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
 import { UserThrottlerGuard } from './common/guards/user-throttler.guard.js';
@@ -39,6 +40,7 @@ import { FaviconController } from './common/favicon.controller.js';
     RoutinesModule,
     WorkoutsModule,
     McpModule,
+    SubscriptionsModule,
     OpenApiModule,
   ],
   controllers: [FaviconController],
