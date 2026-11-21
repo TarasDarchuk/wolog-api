@@ -128,7 +128,7 @@ Lets Claude (remote MCP at `/mcp`) and ChatGPT (GPT Action via `/openapi.json`) 
 - `POST /routines` — create; server resolves exercise names → catalog UUIDs, returns a resolution report; free tier capped at 5 routines (403 `PRO_REQUIRED`, `User.isPro` lifts it)
 - `PATCH /routines/:id` — **id-keyed merge** (never delete-and-replace); `baseUpdatedAt` → 409 with current routine on conflict; bumps `updatedAt` so the change reaches the phone via pull sync
 - `DELETE /routines/:id` — soft delete (bumps `updatedAt`, reaches the phone via pull sync)
-- `GET /workouts`, `GET /exercises/:id/history` — **recent** history + Epley e1RM (scope `history:read`); `/exercises/:id/history` also returns `allTime` records
+- `GET /workouts`, `GET /exercises/:id/history` — **recent** history + Epley e1RM (scope `history:read`); `/exercises/:id/history` also returns `allTime` records. Both include the user's notes (trimmed, `null` when blank): `/workouts` → `notes` per workout and per exercise; `/exercises/:id/history` → `workoutNotes` + `notes` per session (several entries of the exercise joined by newline)
 - `GET /personal-records` — all-time records per exercise over the whole history (MCP `get_personal_records`). History tools are paged to recent sessions, so without this the AI misses older PRs
 - `GET /training-profile` — onboarding answers (scope `history:read`; MCP tool `get_training_profile`)
 - All weights kg, durations seconds, distances meters

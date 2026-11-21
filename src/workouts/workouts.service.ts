@@ -46,6 +46,12 @@ export interface ExerciseRecords {
   longestDistance: RecordSet | null;
 }
 
+/** User-written note, or null when empty/whitespace. */
+function noteOrNull(notes: string | null | undefined): string | null {
+  const trimmed = notes?.trim();
+  return trimmed ? trimmed : null;
+}
+
 /** One record row per metric: the top set by `order`, as JSON. */
 function recordAgg(value: Prisma.Sql, filter: Prisma.Sql, order: Prisma.Sql) {
   return Prisma.sql`(array_agg(jsonb_build_object(
@@ -112,11 +118,13 @@ export class WorkoutsService {
         name: w.name,
         startedAt: w.startedAt.toISOString(),
         completedAt: w.completedAt?.toISOString() ?? null,
+        notes: noteOrNull(w.notes),
         exercises: w.exercises
           .filter((we) => we.sets.length > 0)
           .map((we) => ({
             exerciseId: we.exerciseId,
             name: we.exercise?.name ?? null,
+            notes: noteOrNull(we.notes),
             sets: we.sets.map((s) => this.mapSet(s)),
           })),
       })),
@@ -197,6 +205,13 @@ export class WorkoutsService {
         workoutId: w.id,
         workoutName: w.name,
         completedAt: w.completedAt?.toISOString() ?? null,
+        workoutNotes: noteOrNull(w.notes),
+        // The same exercise can appear twice in one workout; join its notes.
+        notes:
+          w.exercises
+            .map((we) => noteOrNull(we.notes))
+            .filter((n): n is string => n !== null)
+            .join('\n') || null,
         sets,
         bestSet,
         estimatedOneRepMax: bestE1Rm,

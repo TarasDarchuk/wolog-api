@@ -135,6 +135,56 @@ describe('WorkoutsService', () => {
       expect(result.workouts[0].exercises[0].exerciseId).toBe('ex-1');
     });
 
+    it('returns workout and exercise notes, null when blank', async () => {
+      prisma.workout.findMany.mockResolvedValue([
+        {
+          id: 'workout-1',
+          name: 'Push Day',
+          startedAt: new Date(PAST),
+          completedAt: new Date(NOW),
+          notes: '  Felt tired, slept 5h ',
+          exercises: [
+            {
+              exerciseId: 'ex-1',
+              exercise: { name: 'Bench Press (Barbell)' },
+              notes: 'Seat 4, close grip variation',
+              sets: [makeSet()],
+            },
+            {
+              exerciseId: 'ex-2',
+              exercise: { name: 'Face Pull' },
+              notes: '   ',
+              sets: [makeSet()],
+            },
+          ],
+        },
+        {
+          id: 'workout-2',
+          name: 'Legs',
+          startedAt: new Date(PAST),
+          completedAt: new Date(NOW),
+          notes: null,
+          exercises: [
+            {
+              exerciseId: 'ex-3',
+              exercise: { name: 'Squat' },
+              notes: null,
+              sets: [makeSet()],
+            },
+          ],
+        },
+      ]);
+
+      const result = await service.listWorkouts(USER_ID, { limit: 20 });
+      expect(result.workouts[0].notes).toBe('Felt tired, slept 5h');
+      expect(result.workouts[0].exercises.map((e) => e.notes)).toEqual([
+        'Seat 4, close grip variation',
+        null,
+      ]);
+      expect(result.workouts[1].notes).toBeNull();
+      expect(result.workouts[1].exercises[0].notes).toBeNull();
+    });
+
     it('filters by exercise when exerciseId is given', async () => {
       prisma.workout.findMany.mockResolvedValue([]);
       await service.listWorkouts(USER_ID, { exerciseId: 'ex-1', limit: 5 });
@@ -182,6 +232,39 @@ describe('WorkoutsService', () => {
       expect(session.bestSet).toMatchObject({ weight: 100, reps: 5 });
       expect(session.estimatedOneRepMax).toBeCloseTo(116.67, 1);
       expect(session.sets).toHaveLength(2);
+    });
+
+    it('returns workout notes and joined exercise notes per session', async () => {
+      prisma.workout.findMany.mockResolvedValue([
+        {
+          id: 'workout-1',
+          name: 'Push Day',
+          completedAt: new Date(NOW),
+          notes: 'Shoulder a bit sore',
+          exercises: [
+            { notes: 'Paused reps', sets: [makeSet()] },
+            { notes: ' ', sets: [makeSet({ setNumber: 2 })] },
+            { notes: 'Back-off with wide grip', sets: [makeSet()] },
+          ],
+        },
+        {
+          id: 'workout-2',
+          name: 'Push Day',
+          completedAt: new Date(NOW),
+          notes: '',
+          exercises: [{ notes: null, sets: [makeSet()] }],
+        },
+      ]);
+
+      const result = await service.exerciseHistory(USER_ID, EX_1, 10);
+      expect(result.sessions[0]).toMatchObject({
+        workoutNotes: 'Shoulder a bit sore',
+        notes: 'Paused reps\nBack-off with wide grip',
+      });
+      expect(result.sessions[1]).toMatchObject({
+        workoutNotes: null,
+        notes: null,
+      });
     });
 
     it('excludes warmup sets from best set and e1RM', async () => {
